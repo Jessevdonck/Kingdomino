@@ -16,11 +16,22 @@ public class SpelApplicatie {
 	}
 
 	public void start() {
+		
+		registreerSpeler();
+		// TODO Hoofdmenu tonen
+		
+		System.out.println("1. Registreer nieuwe speler");
+		System.out.println("2. Start nieuw spel");
+		System.out.println("3. Afsluiten");
+
+	}
+	
+	public void registreerSpeler() {
 		String gebruikersnaam;
 		int geboortejaar;
-		boolean loggedin = false;
+		boolean registred = false;
 
-		while (!loggedin) {
+		while (!registred) {
 			System.out.println("Gelieve u te registreren.");
 			System.out.print("Gebruikersnaam: ");
 			gebruikersnaam = input.next();
@@ -29,13 +40,12 @@ public class SpelApplicatie {
 			System.out.println("\nEven geduld...");
 			try {
 				dc.registreerSpeler(gebruikersnaam, geboortejaar);
-				loggedin = true;
+				registred = true;
 			} catch (GebruikersnaamInGebruikException e) {
-				System.out.println("Gebruiker bestaat al, probeer opnieuw.");
+				System.out.println(e.getMessage());
+			} catch(IllegalArgumentException e) {
+				System.out.println(e.getMessage());
 			}
 		}
-		
-		// TODO Hoofdmenu tonen
-
 	}
 }
