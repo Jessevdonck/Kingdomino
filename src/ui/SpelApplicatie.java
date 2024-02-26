@@ -16,14 +16,31 @@ public class SpelApplicatie {
 	}
 
 	public void start() {
-		
 		registreerSpeler();
-		// TODO Hoofdmenu tonen
-		
+	}
+	
+	public void hoofdmenu() {
 		System.out.println("1. Registreer nieuwe speler");
 		System.out.println("2. Start nieuw spel");
 		System.out.println("3. Afsluiten");
-
+		int selected = input.nextInt();
+		
+		while (selected < 1 || selected > 3 ) 
+		{
+		  System.out.println("Foute invoer, probeer opnieuw.");
+		  selected = input.nextInt();
+		}
+		
+		switch(selected) {
+		
+		case 1: registreerSpeler();
+		case 2: startSpel();
+		case 3: System.exit(0);
+		}
+	}
+	
+	public void startSpel() {
+		
 	}
 	
 	public void registreerSpeler() {
@@ -47,5 +64,6 @@ public class SpelApplicatie {
 				System.out.println(e.getMessage());
 			}
 		}
+		hoofdmenu();
 	}
 }
