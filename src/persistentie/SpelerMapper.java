@@ -10,7 +10,7 @@ import java.sql.SQLException;
 
 public class SpelerMapper {
 
-    private static final String INSERT_SPELER = "INSERT INTO ID342835_g999.Speler (gebruikersnaam, geboortejaar, aantalGewonnen, aantalGespeeld)"
+    private static final String INSERT_SPELER = "INSERT INTO ID430262_kingdominoDB.Speler (gebruikersnaam, geboortejaar, aantalGewonnen, aantalGespeeld)"
             + "VALUES (?, ?, ?, ?)";
             
     public void voegToe(Speler speler) 
@@ -38,7 +38,7 @@ public class SpelerMapper {
         Speler speler = null;
 
         try (Connection conn = DriverManager.getConnection(Connectie.MYSQL_JDBC);
-                PreparedStatement query = conn.prepareStatement("SELECT * FROM ID342835_g999.Speler WHERE gebruikersnaam = ?")) {
+                PreparedStatement query = conn.prepareStatement("SELECT * FROM ID430262_kingdominoDB.Speler WHERE gebruikersnaam = ?")) {
             query.setString(1, gebruikersnaam);
             try (ResultSet rs = query.executeQuery()) {
                 if (rs.next()) 
