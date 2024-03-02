@@ -18,7 +18,7 @@ public class DomeinController {
         spelerRepository.voegToe(nieuweSpeler);
     }
     
-    public void voegSpelerAanSpel() {
+    public void voegSpelerAanSpel(String gebruikersnaam, int geboortejaar) {
     	
     }
     
