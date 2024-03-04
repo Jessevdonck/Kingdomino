@@ -1,5 +1,6 @@
 package ui;
 
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 import domein.DomeinController;
@@ -52,9 +53,9 @@ public class SpelApplicatie {
 			System.out.println("Gelieve u te registreren.");
 			System.out.print("Gebruikersnaam: ");
 			gebruikersnaam = input.next();
-			System.out.print("\nGeboortejaar:");
+			System.out.print("Geboortejaar:");
 			geboortejaar = input.nextInt();
-			System.out.println("\nEven geduld...");
+			System.out.println("Even geduld...");
 			try {
 				dc.registreerSpeler(gebruikersnaam, geboortejaar);
 				registred = true;
@@ -62,7 +63,7 @@ public class SpelApplicatie {
 				System.out.println(e.getMessage());
 			} catch(IllegalArgumentException e) {
 				System.out.println(e.getMessage());
-			}
+			} 
 		}
 		hoofdmenu();
 	}
