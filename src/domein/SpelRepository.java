@@ -1,6 +1,7 @@
 package domein;
 
 import java.util.HashMap;
+import java.util.List;
 
 import util.Kleur;
 
