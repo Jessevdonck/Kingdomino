@@ -1,11 +1,10 @@
 package testen;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
+import domein.Speler;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import domein.Speler;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class SpelerTest 
 {

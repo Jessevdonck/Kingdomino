@@ -1,7 +1,7 @@
 package persistentie;
 
 import java.io.File;
-
+// test comment jordan bentkowski
 import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.Session;
 
@@ -9,7 +9,7 @@ public class Connectie {
 
 	private static final int MYSQL_PORT = 3306, SSH_PORT = 22;
 	private static final String USER_HOME = System.getProperty("user.home");
-	private static final String SSH_PRIVATE_KEY_PATH = USER_HOME + "\\.ssh\\id_rsa";
+	private static final String SSH_PRIVATE_KEY_PATH = USER_HOME + "/.ssh/id_rsa";
     private static final  String MYSQL_DB="ID430262_kingdominoDB";
 	private static final  String MYSQL_USER="ID430262_kingdominoDB";
 	private static final String MYSQL_SERVER_URL = MYSQL_USER+".db.webhosting.be";
