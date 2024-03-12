@@ -1,5 +1,4 @@
 package domein;
-
 import java.util.HashMap;
 import java.util.List;
 
@@ -12,7 +11,11 @@ public class SpelRepository {
 
     public SpelRepository() {
         gekozenSpelers = new HashMap<>();
+
     }
+
+    public Spel getMomenteelSpel() {return momenteelSpel;}
+    public HashMap<Speler, Kleur> getGekozenSpelers(){return getMomenteelSpel().getGekozenSpelers();}
 
     public void voegSpelerToeAanSpel(Speler speler, Kleur kleur) {
         if (gekozenSpelers.size() >= 4) {
@@ -20,7 +23,6 @@ public class SpelRepository {
         }
         gekozenSpelers.put(speler, kleur);
     }
-
     public void startSpel() {
         if (gekozenSpelers.size() < 3) {
             throw new IllegalArgumentException("Je moet minimaal 3 spelers hebben om het spel te starten.");

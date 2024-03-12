@@ -1,11 +1,14 @@
 package ui;
 
 import java.io.FileNotFoundException;
+import java.util.HashMap;
 import java.util.Scanner;
 
 import domein.DomeinController;
 import domein.Speler;
+import dto.SpelerDTO;
 import exceptions.GebruikersnaamInGebruikException;
+import util.Kleur;
 
 public class SpelApplicatie {
 
@@ -42,8 +45,42 @@ public class SpelApplicatie {
 	}
 	
 	public void startSpel() {
-			System.out.println("Gelieve een speler te kiezen");
-			dc.geefAlleSpelerString();
+
+		SpelerDTO[] spelers = dc.geefAlleSpelers();
+		HashMap<Kleur, Speler> gekozenSpelers = new HashMap<Kleur, Speler>();
+		int aantalSpelers;
+		do {
+			aantalSpelers = vraagAantalSpelers();
+		} while (aantalSpelers != 3 && aantalSpelers != 4);
+
+		for (int i = 0; i <= aantalSpelers-1; i++ ) {
+			System.out.printf("Gelieve speler %d te kiezen", i+1);
+			geefSpelersAlsKeuze(spelers);
+
+			int spelerInt = input.nextInt();
+			dc.voegSpelerToeAanGekozenSpelers(spelers[spelerInt].gebruikersnaam(),
+					spelers[spelerInt].geboortejaar(),
+					spelers[spelerInt].aantalGewonnen(),
+					spelers[spelerInt].aantalGespeeld());
+				}
+	}
+	public int vraagAantalSpelers(){
+		System.out.println("Met hoeveel spelers wil je spelen, 3 of 4");
+		int aantalSpelers = input.nextInt();
+		if(aantalSpelers != 3 && aantalSpelers != 4){
+			System.out.println("Aantal Spelers moet 3 of 4 zijn");
+
+			input.nextLine();
+		}
+		return aantalSpelers;
+	}
+
+	public void geefSpelersAlsKeuze(SpelerDTO[] spelers) {
+		for (int i = 0; i <= spelers.length - 1; i++) {
+			if(dc.) {
+				System.out.printf("%d : %s, %d", i, spelers[i].gebruikersnaam(), spelers[i].geboortejaar());
+			}
+		}
 	}
 	
 	public void registreerSpeler() {

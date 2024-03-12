@@ -9,27 +9,27 @@ import persistentie.DominoTegelMapper;
 import util.Kleur;
 
 public class Spel {
-
-    private int dominotegels;
-    private HashMap<Speler, Kleur> spelerKleur;
+    private int AantalDominotegels;
+    private HashMap<Speler, Kleur> gekozenSpelers;
     private DominoTegelMapper dominotegelmapper;
 
-    public Spel(HashMap<Speler, Kleur> spelerKleur) {
-        this.spelerKleur = spelerKleur;
-        if (spelerKleur.size() < 3 || spelerKleur.size() > 4) {
+    public Spel(HashMap<Speler, Kleur> spelers) {
+        this.gekozenSpelers = spelers;
+        if (spelers.size() < 3 || spelers.size() > 4) {
             throw new IllegalArgumentException("Het aantal spelers moet tussen 3 en 4 liggen.");
         }
-        this.dominotegels = spelerKleur.size() == 3 ? 36 : 48;
+        this.AantalDominotegels = spelers.size() == 3 ? 36 : 48;
         
     }
 
     public int getDominotegels() {
-        return dominotegels;
+        return AantalDominotegels;
     }
 
-    public HashMap<Speler, Kleur> getSpelerKleur() {
-        return spelerKleur;
+    public HashMap<Speler, Kleur> getGekozenSpelers() {
+        return gekozenSpelers;
     }
+
 
     public List<DominoTegel> schudDominotegels() {
         List<DominoTegel> dominotegels = new ArrayList<>();

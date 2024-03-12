@@ -2,6 +2,11 @@ package domein;
 
 // testcommit Tommy - test2 na nieuwe ssh keys te genereren
 
+import dto.SpelerDTO;
+import util.Kleur;
+
+import java.util.Arrays;
+
 public class DomeinController {
 
     private final SpelerRepository spelerRepository;
@@ -17,17 +22,23 @@ public class DomeinController {
         Speler nieuweSpeler = new Speler(gebruikersnaam, geboortejaar);
         spelerRepository.voegToe(nieuweSpeler);
     }
-    
-    public void voegSpelerAanSpel(String gebruikersnaam, int geboortejaar) {
-    	
-    }
-    
-    public void startSpel() {
-    	
+
+    public void voegSpelerToeAanGekozenSpelers(String naam, int geboortejaar, int aantalgewonnen, int aantalgespeeld){
+        spelRepository.voegSpelerToeAanSpel(new Speler(naam, geboortejaar, aantalgewonnen, aantalgespeeld), Kleur.BLAUW);
     }
 
-    public Speler[] geefAlleSpelerString(){
-        return spelerRepository.geefSpelers();
+
+
+
+    public SpelerDTO[] geefAlleSpelers(){
+        Speler[] spelers = spelerRepository.geefSpelers();
+        return Arrays.stream(spelers)
+                .map(speler -> new SpelerDTO(
+                        speler.getGebruikersnaam(),
+                        speler.getGeboortejaar(),
+                        speler.getAantalGewonnen(),
+                        speler.getAantalGespeeld()))
+                .toArray(SpelerDTO[]::new);
 
     }
 
