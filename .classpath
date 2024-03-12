@@ -16,7 +16,7 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/Tommy/Desktop/HoGent TI 2e jaar/Semester 2/SDP/jsch-0.1.55.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Tommy/Desktop/HoGent TI 2e jaar/Semester 2/SDP/mysql-connector-j-8.3.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/maxwa/Documents/HoGent22-23/Software/JARS/jsch-0.1.55.jar"/>
+	<classpathentry kind="lib" path="C:/Users/maxwa/Documents/HoGent22-23/Software/JARS/mysql-connector-j-8.3.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
