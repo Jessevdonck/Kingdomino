@@ -15,7 +15,7 @@ public class SpelRepository {
     }
 
     public Spel getMomenteelSpel() {return momenteelSpel;}
-    public HashMap<Speler, Kleur> getGekozenSpelers(){return getMomenteelSpel().getGekozenSpelers();}
+    public HashMap<Speler, Kleur> getGekozenSpelers(){return gekozenSpelers;}
 
     public void voegSpelerToeAanSpel(Speler speler, Kleur kleur) {
         if (gekozenSpelers.size() >= 4) {
@@ -23,6 +23,7 @@ public class SpelRepository {
         }
         gekozenSpelers.put(speler, kleur);
     }
+
     public void startSpel() {
         if (gekozenSpelers.size() < 3) {
             throw new IllegalArgumentException("Je moet minimaal 3 spelers hebben om het spel te starten.");

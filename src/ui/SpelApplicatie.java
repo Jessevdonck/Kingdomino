@@ -44,7 +44,8 @@ public class SpelApplicatie {
 		}
 	}
 	
-	public void startSpel() {
+	public void startSpel()
+	{
 
 		SpelerDTO[] spelers = dc.geefAlleSpelers();
 		HashMap<Kleur, Speler> gekozenSpelers = new HashMap<Kleur, Speler>();
@@ -53,16 +54,19 @@ public class SpelApplicatie {
 			aantalSpelers = vraagAantalSpelers();
 		} while (aantalSpelers != 3 && aantalSpelers != 4);
 
-		for (int i = 0; i <= aantalSpelers-1; i++ ) {
-			System.out.printf("Gelieve speler %d te kiezen", i+1);
+		for (int i = 0; i <= aantalSpelers - 1; i++) {
+			System.out.printf("Gelieve speler %d te kiezen \n", i + 1);
+
 			geefSpelersAlsKeuze(spelers);
 
 			int spelerInt = input.nextInt();
-			dc.voegSpelerToeAanGekozenSpelers(spelers[spelerInt].gebruikersnaam(),
+			dc.voegSpelerToeAanGekozenSpelers(spelers[spelerInt - 1].gebruikersnaam(),
 					spelers[spelerInt].geboortejaar(),
 					spelers[spelerInt].aantalGewonnen(),
 					spelers[spelerInt].aantalGespeeld());
-				}
+		}
+
+			dc.startSpel();
 	}
 	public int vraagAantalSpelers(){
 		System.out.println("Met hoeveel spelers wil je spelen, 3 of 4");
@@ -77,9 +81,10 @@ public class SpelApplicatie {
 
 	public void geefSpelersAlsKeuze(SpelerDTO[] spelers) {
 		for (int i = 0; i <= spelers.length - 1; i++) {
-			if(dc.) {
-				System.out.printf("%d : %s, %d", i, spelers[i].gebruikersnaam(), spelers[i].geboortejaar());
-			}
+
+				System.out.printf("%d : %s, %d   |   ", i+1, spelers[i].gebruikersnaam(), spelers[i].geboortejaar());
+				if(i % 2 == 1) {
+					System.out.println(); }
 		}
 	}
 	

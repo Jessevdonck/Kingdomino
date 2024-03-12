@@ -27,6 +27,14 @@ public class DomeinController {
         spelRepository.voegSpelerToeAanSpel(new Speler(naam, geboortejaar, aantalgewonnen, aantalgespeeld), Kleur.BLAUW);
     }
 
+    public Speler[] geefAlleSpelendeSpelers(){
+        return spelRepository.getGekozenSpelers().keySet().toArray(new Speler[spelRepository.getGekozenSpelers().size()]);
+    }
+
+    public void startSpel(){
+        spelRepository.startSpel();
+    }
+
 
 
 
