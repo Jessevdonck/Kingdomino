@@ -23,7 +23,7 @@ public class SpelApplicatie {
 		hoofdmenu();
 	}
 	
-	public void hoofdmenu() {
+	private void hoofdmenu() {
 		System.out.println("Kingdomino - G59");
 		System.out.println("1. Registreer nieuwe speler");
 		System.out.println("2. Start nieuw spel");
@@ -46,7 +46,8 @@ public class SpelApplicatie {
 	
 	public void startSpel()
 	{
-
+		Kleur[] kleurenArray = Kleur.values();
+		Kleur[] nieuweArray = kleurenArray;
 		SpelerDTO[] spelers = dc.geefAlleSpelers();
 		HashMap<Kleur, Speler> gekozenSpelers = new HashMap<Kleur, Speler>();
 		int aantalSpelers;
@@ -60,13 +61,36 @@ public class SpelApplicatie {
 			geefSpelersAlsKeuze(spelers);
 
 			int spelerInt = input.nextInt();
+			System.out.printf("Gelieve Kleur te kiezen \n");
+			VraagKleur(kleurenArray);
+			int kleurInt = input.nextInt();
+
 			dc.voegSpelerToeAanGekozenSpelers(spelers[spelerInt - 1].gebruikersnaam(),
 					spelers[spelerInt].geboortejaar(),
 					spelers[spelerInt].aantalGewonnen(),
-					spelers[spelerInt].aantalGespeeld());
+					spelers[spelerInt].aantalGespeeld(),kleurenArray[kleurInt-1]);
+			// Kleur verwijderen uit opties door nieuwe array te maken en alle kleuren
+			// buiten die dat gekozen is eraan toe te voegen
+			nieuweArray = new Kleur[kleurenArray.length - 1];
+			int index = 0;
+			for(Kleur k : kleurenArray){
+				if(k != kleurenArray[kleurInt - 1]){
+					nieuweArray[index++] = k;
+				}
+			}
+			kleurenArray = nieuweArray;
 		}
 
 			dc.startSpel();
+	}
+
+	private void VraagKleur(Kleur[] kleurenarray){
+		int i = 0;
+		for(Kleur kleur : kleurenarray) {
+
+			System.out.printf("%d : %s \n", i+1, kleur);
+			i++;
+		}
 	}
 	public int vraagAantalSpelers(){
 		System.out.println("Met hoeveel spelers wil je spelen, 3 of 4");

@@ -23,8 +23,8 @@ public class DomeinController {
         spelerRepository.voegToe(nieuweSpeler);
     }
 
-    public void voegSpelerToeAanGekozenSpelers(String naam, int geboortejaar, int aantalgewonnen, int aantalgespeeld){
-        spelRepository.voegSpelerToeAanSpel(new Speler(naam, geboortejaar, aantalgewonnen, aantalgespeeld), Kleur.BLAUW);
+    public void voegSpelerToeAanGekozenSpelers(String naam, int geboortejaar, int aantalgewonnen, int aantalgespeeld, Kleur kleur){
+        spelRepository.voegSpelerToeAanSpel(new Speler(naam, geboortejaar, aantalgewonnen, aantalgespeeld),kleur);
     }
 
     public Speler[] geefAlleSpelendeSpelers(){

@@ -13,6 +13,8 @@ public class Spel {
     private HashMap<Speler, Kleur> gekozenSpelers;
     private DominoTegelMapper dominotegelmapper;
 
+
+
     public Spel(HashMap<Speler, Kleur> spelers) {
         this.gekozenSpelers = spelers;
         if (spelers.size() < 3 || spelers.size() > 4) {
@@ -25,6 +27,7 @@ public class Spel {
     public int getDominotegels() {
         return AantalDominotegels;
     }
+    public int getAantalSpelers(){return gekozenSpelers.size();}
 
     public HashMap<Speler, Kleur> getGekozenSpelers() {
         return gekozenSpelers;

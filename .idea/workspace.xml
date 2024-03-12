@@ -7,8 +7,7 @@
     <list default="true" id="22051a32-2670-4f5e-a046-abb92a8d9e7d" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/domein/DomeinController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/domein/DomeinController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/domein/SpelRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/domein/SpelRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dto/SpelDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dto/SpelDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/domein/Spel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/domein/Spel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ui/SpelApplicatie.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/SpelApplicatie.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
