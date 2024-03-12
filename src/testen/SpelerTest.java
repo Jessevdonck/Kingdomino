@@ -1,6 +1,7 @@
 package testen;
 
 import domein.Speler;
+import junit.framework.Assert;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -9,6 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class SpelerTest 
 {
 	private Speler speler;
+	private Assert Assertions;
 
 	@Test
 	void maakSpeler_alleGegevensCorrect_maaktObject() 
