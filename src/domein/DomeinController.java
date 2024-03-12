@@ -26,8 +26,9 @@ public class DomeinController {
     	
     }
 
-    public void geefAlleSpelerString(){
-        spelerRepository.geefSpelersString();
+    public Speler[] geefAlleSpelerString(){
+        return spelerRepository.geefSpelers();
+
     }
 
 }

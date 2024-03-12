@@ -6,23 +6,18 @@
   <component name="ChangeListManager">
     <list default="true" id="22051a32-2670-4f5e-a046-abb92a8d9e7d" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Kingdomino_g59.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Kingdomino_g59.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/domein/DomeinController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/domein/DomeinController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/domein/Speler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/domein/Speler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/domein/SpelerRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/domein/SpelerRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/persistentie/Connectie.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/persistentie/Connectie.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/persistentie/SpelerMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/persistentie/SpelerMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/SpelApplicatie.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/SpelApplicatie.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-  </component>
-  <component name="MarkdownSettingsMigration">
-    <option name="stateVersion" value="1" />
-  </component>
-  <component name="ProjectColorInfo">{
-  &quot;associatedIndex&quot;: 4
-}</component>
-  <component name="ProjectId" id="2damByOH9RJ8doACk5cIndrjUgL" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -37,18 +32,9 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "main",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/maxwa/Documents/HoGent22-23/Software/JARS/jsch-0.1.55.jar",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
     "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "vue.rearranger.settings.migration": "true"
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.2"
   }
 }]]></component>
   <component name="RunManager">
@@ -71,13 +57,6 @@
       </list>
     </recent_temporary>
   </component>
-  <component name="SharedIndexes">
-    <attachedChunks>
-      <set>
-        <option value="jdk-17.0.10-corretto-17.0.10-4caba194b151-5cd809f4" />
-      </set>
-    </attachedChunks>
-  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -86,13 +65,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1709743215609</updated>
-      <workItem from="1710254432380" duration="7000" />
-      <workItem from="1710254602719" duration="7000" />
-      <workItem from="1710254618021" duration="800000" />
     </task>
     <servers />
-  </component>
-  <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="3" />
   </component>
 </project>

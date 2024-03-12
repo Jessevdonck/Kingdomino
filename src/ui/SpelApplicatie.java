@@ -21,6 +21,7 @@ public class SpelApplicatie {
 	}
 	
 	public void hoofdmenu() {
+		System.out.println("Kingdomino - G59");
 		System.out.println("1. Registreer nieuwe speler");
 		System.out.println("2. Start nieuw spel");
 		System.out.println("3. Afsluiten");
