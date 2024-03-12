@@ -63,5 +63,10 @@ public class Speler
 	private void setAantalGespeeld(int aantalGespeeld) {
 		this.aantalGespeeld = aantalGespeeld;
 	}
-
+	public String toString(String gebruikersnaam, int geboortejaar) {
+		return String.format("Gebruikersnaam: %s, geboortejaar: %d", gebruikersnaam, geboortejaar);
+	}
+	public String toString(String gebruikersnaam, int geboortejaar, int aantalGewonnen, int aantalGespeeld) {
+		return String.format("Gebruikersnaam: %s, geboortejaar: %d, aantal spellen gewonnen: %d, aantal spellen gespeeld: %d", gebruikersnaam, geboortejaar, aantalGewonnen, aantalGespeeld);
+	}
 }

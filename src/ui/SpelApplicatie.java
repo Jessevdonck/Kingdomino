@@ -17,7 +17,7 @@ public class SpelApplicatie {
 	}
 
 	public void start() {
-		registreerSpeler();
+		hoofdmenu();
 	}
 	
 	public void hoofdmenu() {
@@ -41,15 +41,16 @@ public class SpelApplicatie {
 	}
 	
 	public void startSpel() {
-		
+			System.out.println("Gelieve een speler te kiezen");
+			dc.geefAlleSpelerString();
 	}
 	
 	public void registreerSpeler() {
 		String gebruikersnaam;
 		int geboortejaar;
-		boolean registred = false;
+		boolean registered = false;
 
-		while (!registred) {
+		while (!registered) {
 			System.out.println("Gelieve u te registreren.");
 			System.out.print("Gebruikersnaam: ");
 			gebruikersnaam = input.next();
@@ -58,10 +59,8 @@ public class SpelApplicatie {
 			System.out.println("Even geduld...");
 			try {
 				dc.registreerSpeler(gebruikersnaam, geboortejaar);
-				registred = true;
-			} catch (GebruikersnaamInGebruikException e) {
-				System.out.println(e.getMessage());
-			} catch(IllegalArgumentException e) {
+				registered = true;
+			} catch (GebruikersnaamInGebruikException | IllegalArgumentException e) {
 				System.out.println(e.getMessage());
 			} 
 		}

@@ -7,6 +7,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SpelerMapper {
 
@@ -57,6 +59,38 @@ public class SpelerMapper {
         ssh.closeConnection();
         return speler;
     }
+
+
+    // Return alle spelers in Array
+    public Speler[] geefAlleSpelers() {
+        Connectie ssh = new Connectie();
+        List<Speler> playersList = new ArrayList<>();
+
+        try (Connection conn = DriverManager.getConnection(Connectie.MYSQL_JDBC);
+             PreparedStatement query = conn.prepareStatement("SELECT * FROM ID430262_kingdominoDB.Speler");
+             ResultSet rs = query.executeQuery()) {
+            while (rs.next()) {
+                String gebruikersnaam = rs.getString("gebruikersnaam");
+                int geboortejaar = rs.getInt("geboortejaar");
+                int aantalGewonnen = rs.getInt("aantalGewonnen");
+                int aantalGespeeld = rs.getInt("aantalGespeeld");
+
+                Speler speler = new Speler(gebruikersnaam, geboortejaar, aantalGewonnen, aantalGespeeld);
+                playersList.add(speler);
+            }
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex);
+        }
+
+        ssh.closeConnection();
+
+        // Convert list to array
+        Speler[] playersArray = new Speler[playersList.size()];
+        playersList.toArray(playersArray);
+
+        return playersArray;
+    }
+
 
 }
 

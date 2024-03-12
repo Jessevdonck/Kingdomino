@@ -48,16 +48,16 @@ public class Connectie {
                 config.put("ConnectionAttempts", "3");
                 this.sshSession.setConfig(config);
 
-                System.out.println("Establishing SSH connection using username and password...");
+//                System.out.println("Establishing SSH connection using username and password...");
                 // 10 sec timeout
                 this.sshSession.connect(10000);
-                System.out.println("SSH connection established!");
-                System.out.println("  Details: ");
-                System.out.println("    User: " + SSH_USER);
-                System.out.println("    Server:Port: " + SSH_SERVER_URL + ":" + SSH_PORT);
+//                System.out.println("SSH connection established!");
+//                System.out.println("  Details: ");
+//                System.out.println("    User: " + SSH_USER);
+//                System.out.println("    Server:Port: " + SSH_SERVER_URL + ":" + SSH_PORT);
 
                 this.allocatedLocalPort = this.sshSession.setPortForwardingL(RANDOM_LOCAL_PORT, MYSQL_SERVER_URL, MYSQL_PORT);
-                System.out.println("  Forwarded port on " + MYSQL_SERVER_URL + ": " + allocatedLocalPort + " -> " + MYSQL_PORT);
+//                System.out.println("  Forwarded port on " + MYSQL_SERVER_URL + ": " + allocatedLocalPort + " -> " + MYSQL_PORT);
             } catch (Exception e){
                 System.out.println("Could not establish SSH connection!");
                 e.printStackTrace();
