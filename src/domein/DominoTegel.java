@@ -1,39 +1,37 @@
 package domein;
 
-public class DominoTegel {
-    private String landschapType1;
-    private int kronen1;
-    private String landschapType2;
-    private int kronen2;
+import util.LandschapType;
 
-    public DominoTegel(String landschapType1, int kronen1, String landschapType2, int kronen2) {
-        if (kronen1 < 0 || kronen1 > 3 || kronen2 < 0 || kronen2 > 3) {
-            throw new IllegalArgumentException("Het aantal kronen moet tussen 0 en 3 liggen.");
-        }
-        this.landschapType1 = landschapType1;
-        this.kronen1 = kronen1;
-        this.landschapType2 = landschapType2;
-        this.kronen2 = kronen2;
+public class DominoTegel {
+    private Landschap landschapType1;
+    private Landschap landschapType2;
+
+    public DominoTegel(Landschap l1, Landschap l2) {
+
+        this.landschapType1 = l1;
+
+        this.landschapType2 = l2;
+
     }
 
-    public String getLandschapType1() {
-        return landschapType1;
+    public LandschapType getLandschapType1() {
+        return landschapType1.getType();
     }
 
     public int getKronen1() {
-        return kronen1;
+        return landschapType1.getAantalKronen();
     }
 
-    public String getLandschapType2() {
-        return landschapType2;
+    public LandschapType getLandschapType2() {
+        return landschapType2.getType();
     }
 
     public int getKronen2() {
-        return kronen2;
+        return landschapType2.getAantalKronen();
     }
 
     @Override
     public String toString() {
-        return "[" + landschapType1 + "|" + kronen1 + "] [" + landschapType2 + "|" + kronen2 + "]";
+        return "[" + landschapType1 + "|" + getKronen1() + "] [" + landschapType2 + "|" + getKronen2() + "]";
     }
 }
