@@ -131,7 +131,13 @@ public class SpelApplicatie {
 	}
 
 	public void spelSituatie() {
-		// TODO - implement SpelApplicatie.spelsituatie
+		HashMap<SpelerDTO, Kleur> spelers = dc.getSpelendeSpelers();
+		for (SpelerDTO speler : spelers.keySet()) {
+			System.out.println(speler.gebruikersnaam() + " speelt met kleur " + spelers.get(speler));
+		}
+		// TODO - Zijn koninkrijk ;Zijn koning op een dominotegel in de startkolom of de eindkolom
+
+		// TODO- Stapel beschikbare dominotegels met genummerde zijde naar boven; De startkolom met dominotegels met landschapszijde naar boven; De eindkolom met dominotegels met landschapszijde naar boven
 
 	}
 

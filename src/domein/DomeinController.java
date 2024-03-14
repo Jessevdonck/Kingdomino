@@ -6,6 +6,8 @@ import dto.SpelerDTO;
 import util.Kleur;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public class DomeinController {
 
@@ -27,8 +29,15 @@ public class DomeinController {
         spelRepository.voegSpelerToeAanSpel(new Speler(naam, geboortejaar, aantalgewonnen, aantalgespeeld),kleur);
     }
 
-    public Speler[] geefAlleSpelendeSpelers(){
-        return spelRepository.getGekozenSpelers().keySet().toArray(new Speler[spelRepository.getGekozenSpelers().size()]);
+    public HashMap<SpelerDTO, Kleur> getSpelendeSpelers(){
+        HashMap<Speler, Kleur> spelendeSpelers = spelRepository.getSpelers();
+        HashMap<SpelerDTO, Kleur> spelendeSpelersDTO = new HashMap<>();
+        for (Map.Entry<Speler, Kleur> entry : spelendeSpelers.entrySet()) {
+            Speler speler = entry.getKey();
+            SpelerDTO spelerDTO = new SpelerDTO(speler.getGebruikersnaam(), speler.getGeboortejaar(), speler.getAantalGewonnen(), speler.getAantalGespeeld());
+            spelendeSpelersDTO.put(spelerDTO, entry.getValue());
+        }
+        return spelendeSpelersDTO;
     }
 
     public void startSpel(){

@@ -29,7 +29,8 @@ public class Spel {
     public int getDominotegels() {
         return AantalDominotegels;
     }
-    public int getAantalSpelers(){return gekozenSpelers.size();}
+    public HashMap<Speler, Kleur> getSpelers()
+    {return gekozenSpelers;}
 
     public HashMap<Speler, Kleur> getGekozenSpelers() {
         return gekozenSpelers;
