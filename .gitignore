@@ -32,6 +32,10 @@ bin/
 *.iws
 *.ipr
 
+*.iml
+*.iws
+*.ipr
+
 ### Mac OS ###
 
 
