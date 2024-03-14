@@ -25,5 +25,19 @@ bin/
 ### VS Code ###
 .vscode/
 
+
+### IDEA  IntelliJ ###
+.idea/
+*.iml
+*.iws
+*.ipr
+
 ### Mac OS ###
+
+
 .DS_Store
+.idea/copilot/chatSessions/xd.lck
+
+.idea/shelf/Uncommitted_changes_before_Update_at_14_03_2024_8_38_\[Changes\]/shelved.patch
+
+.idea/shelf/Uncommitted_changes_before_Update_at_14_03_2024_8_38__Changes_.xml
