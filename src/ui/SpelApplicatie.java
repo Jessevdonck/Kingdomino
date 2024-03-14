@@ -124,7 +124,7 @@ public class SpelApplicatie {
 	public void geefSpelersAlsKeuze(SpelerDTO[] spelers) {
 		for (int i = 0; i <= spelers.length - 1; i++) {
 
-				System.out.printf("%d : %s, %d   |   ", i+1, spelers[i].gebruikersnaam(), spelers[i].geboortejaar());
+				System.out.printf("%d : %s, %d \t | \t", i+1, spelers[i].gebruikersnaam(), spelers[i].geboortejaar());
 				if(i % 2 == 1) {
 					System.out.println(); }
 		}
