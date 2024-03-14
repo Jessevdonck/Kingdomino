@@ -129,6 +129,19 @@ public class SpelApplicatie {
 					System.out.println(); }
 		}
 	}
+
+	public void spelSituatie() {
+		// TODO - implement SpelApplicatie.spelsituatie
+
+	}
+
+	public void speelRonde() {
+		// TODO - implement SpelApplicatie.speelRonde
+
+		if (dc.isEindeSpel()) {
+			System.out.println("Het spel is afgelopen.");
+		}
+	}
 	
 	public void registreerSpeler() {
 		String gebruikersnaam;

@@ -13,9 +13,6 @@ public class Spel {
     private DominoTegelsDeck tegelsDeck;
     private HashMap<Speler, Kleur> gekozenSpelers;
 
-
-
-
     public Spel(HashMap<Speler, Kleur> spelers, DominoTegelsDeck tegelsDeck) {
         this.tegelsDeck = tegelsDeck;
         tegelsDeck.maakDeck(spelers.size());
@@ -38,6 +35,15 @@ public class Spel {
         return gekozenSpelers;
     }
 
+    public boolean isEindeSpel() {
+        // Als beschikbare tegels op zijn, return true
+        return false;
+    }
+
+    public Speler[] geefWinnaars() {
+        // Calculeren van tegels etc,
+        return null;
+    }
 
     public void schudDominotegels() {
         tegelsDeck.Schud();

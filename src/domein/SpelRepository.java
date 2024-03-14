@@ -24,10 +24,20 @@ public class SpelRepository {
         gekozenSpelers.put(speler, kleur);
     }
 
+
+    public boolean isEindeSpel() {
+        return momenteelSpel.isEindeSpel();
+    }
+
+    public Speler[] geefWinnaars() {
+        return momenteelSpel.geefWinnaars();
+    }
+
     public void startSpel() {
         if (gekozenSpelers.size() < 3) {
             throw new IllegalArgumentException("Je moet minimaal 3 spelers hebben om het spel te starten.");
         }
+
         momenteelSpel = new Spel(gekozenSpelers, new DominoTegelsDeck());
 
 

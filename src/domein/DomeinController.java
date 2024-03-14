@@ -35,8 +35,18 @@ public class DomeinController {
         spelRepository.startSpel();
     }
 
+    public boolean isEindeSpel(){
+        return spelRepository.isEindeSpel();
+    }
 
+    public int [] geefScores(){
+        return null;
+    }
 
+    public SpelerDTO[] winnaars() {
+
+        return null;
+    };
 
     public SpelerDTO[] geefAlleSpelers(){
         Speler[] spelers = spelerRepository.geefSpelers();
@@ -49,5 +59,4 @@ public class DomeinController {
                 .toArray(SpelerDTO[]::new);
 
     }
-
 }
