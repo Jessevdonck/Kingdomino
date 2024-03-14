@@ -46,21 +46,34 @@ public class SpelApplicatie {
 	
 	public void startSpel()
 	{
+		
+		// arrays om spelers en kleuren die al gekozen zijn uit de lijst te halen
+		// te kiezen spelers en kleuren.
 		Kleur[] kleurenArray = Kleur.values();
-		Kleur[] nieuweArray = kleurenArray;
+		Kleur[] bufferKleuren;
 		SpelerDTO[] spelers = dc.geefAlleSpelers();
-		HashMap<Kleur, Speler> gekozenSpelers = new HashMap<Kleur, Speler>();
-		int aantalSpelers;
-		do {
-			aantalSpelers = vraagAantalSpelers();
-		} while (aantalSpelers != 3 && aantalSpelers != 4);
+		SpelerDTO[] bufferSpelers;
+		int maxAantalSpelers = 4;
+		int aantalSpelers = 0;
 
-		for (int i = 0; i <= aantalSpelers - 1; i++) {
-			System.out.printf("Gelieve speler %d te kiezen \n", i + 1);
+
+		for (aantalSpelers = 0; aantalSpelers <= maxAantalSpelers - 1; aantalSpelers++) {
+			if(aantalSpelers == 3) {
+				System.out.println("Wilt u een 4de speler kiezen of wilt u starten?");
+				System.out.println("1 : Ja ik wil een 4de speler toevoegen aan het spel");
+				System.out.println("2 : Nee, ik wil het spel nu beginnen");
+				int keuze = input.nextInt();
+				if(keuze == 2 ){
+					break;
+				}
+			}
+
+			System.out.printf("Gelieve speler %d te kiezen \n", aantalSpelers + 1);
 
 			geefSpelersAlsKeuze(spelers);
 
 			int spelerInt = input.nextInt();
+
 			System.out.printf("Gelieve Kleur te kiezen \n");
 			VraagKleur(kleurenArray);
 			int kleurInt = input.nextInt();
@@ -71,14 +84,28 @@ public class SpelApplicatie {
 					spelers[spelerInt].aantalGespeeld(),kleurenArray[kleurInt-1]);
 			// Kleur verwijderen uit opties door nieuwe array te maken en alle kleuren
 			// buiten die dat gekozen is eraan toe te voegen
-			nieuweArray = new Kleur[kleurenArray.length - 1];
-			int index = 0;
-			for(Kleur k : kleurenArray){
-				if(k != kleurenArray[kleurInt - 1]){
-					nieuweArray[index++] = k;
+
+			bufferSpelers = new SpelerDTO[spelers.length - 1];
+			int indexSpelers = 0;
+			for(SpelerDTO s : spelers){
+				if(s != spelers[kleurInt - 1]){
+					bufferSpelers[indexSpelers++] = s;
 				}
 			}
-			kleurenArray = nieuweArray;
+			spelers = bufferSpelers;
+
+
+			// Kleur verwijderen uit opties door nieuwe array te maken en alle kleuren
+			// buiten die dat gekozen is eraan toe te voegen
+			bufferKleuren = new Kleur[kleurenArray.length - 1];
+			int indexKleur = 0;
+			for(Kleur k : kleurenArray){
+				if(k != kleurenArray[kleurInt - 1]){
+					bufferKleuren[indexKleur++] = k;
+				}
+			}
+			kleurenArray = bufferKleuren;
+			aantalSpelers++;
 		}
 
 			dc.startSpel();
@@ -92,16 +119,7 @@ public class SpelApplicatie {
 			i++;
 		}
 	}
-	public int vraagAantalSpelers(){
-		System.out.println("Met hoeveel spelers wil je spelen, 3 of 4");
-		int aantalSpelers = input.nextInt();
-		if(aantalSpelers != 3 && aantalSpelers != 4){
-			System.out.println("Aantal Spelers moet 3 of 4 zijn");
 
-			input.nextLine();
-		}
-		return aantalSpelers;
-	}
 
 	public void geefSpelersAlsKeuze(SpelerDTO[] spelers) {
 		for (int i = 0; i <= spelers.length - 1; i++) {

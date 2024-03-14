@@ -2,12 +2,15 @@ package domein;
 
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.List;
 
 public class Speler 
 {
     private String gebruikersnaam;
     private int geboortejaar;
     private int aantalGewonnen, aantalGespeeld;
+
+
     
 
     public Speler(String gebruikersnaam,int  geboortejaar) 
@@ -21,8 +24,12 @@ public class Speler
     	setGeboortejaar(geboortejaar);
     	setAantalGewonnen(aantalGewonnen);
     	setAantalGespeeld(aantalGespeeld);
+
     }
-    
+
+
+
+
     
 
 	public String getGebruikersnaam() {

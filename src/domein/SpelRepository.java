@@ -28,9 +28,10 @@ public class SpelRepository {
         if (gekozenSpelers.size() < 3) {
             throw new IllegalArgumentException("Je moet minimaal 3 spelers hebben om het spel te starten.");
         }
-        momenteelSpel = new Spel(gekozenSpelers);
-        // Schud de dominotegels en krijg de lijst van geschudde tegels
-        List<DominoTegel> geschuddeTegels = momenteelSpel.schudDominotegels();
-        // Voer verdere stappen uit om het spel te starten, bijvoorbeeld het verdelen van tegels aan spelers, plaatsen van kastelen, etc.
+        momenteelSpel = new Spel(gekozenSpelers, new DominoTegelsDeck());
+
+
+        momenteelSpel.schudDominotegels();
+
     }
 }

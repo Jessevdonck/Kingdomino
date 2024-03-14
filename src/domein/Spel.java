@@ -10,12 +10,15 @@ import util.Kleur;
 
 public class Spel {
     private int AantalDominotegels;
+    private DominoTegelsDeck tegelsDeck;
     private HashMap<Speler, Kleur> gekozenSpelers;
-    private DominoTegelMapper dominotegelmapper;
 
 
 
-    public Spel(HashMap<Speler, Kleur> spelers) {
+
+    public Spel(HashMap<Speler, Kleur> spelers, DominoTegelsDeck tegelsDeck) {
+        this.tegelsDeck = tegelsDeck;
+        tegelsDeck.maakDeck(spelers.size());
         this.gekozenSpelers = spelers;
         if (spelers.size() < 3 || spelers.size() > 4) {
             throw new IllegalArgumentException("Het aantal spelers moet tussen 3 en 4 liggen.");
@@ -23,7 +26,9 @@ public class Spel {
         this.AantalDominotegels = spelers.size() == 3 ? 36 : 48;
         
     }
-
+    public DominoTegelsDeck getTegelsDeck(){
+        return tegelsDeck;
+    }
     public int getDominotegels() {
         return AantalDominotegels;
     }
@@ -34,9 +39,7 @@ public class Spel {
     }
 
 
-    public List<DominoTegel> schudDominotegels() {
-        List<DominoTegel> dominotegels = new ArrayList<>();
-        Collections.shuffle(dominotegels);
-        return dominotegels;
+    public void schudDominotegels() {
+        tegelsDeck.Schud();
     }
 }

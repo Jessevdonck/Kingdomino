@@ -13,7 +13,7 @@ public class Landschap
     public Landschap(LandschapType type, int aantalkronen){
         boolean typeMatched = false;
 
-        if(aantalkronen > 3 | aantalkronen < 0) {
+        if(aantalkronen > 3 | aantalkronen <= 0) {
             throw new IllegalArgumentException("aantal kronen moet tussen 0 en 3 zijn");
         }
         for(int i = 0; i == landschapTypes.length; i++){
@@ -24,7 +24,7 @@ public class Landschap
             }
 
             if(!typeMatched) {
-                throw new IllegalArgumentException("Type moet een correct type zijn");
+                throw new IllegalArgumentException("Type moet een bestaand type zijn");
             }
 
         }
