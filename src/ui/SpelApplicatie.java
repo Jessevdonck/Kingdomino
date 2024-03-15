@@ -105,7 +105,7 @@ public class SpelApplicatie {
 				}
 			}
 			kleurenArray = bufferKleuren;
-			aantalSpelers++;
+			//aantalSpelers++;
 		}
 
 			dc.startSpel();
