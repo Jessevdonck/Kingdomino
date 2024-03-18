@@ -7,6 +7,7 @@ import util.Kleur;
 
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class DomeinController {
@@ -52,10 +53,16 @@ public class DomeinController {
         return null;
     }
     public Spel getSpel(){return spelRepository.getMomenteelSpel();}
+    public List<Kleur> getVolgordeKoning() {return spelRepository.getVolgordeKoning();}
+
+    public void koningRondeEenShuffle(){
+        spelRepository.koningRondeEen();
+    }
     public SpelerDTO[] winnaars() {
 
         return null;
     };
+
 
     public SpelerDTO[] geefAlleSpelers(){
         Speler[] spelers = spelerRepository.geefSpelers();
@@ -66,6 +73,10 @@ public class DomeinController {
                         speler.getAantalGewonnen(),
                         speler.getAantalGespeeld()))
                 .toArray(SpelerDTO[]::new);
+
+    }
+
+    public void kiesTegel(Kleur kleur, DominoTegel tegel){
 
     }
 }

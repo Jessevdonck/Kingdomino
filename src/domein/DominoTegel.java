@@ -1,13 +1,14 @@
 package domein;
 
 import com.sun.source.tree.ReturnTree;
+import util.Kleur;
 import util.LandschapType;
 
 public class DominoTegel {
     private Landschap landschapType1;
     private Landschap landschapType2;
     private int tegelNummer;
-    private Speler koningVanSpeler;
+    private Kleur kleurVanKoning;
 
 
     public DominoTegel(Landschap l1, Landschap l2, int nummer) {
@@ -15,13 +16,13 @@ public class DominoTegel {
         this.landschapType1 = l1;
         this.tegelNummer = nummer;
         this.landschapType2 = l2;
-        this.koningVanSpeler = null;
+        this.kleurVanKoning = null;
     }
 
     public LandschapType getLandschapType1() {
         return landschapType1.getType();
     }
-    public Speler getKoningVanSpeler(){return koningVanSpeler;}
+    public Kleur getKoningVanSpeler(){return kleurVanKoning;}
     public int getTegelNummer(){
         return tegelNummer;
     }
@@ -36,27 +37,28 @@ public class DominoTegel {
     public int getKronen2() {
         return landschapType2.getAantalKronen();
     }
-    private void setKoningVanSpeler(Speler speler){
-        this.koningVanSpeler = speler;
+    private void setKleurVanKoning(Kleur kleur){
+        this.kleurVanKoning = kleur;
     }
 
-    public void claimTegel(Speler speler){
-        if (koningVanSpeler == null){
-            setKoningVanSpeler(speler);
+    public void claimTegel(Kleur kleur){
+        if (kleurVanKoning == null){
+            setKleurVanKoning(kleur);
         }else{
             throw new IllegalArgumentException("Deze tegel is al bezet");
         }
     }
 
+
     @Override
     public String toString()
     {
 
-        if (this.koningVanSpeler == null) {
+        if (this.kleurVanKoning == null) {
             return "[" + landschapType1.toString() + "|" + getKronen1() + "][" + landschapType2 + "|" + getKronen2() + "]" + "\n";
         } else {
             return "[" + landschapType1.toString() + "|" + getKronen1() + "]" +
-                    " " + this.koningVanSpeler.getGebruikersnaam() + " " +
+                    " " + this.kleurVanKoning.toString() + " " +
                     "[" + landschapType2 + "|" + getKronen2() + "]" + "\n";
         }
     }

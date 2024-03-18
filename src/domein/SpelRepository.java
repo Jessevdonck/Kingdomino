@@ -1,5 +1,6 @@
 package domein;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
@@ -13,11 +14,27 @@ public class SpelRepository {
 
     public SpelRepository() {
         gekozenSpelers = new HashMap<>();
-
+    }
+    public List<Kleur> koningRondeEen()
+    {
+        List<Kleur> koningen = new ArrayList<>();
+        koningen = getSpelers().values().stream().toList();
+        Collections.shuffle(koningen);
+        return koningen;
     }
 
     public Spel getMomenteelSpel() {return momenteelSpel;}
     public HashMap<Speler, Kleur> getSpelers(){return momenteelSpel.getSpelers();}
+    public List<DominoTegel> getStartKolom(){
+        return momenteelSpel.geefStartKolom();
+    }
+    public List<DominoTegel> getTweedeKolom(){
+        return momenteelSpel.geefTweedeKolom();
+    }
+    public List<Kleur> getVolgordeKoning(){
+        return momenteelSpel.getVolgordeSpelers();
+
+    }
 
     public void voegSpelerToeAanSpel(Speler speler, Kleur kleur) {
         if (gekozenSpelers.size() >= 4) {
@@ -76,6 +93,10 @@ public class SpelRepository {
 
         return deck;
 
+    }
+
+    public void kiesTegel(Kleur kleur, DominoTegel tegel){
+        tegel.claimTegel(kleur);
     }
     public void startSpel() {
         if (gekozenSpelers.size() < 3) {

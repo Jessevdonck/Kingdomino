@@ -1,5 +1,6 @@
 package domein;
 
+import java.math.MathContext;
 import java.util.*;
 
 import persistentie.DominoTegelMapper;
@@ -14,6 +15,7 @@ public class Spel
     private List<DominoTegel> tegels;
     private List<DominoTegel> startKolom;
     private List<DominoTegel> tweedeKolom;
+    private List<Kleur> volgordeSpelers;
     private HashMap<Speler, Kleur> gekozenSpelers;
 
     public Spel(HashMap<Speler, Kleur> spelers, List<DominoTegel> tegelsDeck)
@@ -24,11 +26,18 @@ public class Spel
             throw new IllegalArgumentException("Het aantal spelers moet tussen 3 en 4 liggen.");
         }
         this.AantalDominotegels = spelers.size() == 3 ? 36 : 48;
-
+        this.volgordeSpelers = null;
     }
 
+    private void setVolgordeSpelers(List<Kleur> kleurList){
+        volgordeSpelers = kleurList;
+    }
+    public List<Kleur> getVolgordeSpelers(){return volgordeSpelers;}
     public List<DominoTegel> geefStartKolom(){
         return startKolom;
+    }
+    public List<DominoTegel> geefTweedeKolom(){
+        return tweedeKolom;
     }
     public List<DominoTegel> getTegelsDeck()
     {
@@ -50,6 +59,8 @@ public class Spel
         return gekozenSpelers;
     }
 
+
+
     public boolean isEindeSpel()
     {
         if(geefWinnaars() != null){
@@ -60,9 +71,6 @@ public class Spel
 
 
     }
-
-
-
     public List<DominoTegel> geefKaarten(int aantalKaarten)
     {
         List<DominoTegel> tegels = new ArrayList<DominoTegel>();
@@ -96,6 +104,7 @@ public class Spel
     {
         Collections.shuffle(tegels);
     }
+
 
 
     public DominoTegel geefTegel()

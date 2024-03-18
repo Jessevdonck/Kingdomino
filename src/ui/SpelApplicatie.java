@@ -112,14 +112,37 @@ public class SpelApplicatie {
 		}
 
 			dc.startSpel();
-			toonTegelLijst(dc.getSpel().geefStartKolom());
 
+
+			dc.koningRondeEenShuffle();
+			speelRondeEen();
+			while(dc.isEindeSpel()){
+
+				speelRonde();
+			}
 
 	}
+	
+	private void speelRondeEen(){
+		for (:
+			 ) {
+			
+		}
+	}
 
+	private void speelBeurt(){
+		toonTegelLijst(dc.getSpel().geefTweedeKolom());
+		System.out.println("Welke tegel wil je nemen?");
+		int tegel = input.nextInt();
+
+		dc.getVolgordeKoning().remove(0);
+	}
 	private void toonTegelLijst(List<DominoTegel> lijst){
+		int count = 0;
 		for (DominoTegel tegel : lijst){
-			System.out.printf(tegel.toString());
+			count++;
+			System.out.printf("%d : %s", count, tegel.toString());
+
 		}
 	}
 
@@ -155,7 +178,7 @@ public class SpelApplicatie {
 
 	public void speelRonde() {
 		// TODO - implement SpelApplicatie.speelRonde
-
+		speelBeurt();
 		if (dc.isEindeSpel()) {
 			System.out.println("Het spel is afgelopen.");
 		}
