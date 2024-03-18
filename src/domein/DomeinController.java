@@ -51,7 +51,7 @@ public class DomeinController {
     public int [] geefScores(){
         return null;
     }
-
+    public Spel getSpel(){return spelRepository.getMomenteelSpel();}
     public SpelerDTO[] winnaars() {
 
         return null;

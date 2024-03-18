@@ -1,8 +1,10 @@
 package domein;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 import util.Kleur;
+import util.LandschapType;
 
 public class SpelRepository {
 
@@ -49,15 +51,41 @@ public class SpelRepository {
     // Bereken voor elk domein het aantal prestigepunten en tel alles op voor de speler voor zijn eindtotaal.
     // Een speler kan meerdere afzonderlijke domeinen hebben van eenzelfde landschapstype
 
+    public List<DominoTegel> maakDeck(int aantalSpelers)
+    {
+        List<DominoTegel> deck = new ArrayList<DominoTegel>();
+
+        if (aantalSpelers == 3) {
+            // TODO - Maak deck met 36 kaarten
+            // OP DIT MOMENT PLACEHOLDER DECKS
+            for (int i = 1; i <= 36; i++) {
+                deck.add(new DominoTegel(new Landschap(LandschapType.WEIDE, 0),
+                        new Landschap(LandschapType.WEIDE, 0),
+                        i));
+            }
+        } else if (aantalSpelers == 4) {
+            for (int i = 1; i <= 48; i++) {
+                deck.add(new DominoTegel(new Landschap(LandschapType.WEIDE, 0),
+                        new Landschap(LandschapType.WEIDE, 0),
+                        i));
+            }
+            // TODO - Maak deck met 48 kaarten
+        } else {
+            throw new IllegalArgumentException("aantal spelers moet 3 of 4 zijn");
+        }
+
+        return deck;
+
+    }
     public void startSpel() {
         if (gekozenSpelers.size() < 3) {
             throw new IllegalArgumentException("Je moet minimaal 3 spelers hebben om het spel te starten.");
         }
 
-        momenteelSpel = new Spel(gekozenSpelers, new DominoTegelsDeck());
-
-
+        momenteelSpel = new Spel(gekozenSpelers, maakDeck(gekozenSpelers.size()));
         momenteelSpel.schudDominotegels();
+        momenteelSpel.maakStartKolom();
+
 
     }
 }

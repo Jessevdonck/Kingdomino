@@ -1,10 +1,13 @@
 package ui;
 
 import java.io.FileNotFoundException;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Scanner;
+import java.util.List;
 
 import domein.DomeinController;
+import domein.DominoTegel;
 import domein.Speler;
 import dto.SpelerDTO;
 import exceptions.GebruikersnaamInGebruikException;
@@ -109,6 +112,15 @@ public class SpelApplicatie {
 		}
 
 			dc.startSpel();
+			toonTegelLijst(dc.getSpel().geefStartKolom());
+
+
+	}
+
+	private void toonTegelLijst(List<DominoTegel> lijst){
+		for (DominoTegel tegel : lijst){
+			System.out.printf(tegel.toString());
+		}
 	}
 
 	private void VraagKleur(Kleur[] kleurenarray){
