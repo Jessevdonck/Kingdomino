@@ -9,6 +9,7 @@ import java.util.List;
 import domein.DomeinController;
 import domein.DominoTegel;
 import domein.Speler;
+import dto.DominoTegelDTO;
 import dto.SpelerDTO;
 import exceptions.GebruikersnaamInGebruikException;
 import util.Kleur;
@@ -170,10 +171,28 @@ public class SpelApplicatie {
 		for (SpelerDTO speler : spelers.keySet()) {
 			System.out.println(speler.gebruikersnaam() + " speelt met kleur " + spelers.get(speler));
 		}
+
 		// TODO - Zijn koninkrijk ;Zijn koning op een dominotegel in de startkolom of de eindkolom
 
-		// TODO- Stapel beschikbare dominotegels met genummerde zijde naar boven; De startkolom met dominotegels met landschapszijde naar boven; De eindkolom met dominotegels met landschapszijde naar boven
+		List<DominoTegelDTO> beschikbareTegels = dc.getStartKolom();
+		System.out.println("Beschikbare tegels:");
+		for (DominoTegelDTO tegel : beschikbareTegels) {
+			System.out.printf("%d", tegel.tegelNummer());
+		}
 
+		List<DominoTegelDTO> startkolom = dc.getStartKolom();
+		System.out.println("Startkolom:");
+		for (DominoTegelDTO tegel : startkolom) {
+			System.out.printf("%s : %s", tegel.landschapType1().toString(), tegel.landschapType2().toString());
+		}
+
+		List<DominoTegelDTO> tweedekolom = dc.getTweedeKolom();
+		System.out.println("TweedeKolom:");
+		for (DominoTegelDTO tegel : tweedekolom) {
+			System.out.printf("%s : %s", tegel.landschapType1().toString(), tegel.landschapType2().toString());
+		}
+
+		// TODO - implement SpelApplicatie.spelSituatie
 	}
 
 	public void speelRonde() {

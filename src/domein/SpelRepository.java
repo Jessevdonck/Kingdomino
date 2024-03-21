@@ -31,6 +31,9 @@ public class SpelRepository {
     public List<DominoTegel> getTweedeKolom(){
         return momenteelSpel.geefTweedeKolom();
     }
+    public List<DominoTegel> getTegelsDeck(){
+        return momenteelSpel.getTegelsDeck();
+    }
     public List<Kleur> getVolgordeKoning(){
         return momenteelSpel.getVolgordeSpelers();
 
