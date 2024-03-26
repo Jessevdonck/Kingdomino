@@ -12,3 +12,8 @@
     -fx-text-fill: white;
     -fx-background-insets: 1px;
 }
+
+.button:hover {
+    -fx-background-color: #e07d28;
+
+}
