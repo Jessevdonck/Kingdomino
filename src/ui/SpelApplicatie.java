@@ -1,24 +1,53 @@
 package ui;
 
+import java.awt.*;
 import java.io.FileNotFoundException;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Scanner;
+import java.io.IOException;
+import java.util.*;
 import java.util.List;
 
+import com.sun.tools.javac.Main;
 import domein.DomeinController;
 import domein.DominoTegel;
+import domein.Spel;
 import domein.Speler;
 import dto.DominoTegelDTO;
 import dto.SpelerDTO;
-import exceptions.GebruikersnaamInGebruikException;
+import exceptions.*;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 import util.Kleur;
 
 public class SpelApplicatie {
+	//gui attributen
+	@FXML
+	Button registreerBalk = new Button();
+	@FXML
+	TextField gebruikersnaamBalk = new TextField();
+	@FXML
+	TextField geboortejaarBalk = new TextField();
+	@FXML
+	Label wrongLogIn = new Label();
+	private Stage stage;
+	private Scene scene;
+	private Parent root;
 
 	private final DomeinController dc;
 	private Scanner input = new Scanner(System.in);
 
+	public SpelApplicatie()
+	{
+		this.dc = new DomeinController();
+	}
 	public SpelApplicatie(DomeinController dc) {
 		this.dc = dc;
 	}
@@ -116,7 +145,7 @@ public class SpelApplicatie {
 
 
 			dc.koningRondeEenShuffle();
-			speelRondeEen();
+			//speelRondeEen();
 			while(dc.isEindeSpel()){
 
 				speelRonde();
@@ -124,12 +153,12 @@ public class SpelApplicatie {
 
 	}
 	
-	private void speelRondeEen(){
+	/*private void speelRondeEen(){
 		for (:
 			 ) {
 			
 		}
-	}
+	}*/
 
 	private void speelBeurt(){
 		toonTegelLijst(dc.getSpel().geefTweedeKolom());
@@ -204,24 +233,44 @@ public class SpelApplicatie {
 	}
 	
 	public void registreerSpeler() {
-		String gebruikersnaam;
-		int geboortejaar;
-		boolean registered = false;
 
-		while (!registered) {
-			System.out.println("Gelieve u te registreren.");
-			System.out.print("Gebruikersnaam: ");
-			gebruikersnaam = input.next();
-			System.out.print("Geboortejaar:");
-			geboortejaar = input.nextInt();
-			System.out.println("Even geduld...");
+		String gebruikersnaam = gebruikersnaamBalk.getText();
+
+		String geboortejaarString = geboortejaarBalk.getText();
+			try {
+				if (geboortejaarString.trim().isBlank())
+					throw new OntbrekendGeboortejaarException();
+			} catch (OntbrekendGeboortejaarException | NumberFormatException e) {
+				wrongLogIn.setText(e.getMessage());
+			}
+
+		int geboortejaar = Integer.parseInt(geboortejaarBalk.getText());
+
+
+
 			try {
 				dc.registreerSpeler(gebruikersnaam, geboortejaar);
-				registered = true;
-			} catch (GebruikersnaamInGebruikException | IllegalArgumentException e) {
-				System.out.println(e.getMessage());
-			} 
-		}
-		hoofdmenu();
+				hoofdmenu();
+			} catch (GebruikersnaamInGebruikException | TeJongeGebruikerException | OngeldigeGebruikersnaamException | SpatiesInGebruikersnaamException |
+					 OntbrekendeGebruikersnaamException | IllegalArgumentException e)
+			{
+				wrongLogIn.setText(e.getMessage());
+			}
+	}
+
+	public void switchToRegisterScene(ActionEvent event) throws IOException {
+		Parent root = FXMLLoader.load(getClass().getResource("/fxml/Login.fxml"));
+		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+		scene = new Scene(root);
+		stage.setScene(scene);
+		stage.show();
+	}
+
+	public void switchToHomescreen(MouseEvent event) throws IOException {
+		Parent root = FXMLLoader.load(getClass().getResource("/fxml/Homepage.fxml"));
+		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+		scene = new Scene(root);
+		stage.setScene(scene);
+		stage.show();
 	}
 }
