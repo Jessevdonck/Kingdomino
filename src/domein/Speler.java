@@ -1,8 +1,11 @@
 package domein;
 
+import exceptions.*;
+
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.List;
+import java.util.Objects;
 
 public class Speler 
 {
@@ -38,9 +41,9 @@ public class Speler
 
 	private void setGebruikersnaam(String gebruikersnaam) {
 		if (gebruikersnaam.isBlank())
-			throw new IllegalArgumentException("Gebruikersnaam mag niet leeg zijn.");
+			throw new OntbrekendeGebruikersnaamException();
 		if (gebruikersnaam.length() < 6)
-			throw new IllegalArgumentException("Gebruikersnaam is te kort.");
+			throw new OngeldigeGebruikersnaamException();
 		this.gebruikersnaam = gebruikersnaam;
 	}
 
@@ -49,9 +52,15 @@ public class Speler
 	}
 
 	private void setGeboortejaar(int geboortejaar) {
+		String geboortejaarString = Integer.toString(geboortejaar);
+
 		Period period = Period.between(LocalDate.of(geboortejaar, 1,1), LocalDate.now());
+		if (geboortejaarString.trim().isBlank())
+			throw new OntbrekendeGebruikersnaamException();
 		if (period.getYears() < 6)
-			throw new IllegalArgumentException("Je bent te jong.");
+			throw new TeJongeGebruikerException();
+
+
 		this.geboortejaar = geboortejaar;
 	}
 
