@@ -24,7 +24,6 @@ public class StartUpGUI extends Application
 
     public static void main(String[] args) {
         DomeinController dc = new DomeinController();
-        new SpelApplicatie(dc).start();
         launch();
     }
 }
