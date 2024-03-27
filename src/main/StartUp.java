@@ -9,22 +9,12 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import ui.SpelApplicatie;
 
-public class StartUp extends Application
+public class StartUp
 	{
-	@Override
-	public void start(Stage stage) throws Exception
+
+		public static void main(String[] args)
 		{
-				Parent root = FXMLLoader.load(getClass().getResource("/fxml/Homepage.fxml"));
-
-				Scene scene = new Scene(root);
-				stage.setScene(scene);
-				stage.setResizable(false);
-				stage.show();
+			DomeinController dc = new DomeinController();
+			new SpelApplicatie(dc).start();
 		}
-
-	public static void main(String[] args) {
-		DomeinController dc = new DomeinController();
-		//new SpelApplicatie(dc).start();
-		launch();
-	}
 	}

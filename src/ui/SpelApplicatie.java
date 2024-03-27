@@ -28,26 +28,14 @@ import javafx.stage.Stage;
 import util.Kleur;
 
 public class SpelApplicatie {
-	//gui attributen
-	@FXML
-	Button registreerBalk = new Button();
-	@FXML
-	TextField gebruikersnaamBalk = new TextField();
-	@FXML
-	TextField geboortejaarBalk = new TextField();
-	@FXML
-	Label wrongLogIn = new Label();
-	private Stage stage;
-	private Scene scene;
-	private Parent root;
 
 	private final DomeinController dc;
 	private Scanner input = new Scanner(System.in);
 
-	public SpelApplicatie()
-	{
+	public SpelApplicatie() {
 		this.dc = new DomeinController();
 	}
+
 	public SpelApplicatie(DomeinController dc) {
 		this.dc = dc;
 	}
@@ -55,31 +43,32 @@ public class SpelApplicatie {
 	public void start() {
 		hoofdmenu();
 	}
-	
+
 	private void hoofdmenu() {
 		System.out.println("Kingdomino - G59");
 		System.out.println("1. Registreer nieuwe speler");
 		System.out.println("2. Start nieuw spel");
 		System.out.println("3. Afsluiten");
 		int selected = input.nextInt();
-		
-		while (selected < 1 || selected > 3 ) 
-		{
-		  System.out.println("Foute invoer, probeer opnieuw.");
-		  selected = input.nextInt();
+
+		while (selected < 1 || selected > 3) {
+			System.out.println("Foute invoer, probeer opnieuw.");
+			selected = input.nextInt();
 		}
-		
-		switch(selected) {
-		
-		case 1: registreerSpeler();
-		case 2: startSpel();
-		case 3: System.exit(0);
+
+		switch (selected) {
+
+			case 1:
+				registreerSpeler();
+			case 2:
+				startSpel();
+			case 3:
+				System.exit(0);
 		}
 	}
-	
-	public void startSpel()
-	{
-		
+
+	public void startSpel() {
+
 		// arrays om spelers en kleuren die al gekozen zijn uit de lijst te halen
 		// te kiezen spelers en kleuren.
 		Kleur[] kleurenArray = Kleur.values();
@@ -91,12 +80,12 @@ public class SpelApplicatie {
 
 
 		for (aantalSpelers = 0; aantalSpelers <= maxAantalSpelers - 1; aantalSpelers++) {
-			if(aantalSpelers == 3) {
+			if (aantalSpelers == 3) {
 				System.out.println("Wilt u een 4de speler kiezen of wilt u starten?");
 				System.out.println("1 : Ja ik wil een 4de speler toevoegen aan het spel");
 				System.out.println("2 : Nee, ik wil het spel nu beginnen");
 				int keuze = input.nextInt();
-				if(keuze == 2 ){
+				if (keuze == 2) {
 					break;
 				}
 			}
@@ -114,14 +103,14 @@ public class SpelApplicatie {
 			dc.voegSpelerToeAanGekozenSpelers(spelers[spelerInt - 1].gebruikersnaam(),
 					spelers[spelerInt].geboortejaar(),
 					spelers[spelerInt].aantalGewonnen(),
-					spelers[spelerInt].aantalGespeeld(),kleurenArray[kleurInt-1]);
+					spelers[spelerInt].aantalGespeeld(), kleurenArray[kleurInt - 1]);
 			// Kleur verwijderen uit opties door nieuwe array te maken en alle kleuren
 			// buiten die dat gekozen is eraan toe te voegen
 
 			bufferSpelers = new SpelerDTO[spelers.length - 1];
 			int indexSpelers = 0;
-			for(SpelerDTO s : spelers){
-				if(s != spelers[kleurInt - 1]){
+			for (SpelerDTO s : spelers) {
+				if (s != spelers[kleurInt - 1]) {
 					bufferSpelers[indexSpelers++] = s;
 				}
 			}
@@ -132,8 +121,8 @@ public class SpelApplicatie {
 			// buiten die dat gekozen is eraan toe te voegen
 			bufferKleuren = new Kleur[kleurenArray.length - 1];
 			int indexKleur = 0;
-			for(Kleur k : kleurenArray){
-				if(k != kleurenArray[kleurInt - 1]){
+			for (Kleur k : kleurenArray) {
+				if (k != kleurenArray[kleurInt - 1]) {
 					bufferKleuren[indexKleur++] = k;
 				}
 			}
@@ -141,15 +130,15 @@ public class SpelApplicatie {
 			//aantalSpelers++;
 		}
 
-			dc.startSpel();
+		dc.startSpel();
 
 
-			dc.koningRondeEenShuffle();
-			//speelRondeEen();
-			while(dc.isEindeSpel()){
+		dc.koningRondeEenShuffle();
+		//speelRondeEen();
+		while (dc.isEindeSpel()) {
 
-				speelRonde();
-			}
+			speelRonde();
+		}
 
 	}
 	
@@ -160,27 +149,28 @@ public class SpelApplicatie {
 		}
 	}*/
 
-	private void speelBeurt(){
+	private void speelBeurt() {
 		toonTegelLijst(dc.getSpel().geefTweedeKolom());
 		System.out.println("Welke tegel wil je nemen?");
 		int tegel = input.nextInt();
 
 		dc.getVolgordeKoning().remove(0);
 	}
-	private void toonTegelLijst(List<DominoTegel> lijst){
+
+	private void toonTegelLijst(List<DominoTegel> lijst) {
 		int count = 0;
-		for (DominoTegel tegel : lijst){
+		for (DominoTegel tegel : lijst) {
 			count++;
 			System.out.printf("%d : %s", count, tegel.toString());
 
 		}
 	}
 
-	private void VraagKleur(Kleur[] kleurenarray){
+	private void VraagKleur(Kleur[] kleurenarray) {
 		int i = 0;
-		for(Kleur kleur : kleurenarray) {
+		for (Kleur kleur : kleurenarray) {
 
-			System.out.printf("%d : %s \n", i+1, kleur);
+			System.out.printf("%d : %s \n", i + 1, kleur);
 			i++;
 		}
 	}
@@ -189,9 +179,10 @@ public class SpelApplicatie {
 	public void geefSpelersAlsKeuze(SpelerDTO[] spelers) {
 		for (int i = 0; i <= spelers.length - 1; i++) {
 
-				System.out.printf("%d : %s, %d \t | \t", i+1, spelers[i].gebruikersnaam(), spelers[i].geboortejaar());
-				if(i % 2 == 1) {
-					System.out.println(); }
+			System.out.printf("%d : %s, %d \t | \t", i + 1, spelers[i].gebruikersnaam(), spelers[i].geboortejaar());
+			if (i % 2 == 1) {
+				System.out.println();
+			}
 		}
 	}
 
@@ -231,50 +222,45 @@ public class SpelApplicatie {
 			System.out.println("Het spel is afgelopen.");
 		}
 	}
-	
+
 	public void registreerSpeler() {
 
-		String gebruikersnaam = gebruikersnaamBalk.getText();
+		boolean isValidInput = false;
 
-		String geboortejaarString = geboortejaarBalk.getText();
+		while (!isValidInput) {
+
+			Scanner scanner = new Scanner(System.in);
+
+			System.out.println("Voer je gebruikersnaam in:");
+			String gebruikersnaam = scanner.nextLine();
+
+			System.out.println("Voer je geboortejaar in:");
+			String geboortejaarString = scanner.nextLine();
+
 			try {
-				if (geboortejaarString.trim().isBlank())
+				if (gebruikersnaam.trim().isBlank()) {
+					throw new OntbrekendeGebruikersnaamException();
+				}
+
+				if (geboortejaarString.trim().isBlank()) {
 					throw new OntbrekendGeboortejaarException();
-			} catch (OntbrekendGeboortejaarException | NumberFormatException e) {
-				wrongLogIn.setText(e.getMessage());
-			}
+				}
 
-		int geboortejaar = Integer.parseInt(geboortejaarBalk.getText());
+				int geboortejaar = Integer.parseInt(geboortejaarString);
 
 
-
-			try {
 				dc.registreerSpeler(gebruikersnaam, geboortejaar);
-				hoofdmenu();
-			} catch (GebruikersnaamInGebruikException | TeJongeGebruikerException | OngeldigeGebruikersnaamException | SpatiesInGebruikersnaamException |
-					 OntbrekendeGebruikersnaamException | IllegalArgumentException e)
-			{
-				wrongLogIn.setText(e.getMessage());
+				isValidInput = true;
+
+			} catch (OntbrekendeGebruikersnaamException | OntbrekendGeboortejaarException | NumberFormatException e) {
+				System.out.println(e.getMessage());
+			} catch (GebruikersnaamInGebruikException | TeJongeGebruikerException | OngeldigeGebruikersnaamException |
+					 SpatiesInGebruikersnaamException | IllegalArgumentException e) {
+				System.out.println(e.getMessage());
+				isValidInput = false;
 			}
-	}
+		}
 
-	public void switchToRegisterScene(ActionEvent event) throws IOException {
-		Parent root = FXMLLoader.load(getClass().getResource("/fxml/Login.fxml"));
-		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-		scene = new Scene(root);
-		stage.setScene(scene);
-		stage.show();
-	}
-
-	public void switchToHomescreen(MouseEvent event) throws IOException {
-		Parent root = FXMLLoader.load(getClass().getResource("/fxml/Homepage.fxml"));
-		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-		scene = new Scene(root);
-		stage.setScene(scene);
-		stage.show();
-	}
-
-	public void afsluiten(ActionEvent event) {
-		System.exit(0);
+		hoofdmenu();
 	}
 }
