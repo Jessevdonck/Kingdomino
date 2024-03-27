@@ -273,4 +273,8 @@ public class SpelApplicatie {
 		stage.setScene(scene);
 		stage.show();
 	}
+
+	public void afsluiten(ActionEvent event) {
+		System.exit(0);
+	}
 }
