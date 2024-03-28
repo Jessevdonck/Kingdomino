@@ -27,11 +27,11 @@
       <RowConstraints maxHeight="381.0" minHeight="10.0" prefHeight="46.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <ListView fx:id="ongeselecteerdeSpelers" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+      <ListView fx:id="ongeselecteerdeSpelers" editable="true" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
       <ListView fx:id="geselecteerdeSpelers" prefHeight="335.0" prefWidth="250.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
       <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
          <children>
-            <Button fx:id="voegToeButton" mnemonicParsing="false" prefHeight="48.0" prefWidth="84.0" text="VOEG TOE" wrapText="true">
+            <Button fx:id="voegToeButton" mnemonicParsing="false" onAction="#laadSpelersInListView" prefHeight="48.0" prefWidth="84.0" text="VOEG TOE" wrapText="true">
                <VBox.margin>
                   <Insets top="50.0" />
                </VBox.margin>

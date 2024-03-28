@@ -16,6 +16,7 @@ import dto.DominoTegelDTO;
 import dto.SpelerDTO;
 import exceptions.*;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableArray;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -58,7 +59,7 @@ public class SpelApplicatieGUI {
     private ImageView groenImageView;
 
     @FXML
-    private ListView<SpelerDTO> ongeselecteerdeSpelers;
+    private ListView<String> ongeselecteerdeSpelers;
 
     @FXML
     private ImageView roosImageView;
@@ -69,7 +70,7 @@ public class SpelApplicatieGUI {
     @FXML
     private Button voegToeButton;
     private ObservableList<SpelerDTO> geselecteerdeSpelersList;
-    private ObservableList<SpelerDTO> ongeselecteerdeSpelersList;
+    private ObservableList<String> ongeselecteerdeSpelersList;
 
     //gui attributen sceneChange
     private Stage stage;
@@ -80,12 +81,27 @@ public class SpelApplicatieGUI {
     private Scanner input = new Scanner(System.in);
 
 
+    public void updateItemsInListViewLeft(ObservableList<String> spelers){
+
+
+        this.ongeselecteerdeSpelers.setItems(spelers);
+    }
+
     public void laadSpelersInListView()
     {
-        SpelerDTO[] spelersArray = dc.geefAlleSpelers();
-        ongeselecteerdeSpelersList = FXCollections.observableArrayList(spelersArray);
 
-        ongeselecteerdeSpelers.setItems(ongeselecteerdeSpelersList);
+        ongeselecteerdeSpelers = new ListView<>();
+
+        SpelerDTO[] spelersArray = dc.geefAlleSpelers();
+        String[] spelerNamen = new String[spelersArray.length];
+        for(int i = 0; i < spelersArray.length - 1; i++){
+            spelerNamen[i] = spelersArray[i].gebruikersnaam();
+        }
+
+
+        ongeselecteerdeSpelersList = FXCollections.observableArrayList(spelerNamen);
+
+        updateItemsInListViewLeft(ongeselecteerdeSpelersList);
 
     }
 
@@ -236,7 +252,8 @@ public class SpelApplicatieGUI {
         stage.show();
 
         SpelApplicatieGUI spelApplicatieGUI = new SpelApplicatieGUI();
-        spelApplicatieGUI.laadSpelersInListView();
+
+        //spelApplicatieGUI.laadSpelersInListView();
 }
 
 
@@ -244,3 +261,5 @@ public class SpelApplicatieGUI {
         System.exit(0);
     }
 }
+
+
