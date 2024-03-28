@@ -6,25 +6,14 @@ import java.io.IOException;
 import java.util.*;
 import java.util.List;
 
-import com.sun.tools.javac.Main;
+
 import domein.DomeinController;
 import domein.DominoTegel;
-import domein.Spel;
-import domein.Speler;
+
 import dto.DominoTegelDTO;
 import dto.SpelerDTO;
 import exceptions.*;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
-import javafx.stage.Stage;
+
 import util.Kleur;
 
 public class SpelApplicatie {
@@ -147,7 +136,7 @@ public class SpelApplicatie {
 			toonTegelLijst(dc.getSpel().geefStartKolom());
 
 		}
-	}*/
+	}
 
 	private void speelBeurt() {
 		toonTegelLijst(dc.getSpel().geefTweedeKolom());

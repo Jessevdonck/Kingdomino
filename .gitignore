@@ -34,3 +34,6 @@ bin/
 
 ### Classes ###
 classes/
+.idea/
+
+*.iml
