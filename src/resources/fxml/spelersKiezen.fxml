@@ -73,7 +73,7 @@
             <Insets left="5.0" top="10.0" />
          </GridPane.margin>
       </ImageView>
-      <ImageView fitHeight="29.0" fitWidth="29.0" nodeOrientation="RIGHT_TO_LEFT" onMouseClicked="#switchToHomescreen" opacity="0.68" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4">
+      <ImageView fitHeight="29.0" fitWidth="29.0" nodeOrientation="RIGHT_TO_LEFT" onMouseClicked="#switchToBordScene" opacity="0.68" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4">
          <image>
             <Image url="@../img/GoBack.png" />
          </image>

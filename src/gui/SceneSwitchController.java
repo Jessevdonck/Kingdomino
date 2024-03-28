@@ -21,6 +21,11 @@ public class SceneSwitchController
         this.stage = stage;
     }
 
+    public SceneSwitchController()
+    {
+        this.stage = new Stage();
+    }
+
     public void switchToRegisterScene(ActionEvent event) throws IOException
     {
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/Login.fxml"));
@@ -48,6 +53,20 @@ public class SceneSwitchController
 
         SpelApplicatieGUI spelApplicatieGUI = new SpelApplicatieGUI();
         spelApplicatieGUI.laadSpelers();
+    }
+
+    public void switchToBordScene(MouseEvent event) throws IOException {
+
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/Bord.fxml"));
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public void afsluiten(ActionEvent event)
+    {
+        System.exit(0);
     }
 
 }

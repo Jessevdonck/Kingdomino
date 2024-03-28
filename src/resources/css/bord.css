@@ -1,0 +1,8 @@
+GridPane {
+    -fx-background-color: #fcba03;
+}
+
+VBox {
+    -fx-border-width: 2px;
+    -fx-border-color: white;
+}

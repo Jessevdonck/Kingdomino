@@ -9,9 +9,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
@@ -105,9 +103,14 @@ public class SpelApplicatieGUI {
         sceneSwitchController.switchToSpeelScene(event);
     }
 
+    @FXML
+    public void switchToBordScene(MouseEvent event) throws IOException
+    {
+        sceneSwitchController.switchToBordScene(event);
+    }
 
     public void afsluiten(ActionEvent event) {
-        System.exit(0);
+        sceneSwitchController.afsluiten(event);
     }
 }
 
