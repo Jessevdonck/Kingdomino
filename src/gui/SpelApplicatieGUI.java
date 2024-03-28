@@ -3,6 +3,7 @@ package GUI;
 import java.awt.*;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.URL;
 import java.util.*;
 import java.util.List;
 
@@ -14,29 +15,63 @@ import domein.Speler;
 import dto.DominoTegelDTO;
 import dto.SpelerDTO;
 import exceptions.*;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import util.Kleur;
 
 public class SpelApplicatieGUI {
-    //gui attributen
+    //gui attributen registreerSpeler
     @FXML
-    Button registreerBalk = new Button();
+    private Button registreerBalk = new Button();
     @FXML
-    TextField gebruikersnaamBalk = new TextField();
+    private TextField gebruikersnaamBalk = new TextField();
     @FXML
-    TextField geboortejaarBalk = new TextField();
+    private TextField geboortejaarBalk = new TextField();
     @FXML
-    Label wrongLogIn = new Label();
+    private Label wrongLogIn = new Label();
+    //gui attributen startSpel
+    @FXML
+    private ImageView blauwImageView;
+
+    @FXML
+    private ImageView geelImageView;
+
+    @FXML
+    private ListView<SpelerDTO> geselecteerdeSpelers;
+
+    @FXML
+    private ImageView groenImageView;
+
+    @FXML
+    private ListView<SpelerDTO> ongeselecteerdeSpelers;
+
+    @FXML
+    private ImageView roosImageView;
+
+    @FXML
+    private Button verwijderButton;
+
+    @FXML
+    private Button voegToeButton;
+    private ObservableList<SpelerDTO> geselecteerdeSpelersList;
+    private ObservableList<SpelerDTO> ongeselecteerdeSpelersList;
+
+    //gui attributen sceneChange
     private Stage stage;
     private Scene scene;
     private Parent root;
@@ -44,6 +79,19 @@ public class SpelApplicatieGUI {
     private final DomeinController dc;
     private Scanner input = new Scanner(System.in);
 
+
+    public void laadSpelersInListView()
+    {
+        SpelerDTO[] spelersArray = dc.geefAlleSpelers();
+        ongeselecteerdeSpelersList = FXCollections.observableArrayList(spelersArray);
+
+        ongeselecteerdeSpelers.setItems((ongeselecteerdeSpelersList));
+    }
+
+    public void kiesSpelers()
+    {
+
+    }
     public SpelApplicatieGUI()
     {
         this.dc = new DomeinController();
@@ -52,113 +100,11 @@ public class SpelApplicatieGUI {
         this.dc = dc;
     }
 
-    public void start() {
-        hoofdmenu();
-    }
-
-    private void hoofdmenu() {
-        System.out.println("Kingdomino - G59");
-        System.out.println("1. Registreer nieuwe speler");
-        System.out.println("2. Start nieuw spel");
-        System.out.println("3. Afsluiten");
-        int selected = input.nextInt();
-
-        while (selected < 1 || selected > 3 )
-        {
-            System.out.println("Foute invoer, probeer opnieuw.");
-            selected = input.nextInt();
-        }
-
-        switch(selected) {
-
-            case 1: registreerSpeler();
-            case 2: startSpel();
-            case 3: System.exit(0);
-        }
-    }
-
     public void startSpel()
     {
 
-        // arrays om spelers en kleuren die al gekozen zijn uit de lijst te halen
-        // te kiezen spelers en kleuren.
-        Kleur[] kleurenArray = Kleur.values();
-        Kleur[] bufferKleuren;
-        SpelerDTO[] spelers = dc.geefAlleSpelers();
-        SpelerDTO[] bufferSpelers;
-        int maxAantalSpelers = 4;
-        int aantalSpelers = 0;
-
-
-        for (aantalSpelers = 0; aantalSpelers <= maxAantalSpelers - 1; aantalSpelers++) {
-            if(aantalSpelers == 3) {
-                System.out.println("Wilt u een 4de speler kiezen of wilt u starten?");
-                System.out.println("1 : Ja ik wil een 4de speler toevoegen aan het spel");
-                System.out.println("2 : Nee, ik wil het spel nu beginnen");
-                int keuze = input.nextInt();
-                if(keuze == 2 ){
-                    break;
-                }
-            }
-
-            System.out.printf("Gelieve speler %d te kiezen \n", aantalSpelers + 1);
-
-            geefSpelersAlsKeuze(spelers);
-
-            int spelerInt = input.nextInt();
-
-            System.out.printf("Gelieve Kleur te kiezen \n");
-            VraagKleur(kleurenArray);
-            int kleurInt = input.nextInt();
-
-            dc.voegSpelerToeAanGekozenSpelers(spelers[spelerInt - 1].gebruikersnaam(),
-                    spelers[spelerInt].geboortejaar(),
-                    spelers[spelerInt].aantalGewonnen(),
-                    spelers[spelerInt].aantalGespeeld(),kleurenArray[kleurInt-1]);
-            // Kleur verwijderen uit opties door nieuwe array te maken en alle kleuren
-            // buiten die dat gekozen is eraan toe te voegen
-
-            bufferSpelers = new SpelerDTO[spelers.length - 1];
-            int indexSpelers = 0;
-            for(SpelerDTO s : spelers){
-                if(s != spelers[kleurInt - 1]){
-                    bufferSpelers[indexSpelers++] = s;
-                }
-            }
-            spelers = bufferSpelers;
-
-
-            // Kleur verwijderen uit opties door nieuwe array te maken en alle kleuren
-            // buiten die dat gekozen is eraan toe te voegen
-            bufferKleuren = new Kleur[kleurenArray.length - 1];
-            int indexKleur = 0;
-            for(Kleur k : kleurenArray){
-                if(k != kleurenArray[kleurInt - 1]){
-                    bufferKleuren[indexKleur++] = k;
-                }
-            }
-            kleurenArray = bufferKleuren;
-            //aantalSpelers++;
         }
 
-        dc.startSpel();
-
-
-        dc.koningRondeEenShuffle();
-        //speelRondeEen();
-        while(dc.isEindeSpel()){
-
-            speelRonde();
-        }
-
-    }
-
-	/*private void speelRondeEen(){
-		for (:
-			 ) {
-
-		}
-	}*/
 
     private void speelBeurt(){
         toonTegelLijst(dc.getSpel().geefTweedeKolom());
@@ -250,7 +196,6 @@ public class SpelApplicatieGUI {
 
         try {
             dc.registreerSpeler(gebruikersnaam, geboortejaar);
-            hoofdmenu();
         } catch (GebruikersnaamInGebruikException | TeJongeGebruikerException | OngeldigeGebruikersnaamException | SpatiesInGebruikersnaamException |
                  OntbrekendeGebruikersnaamException | IllegalArgumentException e)
         {
@@ -273,6 +218,18 @@ public class SpelApplicatieGUI {
         stage.setScene(scene);
         stage.show();
     }
+
+    public void switchToSpeelScene(ActionEvent event) throws IOException {
+
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/spelersKiezen.fxml"));
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+
+        SpelApplicatieGUI spelApplicatieGUI = new SpelApplicatieGUI();
+        spelApplicatieGUI.laadSpelersInListView();
+}
 
     public void afsluiten(ActionEvent event) {
         System.exit(0);
