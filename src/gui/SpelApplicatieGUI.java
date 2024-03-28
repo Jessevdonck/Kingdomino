@@ -85,7 +85,8 @@ public class SpelApplicatieGUI {
         SpelerDTO[] spelersArray = dc.geefAlleSpelers();
         ongeselecteerdeSpelersList = FXCollections.observableArrayList(spelersArray);
 
-        ongeselecteerdeSpelers.setItems((ongeselecteerdeSpelersList));
+        ongeselecteerdeSpelers.setItems(ongeselecteerdeSpelersList);
+
     }
 
     public void kiesSpelers()
@@ -180,6 +181,7 @@ public class SpelApplicatieGUI {
 
     public void registreerSpeler() {
 
+
         String gebruikersnaam = gebruikersnaamBalk.getText();
 
         String geboortejaarString = geboortejaarBalk.getText();
@@ -188,6 +190,7 @@ public class SpelApplicatieGUI {
                 throw new OntbrekendGeboortejaarException();
         } catch (OntbrekendGeboortejaarException | NumberFormatException e) {
             wrongLogIn.setText(e.getMessage());
+            wrongLogIn.setStyle("-fx-text-fill: red;");
         }
 
         int geboortejaar = Integer.parseInt(geboortejaarBalk.getText());
@@ -196,10 +199,14 @@ public class SpelApplicatieGUI {
 
         try {
             dc.registreerSpeler(gebruikersnaam, geboortejaar);
+            wrongLogIn.setText("Speler registreren succesvol!");
+            wrongLogIn.setStyle("-fx-text-fill: green;");
+
         } catch (GebruikersnaamInGebruikException | TeJongeGebruikerException | OngeldigeGebruikersnaamException | SpatiesInGebruikersnaamException |
                  OntbrekendeGebruikersnaamException | IllegalArgumentException e)
         {
             wrongLogIn.setText(e.getMessage());
+            wrongLogIn.setStyle("-fx-text-fill: red;");
         }
     }
 
@@ -219,6 +226,7 @@ public class SpelApplicatieGUI {
         stage.show();
     }
 
+
     public void switchToSpeelScene(ActionEvent event) throws IOException {
 
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/spelersKiezen.fxml"));
@@ -230,6 +238,7 @@ public class SpelApplicatieGUI {
         SpelApplicatieGUI spelApplicatieGUI = new SpelApplicatieGUI();
         spelApplicatieGUI.laadSpelersInListView();
 }
+
 
     public void afsluiten(ActionEvent event) {
         System.exit(0);
