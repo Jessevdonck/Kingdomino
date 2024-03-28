@@ -1,9 +1,7 @@
-GridPane {
-    -fx-background-color: #fcba03;
-}
+
 
 .list-view {
-    -fx-background-color: #ec8d11;
+    -fx-background-color: rgba(0,0,0,0.4);
     -fx-background-radius: 4px;
     -fx-border-width: 1px;
     -fx-border-color: white;
@@ -26,11 +24,11 @@ GridPane {
 }
 
 .list-view .cell:even {
-    -fx-background-color: #ec7803;
+    -fx-background-color: rgba(0,0,0,0.2);
 }
 
 .list-view .cell:odd {
-    -fx-background-color: #fa7f03;
+    -fx-background-color: rgba(255,255,255,0.2);
 }
 
 .list-view .cell {
@@ -43,12 +41,12 @@ GridPane {
 }
 
 .list-view .cell:hover {
-    -fx-background-color: #ff9534;
+    -fx-background-color: rgba(255,255,255,0.5);
 }
 
 
 HBox {
-    -fx-background-color: #ec8d11;
+    -fx-background-color: rgba(0,0,0,0.4);
     -fx-border-width: 1px;
     -fx-border-color: white;
     -fx-border-radius: 4px;
@@ -56,18 +54,8 @@ HBox {
     -fx-background-insets: 1px;
 }
 
-.button {
-    -fx-background-color: #ec8d11;
-    -fx-border-width: 1px;
-    -fx-border-color: white;
-    -fx-border-radius: 4px;
-    -fx-background-radius: 4px;
-    -fx-text-fill: white;
-    -fx-background-insets: 1px;
-}
-
-.button:hover {
-    -fx-background-color: #e07d28;
+GridPane {
+    -fx-background-image: url(../img/woodBackground1.jpg);
 }
 
 

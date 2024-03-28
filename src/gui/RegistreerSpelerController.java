@@ -52,7 +52,7 @@ public class RegistreerSpelerController
         try {
             dc.registreerSpeler(gebruikersnaam, geboortejaar);
             wrongLogIn.setText("Speler registreren succesvol!");
-            wrongLogIn.setStyle("-fx-text-fill: green;");
+            wrongLogIn.setStyle("-fx-text-fill: #00e000;");
 
         } catch (GebruikersnaamInGebruikException | TeJongeGebruikerException | OngeldigeGebruikersnaamException |
                  SpatiesInGebruikersnaamException |

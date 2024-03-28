@@ -1,5 +1,5 @@
 .button {
-    -fx-background-color: #ec8d11;
+    -fx-background-color: transparant;
     -fx-border-color: white;
     -fx-border-width: 1px;
     -fx-border-radius: 8px;
@@ -8,6 +8,13 @@
 }
 
 .button:hover {
-    -fx-background-color: #e07d28;
+    -fx-background-color: rgba(255, 255, 255, 0.4);
+}
 
+VBox {
+
+}
+
+Pane {
+    -fx-background-color: rgba(0,0,0,0.7);
 }
