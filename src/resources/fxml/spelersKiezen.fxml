@@ -2,8 +2,8 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.effect.ColorAdjust?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -11,100 +11,129 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.SpelApplicatieGUI">
+<GridPane alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@../css/spelerSelectieStyles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.SpelApplicatieGUI">
   <columnConstraints>
-      <ColumnConstraints hgrow="SOMETIMES" maxWidth="250.0" minWidth="10.0" prefWidth="42.0" />
+      <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="250.0" minWidth="10.0" prefWidth="42.0" />
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="356.0" minWidth="10.0" prefWidth="184.0" />
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="183.0" minWidth="10.0" prefWidth="137.0" />
-      <ColumnConstraints hgrow="SOMETIMES" maxWidth="250.0" minWidth="10.0" prefWidth="184.0" />
-      <ColumnConstraints hgrow="SOMETIMES" maxWidth="250.0" minWidth="10.0" prefWidth="42.0" />
+      <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="250.0" minWidth="10.0" prefWidth="184.0" />
+      <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="250.0" minWidth="10.0" prefWidth="42.0" />
   </columnConstraints>
   <rowConstraints>
-      <RowConstraints maxHeight="183.0" minHeight="10.0" prefHeight="46.0" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="381.0" minHeight="10.0" prefHeight="350.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="183.0" minHeight="10.0" prefHeight="46.0" valignment="BOTTOM" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="381.0" minHeight="10.0" prefHeight="276.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="381.0" minHeight="10.0" prefHeight="68.0" vgrow="SOMETIMES" />
       <RowConstraints maxHeight="381.0" minHeight="10.0" prefHeight="46.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <ListView fx:id="ongeselecteerdeSpelers" editable="true" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-      <ListView fx:id="geselecteerdeSpelers" prefHeight="335.0" prefWidth="250.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+      <ListView fx:id="ongeselecteerdeSpelers" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="325.0" prefWidth="150.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.rowSpan="2" GridPane.valignment="CENTER" />
+      <ListView fx:id="geselecteerdeSpelers" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="325.0" prefWidth="150.0" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.rowSpan="2" GridPane.valignment="CENTER" />
       <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
          <children>
-            <Button fx:id="voegToeButton" mnemonicParsing="false" onAction="#laadSpelersInListView" prefHeight="48.0" prefWidth="84.0" text="VOEG TOE" wrapText="true">
-               <VBox.margin>
-                  <Insets top="50.0" />
-               </VBox.margin>
-               <font>
-                  <Font name="System Bold" size="12.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-            <Button fx:id="verwijderButton" mnemonicParsing="false" prefHeight="48.0" prefWidth="84.0" text="VERWIJDER" wrapText="true">
-               <font>
-                  <Font name="System Bold" size="12.0" />
-               </font>
-               <VBox.margin>
-                  <Insets top="50.0" />
-               </VBox.margin>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-            <HBox alignment="CENTER" prefHeight="71.0" prefWidth="59.0">
-               <VBox.margin>
-                  <Insets top="30.0" />
-               </VBox.margin>
+            <HBox id="test" alignment="CENTER" prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: none; -fx-border-width: 0;" stylesheets="@../css/spelerSelectieStyles.css">
                <children>
-                  <ImageView fx:id="groenImageView" fitHeight="22.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView id="pijl" fitHeight="42.0" fitWidth="56.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../img/GROEN.png" />
+                        <Image url="@../img/Pijl.png" />
                      </image>
-                     <HBox.margin>
-                        <Insets left="5.0" right="5.0" />
-                     </HBox.margin>
+                     <effect>
+                        <ColorAdjust />
+                     </effect>
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </ImageView>
-                  <ImageView fx:id="blauwImageView" fitHeight="22.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView id="pijl" fitHeight="42.0" fitWidth="56.0" pickOnBounds="true" preserveRatio="true" style="-fx-border-width: 1px; -fx-border-color: white;">
                      <image>
-                        <Image url="@../img/BLAUW.png" />
+                        <Image url="@../img/Pijl.png" />
                      </image>
                      <HBox.margin>
-                        <Insets left="5.0" right="5.0" />
-                     </HBox.margin>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </ImageView>
-                  <ImageView fx:id="roosImageView" fitHeight="22.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../img/ROOS.png" />
-                     </image>
-                     <HBox.margin>
-                        <Insets left="5.0" right="5.0" />
-                     </HBox.margin>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </ImageView>
-                  <ImageView fx:id="geelImageView" fitHeight="22.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../img/GEEL.png" />
-                     </image>
-                     <HBox.margin>
-                        <Insets left="5.0" right="5.0" />
+                        <Insets left="25.0" />
                      </HBox.margin>
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </ImageView>
                </children>
+               <VBox.margin>
+                  <Insets top="50.0" />
+               </VBox.margin>
             </HBox>
          </children>
       </VBox>
+      <ImageView fitHeight="29.0" fitWidth="29.0" onMouseClicked="#switchToHomescreen" opacity="0.68" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/GoBack.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <GridPane.margin>
+            <Insets left="5.0" top="10.0" />
+         </GridPane.margin>
+      </ImageView>
+      <ImageView fitHeight="29.0" fitWidth="29.0" nodeOrientation="RIGHT_TO_LEFT" onMouseClicked="#switchToHomescreen" opacity="0.68" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4">
+         <image>
+            <Image url="@../img/GoBack.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <GridPane.margin>
+            <Insets right="5.0" top="10.0" />
+         </GridPane.margin>
+      </ImageView>
+      <HBox id="HBoxKleur" alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="20.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
+         <children>
+            <ImageView fx:id="groenImageView" fitHeight="22.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/GROEN.png" />
+               </image>
+               <HBox.margin>
+                  <Insets left="5.0" right="5.0" />
+               </HBox.margin>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <ImageView fx:id="blauwImageView" fitHeight="22.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/BLAUW.png" />
+               </image>
+               <HBox.margin>
+                  <Insets left="5.0" right="5.0" />
+               </HBox.margin>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <ImageView fx:id="roosImageView" fitHeight="22.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/ROOS.png" />
+               </image>
+               <HBox.margin>
+                  <Insets left="5.0" right="5.0" />
+               </HBox.margin>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <ImageView fx:id="geelImageView" fitHeight="22.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/GEEL.png" />
+               </image>
+               <HBox.margin>
+                  <Insets left="5.0" right="5.0" />
+               </HBox.margin>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+         </children>
+         <GridPane.margin>
+            <Insets left="5.0" right="5.0" top="20.0" />
+         </GridPane.margin>
+      </HBox>
    </children>
 </GridPane>
