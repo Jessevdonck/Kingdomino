@@ -1,0 +1,80 @@
+GridPane {
+    -fx-background-color: #fcba03;
+}
+
+.list-view {
+    -fx-background-color: #ec8d11;
+    -fx-background-radius: 4px;
+    -fx-border-width: 1px;
+    -fx-border-color: white;
+    -fx-border-radius: 4px;
+    -fx-background-insets: 1px;
+}
+
+.list-view .scroll-bar:vertical .increment-arrow,
+.list-view .scroll-bar:vertical .decrement-arrow,
+.list-view .scroll-bar:vertical .increment-button,
+.list-view .scroll-bar:vertical .decrement-button {
+    -fx-padding: 0px;
+}
+
+.list-view .scroll-bar:horizontal .increment-arrow,
+.list-view .scroll-bar:horizontal .decrement-arrow,
+.list-view .scroll-bar:horizontal .increment-button,
+.list-view .scroll-bar:horizontal .decrement-button {
+    -fx-padding: 0px;
+}
+
+.list-view .cell:even {
+    -fx-background-color: #ec7803;
+}
+
+.list-view .cell:odd {
+    -fx-background-color: #fa7f03;
+}
+
+.list-view .cell {
+    -fx-text-fill: white;
+}
+
+.list-view .cell:selected {
+    -fx-border-color: white;
+    -fx-border-width: 1px 0px 1px 0px;
+}
+
+.list-view .cell:hover {
+    -fx-background-color: #ff9534;
+}
+
+
+HBox {
+    -fx-background-color: #ec8d11;
+    -fx-border-width: 1px;
+    -fx-border-color: white;
+    -fx-border-radius: 4px;
+    -fx-background-radius: 4px;
+    -fx-background-insets: 1px;
+}
+
+.button {
+    -fx-background-color: #ec8d11;
+    -fx-border-width: 1px;
+    -fx-border-color: white;
+    -fx-border-radius: 4px;
+    -fx-background-radius: 4px;
+    -fx-text-fill: white;
+    -fx-background-insets: 1px;
+}
+
+.button:hover {
+    -fx-background-color: #e07d28;
+}
+
+
+
+
+
+
+
+
+

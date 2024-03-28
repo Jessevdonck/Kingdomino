@@ -34,6 +34,10 @@ bin/
 
 ### Classes ###
 classes/
+<<<<<<< Updated upstream
 .idea/
 
 *.iml
+=======
+kingdomino-g59.iml
+>>>>>>> Stashed changes
