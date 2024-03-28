@@ -141,11 +141,11 @@ public class SpelApplicatie {
 		}
 
 	}
-	
-	/*private void speelRondeEen(){
-		for (:
-			 ) {
-			
+
+	private void speelRondeEen(){
+		for (Kleur kleur: dc.getVolgordeKoning()) {
+			toonTegelLijst(dc.getSpel().geefStartKolom());
+
 		}
 	}*/
 
