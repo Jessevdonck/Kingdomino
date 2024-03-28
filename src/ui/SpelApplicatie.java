@@ -124,6 +124,7 @@ public class SpelApplicatie {
 		spelSetupBegin();
 
 
+
 		while (dc.isEindeSpel()) {
 
 			speelRonde();
@@ -140,6 +141,7 @@ public class SpelApplicatie {
 			dc.voegKoningAanKaart(kleur, keuze ,0);
 
 		}
+		spelSituatie();
 	}
 
 	private void speelBeurt() {
@@ -183,6 +185,7 @@ public class SpelApplicatie {
 		HashMap<SpelerDTO, Kleur> spelers = dc.getSpelendeSpelers();
 		for (SpelerDTO speler : spelers.keySet()) {
 			System.out.println(speler.gebruikersnaam() + " speelt met kleur " + spelers.get(speler));
+			System.out.printf(dc.getSpel().getTegelGebieden().get(spelers.get(speler)).toString());
 		}
 
 		// TODO - Zijn koninkrijk ;Zijn koning op een dominotegel in de startkolom of de eindkolom
@@ -190,20 +193,20 @@ public class SpelApplicatie {
 		List<DominoTegelDTO> beschikbareTegels = dc.getStartKolom();
 		System.out.println("Beschikbare tegels:");
 		for (DominoTegelDTO tegel : beschikbareTegels) {
-			System.out.printf("%d", tegel.tegelNummer());
+			System.out.printf("%s : %s : %s \n", tegel.landschapType1().toString(),tegel.kleurVanKoning(), tegel.landschapType2().toString());
 		}
 
 		List<DominoTegelDTO> startkolom = dc.getStartKolom();
 		System.out.println("Startkolom:");
 		for (DominoTegelDTO tegel : startkolom) {
-			System.out.printf("%s : %s", tegel.landschapType1().toString(), tegel.landschapType2().toString());
+			System.out.printf("%s : %s : %s \n", tegel.landschapType1().toString(),tegel.kleurVanKoning(), tegel.landschapType2().toString());
 		}
 
-		List<DominoTegelDTO> tweedekolom = dc.getTweedeKolom();
-		System.out.println("TweedeKolom:");
-		for (DominoTegelDTO tegel : tweedekolom) {
-			System.out.printf("%s : %s", tegel.landschapType1().toString(), tegel.landschapType2().toString());
-		}
+//		List<DominoTegelDTO> tweedekolom = dc.getTweedeKolom();
+//		System.out.println("TweedeKolom:");
+//		for (DominoTegelDTO tegel : tweedekolom) {
+//			System.out.printf("%s : %s", tegel.landschapType1().toString(), tegel.landschapType2().toString());
+//		}
 
 		// TODO - implement SpelApplicatie.spelSituatie
 	}

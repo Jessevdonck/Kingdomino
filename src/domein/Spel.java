@@ -17,6 +17,7 @@ public class Spel
     private List<DominoTegel> tweedeKolom;
     private List<Kleur> volgordeSpelers;
     private HashMap<Speler, Kleur> gekozenSpelers;
+    private HashMap<Kleur, TegelGebied> tegelGebieden;
 
     public Spel(HashMap<Speler, Kleur> spelers, List<DominoTegel> tegelsDeck)
     {
@@ -27,11 +28,17 @@ public class Spel
         }
         this.AantalDominotegels = spelers.size() == 3 ? 36 : 48;
         this.volgordeSpelers = null;
+        this.tegelGebieden = new HashMap<Kleur, TegelGebied>();
+        for (Kleur kleur : gekozenSpelers.values()) {
+            this.tegelGebieden.put(kleur, new TegelGebied());
+        }
+
     }
 
     public void setVolgordeSpelers(List<Kleur> kleurList){
         volgordeSpelers = kleurList;
     }
+    public HashMap<Kleur, TegelGebied> getTegelGebieden() {return this.tegelGebieden;}
     public List<Kleur> getVolgordeSpelers(){return volgordeSpelers;}
     public List<DominoTegel> geefStartKolom(){
         return startKolom;

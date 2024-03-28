@@ -53,7 +53,6 @@ public class DominoTegel {
     @Override
     public String toString()
     {
-
         if (this.kleurVanKoning == null) {
             return "[" + landschapType1.toString() + "|" + getKronen1() + "][" + landschapType2 + "|" + getKronen2() + "]" + "\n";
         } else {
