@@ -29,7 +29,7 @@ public class Spel
         this.volgordeSpelers = null;
     }
 
-    private void setVolgordeSpelers(List<Kleur> kleurList){
+    public void setVolgordeSpelers(List<Kleur> kleurList){
         volgordeSpelers = kleurList;
     }
     public List<Kleur> getVolgordeSpelers(){return volgordeSpelers;}

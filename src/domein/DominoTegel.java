@@ -58,7 +58,7 @@ public class DominoTegel {
             return "[" + landschapType1.toString() + "|" + getKronen1() + "][" + landschapType2 + "|" + getKronen2() + "]" + "\n";
         } else {
             return "[" + landschapType1.toString() + "|" + getKronen1() + "]" +
-                    " " + this.kleurVanKoning.toString() + " " +
+                    " [ " + this.kleurVanKoning.toString() + " ] " +
                     "[" + landschapType2 + "|" + getKronen2() + "]" + "\n";
         }
     }

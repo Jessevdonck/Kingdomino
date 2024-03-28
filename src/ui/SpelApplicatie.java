@@ -120,10 +120,10 @@ public class SpelApplicatie {
 		}
 
 		dc.startSpel();
-
-
 		dc.koningRondeEenShuffle();
-		//speelRondeEen();
+		spelSetupBegin();
+
+
 		while (dc.isEindeSpel()) {
 
 			speelRonde();
@@ -131,9 +131,13 @@ public class SpelApplicatie {
 
 	}
 
-	private void speelRondeEen(){
+	private void spelSetupBegin(){
+
 		for (Kleur kleur: dc.getVolgordeKoning()) {
+			System.out.printf("Kiest een tegel : %s\n", kleur);
 			toonTegelLijst(dc.getSpel().geefStartKolom());
+			int keuze = input.nextInt();
+			dc.voegKoningAanKaart(kleur, keuze ,0);
 
 		}
 	}

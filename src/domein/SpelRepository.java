@@ -17,9 +17,10 @@ public class SpelRepository {
     }
     public List<Kleur> koningRondeEen()
     {
-        List<Kleur> koningen = new ArrayList<>();
-        koningen = getSpelers().values().stream().toList();
+        List<Kleur> koningen = new ArrayList<>(getSpelers().values());
+
         Collections.shuffle(koningen);
+        momenteelSpel.setVolgordeSpelers(koningen);
         return koningen;
     }
 

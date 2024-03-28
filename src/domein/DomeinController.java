@@ -64,6 +64,16 @@ public class DomeinController {
         return null;
     };
 
+    // int kolom is 0 == eerstekolom , 1 == tweedekolom
+    public void voegKoningAanKaart(Kleur kleur, int index, int kolom){
+        if(kolom == 0) {
+            spelRepository.getStartKolom().get(index - 1).claimTegel(kleur);
+        }
+        else {
+            spelRepository.getTweedeKolom().get(index - 1).claimTegel(kleur);
+        }
+    }
+
     public List<DominoTegelDTO> getStartKolom(){
         List<DominoTegel> startKolom = spelRepository.getStartKolom();
         return Arrays.stream(startKolom.toArray(new DominoTegel[0]))
