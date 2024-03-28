@@ -47,7 +47,7 @@ public class SceneSwitchController
         stage.show();
 
         SpelApplicatieGUI spelApplicatieGUI = new SpelApplicatieGUI();
-        spelApplicatieGUI.laadSpelersInListView();
+        spelApplicatieGUI.laadSpelers();
     }
 
 }
