@@ -95,9 +95,6 @@ public class DomeinController {
                 .toList();
     }
 
-
-
-
     public SpelerDTO[] geefAlleSpelers(){
         Speler[] spelers = spelerRepository.geefSpelers();
         return Arrays.stream(spelers)
