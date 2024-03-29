@@ -8,6 +8,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.image.ImageView;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class SpelerSelectieController {
     @FXML
     private ImageView blauwImageView;
@@ -38,10 +42,11 @@ public class SpelerSelectieController {
 
     public void laadSpelers(SpelerDTO[] spelersArray)
     {
-        String[] spelerNamen = new String[spelersArray.length];
-        for (int i = 0; i < spelersArray.length; i++)
+        List<SpelerDTO> spelers = Arrays.asList(spelersArray);
+        List<String> spelerNamen = new ArrayList<String>();
+        for (SpelerDTO speler : spelers)
         {
-            spelerNamen[i] = spelersArray[i].gebruikersnaam();
+            spelerNamen.add(speler.gebruikersnaam());
         }
         ongeselecteerdeSpelersList.setAll(spelerNamen);
     }
