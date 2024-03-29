@@ -144,12 +144,46 @@ public class SpelApplicatie {
 		spelSituatie();
 	}
 
+	private void kiesTegel() {
+		boolean geregistreerd = false;
+		System.out.println("Welke tegel wil je nemen?");
+		int tegel = input.nextInt();
+		// DC Fucntie maken voor het kiezen
+		while (tegel < 1 || tegel > 4) {
+			System.out.println("Foute invoer, probeer opnieuw.");
+			tegel = input.nextInt();
+		}
+		try{
+			dc.kiesTegel(tegel);
+		} catch (IllegalArgumentException e) {
+			System.out.println(e.getMessage());
+			kiesTegel();
+		}
+	}
+
 	private void speelBeurt() {
 		toonTegelLijst(dc.getSpel().geefTweedeKolom());
 		System.out.println("Welke tegel wil je nemen?");
 		int tegel = input.nextInt();
+		// DC Fucntie maken voor het kiezen
+		while (tegel < 1 || tegel > 4) {
+			System.out.println("Foute invoer, probeer opnieuw.");
+			tegel = input.nextInt();
+		}
 
-		dc.getVolgordeKoning().remove(0);
+		kiesTegel();
+
+		System.out.println("Waar wil je de tegel plaatsen?");
+		String waar = input.nextLine();
+		System.out.println("In welke richting wil je de tegel plaatsen?");
+		String richting = input.nextLine();
+
+
+		dc.verplaatsDominoTegel(waar, richting);
+
+
+		// Het systeem valideert volgens DR_PLAATS_DOMINOTEGEL
+		// 8.Het systeem voegt de dominotegel op de juiste plaats en richting toe aan het koninkrijk van de speler
 	}
 
 	private void toonTegelLijst(List<DominoTegel> lijst) {
@@ -186,6 +220,7 @@ public class SpelApplicatie {
 		for (SpelerDTO speler : spelers.keySet()) {
 			System.out.println(speler.gebruikersnaam() + " speelt met kleur " + spelers.get(speler));
 			System.out.printf(dc.getSpel().getTegelGebieden().get(spelers.get(speler)).toString());
+
 		}
 
 		// TODO - Zijn koninkrijk ;Zijn koning op een dominotegel in de startkolom of de eindkolom

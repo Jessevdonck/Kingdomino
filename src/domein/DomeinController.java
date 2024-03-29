@@ -95,6 +95,16 @@ public class DomeinController {
                 .toList();
     }
 
+    public String voorbeeld() {
+        Speler[] spelers = spelerRepository.geefSpelers();
+        String lintje = "De spelers zijn: \n";
+        for (Speler speler : spelers) {
+            String.format("%s%s\n", lintje, speler.getGebruikersnaam());
+            lintje += speler.getGebruikersnaam() + " ";
+        }
+        return "Dit is een voorbeeld";
+    }
+
     public SpelerDTO[] geefAlleSpelers(){
         Speler[] spelers = spelerRepository.geefSpelers();
         return Arrays.stream(spelers)
@@ -107,7 +117,11 @@ public class DomeinController {
 
     }
 
-    public void kiesTegel(Kleur kleur, DominoTegel tegel){
+    public void kiesTegel(int tegelNummer){
+        spelRepository.kiesTegel(tegelNummer);
+    }
 
+    public void verplaatsDominoTegel(String waar, String richting) {
+        spelRepository.verplaatsDominoTegel(waar, richting);
     }
 }

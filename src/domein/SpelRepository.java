@@ -99,9 +99,15 @@ public class SpelRepository {
 
     }
 
-    public void kiesTegel(Kleur kleur, DominoTegel tegel){
-        tegel.claimTegel(kleur);
+    public void kiesTegel( int tegelnummer){
+        List<DominoTegel> tegels = momenteelSpel.geefTweedeKolom();
+        for (DominoTegel tegel : tegels) {
+            if (tegel.getTegelNummer() == tegelnummer) {
+                tegel.claimTegel(getVolgordeKoning().get(0));
+            }
+        }
     }
+
     public void startSpel() {
         if (gekozenSpelers.size() < 3) {
             throw new IllegalArgumentException("Je moet minimaal 3 spelers hebben om het spel te starten.");
@@ -112,5 +118,9 @@ public class SpelRepository {
         momenteelSpel.maakStartKolom();
 
 
+    }
+
+    public void verplaatsDominoTegel(String waar, String richting) {
+        
     }
 }
