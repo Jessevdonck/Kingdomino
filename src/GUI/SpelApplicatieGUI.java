@@ -50,12 +50,7 @@ public class SpelApplicatieGUI {
     @FXML
     public void laadSpelers()
     {
-
-    }
-
-    public void updateSpelersList(ObservableList<String> spelers)
-    {
-        
+        spelerSelectieController.laadSpelers(dc.geefAlleSpelers());
     }
 
     /*-----------------------------------------------------------------------------SPEL CONTROLLER---------------------------------------------------------------*/
