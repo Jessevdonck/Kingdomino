@@ -121,6 +121,6 @@ public class SpelRepository {
     }
 
     public void verplaatsDominoTegel(String waar, String richting) {
-        
+        momenteelSpel.verplaatsDominoTegel(waar, richting);
     }
 }

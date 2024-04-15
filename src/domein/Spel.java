@@ -121,4 +121,74 @@ public class Spel
         }
         return tegels.remove(0);
     }
+
+
+
+    public void verplaatsDominoTegel(String waar, String richting) {
+        if (startKolom.isEmpty()) {
+            throw new IllegalStateException("De startkolom is leeg.");
+        }
+        DominoTegel tegel = startKolom.get(0);
+
+        if (!isBinnenGrenzen(tegel, richting)) {
+            throw new IllegalStateException("Het koninkrijk wordt groter dan 5x5 als deze tegel wordt geplaatst.");
+        }
+
+        if (!isLandschapOvereenkomst(tegel, richting)) {
+            throw new IllegalStateException("Geen enkele zijde van de geplaatste dominotegel komt overeen met een zijde van een reeds geplaatste aangrenzende dominotegel uit het koninkrijk.");
+        }
+
+        Kleur spelerKleur = tegel.getKoningVanSpeler();
+        TegelGebied gebied = tegelGebieden.get(spelerKleur);
+        DominoTegel teVerplaatsen = startKolom.remove(0);
+    }
+
+    public boolean isBinnenGrenzen(DominoTegel tegel, String richting) {
+        int positie = Arrays.asList(gebied).indexOf(tegel.toString());
+
+        switch (richting) {
+            case "horizontaal":
+                return positie % 5 + 1 <= 4 && positie + 1 < 25 && positie % 5 != 4;
+            case "verticaal":
+                return positie + 5 < 25;
+            default:
+                throw new IllegalArgumentException("Ongeldige richting: " + richting);
+        }
+    }
+
+
+    public boolean isLandschapOvereenkomst(DominoTegel tegel, String richting) {
+        int positie = Arrays.asList(gebied).indexOf(tegel.toString());
+
+        if (richting.equals("horizontaal")) {
+            if (positie % 5 != 0) {
+                DominoTegel links = tegelGebieden.get(tegel.getKoningVanSpeler()).get(positie - 1);
+                if (links != null && links.getLandschapType2() == tegel.getLandschapType1()) {
+                    return true;
+                }
+            }
+            if (positie % 5 != 4) {
+                DominoTegel rechts = tegelGebieden.get(tegel.getKoningVanSpeler()).get(positie + 1);
+                if (rechts != null && rechts.getLandschapType1() == tegel.getLandschapType2()) {
+                    return true;
+                }
+            }
+        } else if (richting.equals("verticaal")) {
+            if (positie >= 5) {
+                DominoTegel boven = tegelGebieden.get(tegel.getKoningVanSpeler()).get(positie - 5);
+                if (boven != null && boven.getLandschapType2() == tegel.getLandschapType1()) {
+                    return true;
+                }
+            }
+            if (positie < 20) {
+                DominoTegel onder = tegelGebieden.get(tegel.getKoningVanSpeler()).get(positie + 5);
+                if (onder != null && onder.getLandschapType1() == tegel.getLandschapType2()) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+
 }
