@@ -121,7 +121,7 @@ public class DomeinController {
         spelRepository.kiesTegel(tegelNummer);
     }
 
-    public void verplaatsDominoTegel(String waar, String richting) {
+    /*public void verplaatsDominoTegel(String waar, String richting) {
         spelRepository.verplaatsDominoTegel(waar, richting);
-    }
+    }*/
 }

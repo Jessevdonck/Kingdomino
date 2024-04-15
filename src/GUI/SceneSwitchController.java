@@ -50,9 +50,6 @@ public class SceneSwitchController
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
-
-        SpelApplicatieGUI spelApplicatieGUI = new SpelApplicatieGUI();
-        spelApplicatieGUI.laadSpelers();
     }
 
     public void switchToBordScene(MouseEvent event) throws IOException {

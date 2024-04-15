@@ -33,25 +33,14 @@ public class SpelApplicatieGUI {
         this.registreerSpelerController = new RegistreerSpelerController(dc);
         this.spelController = new SpelController(dc);
         this.sceneSwitchController = new SceneSwitchController(new Stage());
-        this.ongeselecteerdeSpelers = new ListView<>();
-        this.spelerSelectieController = new SpelerSelectieController(ongeselecteerdeSpelers);
-
-        SpelerDTO[] alleSpelers = dc.geefAlleSpelers();
-
-        for (SpelerDTO speler : alleSpelers)
-        {
-            spelers.add(speler.gebruikersnaam());
-        }
-
-        this.ongeselecteerdeSpelers.setItems(spelers);
     }
 
 
-    @FXML
+    /*@FXML
     public void laadSpelers()
     {
         spelerSelectieController.laadSpelers(dc.geefAlleSpelers());
-    }
+    }*/
 
     /*-----------------------------------------------------------------------------SPEL CONTROLLER---------------------------------------------------------------*/
     private void speelBeurt()

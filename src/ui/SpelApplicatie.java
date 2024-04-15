@@ -179,7 +179,7 @@ public class SpelApplicatie {
 		String richting = input.nextLine();
 
 
-		dc.verplaatsDominoTegel(waar, richting);
+		//dc.verplaatsDominoTegel(waar, richting);
 
 
 		// Het systeem valideert volgens DR_PLAATS_DOMINOTEGEL

@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<GridPane alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@../css/spelerSelectieStyles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.SpelApplicatieGUI">
+<GridPane alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@../css/spelerSelectieStyles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.SpelerSelectieController">
   <columnConstraints>
       <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="250.0" minWidth="10.0" prefWidth="42.0" />
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="356.0" minWidth="10.0" prefWidth="184.0" />
@@ -33,7 +33,7 @@
          <children>
             <HBox id="test" alignment="CENTER" prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: none; -fx-border-width: 0;" stylesheets="@../css/spelerSelectieStyles.css">
                <children>
-                  <ImageView id="pijl" fitHeight="42.0" fitWidth="56.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
+                  <ImageView id="pijl" fx:id="deleteButton" fitHeight="42.0" fitWidth="56.0" nodeOrientation="RIGHT_TO_LEFT" onMouseClicked="#deleteSpeler" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../img/Pijl.png" />
                      </image>
@@ -44,7 +44,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </ImageView>
-                  <ImageView id="pijl" fitHeight="42.0" fitWidth="56.0" pickOnBounds="true" preserveRatio="true" style="-fx-border-width: 1px; -fx-border-color: white;">
+                  <ImageView id="pijl" fx:id="addButton" fitHeight="42.0" fitWidth="56.0" onMouseClicked="#addSpeler" pickOnBounds="true" preserveRatio="true" style="-fx-border-width: 1px; -fx-border-color: white;">
                      <image>
                         <Image url="@../img/Pijl.png" />
                      </image>

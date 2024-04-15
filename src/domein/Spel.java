@@ -124,7 +124,7 @@ public class Spel
 
 
 
-    public void verplaatsDominoTegel(String waar, String richting) {
+    /*public void verplaatsDominoTegel(String waar, String richting) {
         if (startKolom.isEmpty()) {
             throw new IllegalStateException("De startkolom is leeg.");
         }
@@ -188,7 +188,7 @@ public class Spel
             }
         }
         return false;
-    }
+    }*/
 
 
 }
