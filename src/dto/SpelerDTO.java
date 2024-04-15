@@ -9,4 +9,5 @@ public record SpelerDTO(String gebruikersnaam, int  geboortejaar, int aantalGewo
     public String toString() {
         return gebruikersnaam;
     }
+
 }

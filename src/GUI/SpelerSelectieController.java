@@ -1,17 +1,15 @@
 package GUI;
-
 import domein.DomeinController;
 import dto.SpelerDTO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-
+import util.Kleur;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -23,7 +21,14 @@ public class SpelerSelectieController implements Initializable{
 
 
 
-
+    @FXML
+    private ImageView groenImageView;
+    @FXML
+    private ImageView blauwImageView;
+    @FXML
+    private ImageView roosImageView;
+    @FXML
+    private ImageView geelImageView;
     @FXML
     private ListView<String> ongeselecteerdeSpelers;
     @FXML
@@ -32,11 +37,18 @@ public class SpelerSelectieController implements Initializable{
     private ImageView addButton;
     @FXML
     private ImageView deleteButton;
+    @FXML
+    private Label foutmelding;
 
     private ObservableList<String> ongeselecteerdeSpelersList;
     private ObservableList<String> geselecteerdeSpelersList;
+    private String geselecteerdeSpelerNaam;
+    private SpelerDTO geselecteerdeSpeler;
+    private Kleur geselecteerdeKleur;
+
     private DomeinController dc;
     private SceneSwitchController ssc;
+
 
 
     public SpelerSelectieController()
@@ -70,12 +82,29 @@ public class SpelerSelectieController implements Initializable{
     @FXML
     public void addSpeler()
         {
-            String geselecteerdeSpeler = ongeselecteerdeSpelers.getSelectionModel().getSelectedItem();
-            geselecteerdeSpelers.getItems().add(geselecteerdeSpeler);
-            ongeselecteerdeSpelersList.remove(geselecteerdeSpeler);
+            geselecteerdeSpelerNaam = ongeselecteerdeSpelers.getSelectionModel().getSelectedItem();
+            geselecteerdeSpeler = Arrays.stream(dc.geefAlleSpelers())
+                    .filter(speler -> speler.gebruikersnaam().equals(geselecteerdeSpelerNaam))
+                    .findFirst()
+                    .orElse(null);
 
-            ongeselecteerdeSpelersList.sort(String::compareToIgnoreCase);
-            geselecteerdeSpelersList.sort(String::compareToIgnoreCase);
+            if(geselecteerdeSpelerNaam != null && geselecteerdeKleur != null) {
+
+                geselecteerdeSpelers.getItems().add(geselecteerdeSpelerNaam);
+                ongeselecteerdeSpelersList.remove(geselecteerdeSpeler);
+
+                voegSpelerToeAanGekozenSpelers(geselecteerdeSpeler.gebruikersnaam(), geselecteerdeSpeler.geboortejaar(),
+                                               geselecteerdeSpeler.aantalGewonnen(), geselecteerdeSpeler.aantalGespeeld(),
+                                               geselecteerdeKleur);
+
+                //Alfabetisch sorteren lijsten
+                ongeselecteerdeSpelersList.sort(String::compareToIgnoreCase);
+                geselecteerdeSpelersList.sort(String::compareToIgnoreCase);
+            } else
+            {
+                foutmelding.setText("Selecteer eerst een speler en een kleur!");
+            }
+
         }
 
     @FXML
@@ -87,6 +116,32 @@ public class SpelerSelectieController implements Initializable{
 
             ongeselecteerdeSpelersList.sort(String::compareToIgnoreCase);
             geselecteerdeSpelersList.sort(String::compareToIgnoreCase);
+        }
+
+    public void selecteerGroen()
+        {
+            groenImageView.setStyle("-fx-border-color: white; -fx-border-width: 2;");
+            geselecteerdeKleur = Kleur.GROEN;
+        }
+
+    public void selecteerBlauw()
+        {
+            geselecteerdeKleur = Kleur.BLAUW;
+        }
+
+    public void selecteerRoos()
+        {
+            geselecteerdeKleur = Kleur.ROOS;
+        }
+
+    public void selecteerGeel()
+        {
+            geselecteerdeKleur = Kleur.GEEL;
+        }
+
+    public void voegSpelerToeAanGekozenSpelers(String gebruikersnaam, int geboortejaar, int aantalGewonnen, int aantalGespeeld, Kleur kleur)
+        {
+            dc.voegSpelerToeAanGekozenSpelers(gebruikersnaam, geboortejaar, aantalGewonnen, aantalGespeeld, kleur);
         }
 
 /*----------------------------------------------------SCENE SWITCH-----------------------------------------------*/
