@@ -6,9 +6,12 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import util.Kleur;
 import java.io.IOException;
 import java.net.URL;
@@ -22,13 +25,13 @@ public class SpelerSelectieController implements Initializable{
 
 
     @FXML
-    private ImageView groenImageView;
+    private Circle groen;
     @FXML
-    private ImageView blauwImageView;
+    private Circle blauw;
     @FXML
-    private ImageView roosImageView;
+    private Circle roos;
     @FXML
-    private ImageView geelImageView;
+    private Circle geel;
     @FXML
     private ListView<String> ongeselecteerdeSpelers;
     @FXML
@@ -45,6 +48,7 @@ public class SpelerSelectieController implements Initializable{
     private String geselecteerdeSpelerNaam;
     private SpelerDTO geselecteerdeSpeler;
     private Kleur geselecteerdeKleur;
+    private Circle huidigGeselecteerdeCircle;
 
     private DomeinController dc;
     private SceneSwitchController ssc;
@@ -89,17 +93,25 @@ public class SpelerSelectieController implements Initializable{
                     .orElse(null);
 
             if(geselecteerdeSpelerNaam != null && geselecteerdeKleur != null) {
-
+                //ListView updaten
                 geselecteerdeSpelers.getItems().add(geselecteerdeSpelerNaam);
-                ongeselecteerdeSpelersList.remove(geselecteerdeSpeler);
+                ongeselecteerdeSpelersList.remove(geselecteerdeSpelerNaam);
 
+                //Speler aanmaken
                 voegSpelerToeAanGekozenSpelers(geselecteerdeSpeler.gebruikersnaam(), geselecteerdeSpeler.geboortejaar(),
                                                geselecteerdeSpeler.aantalGewonnen(), geselecteerdeSpeler.aantalGespeeld(),
                                                geselecteerdeKleur);
 
+                //Reset Kleurselectie
+                huidigGeselecteerdeCircle.setStroke(null);
+                huidigGeselecteerdeCircle = null;
+                geselecteerdeKleur = null;
+
                 //Alfabetisch sorteren lijsten
                 ongeselecteerdeSpelersList.sort(String::compareToIgnoreCase);
                 geselecteerdeSpelersList.sort(String::compareToIgnoreCase);
+
+                foutmelding.setText("");
             } else
             {
                 foutmelding.setText("Selecteer eerst een speler en een kleur!");
@@ -114,30 +126,49 @@ public class SpelerSelectieController implements Initializable{
             ongeselecteerdeSpelersList.add(geselecteerdeSpeler);
             geselecteerdeSpelers.getItems().remove(geselecteerdeSpeler);
 
+            //Alfabetisch sorteren
             ongeselecteerdeSpelersList.sort(String::compareToIgnoreCase);
             geselecteerdeSpelersList.sort(String::compareToIgnoreCase);
+
+            //Reset delete knop na gebruik
+            geselecteerdeKleur = null;
+            huidigGeselecteerdeCircle = null;
         }
 
     public void selecteerGroen()
         {
-            groenImageView.setStyle("-fx-border-color: white; -fx-border-width: 2;");
-            geselecteerdeKleur = Kleur.GROEN;
+            selecteerCircle(groen, Kleur.GROEN);
         }
 
     public void selecteerBlauw()
         {
-            geselecteerdeKleur = Kleur.BLAUW;
+            selecteerCircle(blauw, Kleur.BLAUW);
         }
 
     public void selecteerRoos()
         {
-            geselecteerdeKleur = Kleur.ROOS;
+            selecteerCircle(roos, Kleur.ROOS);
         }
 
     public void selecteerGeel()
         {
-            geselecteerdeKleur = Kleur.GEEL;
+            selecteerCircle(geel, Kleur.GEEL);
         }
+
+    public void selecteerCircle(Circle circle, Kleur kleur)
+        {
+            if (huidigGeselecteerdeCircle != null)
+            {
+                huidigGeselecteerdeCircle.setStroke(null);
+            }
+
+            circle.setStroke(Color.WHITE);
+            circle.setStrokeWidth(1.5);
+
+            huidigGeselecteerdeCircle = circle;
+            geselecteerdeKleur = kleur;
+        }
+
 
     public void voegSpelerToeAanGekozenSpelers(String gebruikersnaam, int geboortejaar, int aantalGewonnen, int aantalGespeeld, Kleur kleur)
         {
@@ -156,4 +187,7 @@ public void switchToBordScene(MouseEvent event) throws IOException
         ssc.switchToBordScene(event);
     }
 
+
 }
+
+

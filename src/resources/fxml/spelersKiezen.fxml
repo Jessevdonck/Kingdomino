@@ -12,6 +12,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
 <GridPane alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@../css/spelerSelectieStyles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.SpelerSelectieController">
@@ -62,7 +63,7 @@
                   <Insets top="50.0" />
                </VBox.margin>
             </HBox>
-            <Label fx:id="foutmelding" prefHeight="60.0" prefWidth="132.0" textAlignment="CENTER" textFill="RED">
+            <Label fx:id="foutmelding" prefHeight="60.0" prefWidth="132.0" textAlignment="CENTER" textFill="RED" wrapText="true">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
@@ -92,55 +93,40 @@
          </GridPane.margin>
       </ImageView>
       <HBox id="HBoxKleur" alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="20.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
-         <children>
-            <ImageView fx:id="groenImageView" fitHeight="22.0" fitWidth="29.0" onMouseClicked="#selecteerGroen" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../img/GROEN.png" />
-               </image>
-               <HBox.margin>
-                  <Insets left="5.0" right="5.0" />
-               </HBox.margin>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </ImageView>
-            <ImageView fx:id="blauwImageView" fitHeight="22.0" fitWidth="29.0" onMouseClicked="#selecteerBlauw" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../img/BLAUW.png" />
-               </image>
-               <HBox.margin>
-                  <Insets left="5.0" right="5.0" />
-               </HBox.margin>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </ImageView>
-            <ImageView fx:id="roosImageView" fitHeight="22.0" fitWidth="29.0" onMouseClicked="#selecteerRoos" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../img/ROOS.png" />
-               </image>
-               <HBox.margin>
-                  <Insets left="5.0" right="5.0" />
-               </HBox.margin>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </ImageView>
-            <ImageView fx:id="geelImageView" fitHeight="22.0" fitWidth="29.0" onMouseClicked="#selecteerGeel" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../img/GEEL.png" />
-               </image>
-               <HBox.margin>
-                  <Insets left="5.0" right="5.0" />
-               </HBox.margin>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </ImageView>
-         </children>
          <GridPane.margin>
             <Insets left="5.0" right="5.0" top="20.0" />
          </GridPane.margin>
+         <children>
+            <Circle fx:id="groen" fill="#66ff61" onMouseClicked="#selecteerGroen" radius="12.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0">
+               <HBox.margin>
+                  <Insets right="7.0" />
+               </HBox.margin>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Circle>
+            <Circle fx:id="blauw" fill="#51aeff" onMouseClicked="#selecteerBlauw" radius="12.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0">
+               <HBox.margin>
+                  <Insets right="7.0" />
+               </HBox.margin>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Circle>
+            <Circle fx:id="roos" fill="#ff63ea" onMouseClicked="#selecteerRoos" radius="12.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0">
+               <HBox.margin>
+                  <Insets right="7.0" />
+               </HBox.margin>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Circle>
+            <Circle fx:id="geel" fill="#f2ff3d" onMouseClicked="#selecteerGeel" radius="12.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Circle>
+         </children>
       </HBox>
    </children>
 </GridPane>
