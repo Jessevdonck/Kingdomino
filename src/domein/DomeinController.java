@@ -31,6 +31,11 @@ public class DomeinController {
         spelRepository.voegSpelerToeAanSpel(new Speler(naam, geboortejaar, aantalgewonnen, aantalgespeeld),kleur);
     }
 
+    public void verwijderSpelerUitGekozenSpelers(String naam)
+        {
+            spelRepository.verwijderSpelerUitSpel(naam);
+        }
+
     public HashMap<SpelerDTO, Kleur> getSpelendeSpelers(){
         HashMap<Speler, Kleur> spelendeSpelers = spelRepository.getSpelers();
         HashMap<SpelerDTO, Kleur> spelendeSpelersDTO = new HashMap<>();

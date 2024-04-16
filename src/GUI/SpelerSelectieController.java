@@ -93,6 +93,11 @@ public class SpelerSelectieController implements Initializable{
                     .orElse(null);
 
             if(geselecteerdeSpelerNaam != null && geselecteerdeKleur != null) {
+                if(geselecteerdeSpelersList.size() >= 4)
+                {
+                    foutmelding.setText("Maximum 4 spelers toegelaten!");
+                    return;
+                }
                 //ListView updaten
                 geselecteerdeSpelers.getItems().add(geselecteerdeSpelerNaam);
                 ongeselecteerdeSpelersList.remove(geselecteerdeSpelerNaam);
@@ -123,8 +128,10 @@ public class SpelerSelectieController implements Initializable{
     public void deleteSpeler()
         {
             String geselecteerdeSpeler = geselecteerdeSpelers.getSelectionModel().getSelectedItem();
+
             ongeselecteerdeSpelersList.add(geselecteerdeSpeler);
             geselecteerdeSpelers.getItems().remove(geselecteerdeSpeler);
+            dc.verwijderSpelerUitGekozenSpelers(geselecteerdeSpelerNaam);
 
             //Alfabetisch sorteren
             ongeselecteerdeSpelersList.sort(String::compareToIgnoreCase);
@@ -184,6 +191,11 @@ public void switchToHomescreen(MouseEvent event) throws IOException
 
 public void switchToBordScene(MouseEvent event) throws IOException
     {
+        if(geselecteerdeSpelersList.size() < 3)
+        {
+            foutmelding.setText("Je moet minstens 3 spelers hebben!");
+            return;
+        }
         ssc.switchToBordScene(event);
     }
 

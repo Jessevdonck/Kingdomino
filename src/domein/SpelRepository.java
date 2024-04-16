@@ -40,12 +40,34 @@ public class SpelRepository {
 
     }
 
-    public void voegSpelerToeAanSpel(Speler speler, Kleur kleur) {
-        if (gekozenSpelers.size() >= 4) {
-            throw new IllegalArgumentException("Het maximum aantal spelers is bereikt.");
+    public void voegSpelerToeAanSpel(Speler speler, Kleur kleur)
+        {
+            if (gekozenSpelers.size() >= 4) {
+                throw new IllegalArgumentException("Het maximum aantal spelers is bereikt.");
+            }
+            gekozenSpelers.put(speler, kleur);
         }
-        gekozenSpelers.put(speler, kleur);
-    }
+
+    public void verwijderSpelerUitSpel(String naam)
+        {
+            Speler teVerwijderenSpeler = null;
+
+            //Speler zoeken op basis van naam
+        for (Speler speler : gekozenSpelers.keySet())
+        {
+            if (speler.getGebruikersnaam().equals(naam))
+            {
+                teVerwijderenSpeler = speler;
+                break;
+            }
+        }
+
+        if (teVerwijderenSpeler != null){
+            gekozenSpelers.remove(teVerwijderenSpeler);
+        } else {
+            throw new IllegalArgumentException("Speler niet gevonden in het spel.");
+        }
+        }
 
 
     public boolean isEindeSpel() {
