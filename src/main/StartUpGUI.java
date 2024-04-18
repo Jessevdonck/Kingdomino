@@ -9,11 +9,15 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import ui.SpelApplicatie;
 
+import java.util.Locale;
+import java.util.ResourceBundle;
+
 public class StartUpGUI extends Application
 {
     @Override
     public void start(Stage stage) throws Exception
     {
+
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/Homepage.fxml"));
 
         Scene scene = new Scene(root);

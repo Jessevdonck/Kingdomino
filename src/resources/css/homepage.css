@@ -14,3 +14,9 @@
 Pane {
     -fx-background-color: rgba(0,0,0,0.7);
 }
+
+#taalknop {
+    -fx-text-fill: white;
+    -fx-border-color: transparent;
+    -fx-font-weight: bold;
+}

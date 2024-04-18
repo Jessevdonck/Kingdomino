@@ -1,5 +1,6 @@
 package GUI;
 import java.io.IOException;
+import java.net.URL;
 import java.util.*;
 import java.util.List;
 import domein.DomeinController;
@@ -9,6 +10,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
@@ -18,13 +22,14 @@ public class SpelApplicatieGUI {
     private RegistreerSpelerController registreerSpelerController;
     private SceneSwitchController sceneSwitchController;
     private SpelController spelController;
-    private SpelerSelectieController spelerSelectieController;
     private final DomeinController dc;
 
-    private ObservableList<String> spelers = FXCollections.observableArrayList();
-    @FXML ListView<String> ongeselecteerdeSpelers;
-
-
+    @FXML private Button nederlandsButton;
+    @FXML private Button fransButton;
+    @FXML private Button engelsButton;
+    @FXML private Button speelBtn;
+    @FXML private Button registreerBtn;
+    @FXML private Button afsluitenBtn;
     private Scanner input = new Scanner(System.in);
 
     public SpelApplicatieGUI()
@@ -35,12 +40,6 @@ public class SpelApplicatieGUI {
         this.sceneSwitchController = new SceneSwitchController(new Stage());
     }
 
-
-    /*@FXML
-    public void laadSpelers()
-    {
-        spelerSelectieController.laadSpelers(dc.geefAlleSpelers());
-    }*/
 
     /*-----------------------------------------------------------------------------SPEL CONTROLLER---------------------------------------------------------------*/
     private void speelBeurt()
@@ -96,6 +95,37 @@ public class SpelApplicatieGUI {
     public void afsluiten(ActionEvent event) {
         sceneSwitchController.afsluiten(event);
     }
+
+    /*-----------------------------------------------------------------------------SCENE SWITCH---------------------------------------------------------------*/
+
+    private void laadLanguage(String lang)
+    {
+        Locale locale = new Locale(lang);
+        ResourceBundle bundle = ResourceBundle.getBundle("resourcebundles.lang", locale);
+        speelBtn.setText(bundle.getString("speel"));
+        registreerBtn.setText(bundle.getString("registreer"));
+        afsluitenBtn.setText(bundle.getString("afsluiten"));
+
+    }
+    @FXML
+    private void switchNaarNederlands(MouseEvent event)
+    {
+        laadLanguage("nl");
+    }
+
+    @FXML
+    private void switchNaarFrans(MouseEvent event)
+    {
+        laadLanguage("fr");
+    }
+
+    @FXML
+    private void switchNaarEngels(MouseEvent event)
+    {
+        laadLanguage("en");
+    }
+
+
 }
 
 
