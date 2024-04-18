@@ -80,7 +80,6 @@ public class SpelerSelectieController implements Initializable{
             ongeselecteerdeSpelers.setItems(ongeselecteerdeSpelersList);
             geselecteerdeSpelers.setItems(geselecteerdeSpelersList);
             ongeselecteerdeSpelersList.setAll(spelerNamen);
-            System.out.println(ongeselecteerdeSpelersList);
         }
 
     @FXML
@@ -98,6 +97,11 @@ public class SpelerSelectieController implements Initializable{
                     foutmelding.setText("Maximum 4 spelers toegelaten!");
                     return;
                 }
+                if (dc.isKleurGekozen(geselecteerdeKleur))
+                {
+                    foutmelding.setText("De kleur " + geselecteerdeKleur +" is al gekozen");
+                    return;
+                }
                 //ListView updaten
                 geselecteerdeSpelers.getItems().add(geselecteerdeSpelerNaam);
                 ongeselecteerdeSpelersList.remove(geselecteerdeSpelerNaam);
@@ -113,8 +117,8 @@ public class SpelerSelectieController implements Initializable{
                 geselecteerdeKleur = null;
 
                 //Alfabetisch sorteren lijsten
-                ongeselecteerdeSpelersList.sort(String::compareToIgnoreCase);
-                geselecteerdeSpelersList.sort(String::compareToIgnoreCase);
+                ongeselecteerdeSpelersList.sort(String::compareTo);
+                geselecteerdeSpelersList.sort(String::compareTo);
 
                 foutmelding.setText("");
             } else
@@ -129,13 +133,16 @@ public class SpelerSelectieController implements Initializable{
         {
             String geselecteerdeSpeler = geselecteerdeSpelers.getSelectionModel().getSelectedItem();
 
+            System.out.println(geselecteerdeSpeler);
+
             ongeselecteerdeSpelersList.add(geselecteerdeSpeler);
             geselecteerdeSpelers.getItems().remove(geselecteerdeSpeler);
-            dc.verwijderSpelerUitGekozenSpelers(geselecteerdeSpelerNaam);
+
+            dc.verwijderSpelerUitGekozenSpelers(geselecteerdeSpeler);
 
             //Alfabetisch sorteren
-            ongeselecteerdeSpelersList.sort(String::compareToIgnoreCase);
-            geselecteerdeSpelersList.sort(String::compareToIgnoreCase);
+            ongeselecteerdeSpelersList.sort(String::compareTo);
+            geselecteerdeSpelersList.sort(String::compareTo);
 
             //Reset delete knop na gebruik
             geselecteerdeKleur = null;

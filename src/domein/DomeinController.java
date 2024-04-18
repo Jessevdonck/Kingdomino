@@ -126,6 +126,10 @@ public class DomeinController {
         spelRepository.kiesTegel(tegelNummer);
     }
 
+    public boolean isKleurGekozen(Kleur kleur) {
+        return spelRepository.isKleurGekozen(kleur);
+    }
+
     /*public void verplaatsDominoTegel(String waar, String richting) {
         spelRepository.verplaatsDominoTegel(waar, richting);
     }*/

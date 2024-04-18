@@ -15,8 +15,8 @@ public class SpelRepository {
     public SpelRepository() {
         gekozenSpelers = new HashMap<>();
     }
-    public List<Kleur> koningRondeEen()
-    {
+
+    public List<Kleur> koningRondeEen() {
         List<Kleur> koningen = new ArrayList<>(getSpelers().values());
 
         Collections.shuffle(koningen);
@@ -24,50 +24,62 @@ public class SpelRepository {
         return koningen;
     }
 
-    public Spel getMomenteelSpel() {return momenteelSpel;}
-    public HashMap<Speler, Kleur> getSpelers(){return momenteelSpel.getSpelers();}
-    public List<DominoTegel> getStartKolom(){
+    public Spel getMomenteelSpel() {
+        return momenteelSpel;
+    }
+
+    public HashMap<Speler, Kleur> getSpelers() {
+        return momenteelSpel.getSpelers();
+    }
+
+    public List<DominoTegel> getStartKolom() {
         return momenteelSpel.geefStartKolom();
     }
-    public List<DominoTegel> getTweedeKolom(){
+
+    public List<DominoTegel> getTweedeKolom() {
         return momenteelSpel.geefTweedeKolom();
     }
-    public List<DominoTegel> getTegelsDeck(){
+
+    public List<DominoTegel> getTegelsDeck() {
         return momenteelSpel.getTegelsDeck();
     }
-    public List<Kleur> getVolgordeKoning(){
+
+    public List<Kleur> getVolgordeKoning() {
         return momenteelSpel.getVolgordeSpelers();
 
     }
 
-    public void voegSpelerToeAanSpel(Speler speler, Kleur kleur)
+    public void voegSpelerToeAanSpel(Speler speler, Kleur kleur) {
+        System.out.println(gekozenSpelers);
+        if (!isKleurGekozen(kleur))
         {
-            if (gekozenSpelers.size() >= 4) {
+            if (gekozenSpelers.size() < 4) {
+                gekozenSpelers.put(speler, kleur);
+            } else {
                 throw new IllegalArgumentException("Het maximum aantal spelers is bereikt.");
             }
-            gekozenSpelers.put(speler, kleur);
+        } else
+        {
+            throw new IllegalArgumentException("Kleur is al gekozen!");
         }
 
-    public void verwijderSpelerUitSpel(String naam)
-        {
-            Speler teVerwijderenSpeler = null;
 
-            //Speler zoeken op basis van naam
-        for (Speler speler : gekozenSpelers.keySet())
-        {
-            if (speler.getGebruikersnaam().equals(naam))
-            {
-                teVerwijderenSpeler = speler;
+    }
+
+    public void verwijderSpelerUitSpel(String naam) {
+        Speler teVerwijderenSpeler = null;
+
+        //Speler zoeken op basis van naam
+        for (Speler speler : gekozenSpelers.keySet()) {
+            if (speler.getGebruikersnaam().equals(naam)) {
+                gekozenSpelers.remove(speler);
+                System.out.println(gekozenSpelers);
                 break;
             }
         }
 
-        if (teVerwijderenSpeler != null){
-            gekozenSpelers.remove(teVerwijderenSpeler);
-        } else {
-            throw new IllegalArgumentException("Speler niet gevonden in het spel.");
-        }
-        }
+
+    }
 
 
     public boolean isEindeSpel() {
@@ -77,7 +89,7 @@ public class SpelRepository {
     public Speler[] geefWinnaars() {
         return momenteelSpel.geefWinnaars();
     }
-    
+
     // De speler met het hoogste aantal prestigepunten is de winnaar
     // -Bij gelijk aantal prestigepunten wint de speler met het grootste grondgebied van een domein binnen zijn koninkrijk
     // -Indien nog altijd gelijk dan wint de speler met de meeste kronen binnen zijn koninkrijk
@@ -94,8 +106,7 @@ public class SpelRepository {
     // Bereken voor elk domein het aantal prestigepunten en tel alles op voor de speler voor zijn eindtotaal.
     // Een speler kan meerdere afzonderlijke domeinen hebben van eenzelfde landschapstype
 
-    public List<DominoTegel> maakDeck(int aantalSpelers)
-    {
+    public List<DominoTegel> maakDeck(int aantalSpelers) {
         List<DominoTegel> deck = new ArrayList<DominoTegel>();
 
         if (aantalSpelers == 3) {
@@ -121,7 +132,7 @@ public class SpelRepository {
 
     }
 
-    public void kiesTegel( int tegelnummer){
+    public void kiesTegel(int tegelnummer) {
         List<DominoTegel> tegels = momenteelSpel.geefTweedeKolom();
         for (DominoTegel tegel : tegels) {
             if (tegel.getTegelNummer() == tegelnummer) {
@@ -138,9 +149,13 @@ public class SpelRepository {
         momenteelSpel = new Spel(gekozenSpelers, maakDeck(gekozenSpelers.size()));
         momenteelSpel.schudDominotegels();
         momenteelSpel.maakStartKolom();
-
-
     }
+
+    public boolean isKleurGekozen(Kleur kleur)
+    {
+        return gekozenSpelers.containsValue(kleur);
+    }
+
 
     /*public void verplaatsDominoTegel(String waar, String richting) {
         momenteelSpel.verplaatsDominoTegel(waar, richting);
