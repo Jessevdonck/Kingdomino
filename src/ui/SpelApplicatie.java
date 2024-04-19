@@ -243,7 +243,6 @@ public class SpelApplicatie {
 			System.out.printf("%s : %s\n", tegel.landschapType1().toString(), tegel.landschapType2().toString());
 		}
 
-		// TODO - implement SpelApplicatie.spelSituatie
 	}
 
 	public void speelRonde() {

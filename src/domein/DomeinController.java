@@ -82,21 +82,21 @@ public class DomeinController {
     public List<DominoTegelDTO> getStartKolom(){
         List<DominoTegel> startKolom = spelRepository.getStartKolom();
         return Arrays.stream(startKolom.toArray(new DominoTegel[0]))
-                .map(tegel -> new DominoTegelDTO(tegel.getLandschapType1(), tegel.getLandschapType2(), tegel.getTegelNummer(), tegel.getKronen1(), tegel.getKronen2(), tegel.getKoningVanSpeler().toString()))
+                .map(tegel -> new DominoTegelDTO(tegel.getLandschapType1().getType(), tegel.getLandschapType2().getType(), tegel.getTegelNummer(), tegel.getKronen1(), tegel.getKronen2(), tegel.getKoningVanSpeler().toString()))
                 .toList();
     }
 
     public List<DominoTegelDTO> getTweedeKolom() {
         List<DominoTegel> tweedeKolom = spelRepository.getTweedeKolom();
         return Arrays.stream(tweedeKolom.toArray(new DominoTegel[0]))
-                .map(tegel -> new DominoTegelDTO(tegel.getLandschapType1(), tegel.getLandschapType2(), tegel.getTegelNummer(), tegel.getKronen1(), tegel.getKronen2(), tegel.getKoningVanSpeler().toString()))
+                .map(tegel -> new DominoTegelDTO(tegel.getLandschapType1().getType(), tegel.getLandschapType2().getType(), tegel.getTegelNummer(), tegel.getKronen1(), tegel.getKronen2(), tegel.getKoningVanSpeler().toString()))
                 .toList();
     }
 
     public List<DominoTegelDTO> getBeschikbareTegels() {
         List<DominoTegel> tegelsDeck = spelRepository.getTegelsDeck();
         return Arrays.stream(tegelsDeck.toArray(new DominoTegel[0]))
-                .map(tegel -> new DominoTegelDTO(tegel.getLandschapType1(), tegel.getLandschapType2(), tegel.getTegelNummer(), tegel.getKronen1(), tegel.getKronen2(), tegel.getKoningVanSpeler().toString()))
+                .map(tegel -> new DominoTegelDTO(tegel.getLandschapType1().getType(), tegel.getLandschapType2().getType(), tegel.getTegelNummer(), tegel.getKronen1(), tegel.getKronen2(), tegel.getKoningVanSpeler().toString()))
                 .toList();
     }
 

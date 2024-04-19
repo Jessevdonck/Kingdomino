@@ -103,6 +103,7 @@ public class Spel
 
     public Speler[] geefWinnaars()
     {
+
         // Calculeren van tegels etc,
         return null;
     }
@@ -140,7 +141,6 @@ public class Spel
 
         Kleur spelerKleur = tegel.getKoningVanSpeler();
         TegelGebied gebied = tegelGebieden.get(spelerKleur);
-        DominoTegel teVerplaatsen = startKolom.remove(0);
     }
 
     public boolean isBinnenGrenzen(DominoTegel tegel, String richting) {

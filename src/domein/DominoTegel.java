@@ -19,8 +19,8 @@ public class DominoTegel {
         this.kleurVanKoning = null;
     }
 
-    public LandschapType getLandschapType1() {
-        return landschapType1.getType();
+    public Landschap getLandschapType1() {
+        return landschapType1;
     }
     public Kleur getKoningVanSpeler(){return kleurVanKoning;}
     public int getTegelNummer(){
@@ -30,8 +30,8 @@ public class DominoTegel {
         return landschapType1.getAantalKronen();
     }
 
-    public LandschapType getLandschapType2() {
-        return landschapType2.getType();
+    public Landschap getLandschapType2() {
+        return landschapType2;
     }
 
     public int getKronen2() {

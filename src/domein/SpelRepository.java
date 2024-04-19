@@ -157,7 +157,24 @@ public class SpelRepository {
     }
 
 
-    /*public void verplaatsDominoTegel(String waar, String richting) {
+    /*public void verplaatsDominoTegel(int rij,int kolom, String richting)  {
+        Convert string to boolean, if string is verticaal then true else false
+        boolean verticaal = richting.equals("verticaal");
+
+
         momenteelSpel.verplaatsDominoTegel(waar, richting);
+
+
+
+
+
+
+
+
+
+
+
+
+
     }*/
 }

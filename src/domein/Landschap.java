@@ -37,4 +37,25 @@ public class Landschap
     public String toString(){
         return this.type.toString();
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
