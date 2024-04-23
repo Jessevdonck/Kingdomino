@@ -130,6 +130,7 @@ public class DomeinController {
         return spelRepository.isKleurGekozen(kleur);
     }
 
+
     /*public void verplaatsDominoTegel(String waar, String richting) {
         spelRepository.verplaatsDominoTegel(waar, richting);
     }*/

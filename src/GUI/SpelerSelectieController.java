@@ -15,10 +15,7 @@ import javafx.scene.shape.Circle;
 import util.Kleur;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class SpelerSelectieController implements Initializable{
 
@@ -102,6 +99,7 @@ public class SpelerSelectieController implements Initializable{
                     foutmelding.setText("De kleur " + geselecteerdeKleur +" is al gekozen");
                     return;
                 }
+
                 //ListView updaten
                 geselecteerdeSpelers.getItems().add(geselecteerdeSpelerNaam);
                 ongeselecteerdeSpelersList.remove(geselecteerdeSpelerNaam);
@@ -110,6 +108,9 @@ public class SpelerSelectieController implements Initializable{
                 voegSpelerToeAanGekozenSpelers(geselecteerdeSpeler.gebruikersnaam(), geselecteerdeSpeler.geboortejaar(),
                                                geselecteerdeSpeler.aantalGewonnen(), geselecteerdeSpeler.aantalGespeeld(),
                                                geselecteerdeKleur);
+
+                huidigGeselecteerdeCircle.setFill(Color.GREY);
+                huidigGeselecteerdeCircle.setDisable(true);
 
                 //Reset Kleurselectie
                 huidigGeselecteerdeCircle.setStroke(null);
@@ -147,6 +148,7 @@ public class SpelerSelectieController implements Initializable{
             //Reset delete knop na gebruik
             geselecteerdeKleur = null;
             huidigGeselecteerdeCircle = null;
+
         }
 
     public void selecteerGroen()
@@ -167,6 +169,7 @@ public class SpelerSelectieController implements Initializable{
     public void selecteerGeel()
         {
             selecteerCircle(geel, Kleur.GEEL);
+
         }
 
     public void selecteerCircle(Circle circle, Kleur kleur)
@@ -182,7 +185,6 @@ public class SpelerSelectieController implements Initializable{
             huidigGeselecteerdeCircle = circle;
             geselecteerdeKleur = kleur;
         }
-
 
     public void voegSpelerToeAanGekozenSpelers(String gebruikersnaam, int geboortejaar, int aantalGewonnen, int aantalGespeeld, Kleur kleur)
         {

@@ -27,5 +27,4 @@ public class SpelerRepository {
         return mapper.geefSpeler(gebruikersnaam)!=null;
     }
 
-
 }

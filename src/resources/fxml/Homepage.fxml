@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.SpelApplicatieGUI">
+<Pane maxHeight="768.0" maxWidth="1024.0" minHeight="400.0" minWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.HomepageController">
    <children>
       <ImageView fitHeight="400.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true">
          <image>

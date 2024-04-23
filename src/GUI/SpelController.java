@@ -4,21 +4,47 @@ import domein.DomeinController;
 import domein.DominoTegel;
 import dto.DominoTegelDTO;
 import dto.SpelerDTO;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.GridPane;
 import util.Kleur;
 
+import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
+import java.util.ResourceBundle;
 import java.util.Scanner;
 
-public class SpelController
+public class SpelController implements Initializable
 {
     private final DomeinController dc;
     private Scanner input = new Scanner(System.in);
 
+    @FXML private GridPane gridPane1;
+    @FXML private GridPane gridPane2;
+    @FXML private GridPane gridPane3;
+    @FXML private GridPane gridPane4;
+
+    private final String[] startTegelImagePath =
+            {
+                    "/img/KingDomino_Afbeeldingen1/starttegel/starttegel_blauw.png",
+                    "/img/KingDomino_Afbeeldingen1/starttegel/geel.png",
+                    "/img/KingDomino_Afbeeldingen1/starttegel/starttegel_groen.png",
+                    "/img/KingDomino_Afbeeldingen1/starttegel/starttegel_roos.png"
+            };
+
+
     public SpelController(DomeinController dc)
-    {
-        this.dc = dc;
-    }
+        {
+            this.dc = dc;
+        }
+
+    public SpelController()
+        {
+            this.dc = new DomeinController();
+        }
 
     public void speelBeurt()
     {
@@ -28,6 +54,30 @@ public class SpelController
 
         dc.getVolgordeKoning().remove(0);
     }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle)
+    {
+        laadStarttegels(gridPane1,"/img/KingDomino_Afbeeldingen1/starttegel/starttegel_blauw.png");
+       /* laadStarttegels(gridPane2,startTegelImagePath[1]);
+        laadStarttegels(gridPane3,startTegelImagePath[2]);
+        laadStarttegels(gridPane4,startTegelImagePath[3]);*/
+    }
+/*-------------------------------------------------FRONTEND---------------------------------------------------*/
+public void laadStarttegels(GridPane gridPane, String startTegelImagePath)
+    {
+        double celHoogte = gridPane.getRowConstraints().get(0).getPrefHeight();
+        double celBreedte = gridPane.getColumnConstraints().get(0).getPrefWidth();
+
+        ImageView imageView = new ImageView(new Image(startTegelImagePath));
+        imageView.setPreserveRatio(true);
+        imageView.setFitWidth(celHoogte - 10);
+        imageView.setFitHeight(celHoogte - 10);
+
+        gridPane.add(imageView,2, 2);
+    }
+
+/*-------------------------------------------------BACKEND---------------------------------------------------*/
 
     public void toonTegelLijst(List<DominoTegel> lijst)
     {
@@ -77,4 +127,6 @@ public class SpelController
             System.out.println("Het spel is afgelopen.");
         }
     }
+
+
 }
