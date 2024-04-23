@@ -114,6 +114,8 @@ public class SpelerSelectieController implements Initializable{
 
                 //Reset Kleurselectie
                 huidigGeselecteerdeCircle.setStroke(null);
+                huidigGeselecteerdeCircle.setScaleX(1);
+                huidigGeselecteerdeCircle.setScaleY(1);
                 huidigGeselecteerdeCircle = null;
                 geselecteerdeKleur = null;
 
@@ -136,11 +138,7 @@ public class SpelerSelectieController implements Initializable{
 
             System.out.println(geselecteerdeSpeler);
 
-            Kleur kleurVanGeselecteerdeSpeler = getKleurVanGeselecteerdeSpeler(geselecteerdeSpelerNaam);
-
-
-        ongeselecteerdeSpelersList.add(geselecteerdeSpeler);
-            geselecteerdeSpelers.getItems().remove(geselecteerdeSpeler);
+            Kleur kleurVanGeselecteerdeSpeler = getKleurVanGeselecteerdeSpeler(geselecteerdeSpeler);
 
             dc.verwijderSpelerUitGekozenSpelers(geselecteerdeSpeler);
 
@@ -151,7 +149,7 @@ public class SpelerSelectieController implements Initializable{
                     groen.setDisable(false);
                     break;
                 case BLAUW:
-                    groen.setFill(Color.web("#51aeff"));
+                    blauw.setFill(Color.web("#51aeff"));
                     blauw.setDisable(false);
                     break;
                 case ROOS:
@@ -164,6 +162,11 @@ public class SpelerSelectieController implements Initializable{
                     break;
             }
 
+            geselecteerdeSpelerNaam = null;
+
+            ongeselecteerdeSpelersList.add(geselecteerdeSpeler);
+            geselecteerdeSpelers.getItems().remove(geselecteerdeSpeler);
+
             //Alfabetisch sorteren
             ongeselecteerdeSpelersList.sort(String::compareTo);
             geselecteerdeSpelersList.sort(String::compareTo);
@@ -171,6 +174,7 @@ public class SpelerSelectieController implements Initializable{
             //Reset delete knop na gebruik
             geselecteerdeKleur = null;
             huidigGeselecteerdeCircle = null;
+
 
         }
 
