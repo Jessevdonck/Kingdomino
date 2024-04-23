@@ -200,10 +200,14 @@ public class SpelerSelectieController implements Initializable{
             if (huidigGeselecteerdeCircle != null)
             {
                 huidigGeselecteerdeCircle.setStroke(null);
+                huidigGeselecteerdeCircle.setScaleX(1);
+                huidigGeselecteerdeCircle.setScaleY(1);
             }
 
             circle.setStroke(Color.WHITE);
             circle.setStrokeWidth(1.5);
+            circle.setScaleX(1.32);
+            circle.setScaleY(1.32);
 
             huidigGeselecteerdeCircle = circle;
             geselecteerdeKleur = kleur;
