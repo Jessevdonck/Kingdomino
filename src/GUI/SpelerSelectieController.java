@@ -136,10 +136,33 @@ public class SpelerSelectieController implements Initializable{
 
             System.out.println(geselecteerdeSpeler);
 
-            ongeselecteerdeSpelersList.add(geselecteerdeSpeler);
+            Kleur kleurVanGeselecteerdeSpeler = getKleurVanGeselecteerdeSpeler(geselecteerdeSpelerNaam);
+
+
+        ongeselecteerdeSpelersList.add(geselecteerdeSpeler);
             geselecteerdeSpelers.getItems().remove(geselecteerdeSpeler);
 
             dc.verwijderSpelerUitGekozenSpelers(geselecteerdeSpeler);
+
+        switch (kleurVanGeselecteerdeSpeler)
+            {
+                case GROEN:
+                    groen.setFill(Color.web("#66ff61"));
+                    groen.setDisable(false);
+                    break;
+                case BLAUW:
+                    groen.setFill(Color.web("#51aeff"));
+                    blauw.setDisable(false);
+                    break;
+                case ROOS:
+                    roos.setFill(Color.web("#ff63ea"));
+                    roos.setDisable(false);
+                    break;
+                case GEEL:
+                    geel.setFill(Color.web("#f2ff3d"));
+                    geel.setDisable(false);
+                    break;
+            }
 
             //Alfabetisch sorteren
             ongeselecteerdeSpelersList.sort(String::compareTo);
@@ -184,6 +207,19 @@ public class SpelerSelectieController implements Initializable{
 
             huidigGeselecteerdeCircle = circle;
             geselecteerdeKleur = kleur;
+        }
+
+    public Kleur getKleurVanGeselecteerdeSpeler(String naam)
+        {
+        for (String spelerNaam : geselecteerdeSpelersList)
+            {
+            if (spelerNaam.equals(naam))
+                {
+                return dc.getKleurVanSpeler(naam);
+                }
+            }
+
+        throw new IllegalArgumentException("Speler niet gevonden");
         }
 
     public void voegSpelerToeAanGekozenSpelers(String gebruikersnaam, int geboortejaar, int aantalGewonnen, int aantalGespeeld, Kleur kleur)

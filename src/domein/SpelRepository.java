@@ -1,8 +1,5 @@
 package domein;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 import util.Kleur;
 import util.LandschapType;
@@ -156,8 +153,14 @@ public class SpelRepository {
         return gekozenSpelers.containsValue(kleur);
     }
 
-
-
+    public Kleur getKleurVanSpeler(String naam) {
+    for (Map.Entry<Speler, Kleur> entry : gekozenSpelers.entrySet()) {
+        if (entry.getKey().getGebruikersnaam().equals(naam)) {
+            return entry.getValue();
+        }
+    }
+    throw new IllegalArgumentException("Speler niet gevonden");
+    }
 
     /*public void verplaatsDominoTegel(int rij,int kolom, String richting)  {
         Convert string to boolean, if string is verticaal then true else false
