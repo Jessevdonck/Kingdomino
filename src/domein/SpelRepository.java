@@ -1,6 +1,7 @@
 package domein;
 import java.util.*;
 
+import persistentie.DominoTegelMapper;
 import util.Kleur;
 import util.LandschapType;
 
@@ -8,6 +9,8 @@ public class SpelRepository {
 
     private HashMap<Speler, Kleur> gekozenSpelers;
     private Spel momenteelSpel;
+
+    private DominoTegelMapper dominoTegelMapper = new DominoTegelMapper();
 
     public SpelRepository() {
         gekozenSpelers = new HashMap<>();
@@ -103,29 +106,31 @@ public class SpelRepository {
     // Bereken voor elk domein het aantal prestigepunten en tel alles op voor de speler voor zijn eindtotaal.
     // Een speler kan meerdere afzonderlijke domeinen hebben van eenzelfde landschapstype
 
+    // In maakDeck roepen we eerst de mapperfunctie op om alle kaarten in een lijst te geven
+    // Erna shuffelen we deze lijst en overlopen we die lijst
+    // Tijdens het overlopen zetten we de kaarten over naar een goede lijst met kaarten, dit tot 36 of 48
+    // Niet echt performant, maar zo kleinschalig maakt het niet uit (Jordi zei om het zo te doen)
     public List<DominoTegel> maakDeck(int aantalSpelers) {
-        List<DominoTegel> deck = new ArrayList<DominoTegel>();
+
+        List<DominoTegel> deck = dominoTegelMapper.geefAlleDominoTegels();
+
+        Collections.shuffle(deck);
+
+        List<DominoTegel> goedeDeck = new ArrayList<>();
 
         if (aantalSpelers == 3) {
-            // TODO - Maak deck met 36 kaarten
-            // OP DIT MOMENT PLACEHOLDER DECKS
-            for (int i = 1; i <= 36; i++) {
-                deck.add(new DominoTegel(new Landschap(LandschapType.WEIDE, 0),
-                        new Landschap(LandschapType.WEIDE, 0),
-                        i));
+            for (int i = 0; i <= 35; i++) {
+                goedeDeck.add(deck.get(i));
             }
         } else if (aantalSpelers == 4) {
-            for (int i = 1; i <= 48; i++) {
-                deck.add(new DominoTegel(new Landschap(LandschapType.WEIDE, 0),
-                        new Landschap(LandschapType.WEIDE, 0),
-                        i));
+            for (int i = 0; i <= 47; i++) {
+                goedeDeck.add(deck.get(i));
             }
-            // TODO - Maak deck met 48 kaarten
         } else {
             throw new IllegalArgumentException("aantal spelers moet 3 of 4 zijn");
         }
 
-        return deck;
+        return goedeDeck;
 
     }
 

@@ -10,13 +10,24 @@ public class DominoTegel {
     private int tegelNummer;
     private Kleur kleurVanKoning;
 
+/*
+    De fotoAchterkant en fotoVoorkant zijn gewoon de paden naar de foto's voor de kaart.
+    Dit om GUI makkelijker te maken.
 
-    public DominoTegel(Landschap l1, Landschap l2, int nummer) {
+*/
+    private String fotoAchterkant;
+
+    private String fotoVoorkant;
+
+
+    public DominoTegel(Landschap l1, Landschap l2, int nummer, String fotoAchterkant, String fotoVoorkant) {
 
         this.landschapType1 = l1;
         this.tegelNummer = nummer;
         this.landschapType2 = l2;
         this.kleurVanKoning = null;
+        this.fotoAchterkant = fotoAchterkant;
+        this.fotoVoorkant = fotoVoorkant;
     }
 
     public Landschap getLandschapType1() {
@@ -39,6 +50,14 @@ public class DominoTegel {
     }
     private void setKleurVanKoning(Kleur kleur){
         this.kleurVanKoning = kleur;
+    }
+
+    public String getFotoAchterkant(){
+        return fotoAchterkant;
+    }
+
+    public String getFotoVoorkant(){
+        return fotoVoorkant;
     }
 
     public void claimTegel(Kleur kleur){
