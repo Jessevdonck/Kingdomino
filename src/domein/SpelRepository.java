@@ -32,12 +32,12 @@ public class SpelRepository {
         return momenteelSpel.getSpelers();
     }
 
-    public List<DominoTegel> getStartKolom() {
-        return momenteelSpel.geefStartKolom();
+    public List<DominoTegel> getBeginKolom() {
+        return momenteelSpel.geefBeginKolom();
     }
 
-    public List<DominoTegel> getTweedeKolom() {
-        return momenteelSpel.geefTweedeKolom();
+    public List<DominoTegel> getEindKolom() {
+        return momenteelSpel.geefEindKolom();
     }
 
     public List<DominoTegel> getTegelsDeck() {
@@ -46,7 +46,6 @@ public class SpelRepository {
 
     public List<Kleur> getVolgordeKoning() {
         return momenteelSpel.getVolgordeSpelers();
-
     }
 
     public void voegSpelerToeAanSpel(Speler speler, Kleur kleur) {
@@ -86,7 +85,8 @@ public class SpelRepository {
         return momenteelSpel.isEindeSpel();
     }
 
-    public Speler[] geefWinnaars() {
+    public List<Speler> geefWinnaars() {
+        // Convert to DTO misschien
         return momenteelSpel.geefWinnaars();
     }
 
@@ -95,8 +95,8 @@ public class SpelRepository {
     // -Indien nog altijd gelijk dan wint de speler met de meeste kronen binnen zijn koninkrijk
     // -Indien dan nog altijd gelijk, wordt de overwinning gedeeld
 
-    public int getScore(Speler speler) {
-        return 0;
+    public HashMap<Kleur, Integer> getScores() {
+        return momenteelSpel.geefScores();
     }
 
     // Een koninkrijk bestaat uit een aantal afzonderlijke domeinen.
@@ -135,7 +135,7 @@ public class SpelRepository {
     }
 
     public void kiesTegel(int tegelnummer) {
-        List<DominoTegel> tegels = momenteelSpel.geefTweedeKolom();
+        List<DominoTegel> tegels = momenteelSpel.geefEindKolom();
         for (DominoTegel tegel : tegels) {
             if (tegel.getTegelNummer() == tegelnummer) {
                 tegel.claimTegel(getVolgordeKoning().get(0));
@@ -167,24 +167,7 @@ public class SpelRepository {
     throw new IllegalArgumentException("Speler niet gevonden");
     }
 
-    /*public void verplaatsDominoTegel(int rij,int kolom, String richting)  {
-        Convert string to boolean, if string is verticaal then true else false
-        boolean verticaal = richting.equals("verticaal");
-
-
-        momenteelSpel.verplaatsDominoTegel(waar, richting);
-
-
-
-
-
-
-
-
-
-
-
-
-
-    }*/
+    public void verplaatsTegel(int kolom, int rij, boolean verticaal, DominoTegel tegel){
+        momenteelSpel.verplaatsTegel(kolom, rij, verticaal, tegel);
+    }
 }

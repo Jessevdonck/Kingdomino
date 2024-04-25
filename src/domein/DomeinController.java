@@ -72,22 +72,22 @@ public class DomeinController {
     // int kolom is 0 == eerstekolom , 1 == tweedekolom
     public void voegKoningAanKaart(Kleur kleur, int index, int kolom){
         if(kolom == 0) {
-            spelRepository.getStartKolom().get(index - 1).claimTegel(kleur);
+            spelRepository.getBeginKolom().get(index - 1).claimTegel(kleur);
         }
         else {
-            spelRepository.getTweedeKolom().get(index - 1).claimTegel(kleur);
+            spelRepository.getEindKolom().get(index - 1).claimTegel(kleur);
         }
     }
 
-    public List<DominoTegelDTO> getStartKolom(){
-        List<DominoTegel> startKolom = spelRepository.getStartKolom();
+    public List<DominoTegelDTO> getBeginKolom(){
+        List<DominoTegel> startKolom = spelRepository.getBeginKolom();
         return Arrays.stream(startKolom.toArray(new DominoTegel[0]))
                 .map(tegel -> new DominoTegelDTO(tegel.getLandschapType1().getType(), tegel.getLandschapType2().getType(), tegel.getTegelNummer(), tegel.getKronen1(), tegel.getKronen2(), tegel.getKoningVanSpeler().toString()))
                 .toList();
     }
 
-    public List<DominoTegelDTO> getTweedeKolom() {
-        List<DominoTegel> tweedeKolom = spelRepository.getTweedeKolom();
+    public List<DominoTegelDTO> getEindKolom() {
+        List<DominoTegel> tweedeKolom = spelRepository.getEindKolom();
         return Arrays.stream(tweedeKolom.toArray(new DominoTegel[0]))
                 .map(tegel -> new DominoTegelDTO(tegel.getLandschapType1().getType(), tegel.getLandschapType2().getType(), tegel.getTegelNummer(), tegel.getKronen1(), tegel.getKronen2(), tegel.getKoningVanSpeler().toString()))
                 .toList();
@@ -133,7 +133,7 @@ public class DomeinController {
     public Kleur getKleurVanSpeler(String naam){return spelRepository.getKleurVanSpeler(naam);}
 
 
-    /*public void verplaatsDominoTegel(String waar, String richting) {
-        spelRepository.verplaatsDominoTegel(waar, richting);
-    }*/
+    public void verplaatsDominotegel(int kolom, int rij, boolean verticaal, DominoTegel tegel){
+        spelRepository.verplaatsTegel(kolom, rij, verticaal, tegel);
+    }
 }

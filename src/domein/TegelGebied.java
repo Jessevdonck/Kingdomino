@@ -80,6 +80,65 @@ public class TegelGebied
 
     }
 
+    public int berekenScore() {
+        int score = 0;
+        boolean[][] bezocht = new boolean[gebied.length][gebied[0].length];
+
+        for (int kolom = 0; kolom < gebied.length; kolom++) {
+            for (int rij = 0; rij < gebied[kolom].length; rij++) {
+                if (!bezocht[kolom][rij] && gebied[kolom][rij] != null) {
+                    LandschapType type = gebied[kolom][rij].getType();
+                    int aantalVakjes = zoekDomein(kolom, rij, type, bezocht);
+                    int aantalKronen = gebied[kolom][rij].getAantalKronen();
+                    score += aantalVakjes * aantalKronen;
+                }
+            }
+        }
+        return score;
+    }
+
+    private int zoekDomein(int kolom, int rij, LandschapType type, boolean[][] bezocht) {
+        if (kolom < 0 || rij < 0 || kolom >= gebied.length || rij >= gebied[0].length || bezocht[kolom][rij] || gebied[kolom][rij] == null || gebied[kolom][rij].getType() != type)
+            return 0;
+
+        bezocht[kolom][rij] = true;
+        int count = 1;
+
+        // Zoek aangrenzende vakjes in alle richtingen
+        count += zoekDomein(kolom + 1, rij, type, bezocht); // Rechts
+        count += zoekDomein(kolom - 1, rij, type, bezocht); // Links
+        count += zoekDomein(kolom, rij + 1, type, bezocht); // Onder
+        count += zoekDomein(kolom, rij - 1, type, bezocht); // Boven
+
+        return count;
+    }
+
+    public int getAantalKronen() {
+        int aantalKronen = 0;
+        for (Landschap[] rij : gebied) {
+            for (Landschap landschap : rij) {
+                if (landschap != null) {
+                    aantalKronen += landschap.getAantalKronen();
+                }
+            }
+        }
+        return aantalKronen;
+    }
+
+    public int getGrootteGebied() {
+        int count = 0;
+        for (Landschap[] rij : gebied) {
+            for (Landschap landschap : rij) {
+                if (landschap != null) {
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
+
+
+
     @Override
     public String toString() {
         StringBuilder string = new StringBuilder();

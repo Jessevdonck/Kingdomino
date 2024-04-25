@@ -13,8 +13,8 @@ public class Spel
 
 
     private List<DominoTegel> tegels;
-    private List<DominoTegel> startKolom;
-    private List<DominoTegel> tweedeKolom;
+    private List<DominoTegel> beginKolom;
+    private List<DominoTegel> eindkolom;
     private List<Kleur> volgordeSpelers;
     private HashMap<Speler, Kleur> gekozenSpelers;
     private HashMap<Kleur, TegelGebied> tegelGebieden;
@@ -40,11 +40,11 @@ public class Spel
     }
     public HashMap<Kleur, TegelGebied> getTegelGebieden() {return this.tegelGebieden;}
     public List<Kleur> getVolgordeSpelers(){return volgordeSpelers;}
-    public List<DominoTegel> geefStartKolom(){
-        return startKolom;
+    public List<DominoTegel> geefBeginKolom(){
+        return beginKolom;
     }
-    public List<DominoTegel> geefTweedeKolom(){
-        return tweedeKolom;
+    public List<DominoTegel> geefEindKolom(){
+        return eindkolom;
     }
     public List<DominoTegel> getTegelsDeck()
     {
@@ -75,8 +75,6 @@ public class Spel
         } else{
             return tegels == null;
         }
-
-
     }
     public List<DominoTegel> geefKaarten(int aantalKaarten)
     {
@@ -88,8 +86,8 @@ public class Spel
     }
 
     public void maakStartKolom(){
-        startKolom = geefKaarten(3);
-        sorteerOpTegelNummer(startKolom);
+        beginKolom = geefKaarten(3);
+        sorteerOpTegelNummer(beginKolom);
     }
 
     public static void sorteerOpTegelNummer(List<DominoTegel> tegels) {
@@ -101,11 +99,89 @@ public class Spel
         });
     }
 
-    public Speler[] geefWinnaars()
-    {
 
-        // Calculeren van tegels etc,
-        return null;
+    private List<Speler> zetNaarSpelers(List<Kleur> winnaars){
+        List<Speler> spelers = new ArrayList<>();
+        spelers.add(getSpeler(winnaars.get(0)));
+        return spelers;
+    }
+    public List<Speler> geefWinnaars()
+    {
+        HashMap<Kleur, Integer> scores = geefScores();
+        int hoogsteScore = -1;
+        List<Kleur> winnaars = new ArrayList<>();
+
+        for (int score : scores.values()) {
+            if (score > hoogsteScore) {
+                hoogsteScore = score;
+            }
+        }
+
+        for (Map.Entry<Kleur, Integer> entry : scores.entrySet()) {
+            if (entry.getValue() == hoogsteScore) {
+                winnaars.add(entry.getKey());
+            }
+        }
+
+        if (winnaars.size() == 1) {
+            zetNaarSpelers(winnaars);
+        }
+
+        int grootsteGrondgebied = -1;
+
+        for (Kleur kleur : winnaars) {
+            int grootte = getGrondgebiedGrootte(kleur);
+            if ( grootte>= grootsteGrondgebied) {
+                grootsteGrondgebied = grootte;
+            }else
+            {
+                winnaars.remove(kleur);
+            }
+        }
+
+        if (winnaars.size() == 1) {
+            zetNaarSpelers(winnaars);
+        }
+
+        int meesteKronen = -1;
+
+        for (Kleur kleur : winnaars) {
+            int grootte = getAantalKronen(kleur);
+            if ( grootte>= meesteKronen) {
+                meesteKronen = grootte;
+            }else
+            {
+                winnaars.remove(kleur);
+            }
+        }
+
+        return zetNaarSpelers(winnaars);
+    }
+
+    private int getGrondgebiedGrootte(Kleur kleur) {
+        return tegelGebieden.get(kleur).getGrootteGebied();
+    }
+
+    private int getAantalKronen(Kleur kleur) {
+        return tegelGebieden.get(kleur).getAantalKronen();
+    }
+
+    private Speler getSpeler(Kleur kleur) {
+        for (Map.Entry<Speler, Kleur> entry : gekozenSpelers.entrySet()) {
+            if (entry.getValue() == kleur) {
+                return entry.getKey();
+            }
+        }
+        throw new IllegalArgumentException("Speler met kleur " + kleur + " niet gevonden");
+    }
+
+    public HashMap<Kleur, Integer> geefScores()
+    {
+        HashMap<Kleur, Integer> scores = new HashMap<Kleur, Integer>();
+        for (Kleur kleur : gekozenSpelers.values()) {
+            scores.put(kleur, tegelGebieden.get(kleur).berekenScore());
+        }
+        return scores;
     }
 
     public void schudDominotegels()
@@ -113,6 +189,15 @@ public class Spel
         Collections.shuffle(tegels);
     }
 
+
+    public HashMap<Kleur, Integer> getScore()
+    {
+        HashMap<Kleur, Integer> scores = new HashMap<Kleur, Integer>();
+        for (Kleur kleur : gekozenSpelers.values()) {
+            scores.put(kleur, tegelGebieden.get(kleur).berekenScore());
+        }
+        return scores;
+    }
 
 
     public DominoTegel geefTegel()
@@ -123,75 +208,9 @@ public class Spel
         return tegels.remove(0);
     }
 
-
-
-
-
-
-    /*public void verplaatsDominoTegel(String waar, String richting) {
-        if (startKolom.isEmpty()) {
-            throw new IllegalStateException("De startkolom is leeg.");
-        }
-        DominoTegel tegel = startKolom.get(0);
-
-        if (!isBinnenGrenzen(tegel, richting)) {
-            throw new IllegalStateException("Het koninkrijk wordt groter dan 5x5 als deze tegel wordt geplaatst.");
-        }
-
-        if (!isLandschapOvereenkomst(tegel, richting)) {
-            throw new IllegalStateException("Geen enkele zijde van de geplaatste dominotegel komt overeen met een zijde van een reeds geplaatste aangrenzende dominotegel uit het koninkrijk.");
-        }
-
-        Kleur spelerKleur = tegel.getKoningVanSpeler();
-        TegelGebied gebied = tegelGebieden.get(spelerKleur);
+    public void verplaatsTegel(int kolom, int rij, boolean verticaal, DominoTegel tegel)
+    {
+        tegelGebieden.get(volgordeSpelers.get(0)).plaatsTegel(kolom, rij, verticaal, tegel);
+        beginKolom.remove(tegel);
     }
-
-    public boolean isBinnenGrenzen(DominoTegel tegel, String richting) {
-        int positie = Arrays.asList(gebied).indexOf(tegel.toString());
-
-        switch (richting) {
-            case "horizontaal":
-                return positie % 5 + 1 <= 4 && positie + 1 < 25 && positie % 5 != 4;
-            case "verticaal":
-                return positie + 5 < 25;
-            default:
-                throw new IllegalArgumentException("Ongeldige richting: " + richting);
-        }
-    }
-
-
-    public boolean isLandschapOvereenkomst(DominoTegel tegel, String richting) {
-        int positie = Arrays.asList(gebied).indexOf(tegel.toString());
-
-        if (richting.equals("horizontaal")) {
-            if (positie % 5 != 0) {
-                DominoTegel links = tegelGebieden.get(tegel.getKoningVanSpeler()).get(positie - 1);
-                if (links != null && links.getLandschapType2() == tegel.getLandschapType1()) {
-                    return true;
-                }
-            }
-            if (positie % 5 != 4) {
-                DominoTegel rechts = tegelGebieden.get(tegel.getKoningVanSpeler()).get(positie + 1);
-                if (rechts != null && rechts.getLandschapType1() == tegel.getLandschapType2()) {
-                    return true;
-                }
-            }
-        } else if (richting.equals("verticaal")) {
-            if (positie >= 5) {
-                DominoTegel boven = tegelGebieden.get(tegel.getKoningVanSpeler()).get(positie - 5);
-                if (boven != null && boven.getLandschapType2() == tegel.getLandschapType1()) {
-                    return true;
-                }
-            }
-            if (positie < 20) {
-                DominoTegel onder = tegelGebieden.get(tegel.getKoningVanSpeler()).get(positie + 5);
-                if (onder != null && onder.getLandschapType1() == tegel.getLandschapType2()) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }*/
-
-
 }
