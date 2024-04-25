@@ -204,7 +204,6 @@ public class SpelApplicatie {
 		}
 	}
 
-
 	public void geefSpelersAlsKeuze(SpelerDTO[] spelers) {
 		for (int i = 0; i <= spelers.length - 1; i++) {
 
@@ -222,6 +221,7 @@ public class SpelApplicatie {
 			System.out.printf(dc.getSpel().getTegelGebieden().get(spelers.get(speler)).toString());
 
 		}
+
 
 		// TODO - Zijn koninkrijk ;Zijn koning op een dominotegel in de startkolom of de eindkolom
 

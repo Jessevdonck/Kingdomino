@@ -55,6 +55,7 @@ public class Spel
     public void setVolgordeSpelers(List<Kleur> kleurList){
         volgordeSpelers = kleurList;
     }
+
     public HashMap<Kleur, TegelGebied> getTegelGebieden() {return this.tegelGebieden;}
     public List<Kleur> getVolgordeSpelers(){return volgordeSpelers;}
     public List<DominoTegel> geefBeginKolom(){

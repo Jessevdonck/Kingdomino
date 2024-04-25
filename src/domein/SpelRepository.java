@@ -59,8 +59,6 @@ public class SpelRepository {
         {
             throw new IllegalArgumentException("Kleur is al gekozen!");
         }
-
-
     }
 
     public void verwijderSpelerUitSpel(String naam) {
@@ -74,8 +72,6 @@ public class SpelRepository {
                 break;
             }
         }
-
-
     }
 
     public boolean isEindeSpel() {

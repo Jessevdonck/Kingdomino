@@ -64,12 +64,14 @@ public class DomeinController {
     public void koningRondeEenShuffle(){
         spelRepository.koningRondeEen();
     }
-    public SpelerDTO[] winnaars() {
-
-        return null;
+    public List<SpelerDTO> getWinnaars() {
+        List<Speler> winnaars = spelRepository.geefWinnaars();
+        return Arrays.stream(winnaars.toArray(new Speler[0]))
+                .map(speler -> new SpelerDTO(speler.getGebruikersnaam(), speler.getGeboortejaar(), speler.getAantalGewonnen(), speler.getAantalGespeeld()))
+                .toList();
     };
 
-    // int kolom is 0 == eerstekolom , 1 == tweedekolom
+    // int kolom is 0 == beginkolom , 1 == eindkolom
     public void voegKoningAanKaart(Kleur kleur, int index, int kolom){
         if(kolom == 0) {
             spelRepository.getBeginKolom().get(index - 1).claimTegel(kleur);
