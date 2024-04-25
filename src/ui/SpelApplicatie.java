@@ -246,7 +246,6 @@ public class SpelApplicatie {
 	}
 
 	public void speelRonde() {
-		// TODO - implement SpelApplicatie.speelRonde
 		speelBeurt();
 		if (dc.isEindeSpel()) {
 			System.out.println("Het spel is afgelopen.");

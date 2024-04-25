@@ -28,18 +28,11 @@ public class Spel
         this.tegels = dominoTegelMapper.geefAlleDominoTegels();
         Collections.shuffle(tegels);
 
-        List<DominoTegel> goedeDeck;
-
-        switch (spelers.size()) {
-            case 3:
-                goedeDeck = new ArrayList<>(tegels.subList(0, 36));
-                break;
-            case 4:
-                goedeDeck = new ArrayList<>(tegels.subList(0, 48));
-                break;
-            default:
-                throw new IllegalArgumentException("Het aantal spelers moet 3 of 4 zijn.");
+        int aantalTegelsPerSpeler = spelers.size() == 3 ? 36 : 48;
+        if (tegels.size() < aantalTegelsPerSpeler) {
+            throw new IllegalArgumentException("Er zijn niet genoeg tegels voor het opgegeven aantal spelers.");
         }
+        this.tegels = new ArrayList<>(tegels.subList(0, aantalTegelsPerSpeler));
 
         this.gekozenSpelers = spelers;
         this.AantalDominotegels = spelers.size() == 3 ? 36 : 48;

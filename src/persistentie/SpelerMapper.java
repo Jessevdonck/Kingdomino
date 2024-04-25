@@ -91,6 +91,20 @@ public class SpelerMapper {
         return playersArray;
     }
 
+    public  void updateSpeler(Speler speler) {
+    	Connectie ssh = new Connectie();
+    	try (Connection conn = DriverManager.getConnection(Connectie.MYSQL_JDBC);
+                PreparedStatement query = conn.prepareStatement("UPDATE ID430262_kingdominoDB.Speler SET aantalGewonnen = ?, aantalGespeeld = ? WHERE gebruikersnaam = ?")) {
+            query.setInt(1, speler.getAantalGewonnen());
+            query.setInt(2, speler.getAantalGespeeld());
+            query.setString(3, speler.getGebruikersnaam());
+            query.executeUpdate();
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex);
+        }
+    	ssh.closeConnection();
+    }
+
 
 }
 
