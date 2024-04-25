@@ -42,7 +42,6 @@ public class Spel
             this.tegelGebieden.put(kleur, new TegelGebied());
         }
 
-        this.tegels = goedeDeck;
     }
 
     public void setVolgordeSpelers(List<Kleur> kleurList){
