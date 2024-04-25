@@ -2,10 +2,12 @@ package GUI;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -58,6 +60,13 @@ public class SceneSwitchController
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
+        Screen screen = Screen.getPrimary();
+        Rectangle2D bounds = screen.getVisualBounds();
+
+        double centerX = bounds.getMinX() + (bounds.getWidth() - scene.getWidth()) / 2;
+        stage.setX(centerX);
+        stage.setY(0);
+
         stage.show();
     }
 
