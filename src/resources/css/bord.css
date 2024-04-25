@@ -1,20 +1,5 @@
 #bord {
     -fx-background-color: rgba(0, 0, 0, 0.5);
-    -fx-background-insets: 1px;
-}
-
-#bordBeneden
-{
-    -fx-background-color: rgba(0,0,0,0.5);
-    -fx-border-color: white;
-    -fx-border-width: 5px 5px 5px 5px;
-}
-
-#bordBoven
-{
-    -fx-background-color: rgba(0,0,0,0.5);
-    -fx-border-color: white;
-    -fx-border-width: 5px 5px 0px 5px;
 }
 
 #tafel {
@@ -38,6 +23,7 @@ VBox {
 
 GridPane Line {
     -fx-stroke: white;
+    -fx-stroke-width: 2px;
 }
 
 Pane {

@@ -59,22 +59,16 @@ public class SpelController implements Initializable
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
         laadStarttegels(gridPane1,"/img/KingDomino_Afbeeldingen1/starttegel/starttegel_blauw.png");
-       /* laadStarttegels(gridPane2,startTegelImagePath[1]);
-        laadStarttegels(gridPane3,startTegelImagePath[2]);
-        laadStarttegels(gridPane4,startTegelImagePath[3]);*/
     }
 /*-------------------------------------------------FRONTEND---------------------------------------------------*/
 public void laadStarttegels(GridPane gridPane, String startTegelImagePath)
     {
-        double celHoogte = gridPane.getRowConstraints().get(0).getPrefHeight();
-        double celBreedte = gridPane.getColumnConstraints().get(0).getPrefWidth();
-
         ImageView imageView = new ImageView(new Image(startTegelImagePath));
-        imageView.setPreserveRatio(true);
-        imageView.setFitWidth(celHoogte - 10);
-        imageView.setFitHeight(celHoogte - 10);
 
-        gridPane.add(imageView,2, 2);
+        imageView.setFitWidth(100);
+        imageView.setFitHeight(100);
+
+        gridPane.add(imageView, 2, 2);
     }
 
 /*-------------------------------------------------BACKEND---------------------------------------------------*/
