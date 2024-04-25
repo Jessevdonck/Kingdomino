@@ -10,8 +10,6 @@ public class SpelRepository {
     private HashMap<Speler, Kleur> gekozenSpelers;
     private Spel momenteelSpel;
 
-    private DominoTegelMapper dominoTegelMapper = new DominoTegelMapper();
-
     public SpelRepository() {
         gekozenSpelers = new HashMap<>();
     }
@@ -80,7 +78,6 @@ public class SpelRepository {
 
     }
 
-
     public boolean isEindeSpel() {
         return momenteelSpel.isEindeSpel();
     }
@@ -110,29 +107,6 @@ public class SpelRepository {
     // Erna shuffelen we deze lijst en overlopen we die lijst
     // Tijdens het overlopen zetten we de kaarten over naar een goede lijst met kaarten, dit tot 36 of 48
     // Niet echt performant, maar zo kleinschalig maakt het niet uit (Jordi zei om het zo te doen)
-    public List<DominoTegel> maakDeck(int aantalSpelers) {
-
-        List<DominoTegel> deck = dominoTegelMapper.geefAlleDominoTegels();
-
-        Collections.shuffle(deck);
-
-        List<DominoTegel> goedeDeck = new ArrayList<>();
-
-        if (aantalSpelers == 3) {
-            for (int i = 0; i <= 35; i++) {
-                goedeDeck.add(deck.get(i));
-            }
-        } else if (aantalSpelers == 4) {
-            for (int i = 0; i <= 47; i++) {
-                goedeDeck.add(deck.get(i));
-            }
-        } else {
-            throw new IllegalArgumentException("aantal spelers moet 3 of 4 zijn");
-        }
-
-        return goedeDeck;
-
-    }
 
     public void kiesTegel(int tegelnummer) {
         List<DominoTegel> tegels = momenteelSpel.geefEindKolom();
@@ -148,7 +122,7 @@ public class SpelRepository {
             throw new IllegalArgumentException("Je moet minimaal 3 spelers hebben om het spel te starten.");
         }
 
-        momenteelSpel = new Spel(gekozenSpelers, maakDeck(gekozenSpelers.size()));
+        momenteelSpel = new Spel(gekozenSpelers);
         momenteelSpel.schudDominotegels();
         momenteelSpel.maakStartKolom();
     }

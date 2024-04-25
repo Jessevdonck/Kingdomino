@@ -2,6 +2,8 @@ package domein;
 
 import java.math.MathContext;
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import persistentie.DominoTegelMapper;
 import util.Kleur;
@@ -18,14 +20,28 @@ public class Spel
     private List<Kleur> volgordeSpelers;
     private HashMap<Speler, Kleur> gekozenSpelers;
     private HashMap<Kleur, TegelGebied> tegelGebieden;
+    private DominoTegelMapper dominoTegelMapper = new DominoTegelMapper();
 
-    public Spel(HashMap<Speler, Kleur> spelers, List<DominoTegel> tegelsDeck)
+
+    public Spel(HashMap<Speler, Kleur> spelers)
     {
-        this.tegels = tegelsDeck;
-        this.gekozenSpelers = spelers;
-        if (spelers.size() < 3 || spelers.size() > 4) {
-            throw new IllegalArgumentException("Het aantal spelers moet tussen 3 en 4 liggen.");
+        this.tegels = dominoTegelMapper.geefAlleDominoTegels();
+        Collections.shuffle(tegels);
+
+        List<DominoTegel> goedeDeck;
+
+        switch (spelers.size()) {
+            case 3:
+                goedeDeck = new ArrayList<>(tegels.subList(0, 36));
+                break;
+            case 4:
+                goedeDeck = new ArrayList<>(tegels.subList(0, 48));
+                break;
+            default:
+                throw new IllegalArgumentException("Het aantal spelers moet 3 of 4 zijn.");
         }
+
+        this.gekozenSpelers = spelers;
         this.AantalDominotegels = spelers.size() == 3 ? 36 : 48;
         this.volgordeSpelers = null;
         this.tegelGebieden = new HashMap<Kleur, TegelGebied>();
@@ -33,6 +49,7 @@ public class Spel
             this.tegelGebieden.put(kleur, new TegelGebied());
         }
 
+        this.tegels = goedeDeck;
     }
 
     public void setVolgordeSpelers(List<Kleur> kleurList){
@@ -76,35 +93,27 @@ public class Spel
             return tegels == null;
         }
     }
-    public List<DominoTegel> geefKaarten(int aantalKaarten)
-    {
-        List<DominoTegel> tegels = new ArrayList<DominoTegel>();
-        for (int i = 0; i < aantalKaarten; i++) {
-            tegels.add(geefTegel());
-        }
-        return tegels;
+    public List<DominoTegel> geefKaarten(int aantalKaarten) {
+        return IntStream.range(0, aantalKaarten)
+                .mapToObj(i -> geefTegel())
+                .collect(Collectors.toList());
     }
 
-    public void maakStartKolom(){
+    public void maakStartKolom() {
         beginKolom = geefKaarten(3);
         sorteerOpTegelNummer(beginKolom);
     }
 
     public static void sorteerOpTegelNummer(List<DominoTegel> tegels) {
-            Collections.sort(tegels, new Comparator<DominoTegel>() {
-            @Override
-            public int compare(DominoTegel tegel1, DominoTegel tegel2) {
-                return Integer.compare(tegel1.getTegelNummer(), tegel2.getTegelNummer());
-            }
-        });
+        tegels.sort(Comparator.comparingInt(DominoTegel::getTegelNummer));
     }
-
 
     private List<Speler> zetNaarSpelers(List<Kleur> winnaars){
         List<Speler> spelers = new ArrayList<>();
         spelers.add(getSpeler(winnaars.get(0)));
         return spelers;
     }
+
     public List<Speler> geefWinnaars()
     {
         HashMap<Kleur, Integer> scores = geefScores();
@@ -198,7 +207,6 @@ public class Spel
         }
         return scores;
     }
-
 
     public DominoTegel geefTegel()
     {
