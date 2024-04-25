@@ -48,7 +48,7 @@ public class SpelController implements Initializable
 
     public void speelBeurt()
     {
-        toonTegelLijst(dc.getSpel().geefTweedeKolom());
+        toonTegelLijst(dc.getSpel().geefEindKolom());
         System.out.println("Welke tegel wil je nemen?");
         int tegel = input.nextInt();
 
@@ -92,19 +92,19 @@ public void laadStarttegels(GridPane gridPane, String startTegelImagePath)
 
         // TODO - Zijn koninkrijk ;Zijn koning op een dominotegel in de startkolom of de eindkolom
 
-        List<DominoTegelDTO> beschikbareTegels = dc.getStartKolom();
+        List<DominoTegelDTO> beschikbareTegels = dc.getBeginKolom();
         System.out.println("Beschikbare tegels:");
         for (DominoTegelDTO tegel : beschikbareTegels) {
             System.out.printf("%d", tegel.tegelNummer());
         }
 
-        List<DominoTegelDTO> startkolom = dc.getStartKolom();
+        List<DominoTegelDTO> startkolom = dc.getBeginKolom();
         System.out.println("Startkolom:");
         for (DominoTegelDTO tegel : startkolom) {
             System.out.printf("%s : %s", tegel.landschapType1().toString(), tegel.landschapType2().toString());
         }
 
-        List<DominoTegelDTO> tweedekolom = dc.getTweedeKolom();
+        List<DominoTegelDTO> tweedekolom = dc.getEindKolom();
         System.out.println("TweedeKolom:");
         for (DominoTegelDTO tegel : tweedekolom) {
             System.out.printf("%s : %s", tegel.landschapType1().toString(), tegel.landschapType2().toString());
