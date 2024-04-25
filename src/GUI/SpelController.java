@@ -59,6 +59,9 @@ public class SpelController implements Initializable
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
         laadStarttegels(gridPane1,"/img/KingDomino_Afbeeldingen1/starttegel/starttegel_blauw.png");
+        laadStarttegels(gridPane2,"/img/KingDomino_Afbeeldingen1/starttegel/starttegel_geel.png");
+        laadStarttegels(gridPane3,"/img/KingDomino_Afbeeldingen1/starttegel/starttegel_groen.png");
+        laadStarttegels(gridPane4,"/img/KingDomino_Afbeeldingen1/starttegel/starttegel_roos.png");
     }
 /*-------------------------------------------------FRONTEND---------------------------------------------------*/
 public void laadStarttegels(GridPane gridPane, String startTegelImagePath)
