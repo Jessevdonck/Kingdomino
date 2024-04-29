@@ -77,14 +77,11 @@ public class Spel
     }
 
 
-
+    //Het spel eindigt als de stapel met beschikbare dominotegels van het spel leeg is
+    // Vragen of het alle tegels zijn
     public boolean isEindeSpel()
     {
-        if(geefWinnaars() != null){
-            return true;
-        } else{
-            return tegels == null;
-        }
+        return tegels == null;
     }
     public List<DominoTegel> geefKaarten(int aantalKaarten) {
         return IntStream.range(0, aantalKaarten)
