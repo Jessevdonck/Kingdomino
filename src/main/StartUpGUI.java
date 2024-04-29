@@ -1,6 +1,7 @@
 package main;
 
 import domein.DomeinController;
+import GUI.HomepageController;
 import domein.TegelGebied;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -18,8 +19,10 @@ public class StartUpGUI extends Application
     @Override
     public void start(Stage stage) throws Exception
     {
-
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/Homepage.fxml"));
+        DomeinController dc = new DomeinController();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Homepage.fxml"));
+        loader.setController(new HomepageController(dc));
+        Parent root = loader.load();
 
         Scene scene = new Scene(root);
         stage.setTitle("KingDomino G59");
@@ -30,7 +33,6 @@ public class StartUpGUI extends Application
     }
 
     public static void main(String[] args) {
-        DomeinController dc = new DomeinController();
         launch();
     }
 }

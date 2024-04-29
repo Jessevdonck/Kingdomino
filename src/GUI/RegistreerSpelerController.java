@@ -27,13 +27,10 @@ public class RegistreerSpelerController
     public RegistreerSpelerController(DomeinController dc)
     {
         this.dc = dc;
-        this.sceneSwitchController = new SceneSwitchController(new Stage());
+        this.sceneSwitchController = new SceneSwitchController(dc);
     }
 
-    public RegistreerSpelerController(){
-        this.dc = new DomeinController();
-        this.sceneSwitchController = new SceneSwitchController(new Stage());
-    }
+
     public void registreerSpeler()
     {
         String gebruikersnaam = gebruikersnaamBalk.getText();
@@ -65,6 +62,6 @@ public class RegistreerSpelerController
 
     public void switchToHomescreen(MouseEvent event) throws IOException
     {
-        sceneSwitchController.switchToHomescreen(event);
+        sceneSwitchController.switchToHomescreen(event,this.dc);
     }
 }

@@ -13,10 +13,13 @@ import java.util.Map;
 
 public class DomeinController {
 
+
+
     private final SpelerRepository spelerRepository;
     private final SpelRepository spelRepository;
 
     public DomeinController() {
+
         spelerRepository = new SpelerRepository();
         spelRepository = new SpelRepository();
     }

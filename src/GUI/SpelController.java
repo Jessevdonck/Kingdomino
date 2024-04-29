@@ -41,10 +41,7 @@ public class SpelController implements Initializable
             this.dc = dc;
         }
 
-    public SpelController()
-        {
-            this.dc = new DomeinController();
-        }
+    
 
     public void speelBeurt()
     {
@@ -62,6 +59,7 @@ public class SpelController implements Initializable
         laadStarttegels(gridPane2,"/img/KingDomino_Afbeeldingen1/starttegel/starttegel_geel.png");
         laadStarttegels(gridPane3,"/img/KingDomino_Afbeeldingen1/starttegel/starttegel_groen.png");
         laadStarttegels(gridPane4,"/img/KingDomino_Afbeeldingen1/starttegel/starttegel_roos.png");
+
     }
 /*-------------------------------------------------FRONTEND---------------------------------------------------*/
 public void laadStarttegels(GridPane gridPane, String startTegelImagePath)

@@ -52,10 +52,10 @@ public class SpelerSelectieController implements Initializable{
 
 
 
-    public SpelerSelectieController()
+    public SpelerSelectieController(DomeinController dc)
         {
-            this.dc = new DomeinController();
-            this.ssc = new SceneSwitchController();
+            this.dc = dc;
+            this.ssc = new SceneSwitchController(dc);
         }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
@@ -239,7 +239,7 @@ public class SpelerSelectieController implements Initializable{
 
 public void switchToHomescreen(MouseEvent event) throws IOException
     {
-        ssc.switchToHomescreen(event);
+        ssc.switchToHomescreen(event, this.dc);
     }
 
 public void switchToBordScene(MouseEvent event) throws IOException
@@ -249,7 +249,7 @@ public void switchToBordScene(MouseEvent event) throws IOException
             foutmelding.setText("Je moet minstens 3 spelers hebben!");
             return;
         }
-        ssc.switchToBordScene(event);
+        ssc.switchToBordScene(event,this.dc );
     }
 
 

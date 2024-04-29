@@ -19,11 +19,11 @@ public class HomepageController
     @FXML private Button registreerBtn;
     @FXML private Button afsluitenBtn;
 
-    public HomepageController()
+    public HomepageController(DomeinController dc)
     {
-        this.dc = new DomeinController();
+        this.dc = dc;
         this.registreerSpelerController = new RegistreerSpelerController(dc);
-        this.sceneSwitchController = new SceneSwitchController(new Stage());
+        this.sceneSwitchController = new SceneSwitchController(dc);
     }
 
     /*---------------------------------------------------------------------------REGISTREER SPELER-------------------------------------------------------------*/
@@ -37,13 +37,13 @@ public class HomepageController
     @FXML
     public void switchToRegisterScene(ActionEvent event) throws IOException
     {
-       sceneSwitchController.switchToRegisterScene(event);
+       sceneSwitchController.switchToRegisterScene(event, this.dc);
     }
 
     @FXML
     public void switchToSpeelScene(ActionEvent event) throws IOException
     {
-        sceneSwitchController.switchToSpeelScene(event);
+        sceneSwitchController.switchToSpeelScene(event, this.dc);
     }
 
     public void afsluiten(ActionEvent event) {

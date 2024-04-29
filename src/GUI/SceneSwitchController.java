@@ -1,5 +1,7 @@
 package GUI;
 
+import domein.DomeinController;
+import domein.Spel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
@@ -17,46 +19,53 @@ public class SceneSwitchController
     private Stage stage;
     private Scene scene;
     private Parent root;
+    private DomeinController dc;
 
-    public SceneSwitchController(Stage stage)
-    {
-        this.stage = stage;
-    }
 
-    public SceneSwitchController()
+
+    public SceneSwitchController(DomeinController dc)
     {
         this.stage = new Stage();
+        this.dc = dc;
     }
 
-    public void switchToRegisterScene(ActionEvent event) throws IOException
+    public void switchToRegisterScene(ActionEvent event, DomeinController dc) throws IOException
     {
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/Login.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Login.fxml"));
+        loader.setController(new RegistreerSpelerController(dc));
+        Parent root = loader.load();
+
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
     }
 
-    public void switchToHomescreen(MouseEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/Homepage.fxml"));
+    public void switchToHomescreen(MouseEvent event, DomeinController dc) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Homepage.fxml"));
+        loader.setController(new HomepageController(dc));
+        Parent root = loader.load();
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
     }
 
-    public void switchToSpeelScene(ActionEvent event) throws IOException {
-
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/spelersKiezen.fxml"));
+    public void switchToSpeelScene(ActionEvent event, DomeinController dc) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/spelersKiezen.fxml"));
+        loader.setController(new SpelerSelectieController(dc));
+        Parent root = loader.load();
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
     }
 
-    public void switchToBordScene(MouseEvent event) throws IOException {
+    public void switchToBordScene(MouseEvent event, DomeinController dc) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Bord.fxml"));
+        loader.setController(new SpelController(dc));
+        Parent root = loader.load();
 
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/Bord.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
