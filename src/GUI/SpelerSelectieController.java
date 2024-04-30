@@ -251,6 +251,7 @@ public void switchToBordScene(MouseEvent event) throws IOException
             foutmelding.setText("Je moet minstens 3 spelers hebben!");
             return;
         }
+        dc.startSpel();
         ssc.switchToBordScene(event,this.dc );
     }
 

@@ -63,9 +63,17 @@ public class SceneSwitchController
     }
 
     public void switchToBordScene(MouseEvent event, DomeinController dc) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Bord.fxml"));
-        loader.setController(new SpelController(dc));
-        Parent root = loader.load();
+        Parent root;
+        if (dc.getSpelendeSpelers().size() == 3)
+        {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Bord3Spelers.fxml"));
+            loader.setController(new SpelController(dc));
+            root = loader.load();
+        } else {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Bord.fxml"));
+            loader.setController(new SpelController(dc));
+            root = loader.load();
+        }
 
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);

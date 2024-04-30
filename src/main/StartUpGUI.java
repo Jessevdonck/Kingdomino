@@ -28,7 +28,7 @@ public class StartUpGUI extends Application
         stage.setTitle("KingDomino G59");
         stage.getIcons().add(new Image(getClass().getResource("/img/LogoKingdominoPNG.png").toExternalForm()));
         stage.setScene(scene);
-        stage.setResizable(false);
+        stage.setResizable(true);
         stage.show();
     }
 

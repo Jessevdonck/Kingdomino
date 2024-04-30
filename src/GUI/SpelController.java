@@ -12,10 +12,7 @@ import javafx.scene.layout.GridPane;
 import util.Kleur;
 
 import java.net.URL;
-import java.util.HashMap;
-import java.util.List;
-import java.util.ResourceBundle;
-import java.util.Scanner;
+import java.util.*;
 
 public class SpelController implements Initializable
 {
@@ -55,14 +52,10 @@ public class SpelController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
-        laadStarttegels(gridPane1,"/img/KingDomino_Afbeeldingen1/starttegel/starttegel_blauw.png");
-        laadStarttegels(gridPane2,"/img/KingDomino_Afbeeldingen1/starttegel/starttegel_geel.png");
-        laadStarttegels(gridPane3,"/img/KingDomino_Afbeeldingen1/starttegel/starttegel_groen.png");
-        laadStarttegels(gridPane4,"/img/KingDomino_Afbeeldingen1/starttegel/starttegel_roos.png");
-
+        plaatsStartTegels();
     }
 /*-------------------------------------------------FRONTEND---------------------------------------------------*/
-public void laadStarttegels(GridPane gridPane, String startTegelImagePath)
+    public void laadStarttegels(GridPane gridPane, String startTegelImagePath)
     {
         ImageView imageView = new ImageView(new Image(startTegelImagePath));
 
@@ -71,6 +64,51 @@ public void laadStarttegels(GridPane gridPane, String startTegelImagePath)
 
         gridPane.add(imageView, 2, 2);
     }
+
+    public void plaatsStartTegels()
+        {
+            HashMap<SpelerDTO, Kleur> spelersMetKleuren = dc.getSpelendeSpelers();
+
+            List<GridPane> beschikbareGridPanes = new ArrayList<>();
+            beschikbareGridPanes.add(gridPane1);
+            beschikbareGridPanes.add(gridPane2);
+            beschikbareGridPanes.add(gridPane3);
+            beschikbareGridPanes.add(gridPane4);
+
+            int index = 0;
+
+            for(Map.Entry<SpelerDTO, Kleur> entry : spelersMetKleuren.entrySet())
+            {
+                SpelerDTO speler = entry.getKey();
+                Kleur kleur = entry.getValue();
+
+                if(index < beschikbareGridPanes.size())
+                {
+                    GridPane gridPane = beschikbareGridPanes.get(index);
+                    String startTegelImagePath = getStartTegelImagePath(kleur);
+                    laadStarttegels(gridPane, startTegelImagePath);
+                }
+
+                index++;
+            }
+        }
+
+        private String getStartTegelImagePath(Kleur kleur)
+            {
+                switch (kleur)
+                {
+                    case BLAUW:
+                        return "/img/KingDomino_Afbeeldingen1/starttegel/starttegel_blauw.png";
+                    case GEEL:
+                        return "/img/KingDomino_Afbeeldingen1/starttegel/starttegel_geel.png";
+                    case GROEN:
+                        return "/img/KingDomino_Afbeeldingen1/starttegel/starttegel_groen.png";
+                    case ROOS:
+                        return "/img/KingDomino_Afbeeldingen1/starttegel/starttegel_roos.png";
+                    default:
+                        return null;
+                }
+            }
 
 /*-------------------------------------------------BACKEND---------------------------------------------------*/
 
@@ -122,6 +160,4 @@ public void laadStarttegels(GridPane gridPane, String startTegelImagePath)
             System.out.println("Het spel is afgelopen.");
         }
     }
-
-
 }
