@@ -49,12 +49,14 @@ public class SpelerSelectieController implements Initializable{
 
     private DomeinController dc;
     private SceneSwitchController ssc;
+    private TaalController tc;
 
 
 
-    public SpelerSelectieController(DomeinController dc)
+    public SpelerSelectieController(DomeinController dc, TaalController tc)
         {
             this.dc = dc;
+            this.tc = tc;
             this.ssc = new SceneSwitchController(dc);
         }
     @Override
@@ -239,7 +241,7 @@ public class SpelerSelectieController implements Initializable{
 
 public void switchToHomescreen(MouseEvent event) throws IOException
     {
-        ssc.switchToHomescreen(event, this.dc);
+        ssc.switchToHomescreen(event, this.dc, tc);
     }
 
 public void switchToBordScene(MouseEvent event) throws IOException

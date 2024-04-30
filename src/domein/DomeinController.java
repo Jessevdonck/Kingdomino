@@ -138,7 +138,8 @@ public class DomeinController {
     public Kleur getKleurVanSpeler(String naam){return spelRepository.getKleurVanSpeler(naam);}
 
 
-    public void verplaatsDominotegel(int kolom, int rij, boolean verticaal, DominoTegel tegel){
+    public void verplaatsDominotegel(int kolom, int rij, boolean verticaal, DominoTegel tegel)
+    {
         spelRepository.verplaatsTegel(kolom, rij, verticaal, tegel);
     }
 }

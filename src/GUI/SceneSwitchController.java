@@ -29,19 +29,20 @@ public class SceneSwitchController
         this.dc = dc;
     }
 
-    public void switchToRegisterScene(ActionEvent event, DomeinController dc) throws IOException
+    public void switchToRegisterScene(ActionEvent event, DomeinController dc, TaalController tc) throws IOException
     {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Login.fxml"));
-        loader.setController(new RegistreerSpelerController(dc));
+        loader.setController(new RegistreerSpelerController(dc, tc));
         Parent root = loader.load();
 
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+    System.out.println(tc.getLanguage());
     }
 
-    public void switchToHomescreen(MouseEvent event, DomeinController dc) throws IOException {
+    public void switchToHomescreen(MouseEvent event, DomeinController dc, TaalController tc) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Homepage.fxml"));
         loader.setController(new HomepageController(dc));
         Parent root = loader.load();
@@ -51,9 +52,9 @@ public class SceneSwitchController
         stage.show();
     }
 
-    public void switchToSpeelScene(ActionEvent event, DomeinController dc) throws IOException {
+    public void switchToSpeelScene(ActionEvent event, DomeinController dc, TaalController tc) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/spelersKiezen.fxml"));
-        loader.setController(new SpelerSelectieController(dc));
+        loader.setController(new SpelerSelectieController(dc, tc));
         Parent root = loader.load();
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
