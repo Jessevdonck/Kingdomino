@@ -42,7 +42,9 @@ public class RegistreerSpelerController implements Initializable
     String gekozenTaal = tc.getLanguage();
     Locale locale = new Locale(gekozenTaal);
     ResourceBundle bundle = ResourceBundle.getBundle("resourcebundles.lang", locale);
-    registreerBalk.setText(bundle.getString("registreer"));
+    registreerBalk.setText(bundle.getString("registreerKort"));
+    gebruikersnaamBalk.setPromptText(bundle.getString("gebruikersnaam"));
+    geboortejaarBalk.setPromptText(bundle.getString("geboortejaar"));
         }
 
 
