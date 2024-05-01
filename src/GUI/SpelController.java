@@ -6,9 +6,13 @@ import dto.DominoTegelDTO;
 import dto.SpelerDTO;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 import util.Kleur;
 
 import java.net.URL;
@@ -23,6 +27,10 @@ public class SpelController implements Initializable
     @FXML private GridPane gridPane2;
     @FXML private GridPane gridPane3;
     @FXML private GridPane gridPane4;
+    @FXML private VBox beginKolom;
+    @FXML private VBox eindKolom;
+    @FXML private Label instructieMelding;
+    @FXML private Button bevestigBtn;
 
     private final String[] startTegelImagePath =
             {
@@ -42,17 +50,16 @@ public class SpelController implements Initializable
 
     public void speelBeurt()
     {
-        toonTegelLijst(dc.getSpel().geefEindKolom());
-        System.out.println("Welke tegel wil je nemen?");
-        int tegel = input.nextInt();
 
-        dc.getVolgordeKoning().remove(0);
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
         plaatsStartTegels();
+        plaatsTegelsInBeginKolom(getBeginKolomTegels(), beginKolom);
+        plaatsTegelInEindKolom(getEindKolomTegels(), eindKolom);
+
     }
 /*-------------------------------------------------FRONTEND---------------------------------------------------*/
     public void laadStarttegels(GridPane gridPane, String startTegelImagePath)
@@ -110,51 +117,75 @@ public class SpelController implements Initializable
                 }
             }
 
+        private void plaatsTegelsInBeginKolom(List<DominoTegel> tegels, VBox kolom)
+        {
+            kolom.getChildren().clear();
+            Random random = new Random();
+            kolom.setSpacing(20);
+
+            for (int i = 0; i < dc.getSpelendeSpelers().size(); i++)
+            {
+                int randomIndex = random.nextInt(tegels.size());
+                DominoTegel tegel = tegels.get(randomIndex);
+                ImageView imageView = new ImageView(new Image(tegel.getFotoVoorkant()));
+                imageView.setFitWidth(200);
+                imageView.setFitHeight(100);
+                kolom.getChildren().add(imageView);
+                System.out.println(tegel);
+            }
+        }
+
+        private void plaatsTegelInEindKolom(List<DominoTegel> tegels, VBox kolom)
+        {
+            kolom.getChildren().clear();
+            Random random = new Random();
+            kolom.setSpacing(20);
+
+            for (int i = 0; i < dc.getSpelendeSpelers().size(); i++)
+            {
+                int randomIndex = random.nextInt(tegels.size());
+                DominoTegel tegel = tegels.get(randomIndex);
+                ImageView imageView = new ImageView(new Image(tegel.getFotoVoorkant()));
+                imageView.setFitWidth(200);
+                imageView.setFitHeight(100);
+                kolom.getChildren().add(imageView);
+                System.out.println(tegel);
+            }
+        }
+
 /*-------------------------------------------------BACKEND---------------------------------------------------*/
 
-    public void toonTegelLijst(List<DominoTegel> lijst)
+
+    public void verschuifKolommen()
     {
-        int count = 0;
-        for (DominoTegel tegel : lijst)
-        {
-            count++;
-            System.out.printf("%d : %s", count, tegel.toString());
-        }
+        List<DominoTegel> eindKolomTegels = dc.getSpel().geefEindKolom();
+        List<DominoTegel> beginKolomTegels = dc.getSpel().geefBeginKolom();
+
+        beginKolomTegels.clear();
+        beginKolomTegels.addAll(eindKolomTegels);
+
+        List<DominoTegel> stapelTegels = dc.getBeschikbareTegels();
+        eindKolomTegels.clear();
+        eindKolomTegels.addAll(stapelTegels);
+    }
+    public List<DominoTegel> getBeginKolomTegels()
+    {
+        return dc.getSpel().geefBeginKolom();
+    }
+
+    public List<DominoTegel> getEindKolomTegels()
+    {
+        return dc.getSpel().geefEindKolom();
     }
 
     public void spelSituatie()
     {
-        HashMap<SpelerDTO, Kleur> spelers = dc.getSpelendeSpelers();
-        for (SpelerDTO speler : spelers.keySet()) {
-            System.out.println(speler.gebruikersnaam() + " speelt met kleur " + spelers.get(speler));
-        }
 
-        // TODO - Zijn koninkrijk ;Zijn koning op een dominotegel in de startkolom of de eindkolom
-
-        List<DominoTegelDTO> beschikbareTegels = dc.getBeginKolom();
-        System.out.println("Beschikbare tegels:");
-        for (DominoTegelDTO tegel : beschikbareTegels) {
-            System.out.printf("%d", tegel.tegelNummer());
-        }
-
-        List<DominoTegelDTO> startkolom = dc.getBeginKolom();
-        System.out.println("Startkolom:");
-        for (DominoTegelDTO tegel : startkolom) {
-            System.out.printf("%s : %s", tegel.landschapType1().toString(), tegel.landschapType2().toString());
-        }
-
-        List<DominoTegelDTO> tweedekolom = dc.getEindKolom();
-        System.out.println("TweedeKolom:");
-        for (DominoTegelDTO tegel : tweedekolom) {
-            System.out.printf("%s : %s", tegel.landschapType1().toString(), tegel.landschapType2().toString());
-        }
-
-        // TODO - implement SpelApplicatie.spelSituatie
     }
 
     public void speelRonde()
     {
-        // TODO - implement SpelApplicatie.speelRonde
+        verschuifKolommen();
         speelBeurt();
         if (dc.isEindeSpel()) {
             System.out.println("Het spel is afgelopen.");

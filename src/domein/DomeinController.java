@@ -17,6 +17,7 @@ public class DomeinController {
 
     private final SpelerRepository spelerRepository;
     private final SpelRepository spelRepository;
+    private List<DominoTegel> dominoTegels;
 
     public DomeinController() {
 
@@ -98,11 +99,9 @@ public class DomeinController {
                 .toList();
     }
 
-    public List<DominoTegelDTO> getBeschikbareTegels() {
+    public List<DominoTegel> getBeschikbareTegels() {
         List<DominoTegel> tegelsDeck = spelRepository.getTegelsDeck();
-        return Arrays.stream(tegelsDeck.toArray(new DominoTegel[0]))
-                .map(tegel -> new DominoTegelDTO(tegel.getLandschapType1().getType(), tegel.getLandschapType2().getType(), tegel.getTegelNummer(), tegel.getKronen1(), tegel.getKronen2(), tegel.getKoningVanSpeler().toString()))
-                .toList();
+        return tegelsDeck;
     }
 
     public String voorbeeld() {
@@ -141,5 +140,29 @@ public class DomeinController {
     public void verplaatsDominotegel(int kolom, int rij, boolean verticaal, DominoTegel tegel)
     {
         spelRepository.verplaatsTegel(kolom, rij, verticaal, tegel);
+    }
+
+    public String getFotoAchterkantVanTegel(int tegelNummer)
+    {
+        for(DominoTegel tegel : dominoTegels)
+        {
+            if(tegel.getTegelNummer() == tegelNummer)
+            {
+                return tegel.getFotoAchterkant();
+            }
+        }
+        throw new IllegalArgumentException("Foto tegel achterkant niet gevonden");
+    }
+
+    public String getFotoVoorkantVanTegel(int tegelNummer)
+    {
+        for(DominoTegel tegel : dominoTegels)
+        {
+            if(tegel.getTegelNummer() == tegelNummer)
+            {
+                return tegel.getFotoVoorkant();
+            }
+        }
+        throw new IllegalArgumentException("Foto tegel voorkant niet gevonden");
     }
 }

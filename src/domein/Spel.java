@@ -94,6 +94,11 @@ public class Spel
         sorteerOpTegelNummer(beginKolom);
     }
 
+    public void maakEindKolom() {
+        eindkolom = geefKaarten(3);
+        sorteerOpTegelNummer(eindkolom);
+    }
+
     public static void sorteerOpTegelNummer(List<DominoTegel> tegels) {
         tegels.sort(Comparator.comparingInt(DominoTegel::getTegelNummer));
     }

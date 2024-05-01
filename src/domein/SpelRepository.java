@@ -121,6 +121,7 @@ public class SpelRepository {
         momenteelSpel = new Spel(gekozenSpelers);
         momenteelSpel.schudDominotegels();
         momenteelSpel.maakStartKolom();
+        momenteelSpel.maakEindKolom();
     }
 
     public boolean isKleurGekozen(Kleur kleur)
