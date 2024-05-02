@@ -12,6 +12,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import util.Kleur;
 
@@ -29,6 +30,7 @@ public class SpelController implements Initializable
     @FXML private GridPane gridPane4;
     @FXML private VBox beginKolom;
     @FXML private VBox eindKolom;
+    @FXML private HBox stapel;
     @FXML private Label instructieMelding;
     @FXML private Button bevestigBtn;
 
@@ -46,12 +48,6 @@ public class SpelController implements Initializable
             this.dc = dc;
         }
 
-    
-
-    public void speelBeurt()
-    {
-
-    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
@@ -59,6 +55,8 @@ public class SpelController implements Initializable
         plaatsStartTegels();
         plaatsTegelsInBeginKolom(getBeginKolomTegels(), beginKolom);
         plaatsTegelInEindKolom(getEindKolomTegels(), eindKolom);
+        plaatsTegelInStapel(getStapel(), stapel);
+        System.out.println(dc.getSpel().getDominotegels());
 
     }
 /*-------------------------------------------------FRONTEND---------------------------------------------------*/
@@ -66,8 +64,23 @@ public class SpelController implements Initializable
     {
         ImageView imageView = new ImageView(new Image(startTegelImagePath));
 
-        imageView.setFitWidth(100);
-        imageView.setFitHeight(100);
+
+
+        gridPane.widthProperty().addListener((observable, oldValue, newValue) ->
+        {
+            double cellWidth = newValue.doubleValue() / gridPane.getColumnCount();
+            imageView.setFitWidth(cellWidth);
+        });
+
+
+        gridPane.heightProperty().addListener((observable, oldValue, newValue) ->
+        {
+            double cellHeight = newValue.doubleValue() / gridPane.getRowCount();
+            imageView.setFitHeight(cellHeight);
+        });
+
+
+        imageView.setPreserveRatio(true);
 
         gridPane.add(imageView, 2, 2);
     }
@@ -120,16 +133,30 @@ public class SpelController implements Initializable
         private void plaatsTegelsInBeginKolom(List<DominoTegel> tegels, VBox kolom)
         {
             kolom.getChildren().clear();
-            Random random = new Random();
             kolom.setSpacing(20);
 
             for (int i = 0; i < dc.getSpelendeSpelers().size(); i++)
             {
-                int randomIndex = random.nextInt(tegels.size());
-                DominoTegel tegel = tegels.get(randomIndex);
+                Random random = new Random();
+                int randomInteger = random.nextInt(tegels.size());
+                DominoTegel tegel = tegels.get(randomInteger);
                 ImageView imageView = new ImageView(new Image(tegel.getFotoVoorkant()));
-                imageView.setFitWidth(200);
+
+                /*kolom.widthProperty().addListener((observable, oldValue, newValue) ->
+                {
+                    imageView.setFitWidth(newValue.doubleValue());
+                });
+
+                kolom.heightProperty().addListener((observable, oldValue, newValue) ->
+                {
+                    imageView.setFitHeight(newValue.doubleValue() / tegels.size());
+                });
+
+                imageView.setPreserveRatio(true);*/
+
                 imageView.setFitHeight(100);
+                imageView.setFitWidth(200);
+
                 kolom.getChildren().add(imageView);
                 System.out.println(tegel);
             }
@@ -138,20 +165,52 @@ public class SpelController implements Initializable
         private void plaatsTegelInEindKolom(List<DominoTegel> tegels, VBox kolom)
         {
             kolom.getChildren().clear();
-            Random random = new Random();
             kolom.setSpacing(20);
 
             for (int i = 0; i < dc.getSpelendeSpelers().size(); i++)
             {
-                int randomIndex = random.nextInt(tegels.size());
-                DominoTegel tegel = tegels.get(randomIndex);
+                Random random = new Random();
+                int randomInteger = random.nextInt(tegels.size());
+                DominoTegel tegel = tegels.get(randomInteger);
                 ImageView imageView = new ImageView(new Image(tegel.getFotoVoorkant()));
-                imageView.setFitWidth(200);
+
+                /*kolom.widthProperty().addListener((observable, oldValue, newValue) ->
+                {
+                    imageView.setFitWidth(newValue.doubleValue());
+                });
+
+                kolom.heightProperty().addListener((observable, oldValue, newValue) ->
+                {
+                    imageView.setFitHeight(newValue.doubleValue() / tegels.size());
+                });
+
+                imageView.setPreserveRatio(true);*/
+
                 imageView.setFitHeight(100);
+                imageView.setFitWidth(200);
+
                 kolom.getChildren().add(imageView);
+
                 System.out.println(tegel);
             }
         }
+
+    private void plaatsTegelInStapel(List<DominoTegel> tegels, HBox kolom)
+    {
+        kolom.getChildren().clear();
+
+        Random random = new Random();
+        int randomIndex = random.nextInt(tegels.size());
+        DominoTegel willekeurigeTegel = tegels.get(randomIndex);
+
+        ImageView imageView = new ImageView(new Image(willekeurigeTegel.getFotoAchterkant()));
+
+        imageView.setFitHeight(100);
+        imageView.setFitWidth(200);
+
+        kolom.getChildren().add(imageView);
+
+    }
 
 /*-------------------------------------------------BACKEND---------------------------------------------------*/
 
@@ -168,17 +227,27 @@ public class SpelController implements Initializable
         eindKolomTegels.clear();
         eindKolomTegels.addAll(stapelTegels);
     }
-    public List<DominoTegel> getBeginKolomTegels()
+    private List<DominoTegel> getBeginKolomTegels()
     {
         return dc.getSpel().geefBeginKolom();
     }
 
-    public List<DominoTegel> getEindKolomTegels()
+    private List<DominoTegel> getEindKolomTegels()
     {
         return dc.getSpel().geefEindKolom();
     }
 
+     List<DominoTegel> getStapel()
+     {
+         return dc.getSpel().getTegelsDeck();
+     }
+
     public void spelSituatie()
+    {
+
+    }
+
+    public void speelBeurt()
     {
 
     }

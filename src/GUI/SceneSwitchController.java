@@ -1,7 +1,6 @@
 package GUI;
 
 import domein.DomeinController;
-import domein.Spel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
@@ -20,7 +19,6 @@ public class SceneSwitchController
     private Scene scene;
     private Parent root;
     private DomeinController dc;
-
 
 
     public SceneSwitchController(DomeinController dc)
@@ -69,11 +67,12 @@ public class SceneSwitchController
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Bord3Spelers.fxml"));
             loader.setController(new SpelController(dc));
             root = loader.load();
-        } else {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Bord.fxml"));
+        } else if(dc.getSpelendeSpelers().size() == 4) {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Bord4Spelers.fxml"));
             loader.setController(new SpelController(dc));
             root = loader.load();
-        }
+        } else throw new IllegalArgumentException("Fout aantal spelers");
+
 
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);

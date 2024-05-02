@@ -16,6 +16,8 @@ import java.util.ResourceBundle;
 
 public class StartUpGUI extends Application
 {
+
+
     @Override
     public void start(Stage stage) throws Exception
     {
@@ -25,10 +27,11 @@ public class StartUpGUI extends Application
         Parent root = loader.load();
 
         Scene scene = new Scene(root);
+
         stage.setTitle("KingDomino G59");
         stage.getIcons().add(new Image(getClass().getResource("/img/LogoKingdominoPNG.png").toExternalForm()));
         stage.setScene(scene);
-        stage.setResizable(true);
+        stage.setResizable(false);
         stage.show();
     }
 

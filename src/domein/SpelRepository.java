@@ -138,7 +138,8 @@ public class SpelRepository {
     throw new IllegalArgumentException("Speler niet gevonden");
     }
 
-    public void verplaatsTegel(int kolom, int rij, boolean verticaal, DominoTegel tegel){
+    public void verplaatsTegel(int kolom, int rij, boolean verticaal, DominoTegel tegel)
+    {
         momenteelSpel.verplaatsTegel(kolom, rij, verticaal, tegel);
     }
 }
