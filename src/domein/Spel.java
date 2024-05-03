@@ -79,12 +79,12 @@ public class Spel
     }
 
     public void maakStartKolom() {
-        beginKolom = geefKaarten(3);
+        beginKolom = geefKaarten(getSpelers().size());
         sorteerOpTegelNummer(beginKolom);
     }
 
     public void maakEindKolom() {
-        eindkolom = geefKaarten(3);
+        eindkolom = geefKaarten(getSpelers().size());
         sorteerOpTegelNummer(eindkolom);
     }
 
@@ -197,7 +197,7 @@ public class Spel
         if (tegels.isEmpty()) {
             throw new RuntimeException("No cards left in the deck");
         }
-        return tegels.remove(0);
+        return tegels.
     }
 
     public void verplaatsTegel(int kolom, int rij, boolean verticaal, DominoTegel tegel)

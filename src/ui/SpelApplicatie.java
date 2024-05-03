@@ -161,9 +161,9 @@ public class SpelApplicatie {
 		}
 	}
 
-	private void speelBeurt() {
+	private void speelBeurt(Kleur kleur) {
 		toonTegelLijst(dc.getSpel().geefEindKolom());
-		System.out.println("Welke tegel wil je nemen?");
+		System.out.printf("Welke tegel wil je nemen %s?", kleur.toString());
 		int tegel = input.nextInt();
 		// DC Fucntie maken voor het kiezen
 		while (tegel < 1 || tegel > 4) {
@@ -246,7 +246,9 @@ public class SpelApplicatie {
 	}
 
 	public void speelRonde() {
-		speelBeurt();
+		for(Kleur kleur : dc.getVolgordeKoning()) {
+			speelBeurt(kleur);
+		}
 		if (dc.isEindeSpel()) {
 			System.out.println("Het spel is afgelopen.");
 		}
