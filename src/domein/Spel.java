@@ -172,7 +172,7 @@ public class Spel
     {
         HashMap<Kleur, Integer> scores = new HashMap<Kleur, Integer>();
         for (Kleur kleur : gekozenSpelers.values()) {
-            scores.put(kleur, tegelGebieden.get(kleur).berekenScore());
+            scores.put(kleur, tegelGebieden.get(kleur).zoekDomein());
         }
         return scores;
     }
@@ -187,7 +187,7 @@ public class Spel
     {
         HashMap<Kleur, Integer> scores = new HashMap<Kleur, Integer>();
         for (Kleur kleur : gekozenSpelers.values()) {
-            scores.put(kleur, tegelGebieden.get(kleur).berekenScore());
+            scores.put(kleur, tegelGebieden.get(kleur).zoekDomein());
         }
         return scores;
     }

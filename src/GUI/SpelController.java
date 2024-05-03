@@ -56,7 +56,6 @@ public class SpelController implements Initializable
         plaatsTegelsInBeginKolom(getBeginKolomTegels(), beginKolom);
         plaatsTegelInEindKolom(getEindKolomTegels(), eindKolom);
         plaatsTegelInStapel(getStapel(), stapel);
-        System.out.println(dc.getSpel().getDominotegels());
 
     }
 /*-------------------------------------------------FRONTEND---------------------------------------------------*/
