@@ -53,8 +53,8 @@ public class SpelController implements Initializable
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
         plaatsStartTegels();
-        plaatsTegelsInBeginKolom(getBeginKolomTegels(), beginKolom);
-        plaatsTegelInEindKolom(getEindKolomTegels(), eindKolom);
+        plaatsTegelsInKolom(getBeginKolomTegels(), beginKolom);
+        plaatsTegelsInKolom(getEindKolomTegels(), eindKolom);
         plaatsTegelInStapel(getStapel(), stapel);
 
     }
@@ -129,19 +129,14 @@ public void plaatsStartTegels()
                 }
             }
 
-        private void plaatsTegelsInBeginKolom(List<DominoTegel> tegels, VBox kolom)
+        private void plaatsTegelsInKolom(List<DominoTegel> tegels, VBox kolom)
         {
             kolom.getChildren().clear();
             kolom.setSpacing(20);
 
-            for (int i = 0; i < dc.getSpelendeSpelers().size(); i++)
+            for (DominoTegel tegel : tegels)
             {
-                Random random = new Random();
-                int randomInteger = random.nextInt(tegels.size());
-                DominoTegel tegel = tegels.get(randomInteger);
                 ImageView imageView = new ImageView(new Image(tegel.getFotoAchterkant()));
-
-
 
                 imageView.setFitHeight(78);
                 imageView.setFitWidth(156);
@@ -151,30 +146,7 @@ public void plaatsStartTegels()
             }
         }
 
-        private void plaatsTegelInEindKolom(List<DominoTegel> tegels, VBox kolom)
-        {
-           kolom.getChildren().clear();
-           kolom.setSpacing(20);
 
-           for (int i = 0; i < dc.getSpelendeSpelers().size(); i++)
-           {
-               Random random = new Random();
-               int randomInteger = random.nextInt(tegels.size());
-               DominoTegel tegel = tegels.get(randomInteger);
-               ImageView imageView = new ImageView(new Image(tegel.getFotoVoorkant()));
-
-
-
-               imageView.setPreserveRatio(true);
-
-               imageView.setFitHeight(78);
-               imageView.setFitWidth(156);
-
-               kolom.getChildren().add(imageView);
-
-               System.out.println(tegel);
-           }
-        }
 
     private void plaatsTegelInStapel(List<DominoTegel> tegels, HBox kolom)
     {

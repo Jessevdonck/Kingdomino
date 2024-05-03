@@ -73,7 +73,7 @@ public class DominoTegel {
     public String toString()
     {
         if (this.kleurVanKoning == null) {
-            return "[" + landschapType1.toString() + "|" + getKronen1() + "][" + landschapType2 + "|" + getKronen2() + "]" + "\n";
+            return "[" + landschapType1.toString() + "|" + getKronen1() + "]" + tegelNummer + "[" + landschapType2 + "|" + getKronen2() + "]" + "\n";
         } else {
             return "[" + landschapType1.toString() + "|" + getKronen1() + "]" +
                     " [ " + this.kleurVanKoning.toString() + " ] " +
