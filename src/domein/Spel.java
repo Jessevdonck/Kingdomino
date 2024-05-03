@@ -72,10 +72,14 @@ public class Spel
     {
         return tegels == null;
     }
+
     public List<DominoTegel> geefKaarten(int aantalKaarten) {
-        return IntStream.range(0, aantalKaarten)
-                .mapToObj(i -> geefTegel())
-                .collect(Collectors.toList());
+        List<DominoTegel> kaarten = new ArrayList<>();
+        for (int i = 0; i < aantalKaarten; i++) {
+            kaarten.add(geefTegel());
+        }
+
+        return kaarten;
     }
 
     public void maakStartKolom() {

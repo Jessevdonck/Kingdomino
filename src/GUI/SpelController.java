@@ -24,15 +24,15 @@ public class SpelController implements Initializable
     private final DomeinController dc;
     private Scanner input = new Scanner(System.in);
 
-    @FXML private GridPane gridPane1;
-    @FXML private GridPane gridPane2;
-    @FXML private GridPane gridPane3;
-    @FXML private GridPane gridPane4;
-    @FXML private VBox beginKolom;
-    @FXML private VBox eindKolom;
-    @FXML private HBox stapel;
-    @FXML private Label instructieMelding;
-    @FXML private Button bevestigBtn;
+//    @FXML private GridPane gridPane1;
+//    @FXML private GridPane gridPane2;
+//    @FXML private GridPane gridPane3;
+//    @FXML private GridPane gridPane4;
+//    @FXML private VBox beginKolom;
+//    @FXML private VBox eindKolom;
+//    @FXML private HBox stapel;
+//    @FXML private Label instructieMelding;
+//    @FXML private Button bevestigBtn;
 
     private final String[] startTegelImagePath =
             {
@@ -61,55 +61,104 @@ public class SpelController implements Initializable
 /*-------------------------------------------------FRONTEND---------------------------------------------------*/
     public void laadStarttegels(GridPane gridPane, String startTegelImagePath)
     {
-        ImageView imageView = new ImageView(new Image(startTegelImagePath));
-
-
-
-        gridPane.widthProperty().addListener((observable, oldValue, newValue) ->
-        {
-            double cellWidth = newValue.doubleValue() / gridPane.getColumnCount();
-            imageView.setFitWidth(cellWidth);
-        });
-
-
-        gridPane.heightProperty().addListener((observable, oldValue, newValue) ->
-        {
-            double cellHeight = newValue.doubleValue() / gridPane.getRowCount();
-            imageView.setFitHeight(cellHeight);
-        });
-
-
-        imageView.setPreserveRatio(true);
-
-        gridPane.add(imageView, 2, 2);
+//        ImageView imageView = new ImageView(new Image(startTegelImagePath));
+//
+//
+//
+//        gridPane.widthProperty().addListener((observable, oldValue, newValue) ->
+//        {
+//            double cellWidth = newValue.doubleValue() / gridPane.getColumnCount();
+//            imageView.setFitWidth(cellWidth);
+//        });
+//
+//
+//        gridPane.heightProperty().addListener((observable, oldValue, newValue) ->
+//        {
+//            double cellHeight = newValue.doubleValue() / gridPane.getRowCount();
+//            imageView.setFitHeight(cellHeight);
+//        });
+//
+//
+//        imageView.setPreserveRatio(true);
+//
+//        gridPane.add(imageView, 2, 2);
     }
 
     public void plaatsStartTegels()
         {
-            HashMap<SpelerDTO, Kleur> spelersMetKleuren = dc.getSpelendeSpelers();
-
-            List<GridPane> beschikbareGridPanes = new ArrayList<>();
-            beschikbareGridPanes.add(gridPane1);
-            beschikbareGridPanes.add(gridPane2);
-            beschikbareGridPanes.add(gridPane3);
-            beschikbareGridPanes.add(gridPane4);
-
-            int index = 0;
-
-            for(Map.Entry<SpelerDTO, Kleur> entry : spelersMetKleuren.entrySet())
-            {
-                SpelerDTO speler = entry.getKey();
-                Kleur kleur = entry.getValue();
-
-                if(index < beschikbareGridPanes.size())
-                {
-                    GridPane gridPane = beschikbareGridPanes.get(index);
-                    String startTegelImagePath = getStartTegelImagePath(kleur);
-                    laadStarttegels(gridPane, startTegelImagePath);
-                }
-
-                index++;
-            }
+//            HashMap<SpelerDTO, Kleur> spelersMetKleuren = dc.getSpelendeSpelers();
+//
+//            List<GridPane> beschikbareGridPanes = new ArrayList<>();
+//            beschikbareGridPanes.add(gridPane1);
+//            beschikbareGridPanes.add(gridPane2);
+//            beschikbareGridPanes.add(gridPane3);
+//            beschikbareGridPanes.add(gridPane4);
+//
+//            int index = 0;
+//
+//            for(Map.Entry<SpelerDTO, Kleur> entry : spelersMetKleuren.entrySet())
+//            {
+//                SpelerDTO speler = entry.getKey();
+//                Kleur kleur = entry.getValue();
+//
+//                if(index < beschikbareGridPanes.size())
+//                {
+//                    GridPane gridPane = beschikbareGridPanes.get(index);
+//                    String startTegelImagePath = getStartTegelImagePath(kleur);
+//                    laadStarttegels(gridPane, startTegelImagePath);
+//                }
+//
+//                index++;
+//            }
+//        }
+//
+//        private String getStartTegelImagePath(Kleur kleur)
+//            {
+//                switch (kleur)
+//                {
+//                    case BLAUW:
+//                        return "/img/KingDomino_Afbeeldingen1/starttegel/starttegel_blauw.png";
+//                    case GEEL:
+//                        return "/img/KingDomino_Afbeeldingen1/starttegel/starttegel_geel.png";
+//                    case GROEN:
+//                        return "/img/KingDomino_Afbeeldingen1/starttegel/starttegel_groen.png";
+//                    case ROOS:
+//                        return "/img/KingDomino_Afbeeldingen1/starttegel/starttegel_roos.png";
+//                    default:
+//                        return null;
+//                }
+//            }
+//
+//        private void plaatsTegelsInBeginKolom(List<DominoTegel> tegels, VBox kolom)
+//        {
+////            kolom.getChildren().clear();
+////            kolom.setSpacing(20);
+////
+////            for (int i = 0; i < dc.getSpelendeSpelers().size(); i++)
+////            {
+////                Random random = new Random();
+////                int randomInteger = random.nextInt(tegels.size());
+////                DominoTegel tegel = tegels.get(randomInteger);
+////                ImageView imageView = new ImageView(new Image(tegel.getFotoVoorkant()));
+////
+////                /*kolom.widthProperty().addListener((observable, oldValue, newValue) ->
+////                {
+////                    imageView.setFitWidth(newValue.doubleValue());
+////                });
+////
+////                kolom.heightProperty().addListener((observable, oldValue, newValue) ->
+////                {
+////                    imageView.setFitHeight(newValue.doubleValue() / tegels.size());
+////                });
+////
+////                imageView.setPreserveRatio(true);*/
+////
+////                imageView.setFitHeight(100);
+////                imageView.setFitWidth(200);
+////
+////                kolom.getChildren().add(imageView);
+////                System.out.println(tegel);
+////            }
         }
 
         private String getStartTegelImagePath(Kleur kleur)
@@ -163,51 +212,51 @@ public class SpelController implements Initializable
 
         private void plaatsTegelInEindKolom(List<DominoTegel> tegels, VBox kolom)
         {
-            kolom.getChildren().clear();
-            kolom.setSpacing(20);
-
-            for (int i = 0; i < dc.getSpelendeSpelers().size(); i++)
-            {
-                Random random = new Random();
-                int randomInteger = random.nextInt(tegels.size());
-                DominoTegel tegel = tegels.get(randomInteger);
-                ImageView imageView = new ImageView(new Image(tegel.getFotoVoorkant()));
-
-                /*kolom.widthProperty().addListener((observable, oldValue, newValue) ->
-                {
-                    imageView.setFitWidth(newValue.doubleValue());
-                });
-
-                kolom.heightProperty().addListener((observable, oldValue, newValue) ->
-                {
-                    imageView.setFitHeight(newValue.doubleValue() / tegels.size());
-                });
-
-                imageView.setPreserveRatio(true);*/
-
-                imageView.setFitHeight(100);
-                imageView.setFitWidth(200);
-
-                kolom.getChildren().add(imageView);
-
-                System.out.println(tegel);
-            }
+//            kolom.getChildren().clear();
+//            kolom.setSpacing(20);
+//
+//            for (int i = 0; i < dc.getSpelendeSpelers().size(); i++)
+//            {
+//                Random random = new Random();
+//                int randomInteger = random.nextInt(tegels.size());
+//                DominoTegel tegel = tegels.get(randomInteger);
+//                ImageView imageView = new ImageView(new Image(tegel.getFotoVoorkant()));
+//
+//                /*kolom.widthProperty().addListener((observable, oldValue, newValue) ->
+//                {
+//                    imageView.setFitWidth(newValue.doubleValue());
+//                });
+//
+//                kolom.heightProperty().addListener((observable, oldValue, newValue) ->
+//                {
+//                    imageView.setFitHeight(newValue.doubleValue() / tegels.size());
+//                });
+//
+//                imageView.setPreserveRatio(true);*/
+//
+//                imageView.setFitHeight(100);
+//                imageView.setFitWidth(200);
+//
+//                kolom.getChildren().add(imageView);
+//
+//                System.out.println(tegel);
+//            }
         }
 
     private void plaatsTegelInStapel(List<DominoTegel> tegels, HBox kolom)
     {
-        kolom.getChildren().clear();
-
-        Random random = new Random();
-        int randomIndex = random.nextInt(tegels.size());
-        DominoTegel willekeurigeTegel = tegels.get(randomIndex);
-
-        ImageView imageView = new ImageView(new Image(willekeurigeTegel.getFotoAchterkant()));
-
-        imageView.setFitHeight(100);
-        imageView.setFitWidth(200);
-
-        kolom.getChildren().add(imageView);
+//        kolom.getChildren().clear();
+//
+//        Random random = new Random();
+//        int randomIndex = random.nextInt(tegels.size());
+//        DominoTegel willekeurigeTegel = tegels.get(randomIndex);
+//
+//        ImageView imageView = new ImageView(new Image(willekeurigeTegel.getFotoAchterkant()));
+//
+//        imageView.setFitHeight(100);
+//        imageView.setFitWidth(200);
+//
+//        kolom.getChildren().add(imageView);
 
     }
 
@@ -216,15 +265,15 @@ public class SpelController implements Initializable
 
     public void verschuifKolommen()
     {
-        List<DominoTegel> eindKolomTegels = dc.getSpel().geefEindKolom();
-        List<DominoTegel> beginKolomTegels = dc.getSpel().geefBeginKolom();
-
-        beginKolomTegels.clear();
-        beginKolomTegels.addAll(eindKolomTegels);
-
-        List<DominoTegel> stapelTegels = dc.getBeschikbareTegels();
-        eindKolomTegels.clear();
-        eindKolomTegels.addAll(stapelTegels);
+//        List<DominoTegel> eindKolomTegels = dc.getSpel().geefEindKolom();
+//        List<DominoTegel> beginKolomTegels = dc.getSpel().geefBeginKolom();
+//
+//        beginKolomTegels.clear();
+//        beginKolomTegels.addAll(eindKolomTegels);
+//
+//        List<DominoTegel> stapelTegels = dc.getBeschikbareTegels();
+//        eindKolomTegels.clear();
+//        eindKolomTegels.addAll(stapelTegels);
     }
     private List<DominoTegel> getBeginKolomTegels()
     {
@@ -253,10 +302,10 @@ public class SpelController implements Initializable
 
     public void speelRonde()
     {
-        verschuifKolommen();
-        speelBeurt();
-        if (dc.isEindeSpel()) {
-            System.out.println("Het spel is afgelopen.");
-        }
+//        verschuifKolommen();
+//        speelBeurt();
+//        if (dc.isEindeSpel()) {
+//            System.out.println("Het spel is afgelopen.");
+//        }
     }
 }
