@@ -4,13 +4,15 @@ import util.LandschapType;
 
 public class TegelGebied
 {
+    private static int[][] richting = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
     private final Landschap[][] gebied;
+    private boolean[][] bezocht = new boolean[5][5];
 
     public TegelGebied() {
         this.gebied = maakGebied();
     }
 
-    // Grid herwerkt van String[25] naar DominoTegel[5][5]
+
     private Landschap[][] maakGebied() {
         Landschap[][] grid = new Landschap[5][5];
         for (int i = 0; i < 5; i++) {
@@ -80,37 +82,48 @@ public class TegelGebied
 
     }
 
-    public int berekenScore() {
-        int score = 0;
-        boolean[][] bezocht = new boolean[gebied.length][gebied[0].length];
 
-        for (int kolom = 0; kolom < gebied.length; kolom++) {
-            for (int rij = 0; rij < gebied[kolom].length; rij++) {
-                if (!bezocht[kolom][rij] && gebied[kolom][rij] != null) {
-                    LandschapType type = gebied[kolom][rij].getType();
-                    int aantalVakjes = zoekDomein(kolom, rij, type, bezocht);
-                    int aantalKronen = gebied[kolom][rij].getAantalKronen();
-                    score += aantalVakjes * aantalKronen;
+
+    public int berekenScore(int x, int y) {
+        if (x < 0 || y < 0 || x >= 5 || y >= 5 || bezocht[x][y] || gebied[x][y] == null ) {
+            return 0;
+        }
+
+
+        bezocht[x][y] = true;
+
+
+        int size = 1;
+
+
+        for (int[] dir : richting) {
+            int nx = x + dir[0];
+            int ny = y + dir[1];
+
+            if (nx >= 0 && ny >= 0 && nx < 5 && ny < 5) {
+                size += berekenScore(nx, ny);
+            }
+        }
+
+        return size;
+    }
+
+    public int zoekDomein() {
+
+        int size = 0;
+
+
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 5; j++) {
+
+                if (!bezocht[i][j]) {
+                    int grootte = berekenScore(i, j);
+                    size += grootte + 1;
                 }
             }
         }
-        return score;
-    }
 
-    private int zoekDomein(int kolom, int rij, LandschapType type, boolean[][] bezocht) {
-        if (kolom < 0 || rij < 0 || kolom >= gebied.length || rij >= gebied[0].length || bezocht[kolom][rij] || gebied[kolom][rij] == null || gebied[kolom][rij].getType() != type)
-            return 0;
-
-        bezocht[kolom][rij] = true;
-        int count = 1;
-
-        // Zoek aangrenzende vakjes in alle richtingen
-        count += zoekDomein(kolom + 1, rij, type, bezocht); // Rechts
-        count += zoekDomein(kolom - 1, rij, type, bezocht); // Links
-        count += zoekDomein(kolom, rij + 1, type, bezocht); // Onder
-        count += zoekDomein(kolom, rij - 1, type, bezocht); // Boven
-
-        return count;
+        return size;
     }
 
     public int getAantalKronen() {
