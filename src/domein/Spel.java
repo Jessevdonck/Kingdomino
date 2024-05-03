@@ -11,9 +11,6 @@ import util.LandschapType;
 
 public class Spel
 {
-    private int AantalDominotegels;
-
-
     private List<DominoTegel> tegels;
     private List<DominoTegel> beginKolom;
     private List<DominoTegel> eindkolom;
@@ -35,7 +32,6 @@ public class Spel
         this.tegels = new ArrayList<>(tegels.subList(0, aantalTegelsPerSpeler));
 
         this.gekozenSpelers = spelers;
-        this.AantalDominotegels = spelers.size() == 3 ? 36 : 48;
         this.volgordeSpelers = null;
         this.tegelGebieden = new HashMap<Kleur, TegelGebied>();
         for (Kleur kleur : gekozenSpelers.values()) {
@@ -61,11 +57,6 @@ public class Spel
         return tegels;
     }
 
-    public int getDominotegels()
-    {
-        return AantalDominotegels;
-    }
-
     public HashMap<Speler, Kleur> getSpelers()
     {
         return gekozenSpelers;
@@ -77,8 +68,6 @@ public class Spel
     }
 
 
-    //Het spel eindigt als de stapel met beschikbare dominotegels van het spel leeg is
-    // Vragen of het alle tegels zijn
     public boolean isEindeSpel()
     {
         return tegels == null;
@@ -215,5 +204,7 @@ public class Spel
     {
         tegelGebieden.get(volgordeSpelers.get(0)).plaatsTegel(kolom, rij, verticaal, tegel);
         beginKolom.remove(tegel);
+        // Verplaats koning maar naar waar?
+
     }
 }

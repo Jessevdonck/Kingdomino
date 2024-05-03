@@ -137,8 +137,6 @@ public class TegelGebied
         return count;
     }
 
-
-
     @Override
     public String toString() {
         StringBuilder string = new StringBuilder();
