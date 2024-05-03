@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Assertions;
 public class TegelgebiedTest {
     @Test
     public void maaktegelgebied() {
-        tegelgebied = new TegelGebied();
+        TegelGebied tegelgebied = new TegelGebied();
         Assertions.assertEquals(new Landschap[5][5], tegelgebied.getGebied());
     }
 }

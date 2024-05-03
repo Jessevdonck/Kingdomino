@@ -139,7 +139,7 @@ public class SpelController implements Initializable
                 Random random = new Random();
                 int randomInteger = random.nextInt(tegels.size());
                 DominoTegel tegel = tegels.get(randomInteger);
-                ImageView imageView = new ImageView(new Image(tegel.getFotoVoorkant()));
+                ImageView imageView = new ImageView(new Image(tegel.getFotoAchterkant()));
 
                 /*kolom.widthProperty().addListener((observable, oldValue, newValue) ->
                 {
