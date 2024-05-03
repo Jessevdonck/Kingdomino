@@ -201,7 +201,7 @@ public class Spel
         if (tegels.isEmpty()) {
             throw new RuntimeException("No cards left in the deck");
         }
-        return tegels.
+        return tegels.remove(0);
     }
 
     public void verplaatsTegel(int kolom, int rij, boolean verticaal, DominoTegel tegel)

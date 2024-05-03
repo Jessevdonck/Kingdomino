@@ -20,7 +20,6 @@ public class SceneSwitchController
     private Parent root;
     private DomeinController dc;
 
-
     public SceneSwitchController(DomeinController dc)
     {
         this.stage = new Stage();
