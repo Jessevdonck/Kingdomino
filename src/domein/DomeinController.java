@@ -165,4 +165,12 @@ public class DomeinController {
         }
         throw new IllegalArgumentException("Foto tegel voorkant niet gevonden");
     }
+
+    public void verplaatsKoning(Kleur kleur, DominoTegel dominoTegel){
+        spelRepository.verplaatsKoning(kleur, dominoTegel);
+    }
+
+    public DominoTegel getGeclaimdeTegel(Kleur kleur){
+        return spelRepository.getGeclaimdetegel(kleur);
+    }
 }

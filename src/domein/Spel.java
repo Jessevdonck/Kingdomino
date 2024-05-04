@@ -19,6 +19,8 @@ public class Spel
     private HashMap<Kleur, TegelGebied> tegelGebieden;
     private DominoTegelMapper dominoTegelMapper = new DominoTegelMapper();
 
+    private HashMap<Kleur, DominoTegel> claimdeTegel;
+
 
     public Spel(HashMap<Speler, Kleur> spelers)
     {
@@ -37,7 +39,7 @@ public class Spel
         for (Kleur kleur : gekozenSpelers.values()) {
             this.tegelGebieden.put(kleur, new TegelGebied());
         }
-
+        this.claimdeTegel = new HashMap<Kleur, DominoTegel>();
     }
 
     public void setVolgordeSpelers(List<Kleur> kleurList){
@@ -208,7 +210,14 @@ public class Spel
     {
         tegelGebieden.get(volgordeSpelers.get(0)).plaatsTegel(kolom, rij, verticaal, tegel);
         beginKolom.remove(tegel);
-        // Verplaats koning maar naar waar?
-
     }
+
+    public void verplaatskoning(Kleur kleur, DominoTegel dominoTegel) {
+        claimdeTegel.put(kleur, dominoTegel);
+    }
+
+    public DominoTegel getGeclaimdeTegel(Kleur kleur) {
+        return claimdeTegel.get(kleur);
+    }
+
 }

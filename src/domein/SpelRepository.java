@@ -142,4 +142,12 @@ public class SpelRepository {
     {
         momenteelSpel.verplaatsTegel(kolom, rij, verticaal, tegel);
     }
+
+    public DominoTegel getGeclaimdetegel(Kleur kleur){
+       return momenteelSpel.getGeclaimdeTegel(kleur);
+    }
+
+    public void verplaatsKoning(Kleur kleur, DominoTegel dominoTegel) {
+        momenteelSpel.verplaatskoning(kleur, dominoTegel);
+    }
 }
