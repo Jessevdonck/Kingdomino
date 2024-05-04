@@ -180,7 +180,7 @@ public void plaatsStartTegels()
 
             for (DominoTegel tegel : tegels)
             {
-                ImageView imageView = new ImageView(new Image(tegel.getFotoAchterkant()));
+                ImageView imageView = new ImageView(new Image(tegel.getFotoVoorkant()));
                 imageView.setId("imageView" + index);
 
                 imageView.setFitHeight(78);
@@ -206,7 +206,7 @@ public void plaatsStartTegels()
 
             for (DominoTegel tegel : tegels)
             {
-                ImageView imageView = new ImageView(new Image(tegel.getFotoAchterkant()));
+                ImageView imageView = new ImageView(new Image(tegel.getFotoVoorkant()));
                 imageView.setId("imageView" + index);
 
                 imageView.setFitHeight(78);
