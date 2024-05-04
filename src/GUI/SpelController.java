@@ -4,16 +4,22 @@ import domein.DomeinController;
 import domein.DominoTegel;
 import dto.DominoTegelDTO;
 import dto.SpelerDTO;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
+import javafx.scene.shape.Circle;
 import util.Kleur;
 
 import java.net.URL;
@@ -33,7 +39,29 @@ public class SpelController implements Initializable
     @FXML private HBox stapel;
     @FXML private Label instructieMelding;
     @FXML private Button bevestigBtn;
+    @FXML private Circle keuzeTegelBeginKolom1;
+    @FXML private Circle keuzeTegelBeginKolom2;
+    @FXML private Circle keuzeTegelBeginKolom3;
+    @FXML private Circle keuzeTegelBeginKolom4;
+    @FXML private Circle keuzeTegelEindKolom1;
+    @FXML private Circle keuzeTegelEindKolom2;
+    @FXML private Circle keuzeTegelEindKolom3;
+    @FXML private Circle keuzeTegelEindKolom4;
+    @FXML private Label instructieTekst;
+    @FXML private ImageView stapelImageView;
+    @FXML private Button verwijderBtn;
+    @FXML private Button bevestignBtn;
+    @FXML private Button volgendeBtn;
+    @FXML private VBox eindKolomKeuze;
+    @FXML private VBox beginKolomKeuze;
 
+    private int gekozenCirkel = 0;
+    Circle geselecteerdeCirkel;
+
+    private List<Kleur> kleurenSpelers;
+    private int huidigeSpelerIndex = 0;
+    private int rondeNummer = 1;
+    Paint geselecteerdeKleurPaint;
     private final String[] startTegelImagePath =
             {
                     "/img/KingDomino_Afbeeldingen1/starttegel/starttegel_blauw.png",
@@ -53,9 +81,23 @@ public class SpelController implements Initializable
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
         plaatsStartTegels();
-        plaatsTegelsInKolom(getBeginKolomTegels(), beginKolom);
-        plaatsTegelsInKolom(getEindKolomTegels(), eindKolom);
+        plaatsTegelsInBeginKolom(getBeginKolomTegels(), beginKolom);
+        plaatsTegelsInEindKolom(getEindKolomTegels(), eindKolom);
         plaatsTegelInStapel(getStapel(), stapel);
+        startSpel();
+
+        for (Node node : beginKolom.getChildren()) {
+            if (node instanceof ImageView) {
+                ImageView imageView = (ImageView) node;
+                imageView.setOnMouseClicked(this::imageViewGeklik);
+            }
+        }
+        for (Node node : eindKolom.getChildren()) {
+            if (node instanceof ImageView) {
+                ImageView imageView = (ImageView) node;
+                imageView.setOnMouseClicked(this::imageViewGeklik);
+            }
+        }
 
     }
 /*-------------------------------------------------FRONTEND---------------------------------------------------*/
@@ -129,22 +171,58 @@ public void plaatsStartTegels()
                 }
             }
 
-        private void plaatsTegelsInKolom(List<DominoTegel> tegels, VBox kolom)
+        private void plaatsTegelsInBeginKolom(List<DominoTegel> tegels, VBox kolom)
         {
+            int index = 1;
             kolom.getChildren().clear();
             kolom.setSpacing(20);
 
             for (DominoTegel tegel : tegels)
             {
                 ImageView imageView = new ImageView(new Image(tegel.getFotoAchterkant()));
+                imageView.setId("imageView" + index);
 
                 imageView.setFitHeight(78);
                 imageView.setFitWidth(156);
 
                 kolom.getChildren().add(imageView);
-                System.out.println(tegel);
+                index++;
             }
         }
+
+        private void plaatsTegelsInEindKolom(List<DominoTegel> tegels, VBox kolom)
+        {
+
+            kolom.getChildren().clear();
+            kolom.setSpacing(20);
+            int index;
+
+            if(dc.getSpelendeSpelers().size() == 3)
+            {
+                index = 4;
+            } else {index = 5;}
+
+
+            for (DominoTegel tegel : tegels)
+            {
+                ImageView imageView = new ImageView(new Image(tegel.getFotoAchterkant()));
+                imageView.setId("imageView" + index);
+
+                imageView.setFitHeight(78);
+                imageView.setFitWidth(156);
+
+                kolom.getChildren().add(imageView);
+                index++;
+            }
+        }
+
+    @FXML
+    private void imageViewGeklik(MouseEvent event)
+    {
+        ImageView geklikteImage = (ImageView) event.getSource();
+        String id = geklikteImage.getId();
+        System.out.println(id);
+    }
 
 
 
@@ -165,10 +243,75 @@ public void plaatsStartTegels()
 
     }
 
+    private void updateVBoxVisibility() {
+        if (rondeNummer == 1) {
+            beginKolomKeuze.setVisible(true);
+            eindKolomKeuze.setVisible(false);
+        } else {
+            beginKolomKeuze.setVisible(false);
+            eindKolomKeuze.setVisible(true);
+        }
+    }
+
 /*-------------------------------------------------BACKEND---------------------------------------------------*/
 
+    @FXML
+    private void volgendeButtonHandler(ActionEvent event)
+    {
+        if(rondeNummer == 1) {
+            dc.voegKoningAanKaart(getKleurSpeler(), gekozenCirkel, 0);
+        } else dc.voegKoningAanKaart(getKleurSpeler(), gekozenCirkel, 1);
 
-    public void verschuifKolommen()
+        System.out.println("speler toegevoegd!");
+        geselecteerdeCirkel.setDisable(true);
+        geselecteerdeCirkel = null;
+        huidigeSpelerIndex++;
+        updateVBoxVisibility();
+    }
+    @FXML
+    private void circleClickHandler(MouseEvent event)
+    {
+        if (geselecteerdeCirkel != null)
+        {
+            geselecteerdeCirkel.setFill(Color.GREY);
+        }
+
+        geselecteerdeCirkel = (Circle) event.getSource();
+        String circleId = ((Circle) event.getSource()).getId();
+        gekozenCirkel = Integer.parseInt(circleId.substring(circleId.length() - 1));
+
+        Kleur kleurHuidigeSpeler = getKleurSpeler();
+        geselecteerdeKleurPaint = getKleurSpelerPaint(kleurHuidigeSpeler);
+        geselecteerdeCirkel.setFill(geselecteerdeKleurPaint);
+        System.out.println("Gekozen cirkel: " + gekozenCirkel);
+    }
+
+    private Paint getKleurSpelerPaint(Kleur kleur)
+    {
+        switch(kleur)
+        {
+            case BLAUW:
+                return Paint.valueOf("blue");
+            case GEEL:
+                return Paint.valueOf("yellow");
+            case GROEN:
+                return Paint.valueOf("green");
+            case ROOS:
+                return Paint.valueOf("pink");
+            default:
+                return Paint.valueOf("black");
+        }
+    }
+
+
+    private Kleur getKleurSpeler()
+    {
+        kleurenSpelers = dc.getVolgordeKoning();
+        return kleurenSpelers.get(huidigeSpelerIndex);
+    }
+
+
+    private void verschuifKolommen()
     {
         List<DominoTegel> eindKolomTegels = dc.getSpel().geefEindKolom();
         List<DominoTegel> beginKolomTegels = dc.getSpel().geefBeginKolom();
@@ -195,11 +338,30 @@ public void plaatsStartTegels()
          return dc.getSpel().getTegelsDeck();
      }
 
-    public void spelSituatie()
-    {
 
-    }
+     public void startSpel()
+     {
+         dc.koningRondeEenShuffle();
+         speelBeurtEersteRonde();
 
+         while (!dc.isEindeSpel())
+         {
+             speelRonde();
+         }
+
+         instructieTekst.setText("Het spel is afgelopen!");
+         System.out.println("Het spel is afgelopen!");
+     }
+
+     public void speelBeurtEersteRonde()
+     {
+         dc.koningRondeEenShuffle();
+         updateVBoxVisibility();
+
+         System.out.println();
+         instructieTekst.setText("Speler met kleur " + getKleurSpeler() + ", kies een tegel voor je koninkrijk!");
+         int keuze = gekozenCirkel;
+     }
     public void speelBeurt()
     {
 
@@ -207,10 +369,7 @@ public void plaatsStartTegels()
 
     public void speelRonde()
     {
-        verschuifKolommen();
-        speelBeurt();
-        if (dc.isEindeSpel()) {
-            System.out.println("Het spel is afgelopen.");
-        }
+
+        rondeNummer++;
     }
 }

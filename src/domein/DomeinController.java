@@ -76,7 +76,8 @@ public class DomeinController {
     };
 
     // int kolom is 0 == beginkolom , 1 == eindkolom
-    public void voegKoningAanKaart(Kleur kleur, int index, int kolom){
+    public void voegKoningAanKaart(Kleur kleur, int index, int kolom)
+    {
         if(kolom == 0) {
             spelRepository.getBeginKolom().get(index - 1).claimTegel(kleur);
         }
@@ -84,6 +85,7 @@ public class DomeinController {
             spelRepository.getEindKolom().get(index - 1).claimTegel(kleur);
         }
     }
+
 
     public List<DominoTegelDTO> getBeginKolom(){
         List<DominoTegel> startKolom = spelRepository.getBeginKolom();
