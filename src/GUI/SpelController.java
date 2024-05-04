@@ -84,7 +84,8 @@ public class SpelController implements Initializable
         plaatsTegelsInBeginKolom(getBeginKolomTegels(), beginKolom);
         plaatsTegelsInEindKolom(getEindKolomTegels(), eindKolom);
         plaatsTegelInStapel(getStapel(), stapel);
-        startSpel();
+        speelBeurtEersteRonde();
+        //startSpel();
 
         for (Node node : beginKolom.getChildren()) {
             if (node instanceof ImageView) {
