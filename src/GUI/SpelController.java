@@ -87,22 +87,31 @@ public class SpelController implements Initializable
             this.dc = dc;
         }
 
+// TODO DRAGGING
 
+    private boolean isDraggableImageView(ImageView imageView) {
+        return imageView.getId().startsWith("beginKolom");
+    }
 
     @FXML
     void imageViewDragDropped(DragEvent event) {
-        Dragboard dragboard = event.getDragboard();
-
+        ImageView imageView = (ImageView) event.getSource();
+        if (isDraggableImageView(imageView)) {
+            Dragboard dragboard = event.getDragboard();
+            // TODO HANDLE THE DRAG EVENT
+        }
         event.consume();
     }
 
     @FXML
     void imageViewDragOver(DragEvent event) {
-        Dragboard dragboard = event.getDragboard();
-        if(dragboard.hasImage() || dragboard.hasFiles()){
-            event.acceptTransferModes(TransferMode.COPY);
+        ImageView imageView = (ImageView) event.getSource();
+        if (isDraggableImageView(imageView)) {
+            Dragboard dragboard = event.getDragboard();
+            if (dragboard.hasImage() || dragboard.hasFiles()) {
+                event.acceptTransferModes(TransferMode.COPY);
+            }
         }
-
         event.consume();
     }
 
@@ -206,10 +215,11 @@ public void plaatsStartTegels()
             kolom.getChildren().clear();
             kolom.setSpacing(20);
 
-            for (DominoTegel tegel : tegels) {
+            for (DominoTegel tegel : tegels)
+            {
+                ImageView imageView = new ImageView(new Image(tegel.getFotoVoorkant()));
+                imageView.setId("imageView" + index);
 
-                ImageView imageView = (ImageView) loader.getNamespace().get("imageView" + index);
-                imageView.setImage(new Image(tegel.getFotoVoorkant()));
                 imageView.setFitHeight(78);
                 imageView.setFitWidth(156);
 
