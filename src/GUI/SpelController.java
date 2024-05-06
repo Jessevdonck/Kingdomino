@@ -6,6 +6,7 @@ import dto.DominoTegelDTO;
 import dto.SpelerDTO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
@@ -22,6 +23,7 @@ import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import util.Kleur;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 
@@ -172,22 +174,28 @@ public void plaatsStartTegels()
                 }
             }
 
-        private void plaatsTegelsInBeginKolom(List<DominoTegel> tegels, VBox kolom)
-        {
+        private void plaatsTegelsInBeginKolom(List<DominoTegel> tegels, VBox kolom) {
             int index = 1;
             kolom.getChildren().clear();
             kolom.setSpacing(20);
 
-            for (DominoTegel tegel : tegels)
-            {
-                ImageView imageView = new ImageView(new Image(tegel.getFotoVoorkant()));
-                imageView.setId("imageView" + index);
+            for (DominoTegel tegel : tegels) {
+                try {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("YourFXMLFile.fxml"));
+                    DragController controller = new DragController();
+                    loader.setController(controller);
+                    loader.load();
 
-                imageView.setFitHeight(78);
-                imageView.setFitWidth(156);
+                    ImageView imageView = (ImageView) loader.getNamespace().get("imageView" + index);
+                    imageView.setImage(new Image(tegel.getFotoVoorkant()));
+                    imageView.setFitHeight(78);
+                    imageView.setFitWidth(156);
 
-                kolom.getChildren().add(imageView);
-                index++;
+                    kolom.getChildren().add(imageView);
+                    index++;
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         }
 

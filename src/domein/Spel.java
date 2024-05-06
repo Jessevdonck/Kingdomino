@@ -84,6 +84,14 @@ public class Spel
         return kaarten;
     }
 
+    public DominoTegel geefTegel()
+    {
+        if (tegels.isEmpty()) {
+            throw new RuntimeException("No cards left in the deck");
+        }
+        return tegels.remove(0);
+    }
+
     public void maakStartKolom() {
         beginKolom = geefKaarten(getSpelers().size());
         sorteerOpTegelNummer(beginKolom);
@@ -196,14 +204,6 @@ public class Spel
             scores.put(kleur, tegelGebieden.get(kleur).zoekDomein());
         }
         return scores;
-    }
-
-    public DominoTegel geefTegel()
-    {
-        if (tegels.isEmpty()) {
-            throw new RuntimeException("No cards left in the deck");
-        }
-        return tegels.remove(0);
     }
 
     public void verplaatsTegel(int kolom, int rij, boolean verticaal, DominoTegel tegel)
