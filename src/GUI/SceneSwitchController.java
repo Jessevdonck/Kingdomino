@@ -64,11 +64,11 @@ public class SceneSwitchController
         if (dc.getSpelendeSpelers().size() == 3)
         {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Bord3Spelers.fxml"));
-            loader.setController(new SpelController(dc));
+            loader.setController(new SpelController(dc, loader));
             root = loader.load();
         } else if(dc.getSpelendeSpelers().size() == 4) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Bord4Spelers.fxml"));
-            loader.setController(new SpelController(dc));
+            loader.setController(new SpelController(dc, loader));
             root = loader.load();
         } else throw new IllegalArgumentException("Fout aantal spelers");
 

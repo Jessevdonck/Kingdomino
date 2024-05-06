@@ -14,7 +14,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.DragEvent;
+import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.input.TransferMode;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -57,6 +60,11 @@ public class SpelController implements Initializable
     @FXML private VBox eindKolomKeuze;
     @FXML private VBox beginKolomKeuze;
 
+    @FXML
+    private javax.swing.text.html.ImageView imageView;
+
+    private FXMLLoader loader;
+
     private int gekozenCirkel = 0;
     Circle geselecteerdeCirkel;
 
@@ -73,11 +81,30 @@ public class SpelController implements Initializable
             };
 
 
-    public SpelController(DomeinController dc)
+    public SpelController(DomeinController dc, FXMLLoader loader)
         {
+            this.loader = loader;
             this.dc = dc;
         }
 
+
+
+    @FXML
+    void imageViewDragDropped(DragEvent event) {
+        Dragboard dragboard = event.getDragboard();
+
+        event.consume();
+    }
+
+    @FXML
+    void imageViewDragOver(DragEvent event) {
+        Dragboard dragboard = event.getDragboard();
+        if(dragboard.hasImage() || dragboard.hasFiles()){
+            event.acceptTransferModes(TransferMode.COPY);
+        }
+
+        event.consume();
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
@@ -180,22 +207,15 @@ public void plaatsStartTegels()
             kolom.setSpacing(20);
 
             for (DominoTegel tegel : tegels) {
-                try {
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("YourFXMLFile.fxml"));
-                    DragController controller = new DragController();
-                    loader.setController(controller);
-                    loader.load();
 
-                    ImageView imageView = (ImageView) loader.getNamespace().get("imageView" + index);
-                    imageView.setImage(new Image(tegel.getFotoVoorkant()));
-                    imageView.setFitHeight(78);
-                    imageView.setFitWidth(156);
+                ImageView imageView = (ImageView) loader.getNamespace().get("imageView" + index);
+                imageView.setImage(new Image(tegel.getFotoVoorkant()));
+                imageView.setFitHeight(78);
+                imageView.setFitWidth(156);
 
-                    kolom.getChildren().add(imageView);
-                    index++;
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                kolom.getChildren().add(imageView);
+                index++;
+
             }
         }
 
