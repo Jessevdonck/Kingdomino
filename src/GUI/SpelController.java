@@ -332,15 +332,19 @@ public void plaatsStartTegels()
     @FXML
     private void volgendeButtonHandler(ActionEvent event)
     {
+
         if(rondeNummer == 1) {
             dc.voegKoningAanKaart(getKleurSpeler(), gekozenCirkel, 0);
         } else dc.voegKoningAanKaart(getKleurSpeler(), gekozenCirkel, 1);
+
 
         System.out.println("speler toegevoegd!");
         geselecteerdeCirkel.setDisable(true);
         geselecteerdeCirkel = null;
         huidigeSpelerIndex++;
         updateVBoxVisibility();
+        instructieTekst.setText("Speler met kleur " + getKleurSpeler() + ", kies een tegel voor je koninkrijk!");
+
     }
     @FXML
     private void circleClickHandler(MouseEvent event)
@@ -365,15 +369,15 @@ public void plaatsStartTegels()
         switch(kleur)
         {
             case BLAUW:
-                return Paint.valueOf("blue");
+                return Color.web("#51aeff");
             case GEEL:
-                return Paint.valueOf("yellow");
+                return Color.web("#f2ff3d");
             case GROEN:
-                return Paint.valueOf("green");
+                return Color.web("#66ff61");
             case ROOS:
-                return Paint.valueOf("pink");
+                return Color.web("#ff63ea");
             default:
-                return Paint.valueOf("black");
+                return Color.web("black");
         }
     }
 
@@ -432,8 +436,8 @@ public void plaatsStartTegels()
          dc.koningRondeEenShuffle();
          updateVBoxVisibility();
 
-         System.out.println();
-         instructieTekst.setText("Speler met kleur " + getKleurSpeler() + ", kies een tegel voor je koninkrijk!");
+        instructieTekst.setText("Speler met kleur " + getKleurSpeler() + ", kies een tegel voor je koninkrijk!");
+
          int keuze = gekozenCirkel;
      }
     public void speelBeurt()
