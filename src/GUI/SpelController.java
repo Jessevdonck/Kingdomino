@@ -91,60 +91,7 @@ public class SpelController implements Initializable
             this.dc = dc;
         }
 
-// TODO DRAGGING
 
-    private boolean isDraggableImageView(ImageView imageView) {
-        return imageView.getId().startsWith("beginKolom");
-    }
-
-    @FXML
-    void imageViewDragDropped(DragEvent event)
-    {
-        ImageView imageView = (ImageView) event.getSource();
-        if (isDraggableImageView(imageView)) {
-            Dragboard dragboard = event.getDragboard();
-            if(dragboard.hasImage())
-            {
-                Image droppedImage = dragboard.getImage();
-                imageView.setImage(droppedImage);
-                event.setDropCompleted(true);
-            } else event.setDropCompleted(false);
-        }
-        event.consume();
-    }
-
-    @FXML
-    void imageViewDragOver(DragEvent event) {
-        ImageView imageView = (ImageView) event.getSource();
-        if (isDraggableImageView(imageView)) {
-            Dragboard dragboard = event.getDragboard();
-            if (dragboard.hasImage() || dragboard.hasFiles()) {
-                event.acceptTransferModes(TransferMode.COPY);
-            }
-        }
-        event.consume();
-    }
-
-    private void imageViewMousePressed(MouseEvent event)
-    {
-
-        orgSceneX = event.getSceneX();
-        orgSceneY = event.getSceneY();
-        orgTranslateX = ((ImageView)(event.getSource())).getTranslateX();
-        orgTranslateY = ((ImageView)(event.getSource())).getTranslateY();
-    }
-
-    private void imageViewMouseDragged(MouseEvent event)
-    {
-        double offsetX = event.getSceneX() - orgSceneX;
-        double offsetY = event.getSceneY() - orgSceneY;
-        double newTranslateX = orgTranslateX + offsetX;
-        double newTranslateY = orgTranslateY + offsetY;
-
-        draggedImageView = (ImageView) event.getSource();
-        draggedImageView.setTranslateX(newTranslateX);
-        draggedImageView.setTranslateY(newTranslateY);
-    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
@@ -327,7 +274,59 @@ public void plaatsStartTegels()
             eindKolomKeuze.setVisible(true);
         }
     }
+/*-------------------------------------------------Drag & Drop-----------------------------------------------*/
+    private boolean isDraggableImageView(ImageView imageView) {
+        return imageView.getId().startsWith("beginKolom");
+    }
 
+    @FXML
+    void imageViewDragDropped(DragEvent event)
+    {
+        ImageView imageView = (ImageView) event.getSource();
+        if (isDraggableImageView(imageView)) {
+            Dragboard dragboard = event.getDragboard();
+            if(dragboard.hasImage())
+            {
+                Image droppedImage = dragboard.getImage();
+                imageView.setImage(droppedImage);
+                event.setDropCompleted(true);
+            } else event.setDropCompleted(false);
+        }
+        event.consume();
+    }
+
+    @FXML
+    void imageViewDragOver(DragEvent event) {
+        ImageView imageView = (ImageView) event.getSource();
+        if (isDraggableImageView(imageView)) {
+            Dragboard dragboard = event.getDragboard();
+            if (dragboard.hasImage() || dragboard.hasFiles()) {
+                event.acceptTransferModes(TransferMode.COPY);
+            }
+        }
+        event.consume();
+    }
+
+    private void imageViewMousePressed(MouseEvent event)
+    {
+
+        orgSceneX = event.getSceneX();
+        orgSceneY = event.getSceneY();
+        orgTranslateX = ((ImageView)(event.getSource())).getTranslateX();
+        orgTranslateY = ((ImageView)(event.getSource())).getTranslateY();
+    }
+
+    private void imageViewMouseDragged(MouseEvent event)
+    {
+        double offsetX = event.getSceneX() - orgSceneX;
+        double offsetY = event.getSceneY() - orgSceneY;
+        double newTranslateX = orgTranslateX + offsetX;
+        double newTranslateY = orgTranslateY + offsetY;
+
+        draggedImageView = (ImageView) event.getSource();
+        draggedImageView.setTranslateX(newTranslateX);
+        draggedImageView.setTranslateY(newTranslateY);
+    }
 /*-------------------------------------------------BACKEND---------------------------------------------------*/
 
     @FXML
