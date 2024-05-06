@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -61,7 +62,10 @@ public class SpelController implements Initializable
     @FXML private VBox beginKolomKeuze;
 
     @FXML
-    private javax.swing.text.html.ImageView imageView;
+    private ImageView draggedImageView;
+    private double orgSceneX, orgSceneY;
+    private double orgTranslateX, orgTranslateY;
+
 
     private FXMLLoader loader;
 
@@ -94,11 +98,17 @@ public class SpelController implements Initializable
     }
 
     @FXML
-    void imageViewDragDropped(DragEvent event) {
+    void imageViewDragDropped(DragEvent event)
+    {
         ImageView imageView = (ImageView) event.getSource();
         if (isDraggableImageView(imageView)) {
             Dragboard dragboard = event.getDragboard();
-            // TODO HANDLE THE DRAG EVENT
+            if(dragboard.hasImage())
+            {
+                Image droppedImage = dragboard.getImage();
+                imageView.setImage(droppedImage);
+                event.setDropCompleted(true);
+            } else event.setDropCompleted(false);
         }
         event.consume();
     }
@@ -113,6 +123,27 @@ public class SpelController implements Initializable
             }
         }
         event.consume();
+    }
+
+    private void imageViewMousePressed(MouseEvent event)
+    {
+
+        orgSceneX = event.getSceneX();
+        orgSceneY = event.getSceneY();
+        orgTranslateX = ((ImageView)(event.getSource())).getTranslateX();
+        orgTranslateY = ((ImageView)(event.getSource())).getTranslateY();
+    }
+
+    private void imageViewMouseDragged(MouseEvent event)
+    {
+        double offsetX = event.getSceneX() - orgSceneX;
+        double offsetY = event.getSceneY() - orgSceneY;
+        double newTranslateX = orgTranslateX + offsetX;
+        double newTranslateY = orgTranslateY + offsetY;
+
+        draggedImageView = (ImageView) event.getSource();
+        draggedImageView.setTranslateX(newTranslateX);
+        draggedImageView.setTranslateY(newTranslateY);
     }
 
     @Override
@@ -222,6 +253,11 @@ public void plaatsStartTegels()
 
                 imageView.setFitHeight(78);
                 imageView.setFitWidth(156);
+
+                imageView.setCursor(Cursor.HAND);
+
+                imageView.setOnMousePressed(this::imageViewMousePressed);
+                imageView.setOnMouseDragged(this::imageViewMouseDragged);
 
                 kolom.getChildren().add(imageView);
                 index++;
