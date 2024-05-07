@@ -16,7 +16,7 @@
             <Image url="@../img/AchtergrondHomePage1.png" />
          </image>
       </ImageView>
-      <Label id="Volume" layoutX="228.0" layoutY="64.0" text="Volume" textAlignment="CENTER" textFill="WHITE">
+      <Label id="Volume" alignment="CENTER" contentDisplay="CENTER" layoutX="207.0" layoutY="65.0" prefHeight="50.0" prefWidth="186.0" text="Volume" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font name="System Bold" size="36.0" />
          </font>
