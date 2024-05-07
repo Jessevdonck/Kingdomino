@@ -8,6 +8,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
@@ -57,6 +58,16 @@ public class SceneSwitchController
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+    }
+
+    public void switchToOptiesScene(ActionEvent event, DomeinController dc, TaalController tc) throws IOException {
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/opties.fxml"));
+    loader.setController(new OptiesController(dc, tc));
+    Parent root = loader.load();
+    stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+    scene = new Scene(root);
+    stage.setScene(scene);
+    stage.show();
     }
 
     public void switchToBordScene(MouseEvent event, DomeinController dc) throws IOException {

@@ -1,5 +1,6 @@
 package main;
 
+import GUI.MediaPlayerSingleton;
 import domein.DomeinController;
 import GUI.HomepageController;
 import domein.TegelGebied;
@@ -21,7 +22,6 @@ import java.util.ResourceBundle;
 public class StartUpGUI extends Application
 {
 
-    MediaPlayer mediaPlayer;
     @Override
     public void start(Stage stage) throws Exception
     {
@@ -29,6 +29,7 @@ public class StartUpGUI extends Application
         DomeinController dc = new DomeinController();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Homepage.fxml"));
         loader.setController(new HomepageController(dc));
+
         Parent root = loader.load();
 
         Scene scene = new Scene(root);
@@ -42,10 +43,7 @@ public class StartUpGUI extends Application
 
 public void music()
     {
-        String muziekPath = "/sounds/bg_music.mp3";
-        Media bgMusic = new Media(getClass().getResource(muziekPath).toString());
-        mediaPlayer = new MediaPlayer(bgMusic);
-        mediaPlayer.play();
+        MediaPlayerSingleton.getInstance().play();
     }
 
     public static void main(String[] args) {

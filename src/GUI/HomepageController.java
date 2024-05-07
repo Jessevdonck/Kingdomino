@@ -10,6 +10,8 @@ import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
+import javax.swing.*;
+
 
 public class HomepageController implements Initializable
     {
@@ -55,6 +57,12 @@ public class HomepageController implements Initializable
     {
         sceneSwitchController.switchToSpeelScene(event, this.dc, tc);
     }
+
+    @FXML
+    public void switchToOptiesScene(ActionEvent event) throws IOException
+        {
+            sceneSwitchController.switchToOptiesScene(event, this.dc, tc);
+        }
 
     public void afsluiten(ActionEvent event) {
         sceneSwitchController.afsluiten(event);
