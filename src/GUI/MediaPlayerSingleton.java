@@ -10,26 +10,27 @@ private static MediaPlayer mediaPlayerSoundFX;
 
 private MediaPlayerSingleton() {}
 
-public static MediaPlayer getInstanceBgMusic()
-    {
-        if (mediaPlayerBgMusic == null)
-        {
-            String muziekPath = "/sounds/bg_music.mp3";
-            Media bgMusic = new Media(MediaPlayerSingleton.class.getResource(muziekPath).toString());
-            mediaPlayerBgMusic = new MediaPlayer(bgMusic);
-        }
+    public static MediaPlayer getInstanceBgMusic() {
+    if (mediaPlayerBgMusic == null) {
+        String muziekPath = "/sounds/bg_music.mp3";
+        Media bgMusic = new Media(MediaPlayerSingleton.class.getResource(muziekPath).toString());
+        mediaPlayerBgMusic = new MediaPlayer(bgMusic);
 
-        return mediaPlayerBgMusic;
+        mediaPlayerBgMusic.setVolume(0.03);
     }
 
-    public static MediaPlayer getInstanceSoundFX()
-        {
+    return mediaPlayerBgMusic;
+    }
 
-            String muziekPath = "/sounds/buttonClick.mp3";
-            Media bgMusic = new Media(MediaPlayerSingleton.class.getResource(muziekPath).toString());
-            mediaPlayerSoundFX = new MediaPlayer(bgMusic);
+    public static MediaPlayer getInstanceSoundFX() {
+    if (mediaPlayerSoundFX == null) {
+        String muziekPath = "/sounds/buttonClick.mp3";
+        Media bgMusic = new Media(MediaPlayerSingleton.class.getResource(muziekPath).toString());
+        mediaPlayerSoundFX = new MediaPlayer(bgMusic);
 
+        mediaPlayerSoundFX.setVolume(0.05);
+    }
 
-            return mediaPlayerSoundFX;
-        }
+    return mediaPlayerSoundFX;
+    }
 }

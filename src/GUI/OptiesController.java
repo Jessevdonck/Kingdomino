@@ -33,6 +33,7 @@ public class OptiesController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
         {
+
             volumeSliderBgMusic.setValue(MediaPlayerSingleton.getInstanceBgMusic().getVolume() * 100);
             volumeSliderBgMusic.valueProperty().addListener(new InvalidationListener()
                 {
@@ -49,7 +50,7 @@ public class OptiesController implements Initializable
             @Override
             public void invalidated(Observable observable)
                 {
-                MediaPlayerSingleton.getInstanceSoundFX().setVolume(volumeSliderBgMusic.getValue() / 100);
+                    MediaPlayerSingleton.getInstanceSoundFX().setVolume(volumeSliderSoundFX.getValue() / 100);
                 }
             });
         }
