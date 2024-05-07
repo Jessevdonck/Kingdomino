@@ -95,18 +95,8 @@
                   </Circle>
                </children>
             </VBox>
-            <VBox fx:id="beginKolom" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="312.0" prefWidth="156.0" spacing="20.0">
-               <children>
-                  <ImageView fx:id="beginKolomImageView1" fitHeight="78.0" fitWidth="156.0" pickOnBounds="true" preserveRatio="true" />
-                  <ImageView fx:id="beginKolomImageView2" fitHeight="78.0" fitWidth="156.0" pickOnBounds="true" preserveRatio="true" />
-                  <ImageView fx:id="beginKolomImageView3" fitHeight="78.0" fitWidth="156.0" pickOnBounds="true" preserveRatio="true" />
-               </children></VBox>
-            <VBox fx:id="eindKolom" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="312.0" prefWidth="156.0" spacing="20.0">
-               <children>
-                  <ImageView fx:id="eindKolomImageView1" fitHeight="78.0" fitWidth="156.0" pickOnBounds="true" preserveRatio="true" />
-                  <ImageView fx:id="eindKolomImageView2" fitHeight="78.0" fitWidth="156.0" pickOnBounds="true" preserveRatio="true" />
-                  <ImageView fx:id="eindKolomImageView3" fitHeight="78.0" fitWidth="156.0" pickOnBounds="true" preserveRatio="true" />
-               </children></VBox>
+            <VBox fx:id="beginKolom" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="312.0" prefWidth="156.0" spacing="20.0" />
+            <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="312.0" prefWidth="156.0" spacing="20.0" />
             <VBox fx:id="eindKolomKeuze" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="312.0" prefWidth="156.0" spacing="60.0">
                <children>
                   <Circle fx:id="keuzeTegelEindKolom1" fill="#a4a4a4" onMouseClicked="#circleClickHandler" radius="20.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0">
@@ -160,7 +150,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Button fx:id="verwijderBtn" mnemonicParsing="false" prefHeight="42.0" prefWidth="87.0" text="Verwijder">
+                  <Button fx:id="verwijderBtn" mnemonicParsing="false" onAction="#verwijderBtnTest" prefHeight="42.0" prefWidth="87.0" text="Verwijder">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>

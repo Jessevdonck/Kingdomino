@@ -27,6 +27,7 @@ import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import util.Kleur;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
@@ -97,24 +98,13 @@ public class SpelController implements Initializable
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
         plaatsStartTegels();
-        plaatsTegelsInBeginKolom(getBeginKolomTegels(), beginKolom);
+
         plaatsTegelsInEindKolom(getEindKolomTegels(), eindKolom);
         plaatsTegelInStapel(getStapel(), stapel);
+        plaatsTegelsInBeginKolom(getBeginKolomTegels(), beginKolom);
+
         speelBeurtEersteRonde();
         //startSpel();
-
-        for (Node node : beginKolom.getChildren()) {
-            if (node instanceof ImageView) {
-                ImageView imageView = (ImageView) node;
-                imageView.setOnMouseClicked(this::imageViewGeklik);
-            }
-        }
-        for (Node node : eindKolom.getChildren()) {
-            if (node instanceof ImageView) {
-                ImageView imageView = (ImageView) node;
-                imageView.setOnMouseClicked(this::imageViewGeklik);
-            }
-        }
 
     }
 /*-------------------------------------------------FRONTEND---------------------------------------------------*/
@@ -207,6 +197,7 @@ public void plaatsStartTegels()
                 imageView.setOnMouseDragged(this::imageViewMouseDragged);
 
                 kolom.getChildren().add(imageView);
+
                 index++;
 
             }
