@@ -64,9 +64,10 @@ public class HomepageController implements Initializable
             sceneSwitchController.switchToOptiesScene(event, this.dc, tc);
         }
 
-    public void afsluiten(ActionEvent event) {
-        sceneSwitchController.afsluiten(event);
-    }
+    public void afsluiten(ActionEvent event)
+        {
+            sceneSwitchController.afsluiten(event);
+        }
 
     /*-----------------------------------------------------------------------------LAAD TAAL---------------------------------------------------------------*/
 
@@ -92,6 +93,7 @@ public class HomepageController implements Initializable
     @FXML
     private void switchNaarNederlands(MouseEvent event)
     {
+        MediaPlayerSingleton.getInstanceSoundFX().play();
         tc.setLanguage("nl");
         laadLanguage("nl");
 
@@ -100,6 +102,7 @@ public class HomepageController implements Initializable
     @FXML
     private void switchNaarFrans(MouseEvent event)
     {
+        MediaPlayerSingleton.getInstanceSoundFX().play();
         tc.setLanguage("fr");
         laadLanguage("fr");
     }
@@ -107,6 +110,7 @@ public class HomepageController implements Initializable
     @FXML
     private void switchNaarEngels(MouseEvent event)
     {
+        MediaPlayerSingleton.getInstanceSoundFX().play();
         tc.setLanguage("en");
         laadLanguage("en");
     }

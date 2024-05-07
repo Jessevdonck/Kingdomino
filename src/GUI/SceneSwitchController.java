@@ -29,6 +29,7 @@ public class SceneSwitchController
 
     public void switchToRegisterScene(ActionEvent event, DomeinController dc, TaalController tc) throws IOException
     {
+        MediaPlayerSingleton.getInstanceSoundFX().play();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Login.fxml"));
         loader.setController(new RegistreerSpelerController(dc, tc));
         Parent root = loader.load();
@@ -41,6 +42,7 @@ public class SceneSwitchController
     }
 
     public void switchToHomescreen(MouseEvent event, DomeinController dc, TaalController tc) throws IOException {
+        MediaPlayerSingleton.getInstanceSoundFX().play();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Homepage.fxml"));
         loader.setController(new HomepageController(dc));
         Parent root = loader.load();
@@ -51,6 +53,7 @@ public class SceneSwitchController
     }
 
     public void switchToSpeelScene(ActionEvent event, DomeinController dc, TaalController tc) throws IOException {
+        MediaPlayerSingleton.getInstanceSoundFX().play();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/spelersKiezen.fxml"));
         loader.setController(new SpelerSelectieController(dc, tc));
         Parent root = loader.load();
@@ -61,6 +64,7 @@ public class SceneSwitchController
     }
 
     public void switchToOptiesScene(ActionEvent event, DomeinController dc, TaalController tc) throws IOException {
+    MediaPlayerSingleton.getInstanceSoundFX().play();
     FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/opties.fxml"));
     loader.setController(new OptiesController(dc, tc));
     Parent root = loader.load();
@@ -72,6 +76,8 @@ public class SceneSwitchController
 
     public void switchToBordScene(MouseEvent event, DomeinController dc) throws IOException {
         Parent root;
+
+        MediaPlayerSingleton.getInstanceSoundFX().play();
         if (dc.getSpelendeSpelers().size() == 3)
         {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Bord3Spelers.fxml"));
@@ -99,6 +105,7 @@ public class SceneSwitchController
 
     public void afsluiten(ActionEvent event)
     {
+        MediaPlayerSingleton.getInstanceSoundFX().play();
         System.exit(0);
     }
 

@@ -43,7 +43,7 @@ public class StartUpGUI extends Application
 
 public void music()
     {
-        MediaPlayerSingleton.getInstance().play();
+        MediaPlayerSingleton.getInstanceBgMusic().play();
     }
 
     public static void main(String[] args) {

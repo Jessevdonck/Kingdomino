@@ -17,3 +17,11 @@
     /*-fx-background-image: url(../img/sliderPijl1.png);*/
     -fx-background-repeat: no-repeat;
 }
+
+#Volume
+{
+    -fx-border-width: 2px;
+    -fx-border-color: white;
+    -fx-padding: 5px;
+    -fx-border-radius: 8px;
+}

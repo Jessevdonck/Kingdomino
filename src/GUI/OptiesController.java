@@ -6,14 +6,17 @@ import javafx.beans.Observable;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Slider;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.media.MediaPlayer;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class OptiesController implements Initializable
     {
-    @FXML Slider volumeSlider;
+    @FXML Slider volumeSliderBgMusic;
+    @FXML Slider volumeSliderSoundFX;
     private MediaPlayer mediaPlayer;
     private DomeinController dc;
     private SceneSwitchController ssc;
@@ -30,14 +33,29 @@ public class OptiesController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
         {
-            volumeSlider.setValue(MediaPlayerSingleton.getInstance().getVolume() * 100);
-            volumeSlider.valueProperty().addListener(new InvalidationListener()
+            volumeSliderBgMusic.setValue(MediaPlayerSingleton.getInstanceBgMusic().getVolume() * 100);
+            volumeSliderBgMusic.valueProperty().addListener(new InvalidationListener()
                 {
                 @Override
                 public void invalidated(Observable observable)
                     {
-                        MediaPlayerSingleton.getInstance().setVolume(volumeSlider.getValue() / 100);
+                        MediaPlayerSingleton.getInstanceBgMusic().setVolume(volumeSliderBgMusic.getValue() / 100);
                     }
                 });
+
+            volumeSliderSoundFX.setValue(MediaPlayerSingleton.getInstanceSoundFX().getVolume() * 100);
+            volumeSliderSoundFX.valueProperty().addListener(new InvalidationListener()
+            {
+            @Override
+            public void invalidated(Observable observable)
+                {
+                MediaPlayerSingleton.getInstanceSoundFX().setVolume(volumeSliderBgMusic.getValue() / 100);
+                }
+            });
         }
+
+        public void switchToHomescreen(MouseEvent event) throws IOException
+            {
+                ssc.switchToHomescreen(event,this.dc, tc);
+            }
     }

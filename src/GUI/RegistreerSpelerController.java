@@ -53,6 +53,8 @@ public class RegistreerSpelerController implements Initializable
         String gebruikersnaam = gebruikersnaamBalk.getText();
         String geboortejaarString = geboortejaarBalk.getText();
 
+        MediaPlayerSingleton.getInstanceSoundFX().play();
+
         try {
             if (geboortejaarString.trim().isBlank())
                 throw new OntbrekendGeboortejaarException();
