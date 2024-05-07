@@ -23,14 +23,13 @@ private MediaPlayerSingleton() {}
     }
 
     public static MediaPlayer getInstanceSoundFX() {
-    if (mediaPlayerSoundFX == null) {
+
         String muziekPath = "/sounds/buttonClick.mp3";
         Media bgMusic = new Media(MediaPlayerSingleton.class.getResource(muziekPath).toString());
         mediaPlayerSoundFX = new MediaPlayer(bgMusic);
 
         mediaPlayerSoundFX.setVolume(0.05);
-    }
 
-    return mediaPlayerSoundFX;
+        return mediaPlayerSoundFX;
     }
 }
