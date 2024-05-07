@@ -1,6 +1,7 @@
 #mainVBox
 {
     -fx-background-color: rgba(0, 0, 0, 0.27);
+    -fx-background-radius: 8px;
 }
 
 .slider {

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Slider?>
@@ -16,7 +17,7 @@
             <Image url="@../img/AchtergrondHomePage1.png" />
          </image>
       </ImageView>
-      <Label id="Volume" alignment="CENTER" contentDisplay="CENTER" layoutX="207.0" layoutY="65.0" prefHeight="50.0" prefWidth="186.0" text="Volume" textAlignment="CENTER" textFill="WHITE">
+      <Label id="Volume" fx:id="volumeTitel" alignment="CENTER" contentDisplay="CENTER" layoutX="207.0" layoutY="65.0" prefHeight="50.0" prefWidth="186.0" text="Volume" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font name="System Bold" size="36.0" />
          </font>
@@ -25,19 +26,22 @@
          <children>
             <VBox alignment="CENTER" prefHeight="139.0" prefWidth="305.0" spacing="20.0">
                <children>
-                  <Label text="Achtergrondmuziek" textFill="WHITE">
+                  <Label fx:id="achtergrondmuziekLabel" text="Achtergrondmuziek" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="18.0" />
                      </font>
                   </Label>
                   <Slider fx:id="volumeSliderBgMusic" prefHeight="35.0" prefWidth="305.0" />
-                  <Label text="Geluidseffecten" textFill="WHITE">
+                  <Label fx:id="geluidseffectenLabel" text="Geluidseffecten" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="18.0" />
                      </font>
                   </Label>
                   <Slider fx:id="volumeSliderSoundFX" prefHeight="35.0" prefWidth="305.0" />
                </children>
+               <padding>
+                  <Insets bottom="20.0" left="10.0" right="10.0" top="20.0" />
+               </padding>
             </VBox>
          </children>
       </VBox>

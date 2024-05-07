@@ -23,6 +23,7 @@ public class HomepageController implements Initializable
     @FXML private Button speelBtn;
     @FXML private Button registreerBtn;
     @FXML private Button afsluitenBtn;
+    @FXML private Button optiesBtn;
 
     public HomepageController(DomeinController dc)
     {
@@ -78,6 +79,7 @@ public class HomepageController implements Initializable
         speelBtn.setText(bundle.getString("speel"));
         registreerBtn.setText(bundle.getString("registreer"));
         afsluitenBtn.setText(bundle.getString("afsluiten"));
+        optiesBtn.setText(bundle.getString("instellingen"));
 
     }
 
@@ -89,6 +91,7 @@ public class HomepageController implements Initializable
         speelBtn.setText(bundle.getString("speel"));
         registreerBtn.setText(bundle.getString("registreer"));
         afsluitenBtn.setText(bundle.getString("afsluiten"));
+        optiesBtn.setText(bundle.getString("instellingen"));
     }
     @FXML
     private void switchNaarNederlands(MouseEvent event)
