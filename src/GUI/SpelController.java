@@ -275,37 +275,9 @@ public void plaatsStartTegels()
         }
     }
 /*-------------------------------------------------Drag & Drop-----------------------------------------------*/
-    private boolean isDraggableImageView(ImageView imageView) {
-        return imageView.getId().startsWith("beginKolom");
-    }
-
-    @FXML
-    void imageViewDragDropped(DragEvent event)
-    {
-        ImageView imageView = (ImageView) event.getSource();
-        if (isDraggableImageView(imageView)) {
-            Dragboard dragboard = event.getDragboard();
-            if(dragboard.hasImage())
-            {
-                Image droppedImage = dragboard.getImage();
-                imageView.setImage(droppedImage);
-                event.setDropCompleted(true);
-            } else event.setDropCompleted(false);
-        }
-        event.consume();
-    }
-
-    @FXML
-    void imageViewDragOver(DragEvent event) {
-        ImageView imageView = (ImageView) event.getSource();
-        if (isDraggableImageView(imageView)) {
-            Dragboard dragboard = event.getDragboard();
-            if (dragboard.hasImage() || dragboard.hasFiles()) {
-                event.acceptTransferModes(TransferMode.COPY);
-            }
-        }
-        event.consume();
-    }
+//    private boolean isDraggableImageView(ImageView imageView) {
+//        return imageView.getId().startsWith("beginKolom");
+//    }
 
     private void imageViewMousePressed(MouseEvent event)
     {
