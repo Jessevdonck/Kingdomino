@@ -16,10 +16,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.DragEvent;
-import javafx.scene.input.Dragboard;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.input.TransferMode;
+import javafx.scene.input.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -67,6 +64,7 @@ public class SpelController implements Initializable
     private ImageView draggedImageView;
     private double orgSceneX, orgSceneY;
     private double orgTranslateX, orgTranslateY;
+    private ImageView keyTypedImageView;
 
 
     private FXMLLoader loader;
@@ -194,9 +192,13 @@ public void plaatsStartTegels()
 
                 imageView.setCursor(Cursor.HAND);
 
+                imageView.setFocusTraversable(true);
+
                 imageView.setOnMousePressed(this::imageViewMousePressed);
                 imageView.setOnMouseDragged(this::imageViewMouseDragged);
                 imageView.setOnMouseReleased(this::imageViewMouseReleased);
+                imageView.setOnKeyPressed(this::imageViewKeyPressed);
+
 
                 kolom.getChildren().add(imageView);
 
@@ -267,7 +269,7 @@ public void plaatsStartTegels()
             eindKolomKeuze.setVisible(true);
         }
     }
-/*-------------------------------------------------Drag & Drop-----------------------------------------------*/
+/*-------------------------------------------------Drag & Drop / Turning Tiles-------------------------------*/
 //    private boolean isDraggableImageView(ImageView imageView) {
 //        return imageView.getId().startsWith("beginKolom");
 //    }
@@ -301,6 +303,22 @@ public void plaatsStartTegels()
         draggedImageView = (ImageView) event.getSource();
         draggedImageView.setLayoutX(newX);
         draggedImageView.setLayoutY(newY);
+    }
+
+    /* Hier gaat er gekeken worden of onze tegel al gedraaid is geweest, dan zet hij hem terug op zijn
+       oorsponkelijke horizontale status, anders wordt hij 90 graden gedraaid naar rechts om hem verticaal te zetten
+     */
+    private void imageViewKeyPressed(KeyEvent event)
+    {
+        keyTypedImageView = (ImageView) event.getSource();
+        if(event.getCode() == KeyCode.R){
+            double rotation = keyTypedImageView.getRotate();
+            if(rotation == 0.0) {
+                keyTypedImageView.setRotate(90);
+            }else{
+                keyTypedImageView.setRotate(0);
+            }
+        }
     }
 /*-------------------------------------------------BACKEND---------------------------------------------------*/
 
