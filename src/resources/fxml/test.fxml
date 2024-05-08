@@ -9,7 +9,6 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Circle?>
@@ -28,9 +27,6 @@
       <RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="390.0" vgrow="SOMETIMES" />
    </rowConstraints>
    <children>
-      <Pane fx:id="bord1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="390.0" prefWidth="390.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-      <Pane fx:id="bord2" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="390.0" prefWidth="390.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-      <Pane fx:id="bord3" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="390.0" prefWidth="390.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
       <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3">
          <children>
             <Label fx:id="instructieTekst" alignment="CENTER" layoutX="119.0" layoutY="34.0" prefHeight="324.0" prefWidth="268.0" textAlignment="CENTER" textFill="WHITE" wrapText="true">
@@ -118,5 +114,8 @@
             </VBox>
          </children>
       </HBox>
+      <AnchorPane fx:id="bord1" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+      <AnchorPane fx:id="bord2" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+      <AnchorPane fx:id="bord3" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
    </children>
 </GridPane>

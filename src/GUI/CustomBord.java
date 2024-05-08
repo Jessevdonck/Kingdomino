@@ -1,5 +1,6 @@
 package GUI;
 
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -10,7 +11,7 @@ public class CustomBord {
     private int aantalVeldenPerRij = 5;
     private int sizeSquare = sizeBoard / aantalVeldenPerRij;
 
-    public void maakBord(Pane pane)
+    public void maakBord(AnchorPane pane)
     {
         for (int i = 0 ; i < sizeBoard; i += sizeSquare)
         {
