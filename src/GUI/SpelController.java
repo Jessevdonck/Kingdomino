@@ -336,6 +336,8 @@ public class SpelController implements Initializable
                 keyTypedImageView.setRotate(0);
             }
         }
+
+        System.out.println("R Pressed");
     }
 /*-------------------------------------------------BACKEND---------------------------------------------------*/
 
