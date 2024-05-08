@@ -17,7 +17,10 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
-import javafx.scene.layout.*;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
@@ -57,7 +60,7 @@ public class SpelController implements Initializable
     @FXML private Button volgendeBtn;
     @FXML private VBox eindKolomKeuze;
     @FXML private VBox beginKolomKeuze;
-    @FXML private AnchorPane bord1, bord2, bord3, bord4;
+    @FXML private Pane bord1, bord2, bord3, bord4;
 
     @FXML
     private ImageView draggedImageView;
