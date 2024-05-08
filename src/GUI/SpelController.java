@@ -19,6 +19,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
@@ -59,9 +60,11 @@ public class SpelController implements Initializable
     @FXML private Button volgendeBtn;
     @FXML private VBox eindKolomKeuze;
     @FXML private VBox beginKolomKeuze;
+    @FXML private Pane bord1, bord2, bord3, bord4;
 
     @FXML
     private ImageView draggedImageView;
+    CustomBord[] customBorden;
     private double orgSceneX, orgSceneY;
     private double orgTranslateX, orgTranslateY;
     private ImageView keyTypedImageView;
@@ -96,7 +99,8 @@ public class SpelController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
-        plaatsStartTegels();
+        maakBorden();
+        //plaatsStartTegels();
 
         plaatsTegelsInEindKolom(getEindKolomTegels(), eindKolom);
         plaatsTegelInStapel(getStapel(), stapel);
@@ -107,7 +111,7 @@ public class SpelController implements Initializable
 
     }
 /*-------------------------------------------------FRONTEND---------------------------------------------------*/
-    public void laadStarttegels(GridPane gridPane, String startTegelImagePath)
+    /*public void laadStarttegels(GridPane gridPane, String startTegelImagePath)
     {
       ImageView imageView = new ImageView(new Image(startTegelImagePath));
 
@@ -130,9 +134,9 @@ public class SpelController implements Initializable
       imageView.setPreserveRatio(true);
 
       gridPane.add(imageView, 2, 2);
-}
+}*/
 
-public void plaatsStartTegels()
+/*public void plaatsStartTegels()
     {
           HashMap<Speler, Kleur> spelersMetKleuren = dc.getSpelendeSpelers();
 
@@ -158,7 +162,7 @@ public void plaatsStartTegels()
 
               index++;
           }
-      }
+      }*/
 
         private String getStartTegelImagePath(Kleur kleur)
             {
@@ -322,6 +326,35 @@ public void plaatsStartTegels()
     }
 /*-------------------------------------------------BACKEND---------------------------------------------------*/
 
+    @FXML
+    public void maakBorden()
+    {
+        customBorden = new CustomBord[3];
+
+        if(dc.getSpelendeSpelers().size() == 3)
+        {
+            customBorden[0] = new CustomBord();
+            customBorden[1] = new CustomBord();
+            customBorden[2] = new CustomBord();
+
+            customBorden[0].maakBord(bord1);
+            customBorden[1].maakBord(bord2);
+            customBorden[2].maakBord(bord3);
+        } else {
+            customBorden[0] = new CustomBord();
+            customBorden[1] = new CustomBord();
+            customBorden[2] = new CustomBord();
+            customBorden[3] = new CustomBord();
+
+            customBorden[0].maakBord(bord1);
+            customBorden[1].maakBord(bord2);
+            customBorden[2].maakBord(bord3);
+            customBorden[3].maakBord(bord4);
+        }
+
+
+
+    }
     @FXML
     private void volgendeButtonHandler(ActionEvent event)
     {
