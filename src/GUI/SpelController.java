@@ -17,10 +17,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
@@ -61,6 +58,8 @@ public class SpelController implements Initializable
     @FXML private VBox eindKolomKeuze;
     @FXML private VBox beginKolomKeuze;
     @FXML private Pane bord1, bord2, bord3, bord4;
+
+    @FXML private AnchorPane tafel;
 
     @FXML
     private ImageView draggedImageView;
@@ -305,8 +304,22 @@ public class SpelController implements Initializable
         double newY = 10;
 
         draggedImageView = (ImageView) event.getSource();
-        draggedImageView.setLayoutX(newX);
-        draggedImageView.setLayoutY(newY);
+
+        // De onderste 2 lijnen zijn een bugfix maar idk hoe de bug volledig werkt
+        draggedImageView.setTranslateX(0);
+        draggedImageView.setTranslateY(0);
+
+        if(!(bord1.getChildren().contains(draggedImageView))){
+            bord1.getChildren().add(draggedImageView);
+            draggedImageView.setLayoutX(156);
+            draggedImageView.setLayoutY(156);
+        }else{
+            double x = draggedImageView.getLayoutX();
+            draggedImageView.setLayoutX(x + 30);
+        }
+
+        System.out.printf("X-coor: %f, Y-coor: %f", draggedImageView.getLocalToSceneTransform().getTx(), draggedImageView.getLocalToSceneTransform().getTy());
+
     }
 
     /* Hier gaat er gekeken worden of onze tegel al gedraaid is geweest, dan zet hij hem terug op zijn

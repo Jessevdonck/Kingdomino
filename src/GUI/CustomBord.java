@@ -17,8 +17,8 @@ public class CustomBord {
             for (int j = 0 ; j < sizeBoard ; j += sizeSquare)
             {
                 Rectangle r = new Rectangle(i, j, sizeSquare, sizeSquare);
-                r.setFill(Color.WHITE);
-                r.setStroke(Color.BLACK);
+                r.setFill(Color.TRANSPARENT);
+                r.setStroke(Color.WHITE);
                 pane.getChildren().add(r);
             }
         }
