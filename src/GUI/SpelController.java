@@ -196,6 +196,7 @@ public void plaatsStartTegels()
 
                 imageView.setOnMousePressed(this::imageViewMousePressed);
                 imageView.setOnMouseDragged(this::imageViewMouseDragged);
+                imageView.setOnMouseReleased(this::imageViewMouseReleased);
 
                 kolom.getChildren().add(imageView);
 
@@ -290,6 +291,16 @@ public void plaatsStartTegels()
         draggedImageView = (ImageView) event.getSource();
         draggedImageView.setTranslateX(newTranslateX);
         draggedImageView.setTranslateY(newTranslateY);
+    }
+
+    private void imageViewMouseReleased(MouseEvent event)
+    {
+        double newX = -10;
+        double newY = 10;
+
+        draggedImageView = (ImageView) event.getSource();
+        draggedImageView.setLayoutX(newX);
+        draggedImageView.setLayoutY(newY);
     }
 /*-------------------------------------------------BACKEND---------------------------------------------------*/
 
