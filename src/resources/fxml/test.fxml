@@ -11,12 +11,8 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane fx:id="tafel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" stylesheets="@../css/bord.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <AnchorPane id="bord" fx:id="bord1" layoutX="27.0" layoutY="316.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="390.0" prefWidth="390.0" />
-      <AnchorPane id="bord" fx:id="bord2" layoutX="445.0" layoutY="316.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="390.0" prefWidth="390.0" />
-      <AnchorPane id="bord" fx:id="bord3" layoutX="852.0" layoutY="316.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="390.0" prefWidth="390.0" />
       <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="350.0">
          <children>
             <HBox fx:id="stapel" alignment="CENTER" layoutX="97.0" layoutY="86.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="78.0" prefWidth="156.0">
@@ -50,6 +46,9 @@
             <Font name="System Bold" size="16.0" />
          </font>
       </Label>
+      <AnchorPane id="bord" fx:id="bord1" layoutX="27.0" layoutY="323.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="390.0" prefWidth="390.0" />
+      <AnchorPane id="bord" fx:id="bord2" layoutX="445.0" layoutY="323.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="390.0" prefWidth="390.0" />
+      <AnchorPane id="bord" fx:id="bord3" layoutX="852.0" layoutY="323.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="390.0" prefWidth="390.0" />
       <HBox alignment="CENTER" layoutX="384.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0" spacing="40.0">
          <children>
             <VBox fx:id="beginKolomKeuze" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="312.0" prefWidth="156.0" spacing="60.0">
