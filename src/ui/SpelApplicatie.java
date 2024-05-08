@@ -10,6 +10,7 @@ import java.util.List;
 import domein.DomeinController;
 import domein.DominoTegel;
 
+import domein.Speler;
 import dto.DominoTegelDTO;
 import dto.SpelerDTO;
 import exceptions.*;
@@ -161,11 +162,27 @@ public class SpelApplicatie {
 		}
 	}
 
+	private Speler kleurNaarSpeler(Kleur kleur){
+
+		for (Map.Entry<Speler, Kleur> map : dc.getSpelendeSpelers().entrySet()) {
+			if(Objects.equals(map.getValue(), kleur)){
+				return map.getKey();
+			}
+			else throw new IllegalArgumentException("geen speler met die kleur");
+		}
+
+		return null;
+	}
+	private void plaatsTegelInBeurt(Kleur kleur){}
 	private void speelBeurt(Kleur kleur) {
+		plaatsTegelInBeurt(kleur);
+
+
+
 		toonTegelLijst(dc.getSpel().geefEindKolom());
 		System.out.printf("Welke tegel wil je nemen %s?", kleur.toString());
 		int tegel = input.nextInt();
-		// DC Fucntie maken voor het kiezen
+
 		while (tegel < 1 || tegel > 4) {
 			System.out.println("Foute invoer, probeer opnieuw.");
 			tegel = input.nextInt();
@@ -215,9 +232,9 @@ public class SpelApplicatie {
 	}
 
 	public void spelSituatie() {
-		HashMap<SpelerDTO, Kleur> spelers = dc.getSpelendeSpelers();
-		for (SpelerDTO speler : spelers.keySet()) {
-			System.out.println(speler.gebruikersnaam() + " speelt met kleur " + spelers.get(speler));
+		HashMap<Speler, Kleur> spelers = dc.getSpelendeSpelers();
+		for (Speler speler : spelers.keySet()) {
+			System.out.println(speler.getGebruikersnaam() + " speelt met kleur " + spelers.get(speler));
 			System.out.printf(dc.getSpel().getTegelGebieden().get(spelers.get(speler)).toString());
 
 		}

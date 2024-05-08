@@ -2,6 +2,7 @@ package GUI;
 
 import domein.DomeinController;
 import domein.DominoTegel;
+import domein.Speler;
 import dto.DominoTegelDTO;
 import dto.SpelerDTO;
 import javafx.event.ActionEvent;
@@ -135,7 +136,7 @@ public class SpelController implements Initializable
 
 public void plaatsStartTegels()
     {
-          HashMap<SpelerDTO, Kleur> spelersMetKleuren = dc.getSpelendeSpelers();
+          HashMap<Speler, Kleur> spelersMetKleuren = dc.getSpelendeSpelers();
 
           List<GridPane> beschikbareGridPanes = new ArrayList<>();
           beschikbareGridPanes.add(gridPane1);
@@ -145,9 +146,9 @@ public void plaatsStartTegels()
 
           int index = 0;
 
-          for(Map.Entry<SpelerDTO, Kleur> entry : spelersMetKleuren.entrySet())
+          for(Map.Entry<Speler, Kleur> entry : spelersMetKleuren.entrySet())
           {
-              SpelerDTO speler = entry.getKey();
+              Speler speler = entry.getKey();
               Kleur kleur = entry.getValue();
 
               if(index < beschikbareGridPanes.size())

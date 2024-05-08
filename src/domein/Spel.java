@@ -112,6 +112,21 @@ public class Spel
         return spelers;
     }
 
+    public Integer[][] geefBeschikbareTegels(TegelGebied tegelGebied){
+        Landschap[][] grid = tegelGebied.getGebied();
+        Integer[][] beschikbareTegels = new Integer[grid.length][grid[0].length];
+        for (int i = 0; i < 5;i++ ){
+            for(int j = 0; j < 5; j++) {
+                if (grid[i][j] == null) {
+                    beschikbareTegels[i][j] = 1; // Set the status of the tile to "Beschikbaar"
+                }else {
+                    beschikbareTegels[i][j] = 0;
+                }
+            }
+        }
+            return beschikbareTegels;
+    }
+
     public List<Speler> geefWinnaars()
     {
         HashMap<Kleur, Integer> scores = geefScores();

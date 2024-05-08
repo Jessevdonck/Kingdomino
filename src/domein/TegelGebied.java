@@ -27,6 +27,7 @@ public class TegelGebied
         return gebied;
     }
 
+
     public void plaatsTegel(int kolom, int rij, boolean verticaal,DominoTegel tegel) {
         if (rij < 0 || kolom < 0 || rij + 1 >= 5 || kolom + 1 >= 5) {
             throw new IllegalArgumentException("Plaatsing ligt buiten gebied.");

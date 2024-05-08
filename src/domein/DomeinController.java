@@ -40,15 +40,10 @@ public class DomeinController {
             spelRepository.verwijderSpelerUitSpel(naam);
         }
 
-    public HashMap<SpelerDTO, Kleur> getSpelendeSpelers(){
-        HashMap<Speler, Kleur> spelendeSpelers = spelRepository.getSpelers();
-        HashMap<SpelerDTO, Kleur> spelendeSpelersDTO = new HashMap<>();
-        for (Map.Entry<Speler, Kleur> entry : spelendeSpelers.entrySet()) {
-            Speler speler = entry.getKey();
-            SpelerDTO spelerDTO = new SpelerDTO(speler.getGebruikersnaam(), speler.getGeboortejaar(), speler.getAantalGewonnen(), speler.getAantalGespeeld());
-            spelendeSpelersDTO.put(spelerDTO, entry.getValue());
-        }
-        return spelendeSpelersDTO;
+    public HashMap<Speler, Kleur> getSpelendeSpelers(){
+
+
+        return spelRepository.getSpelers();
     }
 
     public void startSpel(){
