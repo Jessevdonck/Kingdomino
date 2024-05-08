@@ -68,7 +68,6 @@ public class DominoTegel {
         }
     }
 
-
     @Override
     public String toString()
     {

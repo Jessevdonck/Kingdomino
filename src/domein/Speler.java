@@ -13,9 +13,6 @@ public class Speler
     private int geboortejaar;
     private int aantalGewonnen, aantalGespeeld;
 
-
-    
-
     public Speler(String gebruikersnaam,int  geboortejaar) 
     {
     	this(gebruikersnaam,geboortejaar,0,0);
@@ -29,11 +26,6 @@ public class Speler
     	setAantalGespeeld(aantalGespeeld);
 
     }
-
-
-
-
-    
 
 	public String getGebruikersnaam() {
 		return gebruikersnaam;
@@ -68,7 +60,7 @@ public class Speler
 		return aantalGewonnen;
 	}
 
-	private void setAantalGewonnen(int aantalGewonnen) {
+	public void setAantalGewonnen(int aantalGewonnen) {
 		this.aantalGewonnen = aantalGewonnen;
 	}
 
@@ -76,7 +68,7 @@ public class Speler
 		return aantalGespeeld;
 	}
 
-	private void setAantalGespeeld(int aantalGespeeld) {
+	public void setAantalGespeeld(int aantalGespeeld) {
 		this.aantalGespeeld = aantalGespeeld;
 	}
 	public String toString(String gebruikersnaam, int geboortejaar) {

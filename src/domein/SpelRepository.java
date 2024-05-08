@@ -88,7 +88,7 @@ public class SpelRepository {
     // -Indien nog altijd gelijk dan wint de speler met de meeste kronen binnen zijn koninkrijk
     // -Indien dan nog altijd gelijk, wordt de overwinning gedeeld
 
-    public HashMap<Kleur, Integer> getScores() {
+    public HashMap<Kleur, Integer> geefScores() {
         return momenteelSpel.geefScores();
     }
 
@@ -119,9 +119,6 @@ public class SpelRepository {
         }
 
         momenteelSpel = new Spel(gekozenSpelers);
-        momenteelSpel.schudDominotegels();
-        momenteelSpel.maakStartKolom();
-        momenteelSpel.maakEindKolom();
     }
 
     public boolean isKleurGekozen(Kleur kleur)

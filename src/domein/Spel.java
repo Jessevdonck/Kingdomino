@@ -31,6 +31,7 @@ public class Spel
         if (tegels.size() < aantalTegelsPerSpeler) {
             throw new IllegalArgumentException("Er zijn niet genoeg tegels voor het opgegeven aantal spelers.");
         }
+
         this.tegels = new ArrayList<>(tegels.subList(0, aantalTegelsPerSpeler));
 
         this.gekozenSpelers = spelers;
@@ -39,6 +40,11 @@ public class Spel
         for (Kleur kleur : gekozenSpelers.values()) {
             this.tegelGebieden.put(kleur, new TegelGebied());
         }
+
+        this.beginKolom = geefKaarten(spelers.size());
+        sorteerOpTegelNummer(beginKolom);
+        this.eindkolom = geefKaarten(spelers.size());
+        sorteerOpTegelNummer(eindkolom);
         this.claimdeTegel = new HashMap<Kleur, DominoTegel>();
     }
 
@@ -72,7 +78,7 @@ public class Spel
 
     public boolean isEindeSpel()
     {
-        return tegels == null;
+        return tegels.isEmpty();
     }
 
     public List<DominoTegel> geefKaarten(int aantalKaarten) {
@@ -90,16 +96,6 @@ public class Spel
             throw new RuntimeException("No cards left in the deck");
         }
         return tegels.remove(0);
-    }
-
-    public void maakStartKolom() {
-        beginKolom = geefKaarten(getSpelers().size());
-        sorteerOpTegelNummer(beginKolom);
-    }
-
-    public void maakEindKolom() {
-        eindkolom = geefKaarten(getSpelers().size());
-        sorteerOpTegelNummer(eindkolom);
     }
 
     public static void sorteerOpTegelNummer(List<DominoTegel> tegels) {
@@ -198,21 +194,6 @@ public class Spel
     }
 
     public HashMap<Kleur, Integer> geefScores()
-    {
-        HashMap<Kleur, Integer> scores = new HashMap<Kleur, Integer>();
-        for (Kleur kleur : gekozenSpelers.values()) {
-            scores.put(kleur, tegelGebieden.get(kleur).zoekDomein());
-        }
-        return scores;
-    }
-
-    public void schudDominotegels()
-    {
-        Collections.shuffle(tegels);
-    }
-
-
-    public HashMap<Kleur, Integer> getScore()
     {
         HashMap<Kleur, Integer> scores = new HashMap<Kleur, Integer>();
         for (Kleur kleur : gekozenSpelers.values()) {

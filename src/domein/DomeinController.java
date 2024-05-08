@@ -12,15 +12,11 @@ import java.util.List;
 import java.util.Map;
 
 public class DomeinController {
-
-
-
     private final SpelerRepository spelerRepository;
     private final SpelRepository spelRepository;
     private List<DominoTegel> dominoTegels;
 
     public DomeinController() {
-
         spelerRepository = new SpelerRepository();
         spelRepository = new SpelRepository();
     }
@@ -54,15 +50,34 @@ public class DomeinController {
         return spelRepository.isEindeSpel();
     }
 
-    public int [] geefScores(){
-        return null;
+    public HashMap<Kleur, Integer> geefScores(){
+        return spelRepository.geefScores();
     }
-    public Spel getSpel(){return spelRepository.getMomenteelSpel();}
-    public List<Kleur> getVolgordeKoning() {return spelRepository.getVolgordeKoning();}
+
+    public void verwerkEindeSpel() {
+        if (isEindeSpel()) {
+            List<Speler> spelers = spelRepository.getSpelers().keySet().stream().toList();
+            List<Speler> winnaars = spelRepository.geefWinnaars();
+
+            for (Speler speler : spelers) {
+                speler.setAantalGespeeld(speler.getAantalGespeeld() + 1);
+                if(winnaars.contains(speler))
+                    speler.setAantalGewonnen(speler.getAantalGewonnen() + 1);
+                spelerRepository.updateSpeler(speler);
+            }
+        }
+    }
+    public Spel getSpel(){
+        return spelRepository.getMomenteelSpel();
+    }
+    public List<Kleur> getVolgordeKoning() {
+        return spelRepository.getVolgordeKoning();
+    }
 
     public void koningRondeEenShuffle(){
         spelRepository.koningRondeEen();
     }
+
     public List<SpelerDTO> getWinnaars() {
         List<Speler> winnaars = spelRepository.geefWinnaars();
         return Arrays.stream(winnaars.toArray(new Speler[0]))
@@ -81,7 +96,6 @@ public class DomeinController {
         }
     }
 
-
     public List<DominoTegelDTO> getBeginKolom(){
         List<DominoTegel> startKolom = spelRepository.getBeginKolom();
         return Arrays.stream(startKolom.toArray(new DominoTegel[0]))
@@ -99,16 +113,6 @@ public class DomeinController {
     public List<DominoTegel> getBeschikbareTegels() {
         List<DominoTegel> tegelsDeck = spelRepository.getTegelsDeck();
         return tegelsDeck;
-    }
-
-    public String voorbeeld() {
-        Speler[] spelers = spelerRepository.geefSpelers();
-        String lintje = "De spelers zijn: \n";
-        for (Speler speler : spelers) {
-            String.format("%s%s\n", lintje, speler.getGebruikersnaam());
-            lintje += speler.getGebruikersnaam() + " ";
-        }
-        return "Dit is een voorbeeld";
     }
 
     public SpelerDTO[] geefAlleSpelers(){
