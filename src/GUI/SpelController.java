@@ -61,6 +61,8 @@ public class SpelController implements Initializable
     @FXML private VBox beginKolomKeuze;
     @FXML private Pane bord1, bord2, bord3, bord4;
 
+
+
     @FXML private AnchorPane tafel;
 
     @FXML
@@ -73,6 +75,7 @@ public class SpelController implements Initializable
 
     private FXMLLoader loader;
 
+
     private int gekozenCirkel = 0;
     Circle geselecteerdeCirkel;
 
@@ -80,6 +83,7 @@ public class SpelController implements Initializable
     private int huidigeSpelerIndex = 0;
     private int rondeNummer = 1;
     Paint geselecteerdeKleurPaint;
+    Pane[] borden;
     private final String[] startTegelImagePath =
             {
                     "/img/KingDomino_Afbeeldingen1/starttegel/starttegel_blauw.png",
@@ -90,10 +94,10 @@ public class SpelController implements Initializable
 
 
     public SpelController(DomeinController dc, FXMLLoader loader)
-        {
-            this.loader = loader;
-            this.dc = dc;
-        }
+    {
+        this.loader = loader;
+        this.dc = dc;
+    }
 
 
 
@@ -101,6 +105,8 @@ public class SpelController implements Initializable
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
         maakBorden();
+
+
         plaatsStartTegels();
 
         plaatsTegelsInEindKolom(getEindKolomTegels(), eindKolom);
@@ -111,122 +117,116 @@ public class SpelController implements Initializable
         //startSpel();
 
     }
-/*-------------------------------------------------FRONTEND---------------------------------------------------*/
+    /*-------------------------------------------------FRONTEND---------------------------------------------------*/
     public void laadStarttegels(Pane pane, String startTegelImagePath)
     {
-      ImageView imageView = new ImageView(new Image(startTegelImagePath));
+        ImageView imageView = new ImageView(new Image(startTegelImagePath));
 
 
-      imageView.setFitWidth(78);
-      imageView.setFitHeight(78);
-      imageView.setLayoutX(156); //r
-      imageView.setLayoutY(156);
+        imageView.setFitWidth(78);
+        imageView.setFitHeight(78);
+        imageView.setLayoutX(156); //r
+        imageView.setLayoutY(156);
 
 
-      pane.getChildren().add(imageView);
-}
+        pane.getChildren().add(imageView);
+    }
 
-public void plaatsStartTegels()
+    public void plaatsStartTegels()
     {
-          HashMap<Speler, Kleur> spelersMetKleuren = dc.getSpelendeSpelers();
+        HashMap<Speler, Kleur> spelersMetKleuren = dc.getSpelendeSpelers();
 
-          List<Pane> beschikbareBorden = new ArrayList<>();
-            beschikbareBorden.add(bord1);
-            beschikbareBorden.add(bord2);
-            beschikbareBorden.add(bord3);
-            beschikbareBorden.add(bord4);
+        List<Pane> beschikbareBorden = new ArrayList<>();
+        beschikbareBorden.add(bord1);
+        beschikbareBorden.add(bord2);
+        beschikbareBorden.add(bord3);
+        beschikbareBorden.add(bord4);
 
-          int index = 0;
+        int index = 0;
 
-          for(Map.Entry<Speler, Kleur> entry : spelersMetKleuren.entrySet())
-          {
-              Speler speler = entry.getKey();
-              Kleur kleur = entry.getValue();
-
-              if(index < beschikbareBorden.size())
-              {
-                  Pane pane = beschikbareBorden.get(index);
-                  String startTegelImagePath = getStartTegelImagePath(kleur);
-                  laadStarttegels(pane, startTegelImagePath);
-              }
-
-              index++;
-          }
-      }
-
-        private String getStartTegelImagePath(Kleur kleur)
-            {
-                switch (kleur)
-                {
-                    case BLAUW:
-                        return "/img/KingDomino_Afbeeldingen1/starttegel/starttegel_blauw.png";
-                    case GEEL:
-                        return "/img/KingDomino_Afbeeldingen1/starttegel/starttegel_geel.png";
-                    case GROEN:
-                        return "/img/KingDomino_Afbeeldingen1/starttegel/starttegel_groen.png";
-                    case ROOS:
-                        return "/img/KingDomino_Afbeeldingen1/starttegel/starttegel_roos.png";
-                    default:
-                        return null;
-                }
-            }
-
-        private void plaatsTegelsInBeginKolom(List<DominoTegel> tegels, VBox kolom) {
-            int index = 1;
-            kolom.getChildren().clear();
-            kolom.setSpacing(20);
-
-            for (DominoTegel tegel : tegels)
-            {
-                ImageView imageView = new ImageView(new Image(tegel.getFotoVoorkant()));
-                imageView.setId("imageView" + index);
-
-                imageView.setFitHeight(78);
-                imageView.setFitWidth(156);
-
-                imageView.setCursor(Cursor.HAND);
-
-                imageView.setFocusTraversable(true);
-
-                imageView.setOnKeyPressed(this::imageViewKeyPressed);
-                imageView.setOnMousePressed(this::imageViewMousePressed);
-                imageView.setOnMouseDragged(this::imageViewMouseDragged);
-                imageView.setOnMouseReleased(this::imageViewMouseReleased);
-
-
-
-                kolom.getChildren().add(imageView);
-
-                index++;
-
-            }
-        }
-
-        private void plaatsTegelsInEindKolom(List<DominoTegel> tegels, VBox kolom)
+        for(Map.Entry<Speler, Kleur> entry : spelersMetKleuren.entrySet())
         {
+            Speler speler = entry.getKey();
+            Kleur kleur = entry.getValue();
 
-            kolom.getChildren().clear();
-            kolom.setSpacing(20);
-            int index;
-
-            if(dc.getSpelendeSpelers().size() == 3)
+            if(index < beschikbareBorden.size())
             {
-                index = 4;
-            } else {index = 5;}
-
-
-            for (DominoTegel tegel : tegels)
-            {
-                ImageView imageView = new ImageView(new Image(tegel.getFotoVoorkant()));
-                imageView.setId("imageView" + index);
-
-                imageView.setFitHeight(78);
-                imageView.setFitWidth(156);
-
-                kolom.getChildren().add(imageView);
-                index++;
+                Pane pane = beschikbareBorden.get(index);
+                String startTegelImagePath = getStartTegelImagePath(kleur);
+                laadStarttegels(pane, startTegelImagePath);
             }
+
+            index++;
         }
+    }
+
+    private String getStartTegelImagePath(Kleur kleur)
+    {
+        switch (kleur)
+        {
+            case BLAUW:
+                return "/img/KingDomino_Afbeeldingen1/starttegel/starttegel_blauw.png";
+            case GEEL:
+                return "/img/KingDomino_Afbeeldingen1/starttegel/starttegel_geel.png";
+            case GROEN:
+                return "/img/KingDomino_Afbeeldingen1/starttegel/starttegel_groen.png";
+            case ROOS:
+                return "/img/KingDomino_Afbeeldingen1/starttegel/starttegel_roos.png";
+            default:
+                return null;
+        }
+    }
+
+    private void plaatsTegelsInBeginKolom(List<DominoTegel> tegels, VBox kolom) {
+        int index = 1;
+        kolom.getChildren().clear();
+        kolom.setSpacing(20);
+
+        for (DominoTegel tegel : tegels)
+        {
+            ImageView imageView = new ImageView(new Image(tegel.getFotoVoorkant()));
+            imageView.setId("imageView" + index);
+
+            imageView.setFitHeight(78);
+            imageView.setFitWidth(156);
+
+            imageView.setCursor(Cursor.HAND);
+
+            imageView.setFocusTraversable(true);
+
+            imageView.setOnKeyPressed(this::imageViewKeyPressed);
+            imageView.setOnMousePressed(this::imageViewMousePressed);
+            imageView.setOnMouseDragged(this::imageViewMouseDragged);
+            imageView.setOnMouseReleased(this::imageViewMouseReleased);
+
+
+
+            kolom.getChildren().add(imageView);
+
+            index++;
+
+        }
+    }
+
+    private void plaatsTegelsInEindKolom(List<DominoTegel> tegels, VBox kolom)
+    {
+
+        kolom.getChildren().clear();
+        kolom.setSpacing(20);
+        int index = dc.getSpelendeSpelers().size() + 1;
+
+        for (DominoTegel tegel : tegels)
+        {
+            ImageView imageView = new ImageView(new Image(tegel.getFotoVoorkant()));
+            imageView.setId("imageView" + index);
+
+            imageView.setFitHeight(78);
+            imageView.setFitWidth(156);
+
+            kolom.getChildren().add(imageView);
+            index++;
+        }
+    }
 
     @FXML
     private void imageViewGeklik(MouseEvent event)
@@ -264,7 +264,7 @@ public void plaatsStartTegels()
             eindKolomKeuze.setVisible(true);
         }
     }
-/*-------------------------------------------------Drag & Drop / Turning Tiles-------------------------------*/
+    /*-------------------------------------------------Drag & Drop / Turning Tiles-------------------------------*/
 //    private boolean isDraggableImageView(ImageView imageView) {
 //        return imageView.getId().startsWith("beginKolom");
 //    }
@@ -296,15 +296,16 @@ public void plaatsStartTegels()
     private void imageViewMouseReleased(MouseEvent event)
     {
 
-        double cellSize = customBorden[0].getSizeSquare(); 
+
+        double cellSize = customBorden[0].getSizeSquare();
 
         // Haal de coördinaten op van de muispositie ten opzichte van het bord
-        double mouseX = event.getSceneX() - bord1.getBoundsInParent().getMinX();
-        double mouseY = event.getSceneY() - bord1.getBoundsInParent().getMinY();
+        double mouseX = event.getSceneX() - borden[huidigeSpelerIndex].getBoundsInParent().getMinX();
+        double mouseY = event.getSceneY() - borden[huidigeSpelerIndex].getBoundsInParent().getMinY();
 
         // Pas deze coördinaten aan om ervoor te zorgen dat ze binnen het bordgebied blijven
-        mouseX = Math.max(0, Math.min(mouseX, bord1.getWidth()) - 1);
-        mouseY = Math.max(0, Math.min(mouseY, bord1.getHeight()) - 1);
+        mouseX = Math.max(0, Math.min(mouseX, borden[huidigeSpelerIndex].getWidth()) - 1);
+        mouseY = Math.max(0, Math.min(mouseY, borden[huidigeSpelerIndex].getHeight()) - 1);
 
         // Bereken de gesnapte x- en y-coördinaten binnen het bord
         double newX = tegelRotated ? Math.floor(mouseX / cellSize) * cellSize - (cellSize / 2) : Math.floor(mouseX / cellSize) * cellSize;
@@ -315,13 +316,19 @@ public void plaatsStartTegels()
         draggedImageView.setLayoutY(newY);
 
 
-        if (!bord1.getChildren().contains(draggedImageView)) {
-            bord1.getChildren().add(draggedImageView);
+        if (!borden[huidigeSpelerIndex].getChildren().contains(draggedImageView)) {
+            borden[huidigeSpelerIndex].getChildren().add(draggedImageView);
         }
 
         // Reset de translate
         draggedImageView.setTranslateX(0);
         draggedImageView.setTranslateY(0);
+
+        draggedImageView.setOnMouseDragged(null);
+        draggedImageView.setOnMousePressed(null);
+        draggedImageView.setOnMouseReleased(null);
+        draggedImageView.setOnKeyPressed(null);
+
 
     }
 
@@ -346,7 +353,7 @@ public void plaatsStartTegels()
 
         System.out.println("R Pressed");
     }
-/*-------------------------------------------------BACKEND---------------------------------------------------*/
+    /*-------------------------------------------------BACKEND---------------------------------------------------*/
 
     @FXML
     public void maakBorden()
@@ -362,6 +369,8 @@ public void plaatsStartTegels()
             customBorden[0].maakBord(bord1);
             customBorden[1].maakBord(bord2);
             customBorden[2].maakBord(bord3);
+
+            this.borden = new Pane[]{bord1, bord2, bord3};
         } else {
             customBorden[0] = new CustomBord();
             customBorden[1] = new CustomBord();
@@ -372,6 +381,7 @@ public void plaatsStartTegels()
             customBorden[1].maakBord(bord2);
             customBorden[2].maakBord(bord3);
             customBorden[3].maakBord(bord4);
+            this.borden = new Pane[]{bord1, bord2, bord3,bord4};
         }
 
 
@@ -389,7 +399,8 @@ public void plaatsStartTegels()
         System.out.println("speler toegevoegd!");
         geselecteerdeCirkel.setDisable(true);
         geselecteerdeCirkel = null;
-        huidigeSpelerIndex++;
+        huidigeSpelerIndex = (huidigeSpelerIndex + 1) % 3;
+
         updateVBoxVisibility();
         instructieTekst.setText("Speler met kleur " + getKleurSpeler() + ", kies een tegel voor je koninkrijk!");
 
@@ -459,35 +470,35 @@ public void plaatsStartTegels()
         return dc.getSpel().geefEindKolom();
     }
 
-     List<DominoTegel> getStapel()
-     {
-         return dc.getSpel().getTegelsDeck();
-     }
+    List<DominoTegel> getStapel()
+    {
+        return dc.getSpel().getTegelsDeck();
+    }
 
 
-     public void startSpel()
-     {
-         dc.koningRondeEenShuffle();
-         speelBeurtEersteRonde();
+    public void startSpel()
+    {
+        dc.koningRondeEenShuffle();
+        speelBeurtEersteRonde();
 
-         while (!dc.isEindeSpel())
-         {
-             speelRonde();
-         }
+        while (!dc.isEindeSpel())
+        {
+            speelRonde();
+        }
 
-         instructieTekst.setText("Het spel is afgelopen!");
-         System.out.println("Het spel is afgelopen!");
-     }
+        instructieTekst.setText("Het spel is afgelopen!");
+        System.out.println("Het spel is afgelopen!");
+    }
 
-     public void speelBeurtEersteRonde()
-     {
-         dc.koningRondeEenShuffle();
-         updateVBoxVisibility();
+    public void speelBeurtEersteRonde()
+    {
+        dc.koningRondeEenShuffle();
+        updateVBoxVisibility();
 
         instructieTekst.setText("Speler met kleur " + getKleurSpeler() + ", kies een tegel voor je koninkrijk!");
 
-         int keuze = gekozenCirkel;
-     }
+        int keuze = gekozenCirkel;
+    }
     public void speelBeurt()
     {
 
