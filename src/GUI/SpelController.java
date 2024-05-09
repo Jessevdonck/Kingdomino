@@ -300,26 +300,32 @@ public class SpelController implements Initializable
 
     private void imageViewMouseReleased(MouseEvent event)
     {
-        double newX = -10;
-        double newY = 10;
+        double cellSize = customBorden[0].getSizeSquare(); // Assumptie: alle borden hebben dezelfde celgrootte
 
-        draggedImageView = (ImageView) event.getSource();
+        // Haal de coördinaten op van de muispositie ten opzichte van het bord
+        double mouseX = event.getSceneX() - bord1.getBoundsInParent().getMinX();
+        double mouseY = event.getSceneY() - bord1.getBoundsInParent().getMinY();
 
-        // De onderste 2 lijnen zijn een bugfix maar idk hoe de bug volledig werkt
-        draggedImageView.setTranslateX(0);
-        draggedImageView.setTranslateY(0);
+        // Pas deze coördinaten aan om ervoor te zorgen dat ze binnen het bordgebied blijven
+        mouseX = Math.max(0, Math.min(mouseX, bord1.getWidth()));
+        mouseY = Math.max(0, Math.min(mouseY, bord1.getHeight()));
 
-        if(!(bord1.getChildren().contains(draggedImageView))){
+        // Bereken de gesnapte x- en y-coördinaten binnen het bord
+        double newX = Math.floor(mouseX / cellSize) * cellSize;
+        double newY = Math.floor(mouseY / cellSize) * cellSize;
+
+        // Werk de positie van de ImageView bij naar de gesnapte coördinaten
+        draggedImageView.setLayoutX(newX);
+        draggedImageView.setLayoutY(newY);
+
+        // Voeg de ImageView toe aan het bord als deze er nog niet is
+        if (!bord1.getChildren().contains(draggedImageView)) {
             bord1.getChildren().add(draggedImageView);
-            draggedImageView.setLayoutX(156);
-            draggedImageView.setLayoutY(156);
-        }else{
-            double x = draggedImageView.getLayoutX();
-            System.out.printf("X-coor: %f, Y-coor: %f %n", event.getSceneX(), event.getSceneY());
-            draggedImageView.setLayoutX(x + 30);
         }
 
-        System.out.printf("X-coor: %f, Y-coor: %f %n", draggedImageView.getLocalToSceneTransform().getTx(), draggedImageView.getLocalToSceneTransform().getTy());
+        // Reset de translate
+        draggedImageView.setTranslateX(0);
+        draggedImageView.setTranslateY(0);
 
     }
 

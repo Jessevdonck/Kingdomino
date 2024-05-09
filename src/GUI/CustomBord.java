@@ -23,4 +23,9 @@ public class CustomBord {
             }
         }
     }
+
+    public int getSizeSquare()
+    {
+        return sizeSquare;
+    }
 }
