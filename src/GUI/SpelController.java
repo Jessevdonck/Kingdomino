@@ -33,6 +33,8 @@ public class SpelController implements Initializable
     private final DomeinController dc;
     private Scanner input = new Scanner(System.in);
 
+    private boolean tegelRotated = false;
+
     @FXML private GridPane gridPane1;
     @FXML private GridPane gridPane2;
     @FXML private GridPane gridPane3;
@@ -289,18 +291,22 @@ public class SpelController implements Initializable
 
     private void imageViewMouseDragged(MouseEvent event)
     {
+
         double offsetX = event.getSceneX() - orgSceneX;
         double offsetY = event.getSceneY() - orgSceneY;
         double newTranslateX = orgTranslateX + offsetX;
         double newTranslateY = orgTranslateY + offsetY;
 
         draggedImageView = (ImageView) event.getSource();
+        draggedImageView.requestFocus();
         draggedImageView.setTranslateX(newTranslateX);
         draggedImageView.setTranslateY(newTranslateY);
+
     }
 
     private void imageViewMouseReleased(MouseEvent event)
     {
+
         double cellSize = customBorden[0].getSizeSquare(); 
 
         // Haal de coördinaten op van de muispositie ten opzichte van het bord
@@ -308,8 +314,8 @@ public class SpelController implements Initializable
         double mouseY = event.getSceneY() - bord1.getBoundsInParent().getMinY();
 
         // Pas deze coördinaten aan om ervoor te zorgen dat ze binnen het bordgebied blijven
-        mouseX = Math.max(0, Math.min(mouseX, bord1.getWidth()));
-        mouseY = Math.max(0, Math.min(mouseY, bord1.getHeight()));
+        mouseX = Math.max(0, Math.min(mouseX, bord1.getWidth()) - 1);
+        mouseY = Math.max(0, Math.min(mouseY, bord1.getHeight()) - 1);
 
         // Bereken de gesnapte x- en y-coördinaten binnen het bord
         double newX = Math.floor(mouseX / cellSize) * cellSize;
@@ -319,7 +325,7 @@ public class SpelController implements Initializable
         draggedImageView.setLayoutX(newX);
         draggedImageView.setLayoutY(newY);
 
-        // Voeg de ImageView toe aan het bord als deze er nog niet is
+
         if (!bord1.getChildren().contains(draggedImageView)) {
             bord1.getChildren().add(draggedImageView);
         }
@@ -335,14 +341,17 @@ public class SpelController implements Initializable
      */
     private void imageViewKeyPressed(KeyEvent event)
     {
+
         System.out.println("Key pressed: " + event.getCode());
         keyTypedImageView = (ImageView) event.getSource();
         if(event.getCode() == KeyCode.R){
             double rotation = keyTypedImageView.getRotate();
             if(rotation == 0.0) {
                 keyTypedImageView.setRotate(90);
+                tegelRotated = true;
             }else{
                 keyTypedImageView.setRotate(0);
+                tegelRotated = false;
             }
         }
 
