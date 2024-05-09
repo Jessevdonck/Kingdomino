@@ -1,6 +1,6 @@
 package exceptions;
 
-public class GebruikersnaamInGebruikException extends RuntimeException 
+public class GebruikersnaamInGebruikException extends RuntimeException
 {
 
 	public GebruikersnaamInGebruikException() {

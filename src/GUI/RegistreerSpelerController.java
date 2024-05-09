@@ -29,6 +29,8 @@ public class RegistreerSpelerController implements Initializable
     @FXML
     private Label wrongLogIn = new Label();
 
+    private ResourceBundle bundle;
+
     public RegistreerSpelerController(DomeinController dc, TaalController tc)
     {
         this.dc = dc;
@@ -41,7 +43,7 @@ public class RegistreerSpelerController implements Initializable
         {
         String gekozenTaal = tc.getLanguage();
         Locale locale = new Locale(gekozenTaal);
-        ResourceBundle bundle = ResourceBundle.getBundle("resourcebundles.lang", locale);
+        bundle = ResourceBundle.getBundle("resourcebundles.lang", locale);
         registreerBalk.setText(bundle.getString("registreerKort"));
         gebruikersnaamBalk.setPromptText(bundle.getString("gebruikersnaam"));
         geboortejaarBalk.setPromptText(bundle.getString("geboortejaar"));
@@ -59,7 +61,7 @@ public class RegistreerSpelerController implements Initializable
             if (geboortejaarString.trim().isBlank())
                 throw new OntbrekendGeboortejaarException();
         } catch (OntbrekendGeboortejaarException | NumberFormatException e) {
-            wrongLogIn.setText(e.getMessage());
+            wrongLogIn.setText(bundle.getString("OntbrekendGeboortejaarException"));
             wrongLogIn.setStyle("-fx-text-fill: red;");
         }
 
@@ -67,7 +69,7 @@ public class RegistreerSpelerController implements Initializable
 
         try {
             dc.registreerSpeler(gebruikersnaam, geboortejaar);
-            wrongLogIn.setText("Speler registreren succesvol!");
+            wrongLogIn.setText(bundle.getString("SuccesvolGeregistreerd"));
             wrongLogIn.setStyle("-fx-text-fill: #00e000;");
 
         } catch (GebruikersnaamInGebruikException | TeJongeGebruikerException | OngeldigeGebruikersnaamException |
