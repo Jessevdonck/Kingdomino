@@ -301,7 +301,7 @@ public class SpelController implements Initializable
 
     private void imageViewMouseReleased(MouseEvent event)
     {
-        double cellSize = customBorden[0].getSizeSquare(); 
+        double cellSize = customBorden[0].getSizeSquare();
 
         // Haal de coördinaten op van de muispositie ten opzichte van het bord
         double mouseX = event.getSceneX() - bord1.getBoundsInParent().getMinX();
@@ -353,7 +353,7 @@ public class SpelController implements Initializable
     @FXML
     public void maakBorden()
     {
-        customBorden = new CustomBord[3];
+        customBorden = new CustomBord[4];
 
         if(dc.getSpelendeSpelers().size() == 3)
         {
