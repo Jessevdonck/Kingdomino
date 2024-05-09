@@ -119,7 +119,7 @@ public class SpelController implements Initializable
 
       imageView.setFitWidth(78);
       imageView.setFitHeight(78);
-      imageView.setLayoutX(156);
+      imageView.setLayoutX(156); //r
       imageView.setLayoutY(156);
 
 
