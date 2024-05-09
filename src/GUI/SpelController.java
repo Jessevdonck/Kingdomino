@@ -318,8 +318,8 @@ public class SpelController implements Initializable
         mouseY = Math.max(0, Math.min(mouseY, bord1.getHeight()) - 1);
 
         // Bereken de gesnapte x- en y-coördinaten binnen het bord
-        double newX = Math.floor(mouseX / cellSize) * cellSize;
-        double newY = Math.floor(mouseY / cellSize) * cellSize;
+        double newX = tegelRotated ? Math.floor(mouseX / cellSize) * cellSize - (cellSize / 2) : Math.floor(mouseX / cellSize) * cellSize;
+        double newY = tegelRotated ? Math.floor(mouseY / cellSize) * cellSize - (cellSize / 2) : Math.floor(mouseY / cellSize) * cellSize;
 
         // Werk de positie van de ImageView bij naar de gesnapte coördinaten
         draggedImageView.setLayoutX(newX);
