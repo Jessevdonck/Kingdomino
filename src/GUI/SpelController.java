@@ -39,8 +39,8 @@ public class SpelController implements Initializable
     @FXML private GridPane gridPane2;
     @FXML private GridPane gridPane3;
     @FXML private GridPane gridPane4;
-    @FXML private VBox beginKolom;
-    @FXML private VBox eindKolom;
+    @FXML private GridPane beginKolom;
+    @FXML private GridPane eindKolom;
     @FXML private HBox stapel;
     @FXML private Label instructieMelding;
     @FXML private Button bevestigBtn;
@@ -157,6 +157,7 @@ public class SpelController implements Initializable
             }
 
             index++;
+
         }
     }
 
@@ -177,10 +178,10 @@ public class SpelController implements Initializable
         }
     }
 
-    private void plaatsTegelsInBeginKolom(List<DominoTegel> tegels, VBox kolom) {
+    private void plaatsTegelsInBeginKolom(List<DominoTegel> tegels, GridPane kolom) {
         int index = 1;
+        int indexGridPane = 0;
         kolom.getChildren().clear();
-        kolom.setSpacing(20);
 
         for (DominoTegel tegel : tegels)
         {
@@ -201,19 +202,21 @@ public class SpelController implements Initializable
 
 
 
-            kolom.getChildren().add(imageView);
+            kolom.add(imageView, 0, indexGridPane);
 
             index++;
+            indexGridPane++;
 
         }
     }
 
-    private void plaatsTegelsInEindKolom(List<DominoTegel> tegels, VBox kolom)
+    private void plaatsTegelsInEindKolom(List<DominoTegel> tegels, GridPane kolom)
     {
+        int index = dc.getSpelendeSpelers().size() + 1;
+        int indexGridPane = 0;
 
         kolom.getChildren().clear();
-        kolom.setSpacing(20);
-        int index = dc.getSpelendeSpelers().size() + 1;
+
 
         for (DominoTegel tegel : tegels)
         {
@@ -223,8 +226,9 @@ public class SpelController implements Initializable
             imageView.setFitHeight(78);
             imageView.setFitWidth(156);
 
-            kolom.getChildren().add(imageView);
+            kolom.add(imageView, 0, indexGridPane);
             index++;
+            indexGridPane++;
         }
     }
 
