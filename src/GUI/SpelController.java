@@ -315,10 +315,11 @@ public class SpelController implements Initializable
             draggedImageView.setLayoutY(156);
         }else{
             double x = draggedImageView.getLayoutX();
+            System.out.printf("X-coor: %f, Y-coor: %f %n", event.getSceneX(), event.getSceneY());
             draggedImageView.setLayoutX(x + 30);
         }
 
-        System.out.printf("X-coor: %f, Y-coor: %f", draggedImageView.getLocalToSceneTransform().getTx(), draggedImageView.getLocalToSceneTransform().getTy());
+        System.out.printf("X-coor: %f, Y-coor: %f %n", draggedImageView.getLocalToSceneTransform().getTx(), draggedImageView.getLocalToSceneTransform().getTy());
 
     }
 
