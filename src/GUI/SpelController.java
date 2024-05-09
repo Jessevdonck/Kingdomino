@@ -197,10 +197,11 @@ public class SpelController implements Initializable
 
                 imageView.setFocusTraversable(true);
 
+                imageView.setOnKeyPressed(this::imageViewKeyPressed);
                 imageView.setOnMousePressed(this::imageViewMousePressed);
                 imageView.setOnMouseDragged(this::imageViewMouseDragged);
                 imageView.setOnMouseReleased(this::imageViewMouseReleased);
-                imageView.setOnKeyPressed(this::imageViewKeyPressed);
+
 
 
                 kolom.getChildren().add(imageView);
@@ -300,7 +301,7 @@ public class SpelController implements Initializable
 
     private void imageViewMouseReleased(MouseEvent event)
     {
-        double cellSize = customBorden[0].getSizeSquare(); // Assumptie: alle borden hebben dezelfde celgrootte
+        double cellSize = customBorden[0].getSizeSquare(); 
 
         // Haal de coördinaten op van de muispositie ten opzichte van het bord
         double mouseX = event.getSceneX() - bord1.getBoundsInParent().getMinX();
@@ -334,6 +335,7 @@ public class SpelController implements Initializable
      */
     private void imageViewKeyPressed(KeyEvent event)
     {
+        System.out.println("Key pressed: " + event.getCode());
         keyTypedImageView = (ImageView) event.getSource();
         if(event.getCode() == KeyCode.R){
             double rotation = keyTypedImageView.getRotate();
