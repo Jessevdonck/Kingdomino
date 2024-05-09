@@ -101,7 +101,7 @@ public class SpelController implements Initializable
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
         maakBorden();
-        //plaatsStartTegels();
+        plaatsStartTegels();
 
         plaatsTegelsInEindKolom(getEindKolomTegels(), eindKolom);
         plaatsTegelInStapel(getStapel(), stapel);
@@ -112,40 +112,29 @@ public class SpelController implements Initializable
 
     }
 /*-------------------------------------------------FRONTEND---------------------------------------------------*/
-    /*public void laadStarttegels(GridPane gridPane, String startTegelImagePath)
+    public void laadStarttegels(Pane pane, String startTegelImagePath)
     {
       ImageView imageView = new ImageView(new Image(startTegelImagePath));
 
 
-
-      gridPane.widthProperty().addListener((observable, oldValue, newValue) ->
-      {
-          double cellWidth = newValue.doubleValue() / gridPane.getColumnCount();
-          imageView.setFitWidth(cellWidth);
-      });
+      imageView.setFitWidth(78);
+      imageView.setFitHeight(78);
+      imageView.setLayoutX(156);
+      imageView.setLayoutY(156);
 
 
-      gridPane.heightProperty().addListener((observable, oldValue, newValue) ->
-      {
-          double cellHeight = newValue.doubleValue() / gridPane.getRowCount();
-          imageView.setFitHeight(cellHeight);
-      });
+      pane.getChildren().add(imageView);
+}
 
-
-      imageView.setPreserveRatio(true);
-
-      gridPane.add(imageView, 2, 2);
-}*/
-
-/*public void plaatsStartTegels()
+public void plaatsStartTegels()
     {
           HashMap<Speler, Kleur> spelersMetKleuren = dc.getSpelendeSpelers();
 
-          List<GridPane> beschikbareGridPanes = new ArrayList<>();
-          beschikbareGridPanes.add(gridPane1);
-          beschikbareGridPanes.add(gridPane2);
-          beschikbareGridPanes.add(gridPane3);
-          beschikbareGridPanes.add(gridPane4);
+          List<Pane> beschikbareBorden = new ArrayList<>();
+            beschikbareBorden.add(bord1);
+            beschikbareBorden.add(bord2);
+            beschikbareBorden.add(bord3);
+            beschikbareBorden.add(bord4);
 
           int index = 0;
 
@@ -154,16 +143,16 @@ public class SpelController implements Initializable
               Speler speler = entry.getKey();
               Kleur kleur = entry.getValue();
 
-              if(index < beschikbareGridPanes.size())
+              if(index < beschikbareBorden.size())
               {
-                  GridPane gridPane = beschikbareGridPanes.get(index);
+                  Pane pane = beschikbareBorden.get(index);
                   String startTegelImagePath = getStartTegelImagePath(kleur);
-                  laadStarttegels(gridPane, startTegelImagePath);
+                  laadStarttegels(pane, startTegelImagePath);
               }
 
               index++;
           }
-      }*/
+      }
 
         private String getStartTegelImagePath(Kleur kleur)
             {

@@ -1,5 +1,7 @@
 package GUI;
 
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -27,5 +29,9 @@ public class CustomBord {
     public int getSizeSquare()
     {
         return sizeSquare;
+    }
+
+    public void addTile(ImageView imageView, AnchorPane pane) {
+        pane.getChildren().add(imageView);
     }
 }
