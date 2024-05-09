@@ -51,6 +51,8 @@ public class SpelerSelectieController implements Initializable{
     private SceneSwitchController ssc;
     private TaalController tc;
 
+    private ResourceBundle bundle;
+
 
 
     public SpelerSelectieController(DomeinController dc, TaalController tc)
@@ -62,6 +64,7 @@ public class SpelerSelectieController implements Initializable{
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
         {
+            laadLanguage();
             ongeselecteerdeSpelersList = FXCollections.observableArrayList();
             geselecteerdeSpelersList = FXCollections.observableArrayList();
             laadSpelers(dc.geefAlleSpelers());
@@ -93,12 +96,12 @@ public class SpelerSelectieController implements Initializable{
             if(geselecteerdeSpelerNaam != null && geselecteerdeKleur != null) {
                 if(geselecteerdeSpelersList.size() >= 4)
                 {
-                    foutmelding.setText("Maximum 4 spelers toegelaten!");
+                    foutmelding.setText(bundle.getString("foutmelding_teveelspelers"));
                     return;
                 }
                 if (dc.isKleurGekozen(geselecteerdeKleur))
                 {
-                    foutmelding.setText("De kleur " + geselecteerdeKleur +" is al gekozen");
+                    foutmelding.setText(bundle.getString("de_kleur") + geselecteerdeKleur + bundle.getString("al_gekozen"));
                     return;
                 }
 
@@ -128,7 +131,7 @@ public class SpelerSelectieController implements Initializable{
                 foutmelding.setText("");
             } else
             {
-                foutmelding.setText("Selecteer eerst een speler en een kleur!");
+                foutmelding.setText(bundle.getString("foutmelding_verkeerdeselectie"));
             }
 
         }
@@ -237,6 +240,13 @@ public class SpelerSelectieController implements Initializable{
             dc.voegSpelerToeAanGekozenSpelers(gebruikersnaam, geboortejaar, aantalGewonnen, aantalGespeeld, kleur);
         }
 
+    public void laadLanguage()
+    {
+        String gekozenTaal = tc.getLanguage();
+        Locale locale = new Locale(gekozenTaal);
+        bundle = ResourceBundle.getBundle("resourcebundles.lang", locale);
+    }
+
 /*----------------------------------------------------SCENE SWITCH-----------------------------------------------*/
 
 public void switchToHomescreen(MouseEvent event) throws IOException
@@ -248,7 +258,7 @@ public void switchToBordScene(MouseEvent event) throws IOException
     {
         if(geselecteerdeSpelersList.size() < 3)
         {
-            foutmelding.setText("Je moet minstens 3 spelers hebben!");
+            foutmelding.setText(bundle.getString("foutmelding_teweinigspelers"));
             return;
         }
         dc.startSpel();
