@@ -12,7 +12,6 @@ public class TegelGebied
         this.gebied = maakGebied();
     }
 
-
     private Landschap[][] maakGebied() {
         Landschap[][] grid = new Landschap[5][5];
         for (int i = 0; i < 5; i++) {
@@ -23,16 +22,12 @@ public class TegelGebied
         return grid;
     }
 
+
     public Landschap[][] getGebied() {
         return gebied;
     }
 
-
     public void plaatsTegel(int kolom, int rij, boolean verticaal,DominoTegel tegel) {
-
-
-
-
         if (verticaal) { // VERTICAAL
             if(rij == 3 && kolom == 2){
                 throw new IllegalArgumentException("kan niet plaatsen in het midden van het bord");
@@ -98,8 +93,6 @@ public class TegelGebied
         }
 
     }
-
-
 
     public int berekenScore(int x, int y) {
         if (x < 0 || y < 0 || x >= 5 || y >= 5 || bezocht[x][y] || gebied[x][y] == null ) {
