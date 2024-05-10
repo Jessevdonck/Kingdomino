@@ -312,8 +312,14 @@ public class SpelController implements Initializable
         mouseY = Math.max(0, Math.min(mouseY, borden[huidigeSpelerIndex].getHeight()) - 1);
 
         // Bereken de gesnapte x- en y-coördinaten binnen het bord
-        double newX = tegelRotated ? Math.floor(mouseX / cellSize) * cellSize - (cellSize / 2) : Math.floor(mouseX / cellSize) * cellSize;
-        double newY = tegelRotated ? Math.floor(mouseY / cellSize) * cellSize - (cellSize / 2) : Math.floor(mouseY / cellSize) * cellSize;
+        double newX = !tegelRotated ? Math.floor(mouseX / cellSize) * cellSize : Math.floor(mouseX / cellSize) * cellSize - (cellSize / 2);
+        double newY = !tegelRotated ? Math.floor(mouseY / cellSize) * cellSize : Math.floor(mouseY / cellSize) * cellSize - (cellSize / 2);
+
+        if (!tegelRotated && newX >= borden[huidigeSpelerIndex].getWidth() - cellSize) {
+            // Negeer de actie als de tegelRotated false is en de tegel in de laatste kolom wordt geplaatst
+            return;
+        }
+
 
         // Werk de positie van de ImageView bij naar de gesnapte coördinaten
         draggedImageView.setLayoutX(newX);
@@ -332,6 +338,7 @@ public class SpelController implements Initializable
         draggedImageView.setOnMousePressed(null);
         draggedImageView.setOnMouseReleased(null);
         draggedImageView.setOnKeyPressed(null);
+        tegelRotated = false;
 
 
     }
