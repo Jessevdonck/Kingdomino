@@ -320,6 +320,11 @@ public class SpelController implements Initializable
             return;
         }
 
+        if (tegelRotated && newY < cellSize / 2) {
+            // Negeer de actie als de tegel geroteerd is en wordt geplaatst in de bovenste rij
+            return;
+        }
+
 
         // Werk de positie van de ImageView bij naar de gesnapte coördinaten
         draggedImageView.setLayoutX(newX);
