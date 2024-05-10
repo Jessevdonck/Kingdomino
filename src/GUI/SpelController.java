@@ -425,7 +425,7 @@ public class SpelController implements Initializable
         boolean verticaal = tegelRotated;
         DominoTegel tegel = dc.getGeclaimdeTegel(getKleurSpeler());
 
-        // Try-Catch om te checken of de tegel weldegelijk geplaatst kan worden
+        // Try-Catch om te checken of de tegel correct geplaatst kan worden in het tegelgebied.
         try {
             dc.verplaatsDominotegel(kolom, rij, verticaal, tegel);
             System.out.println("Tegel toegevoegd met kolom: " + kolom  +"\nrij: " + rij + "\nverticaal: " + tegelRotated + "\ntegel: " + tegel);
@@ -444,6 +444,36 @@ public class SpelController implements Initializable
         }
 
     }
+
+    @FXML
+    private void verwijderButtonHandler(ActionEvent event){
+
+        int kolom = (int) (newX / 78);
+        int rij = (int) (newY / 78);
+        boolean verticaal = tegelRotated;
+        DominoTegel tegel = dc.getGeclaimdeTegel(getKleurSpeler());
+
+        // Try-Catch om te checken of de tegel weldegelijk geplaatst kan worden, of toch niet.
+        try {
+
+            //methodeDieChecktOfTegelWelOfNietGeplaatstKanWorden()
+            System.out.println("Tegel verwijderd uit spel: " + tegel);
+
+            draggedImageView.setOnMouseDragged(null);
+            draggedImageView.setOnMousePressed(null);
+            draggedImageView.setOnMouseReleased(null);
+            draggedImageView.setOnKeyPressed(null);
+            tegelRotated = false;
+
+            instructieTekst.setText(bundle.getString("TegelVerwijderdUitSpel"));
+            instructieTekst.setStyle("-fx-text-fill: #00e000;");
+        } catch(IllegalArgumentException e) {
+            instructieTekst.setText(e.getMessage());
+            instructieTekst.setStyle("-fx-text-fill: red;");
+        }
+
+    }
+
     @FXML
     private void volgendeButtonHandler(ActionEvent event)
     {
