@@ -84,6 +84,8 @@ public class SpelController implements Initializable
     private int rondeNummer = 1;
     Paint geselecteerdeKleurPaint;
     Pane[] borden;
+    private double newX;
+    private double newY;;
     private final String[] startTegelImagePath =
             {
                     "/img/KingDomino_Afbeeldingen1/starttegel/starttegel_blauw.png",
@@ -312,8 +314,8 @@ public class SpelController implements Initializable
         mouseY = Math.max(0, Math.min(mouseY, borden[huidigeSpelerIndex].getHeight()) - 1);
 
         // Bereken de gesnapte x- en y-coördinaten binnen het bord
-        double newX = !tegelRotated ? Math.floor(mouseX / cellSize) * cellSize : Math.floor(mouseX / cellSize) * cellSize - (cellSize / 2);
-        double newY = !tegelRotated ? Math.floor(mouseY / cellSize) * cellSize : Math.floor(mouseY / cellSize) * cellSize - (cellSize / 2);
+         newX = !tegelRotated ? Math.floor(mouseX / cellSize) * cellSize : Math.floor(mouseX / cellSize) * cellSize - (cellSize / 2);
+         newY = !tegelRotated ? Math.floor(mouseY / cellSize) * cellSize : Math.floor(mouseY / cellSize) * cellSize - (cellSize / 2);
 
         if (!tegelRotated && newX >= borden[huidigeSpelerIndex].getWidth() - cellSize) {
             // Negeer de actie als de tegelRotated false is en de tegel in de laatste kolom wordt geplaatst
@@ -339,11 +341,9 @@ public class SpelController implements Initializable
         draggedImageView.setTranslateX(0);
         draggedImageView.setTranslateY(0);
 
-        draggedImageView.setOnMouseDragged(null);
-        draggedImageView.setOnMousePressed(null);
-        draggedImageView.setOnMouseReleased(null);
-        draggedImageView.setOnKeyPressed(null);
-        tegelRotated = false;
+
+
+
 
 
     }
@@ -369,6 +369,10 @@ public class SpelController implements Initializable
 
         System.out.println("R Pressed");
     }
+
+
+
+
     /*-------------------------------------------------BACKEND---------------------------------------------------*/
 
     @FXML
@@ -402,6 +406,25 @@ public class SpelController implements Initializable
 
 
 
+    }
+
+    @FXML
+    private void bevestigButtonHandler(ActionEvent event)
+    {
+        int kolom = (int) (newX / 78);
+        int rij = (int) (newY / 78);
+        boolean verticaal = tegelRotated;
+        DominoTegel tegel = dc.getGeclaimdeTegel(getKleurSpeler());
+
+        dc.verplaatsDominotegel(kolom, rij, verticaal, tegel);
+
+        System.out.println("Tegel toegevoegd met kolom: " + kolom  +"\nrij: " + rij + "\nverticaal: " + tegelRotated + "\ntegel: " + tegel);
+
+        draggedImageView.setOnMouseDragged(null);
+        draggedImageView.setOnMousePressed(null);
+        draggedImageView.setOnMouseReleased(null);
+        draggedImageView.setOnKeyPressed(null);
+        tegelRotated = false;
     }
     @FXML
     private void volgendeButtonHandler(ActionEvent event)

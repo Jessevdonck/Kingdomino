@@ -25,7 +25,7 @@
             </HBox>
             <HBox alignment="CENTER" layoutX="-5.0" layoutY="178.0" prefHeight="72.0" prefWidth="360.0" spacing="30.0">
                <children>
-                  <Button fx:id="bevestigBtn" mnemonicParsing="false" prefHeight="42.0" prefWidth="87.0" text="Bevestig">
+                  <Button fx:id="bevestigBtn" mnemonicParsing="false" onAction="#bevestigButtonHandler" prefHeight="42.0" prefWidth="87.0" text="Bevestig">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
