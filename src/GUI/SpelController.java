@@ -72,6 +72,8 @@ public class SpelController implements Initializable
     private double orgTranslateX, orgTranslateY;
     private ImageView keyTypedImageView;
 
+    private ResourceBundle bundle;
+
 
     private FXMLLoader loader;
 
@@ -107,7 +109,7 @@ public class SpelController implements Initializable
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
         maakBorden();
-
+        laadLanguage();
 
         plaatsStartTegels();
 
@@ -370,8 +372,15 @@ public class SpelController implements Initializable
         System.out.println("R Pressed");
     }
 
+    /*-------------------------------------------------LAAD LANGUAGE---------------------------------------------*/
+    public void laadLanguage() //Wordt gebruikt wanneer er al taal gekozen is
+    {
+        String gekozenTaal = TaalController.getInstance().getLanguage();
 
+        Locale locale = new Locale(gekozenTaal);
+        bundle = ResourceBundle.getBundle("resourcebundles.lang", locale);
 
+    }
 
     /*-------------------------------------------------BACKEND---------------------------------------------------*/
 
@@ -416,15 +425,24 @@ public class SpelController implements Initializable
         boolean verticaal = tegelRotated;
         DominoTegel tegel = dc.getGeclaimdeTegel(getKleurSpeler());
 
-        dc.verplaatsDominotegel(kolom, rij, verticaal, tegel);
+        // Try-Catch om te checken of de tegel weldegelijk geplaatst kan worden
+        try {
+            dc.verplaatsDominotegel(kolom, rij, verticaal, tegel);
+            System.out.println("Tegel toegevoegd met kolom: " + kolom  +"\nrij: " + rij + "\nverticaal: " + tegelRotated + "\ntegel: " + tegel);
 
-        System.out.println("Tegel toegevoegd met kolom: " + kolom  +"\nrij: " + rij + "\nverticaal: " + tegelRotated + "\ntegel: " + tegel);
+            draggedImageView.setOnMouseDragged(null);
+            draggedImageView.setOnMousePressed(null);
+            draggedImageView.setOnMouseReleased(null);
+            draggedImageView.setOnKeyPressed(null);
+            tegelRotated = false;
 
-        draggedImageView.setOnMouseDragged(null);
-        draggedImageView.setOnMousePressed(null);
-        draggedImageView.setOnMouseReleased(null);
-        draggedImageView.setOnKeyPressed(null);
-        tegelRotated = false;
+            instructieTekst.setText(bundle.getString("TegelSuccesVolToegevoegd"));
+            instructieTekst.setStyle("-fx-text-fill: #00e000;");
+        } catch(IllegalArgumentException e) {
+            instructieTekst.setText(e.getMessage());
+            instructieTekst.setStyle("-fx-text-fill: red;");
+        }
+
     }
     @FXML
     private void volgendeButtonHandler(ActionEvent event)
@@ -548,4 +566,5 @@ public class SpelController implements Initializable
 
         rondeNummer++;
     }
+
 }
