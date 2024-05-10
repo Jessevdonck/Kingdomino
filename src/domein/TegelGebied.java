@@ -30,18 +30,17 @@ public class TegelGebied
 
     public void plaatsTegel(int kolom, int rij, boolean verticaal,DominoTegel tegel) {
 
-        if(rij == 2 && kolom == 2 && verticaal){
-            throw new IllegalArgumentException("kan niet plaatsen in het midden van het bord");
-        }
-        if(rij == 2 && kolom == 1 && !verticaal){
-            throw new IllegalArgumentException("kan niet plaatsen in het midden van het bord");
-        }
 
-        if (rij < 0 || kolom < 0 || rij + 1 >= 5 || kolom + 1 >= 5) {
-            throw new IllegalArgumentException("Plaatsing ligt buiten gebied.");
-        }
+
 
         if (verticaal) { // VERTICAAL
+            if(rij == 1 && kolom == 2){
+                throw new IllegalArgumentException("kan niet plaatsen in het midden van het bord");
+            }
+            if(rij == 2 && kolom == 2){
+                throw new IllegalArgumentException("kan niet plaatsen in het midden van het bord");
+            }
+            
             if (kolom + 1 >= 5 || gebied[kolom][rij] != null || gebied[kolom + 1][rij] != null) {
                 throw new IllegalArgumentException("Overlapping met andere tegel verticaal.");
             }
@@ -62,9 +61,15 @@ public class TegelGebied
             if(gebied[kolom][rij-1] != null && gebied[kolom][rij-1].getType() != tegel.getLandschapType1().getType())
                 throw new IllegalArgumentException("De tegel komt niet overeen met de aanliggende tegel");
 
-            gebied[kolom][rij] = tegel.getLandschapType1();
-            gebied[kolom][rij+1] = tegel.getLandschapType2();
+            gebied[rij][kolom] = tegel.getLandschapType1();
+            gebied[rij + 1][kolom] = tegel.getLandschapType2();
         } else { // HORIZONTAAL
+            if(rij == 2 && kolom == 2){
+                throw new IllegalArgumentException("kan niet plaatsen in het midden van het bord");
+            }
+            if(rij == 2 && kolom == 1){
+                throw new IllegalArgumentException("kan niet plaatsen in het midden van het bord");
+            }
             if (kolom + 1 >= 5 || gebied[kolom][rij] != null || gebied[kolom+1][rij] != null) {
                 throw new IllegalArgumentException("Overlapping met andere tegel horizontaal.");
             }
@@ -85,8 +90,8 @@ public class TegelGebied
             if (gebied[kolom+1][rij-1] != null && gebied[kolom+1][rij-1].getType() != tegel.getLandschapType2().getType())
                 throw new IllegalArgumentException("De tegel komt niet overeen met de aanliggende tegel");
 
-            gebied[kolom][rij] = tegel.getLandschapType1();
-            gebied[kolom+1][rij] = tegel.getLandschapType2();
+            gebied[rij][kolom] = tegel.getLandschapType1();
+            gebied[rij][kolom + 1] = tegel.getLandschapType2();
         }
 
     }

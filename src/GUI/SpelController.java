@@ -372,7 +372,7 @@ public class SpelController implements Initializable
         // Reset de translate
         draggedImageView.setTranslateX(0);
         draggedImageView.setTranslateY(0);
-
+        draggedImageView.getParent().requestFocus();
 
 
 
