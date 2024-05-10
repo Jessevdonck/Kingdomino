@@ -96,18 +96,14 @@ public class DomeinController {
         }
     }
 
-    public List<DominoTegelDTO> getBeginKolom(){
-        List<DominoTegel> startKolom = spelRepository.getBeginKolom();
-        return Arrays.stream(startKolom.toArray(new DominoTegel[0]))
-                .map(tegel -> new DominoTegelDTO(tegel.getLandschapType1().getType(), tegel.getLandschapType2().getType(), tegel.getTegelNummer(), tegel.getKronen1(), tegel.getKronen2(), tegel.getKoningVanSpeler().toString()))
-                .toList();
+    public List<DominoTegel> getBeginKolom(){
+
+        return spelRepository.getBeginKolom();
     }
 
-    public List<DominoTegelDTO> getEindKolom() {
-        List<DominoTegel> tweedeKolom = spelRepository.getEindKolom();
-        return Arrays.stream(tweedeKolom.toArray(new DominoTegel[0]))
-                .map(tegel -> new DominoTegelDTO(tegel.getLandschapType1().getType(), tegel.getLandschapType2().getType(), tegel.getTegelNummer(), tegel.getKronen1(), tegel.getKronen2(), tegel.getKoningVanSpeler().toString()))
-                .toList();
+    public List<DominoTegel> getEindKolom() {
+        return spelRepository.getEindKolom();
+
     }
 
     public List<DominoTegel> getBeschikbareTegels() {
@@ -172,6 +168,13 @@ public class DomeinController {
     }
 
     public DominoTegel getGeclaimdeTegel(Kleur kleur){
-        return spelRepository.getGeclaimdetegel(kleur);
+        List<DominoTegel> beginKolom = getBeginKolom();
+        for(DominoTegel tegel : beginKolom){
+            if(tegel.getKoningVanSpeler() == kleur){
+                return tegel;
+            }
+        }
+        throw new IllegalArgumentException("geen geclaimde tegel gevonden");
+
     }
 }

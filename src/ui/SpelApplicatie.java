@@ -242,22 +242,22 @@ public class SpelApplicatie {
 
 		// TODO - Zijn koninkrijk ;Zijn koning op een dominotegel in de startkolom of de eindkolom
 
-		List<DominoTegelDTO> beschikbareTegels = dc.getBeginKolom();
+		List<DominoTegel> beschikbareTegels = dc.getBeginKolom();
 		System.out.println("Beschikbare tegels:");
-		for (DominoTegelDTO tegel : beschikbareTegels) {
-			System.out.printf("%d\n", tegel.tegelNummer());
+		for (DominoTegel tegel : beschikbareTegels) {
+			System.out.printf("%d\n", tegel.getTegelNummer());
 		}
 
-		List<DominoTegelDTO> startkolom = dc.getBeginKolom();
+		List<DominoTegel> startkolom = dc.getBeginKolom();
 		System.out.println("Startkolom:");
-		for (DominoTegelDTO tegel : startkolom) {
-			System.out.printf("%s : %s \n", tegel.landschapType1().toString(), tegel.landschapType2().toString());
+		for (DominoTegel tegel : startkolom) {
+			System.out.printf("%s : %s \n", tegel.getLandschapType1().toString(), tegel.getLandschapType2().toString());
 		}
 
-		List<DominoTegelDTO> tweedekolom = dc.getEindKolom();
+		List<DominoTegel> tweedekolom = dc.getEindKolom();
 		System.out.println("TweedeKolom:");
-		for (DominoTegelDTO tegel : tweedekolom) {
-			System.out.printf("%s : %s\n", tegel.landschapType1().toString(), tegel.landschapType2().toString());
+		for (DominoTegel tegel : tweedekolom) {
+			System.out.printf("%s : %s\n", tegel.getLandschapType1().toString(), tegel.getLandschapType2().toString());
 		}
 
 	}
