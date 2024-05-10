@@ -30,10 +30,10 @@ public class TegelGebied
 
     public void plaatsTegel(int kolom, int rij, boolean verticaal,DominoTegel tegel) {
 
-        if(rij == 2 && kolom == 2 && !verticaal){
+        if(rij == 2 && kolom == 2 && verticaal){
             throw new IllegalArgumentException("kan niet plaatsen in het midden van het bord");
         }
-        if(rij == 2 && kolom == 1 && verticaal){
+        if(rij == 2 && kolom == 1 && !verticaal){
             throw new IllegalArgumentException("kan niet plaatsen in het midden van het bord");
         }
 
