@@ -34,7 +34,7 @@ public class TegelGebied
 
 
         if (verticaal) { // VERTICAAL
-            if(rij == 1 && kolom == 2){
+            if(rij == 3 && kolom == 2){
                 throw new IllegalArgumentException("kan niet plaatsen in het midden van het bord");
             }
             if(rij == 2 && kolom == 2){
@@ -62,8 +62,9 @@ public class TegelGebied
                 throw new IllegalArgumentException("De tegel komt niet overeen met de aanliggende tegel");
 
             gebied[rij][kolom] = tegel.getLandschapType1();
-            gebied[rij + 1][kolom] = tegel.getLandschapType2();
+            gebied[rij - 1][kolom] = tegel.getLandschapType2();
         } else { // HORIZONTAAL
+            System.out.println("PLAATSTEGEL" + kolom +" rij :" + rij);
             if(rij == 2 && kolom == 2){
                 throw new IllegalArgumentException("kan niet plaatsen in het midden van het bord");
             }
@@ -89,6 +90,8 @@ public class TegelGebied
                 throw new IllegalArgumentException("De tegel komt niet overeen met de aanliggende tegel");
             if (gebied[kolom+1][rij-1] != null && gebied[kolom+1][rij-1].getType() != tegel.getLandschapType2().getType())
                 throw new IllegalArgumentException("De tegel komt niet overeen met de aanliggende tegel");
+
+
 
             gebied[rij][kolom] = tegel.getLandschapType1();
             gebied[rij][kolom + 1] = tegel.getLandschapType2();
