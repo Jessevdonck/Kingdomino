@@ -101,7 +101,7 @@ public class SpelerSelectieController implements Initializable{
                 }
                 if (dc.isKleurGekozen(geselecteerdeKleur))
                 {
-                    foutmelding.setText(bundle.getString("de_kleur") + geselecteerdeKleur + bundle.getString("al_gekozen"));
+                    foutmelding.setText(bundle.getString("de_kleur") + geselecteerdeKleur + " " + bundle.getString("al_gekozen"));
                     return;
                 }
 
