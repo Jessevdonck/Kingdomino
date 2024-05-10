@@ -9,45 +9,21 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<GridPane id="tafel" hgap="18.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="780.0" prefWidth="1280.0" stylesheets="@../css/bord.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
-   <columnConstraints>
-      <ColumnConstraints hgrow="SOMETIMES" maxWidth="289.0" minWidth="0.0" prefWidth="0.0" />
-      <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" prefWidth="390.0" />
-      <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" prefWidth="390.0" />
-      <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" prefWidth="390.0" />
-      <ColumnConstraints hgrow="SOMETIMES" maxWidth="230.0" minWidth="0.0" prefWidth="0.0" />
-   </columnConstraints>
-   <rowConstraints>
-      <RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="390.0" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="390.0" vgrow="SOMETIMES" />
-   </rowConstraints>
+<AnchorPane fx:id="tafel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" stylesheets="@../css/bord.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Pane fx:id="bord1" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-      <Pane fx:id="bord2" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-      <Pane fx:id="bord3" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3">
+      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="289.0" prefWidth="372.0">
          <children>
-            <Label fx:id="instructieTekst" alignment="CENTER" layoutX="119.0" layoutY="34.0" prefHeight="324.0" prefWidth="268.0" textAlignment="CENTER" textFill="WHITE" wrapText="true">
-               <font>
-                  <Font name="System Bold" size="12.0" />
-               </font>
-            </Label>
-         </children>
-      </AnchorPane>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
-         <children>
-            <HBox fx:id="stapel" alignment="CENTER" layoutX="117.0" layoutY="156.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="78.0" prefWidth="156.0">
+            <HBox fx:id="stapel" alignment="CENTER" layoutX="97.0" layoutY="86.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="78.0" prefWidth="156.0">
                <children>
                   <ImageView fx:id="stapelImageView" fitHeight="78.0" fitWidth="156.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </HBox>
-            <HBox alignment="CENTER" layoutX="4.0" layoutY="276.0" prefHeight="100.0" prefWidth="383.0" spacing="40.0">
+            <HBox alignment="CENTER" layoutX="-5.0" layoutY="178.0" prefHeight="72.0" prefWidth="360.0" spacing="30.0">
                <children>
                   <Button fx:id="bevestigBtn" mnemonicParsing="false" prefHeight="42.0" prefWidth="87.0" text="Bevestig">
                      <cursor>
@@ -68,11 +44,19 @@
             </HBox>
          </children>
       </AnchorPane>
-      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="40.0" GridPane.columnIndex="2">
+      <Label fx:id="instructieTekst" alignment="CENTER" contentDisplay="CENTER" layoutX="913.0" layoutY="30.0" prefHeight="258.0" prefWidth="326.0" textFill="WHITE" wrapText="true">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <AnchorPane id="bord" fx:id="bord1" layoutX="32.0" layoutY="323.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="390.0" prefWidth="390.0" />
+      <AnchorPane id="bord" fx:id="bord2" layoutX="445.0" layoutY="323.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="390.0" prefWidth="390.0" />
+      <AnchorPane id="bord" fx:id="bord3" layoutX="857.0" layoutY="323.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="390.0" prefWidth="390.0" />
+      <HBox alignment="CENTER" layoutX="384.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0" spacing="40.0">
          <children>
-            <VBox fx:id="beginKolomKeuze" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="312.0" prefWidth="156.0" spacing="60.0">
+            <VBox fx:id="beginKolomKeuze" alignment="TOP_CENTER" fillWidth="false" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="312.0" prefWidth="156.0" spacing="60.0">
                <children>
-                  <Circle fx:id="keuzeTegelBeginKolom1" fill="#a4a4a4" onMouseClicked="#circleClickHandler" radius="20.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0">
+                  <Circle fx:id="keuzeTegelBeginKolom1" fill="#a4a4a4" onMouseClicked="#circleClickHandler" radius="20.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" VBox.vgrow="NEVER">
                      <VBox.margin>
                         <Insets top="20.0" />
                      </VBox.margin>
@@ -80,20 +64,38 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Circle>
-                  <Circle fx:id="keuzeTegelBeginKolom2" fill="#a4a4a4" onMouseClicked="#circleClickHandler" radius="20.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0">
+                  <Circle fx:id="keuzeTegelBeginKolom2" fill="#a4a4a4" onMouseClicked="#circleClickHandler" radius="20.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" VBox.vgrow="NEVER">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Circle>
-                  <Circle fx:id="keuzeTegelBeginKolom3" fill="#a4a4a4" onMouseClicked="#circleClickHandler" radius="20.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0">
+                  <Circle fx:id="keuzeTegelBeginKolom3" fill="#a4a4a4" onMouseClicked="#circleClickHandler" radius="20.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" VBox.vgrow="NEVER">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Circle>
                </children>
             </VBox>
-            <VBox fx:id="beginKolom" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="312.0" prefWidth="156.0" spacing="20.0" />
-            <VBox fx:id="eindKolom" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="312.0" prefWidth="156.0" spacing="20.0" />
+            <GridPane fx:id="beginKolom" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="315.0" prefWidth="156.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="156.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="130.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="130.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="130.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+            </GridPane>
+            <GridPane fx:id="eindKolom" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="315.0" prefWidth="156.0">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="156.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="130.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="130.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="130.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+            </GridPane>
             <VBox fx:id="eindKolomKeuze" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="312.0" prefWidth="156.0" spacing="60.0">
                <children>
                   <Circle fx:id="keuzeTegelEindKolom1" fill="#a4a4a4" onMouseClicked="#circleClickHandler" radius="20.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0">
@@ -119,4 +121,4 @@
          </children>
       </HBox>
    </children>
-</GridPane>
+</AnchorPane>

@@ -89,7 +89,7 @@ public class SceneSwitchController
         MediaPlayerSingleton.getInstanceSoundFX().play();
         if (dc.getSpelendeSpelers().size() == 3)
         {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/test.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Bord3Spelers.fxml"));
             loader.setController(new SpelController(dc, loader));
             root = loader.load();
         } else if(dc.getSpelendeSpelers().size() == 4) {
