@@ -74,6 +74,10 @@ public class SpelController implements Initializable
 
     private ResourceBundle bundle;
 
+    private int bordIndexGroen = -1;
+    private int bordIndexBlauw = -1;
+    private int bordIndexRoos = -1;
+    private int bordIndexGeel = -1;
 
     private FXMLLoader loader;
 
@@ -160,6 +164,20 @@ public class SpelController implements Initializable
             {
                 Pane pane = beschikbareBorden.get(index);
                 String startTegelImagePath = getStartTegelImagePath(kleur);
+                switch (kleur){
+                    case GROEN:
+                        bordIndexGroen = index;
+                        break;
+                    case ROOS:
+                        bordIndexRoos = index;
+                        break;
+                    case GEEL:
+                        bordIndexGeel = index;
+                        break;
+                    case BLAUW:
+                        bordIndexBlauw = index;
+                        break;
+                }
                 laadStarttegels(pane, startTegelImagePath);
             }
 
@@ -301,20 +319,37 @@ public class SpelController implements Initializable
 
 
         double cellSize = customBorden[0].getSizeSquare();
+        Kleur kleurHuidigeSpeler = getKleurSpeler();
+        int bordIndex = 0;
+
+        switch(kleurHuidigeSpeler) {
+            case GROEN:
+                bordIndex = bordIndexGroen;
+                break;
+            case BLAUW:
+                bordIndex = bordIndexBlauw;
+                break;
+            case ROOS:
+                bordIndex = bordIndexRoos;
+                break;
+            case GEEL:
+                bordIndex = bordIndexGeel;
+                break;
+        }
 
         // Haal de coördinaten op van de muispositie ten opzichte van het bord
-        double mouseX = event.getSceneX() - borden[huidigeSpelerIndex].getBoundsInParent().getMinX();
-        double mouseY = event.getSceneY() - borden[huidigeSpelerIndex].getBoundsInParent().getMinY();
+        double mouseX = event.getSceneX() - borden[bordIndex].getBoundsInParent().getMinX();
+        double mouseY = event.getSceneY() - borden[bordIndex].getBoundsInParent().getMinY();
 
         // Pas deze coördinaten aan om ervoor te zorgen dat ze binnen het bordgebied blijven
-        mouseX = Math.max(0, Math.min(mouseX, borden[huidigeSpelerIndex].getWidth()) - 1);
-        mouseY = Math.max(0, Math.min(mouseY, borden[huidigeSpelerIndex].getHeight()) - 1);
+        mouseX = Math.max(0, Math.min(mouseX, borden[bordIndex].getWidth()) - 1);
+        mouseY = Math.max(0, Math.min(mouseY, borden[bordIndex].getHeight()) - 1);
 
         // Bereken de gesnapte x- en y-coördinaten binnen het bord
          newX = !tegelRotated ? Math.floor(mouseX / cellSize) * cellSize : Math.floor(mouseX / cellSize) * cellSize - (cellSize / 2);
          newY = !tegelRotated ? Math.floor(mouseY / cellSize) * cellSize : Math.floor(mouseY / cellSize) * cellSize - (cellSize / 2);
 
-        if (!tegelRotated && newX >= borden[huidigeSpelerIndex].getWidth() - cellSize) {
+        if (!tegelRotated && newX >= borden[bordIndex].getWidth() - cellSize) {
             // Negeer de actie als de tegelRotated false is en de tegel in de laatste kolom wordt geplaatst
             return;
         }
@@ -330,8 +365,8 @@ public class SpelController implements Initializable
         draggedImageView.setLayoutY(newY);
 
 
-        if (!borden[huidigeSpelerIndex].getChildren().contains(draggedImageView)) {
-            borden[huidigeSpelerIndex].getChildren().add(draggedImageView);
+        if (!borden[bordIndex].getChildren().contains(draggedImageView)) {
+            borden[bordIndex].getChildren().add(draggedImageView);
         }
 
         // Reset de translate
