@@ -75,7 +75,7 @@ public class TegelGebied
             if (gebied[kolom+2][rij] != null && gebied[kolom+2][rij].getType() != tegel.getLandschapType2().getType())
                 throw new IllegalArgumentException("De tegel komt niet overeen met de aanliggende tegel");
             // Tegel onder komt niet overeen met landschap
-            if (gebied[kolom][rij+1] != null && gebied[kolom][rij+1].getType() != tegel.getLandschapType1().getType())
+            if (rij + 1 < gebied[0].length && gebied[kolom][rij+1] != null && gebied[kolom][rij+1].getType() != tegel.getLandschapType1().getType())
                 throw new IllegalArgumentException("De tegel komt niet overeen met de aanliggende tegel");
             if (gebied[kolom+1][rij+1] != null && gebied[kolom+1][rij+1].getType() != tegel.getLandschapType2().getType())
                 throw new IllegalArgumentException("De tegel komt niet overeen met de aanliggende tegel");

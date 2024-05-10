@@ -87,7 +87,8 @@ public class SpelController implements Initializable
     Paint geselecteerdeKleurPaint;
     Pane[] borden;
     private double newX;
-    private double newY;;
+    private double newY;
+    private int spelersMetTegels = 0;
     private final String[] startTegelImagePath =
             {
                     "/img/KingDomino_Afbeeldingen1/starttegel/starttegel_blauw.png",
@@ -145,6 +146,8 @@ public class SpelController implements Initializable
         beschikbareBorden.add(bord2);
         beschikbareBorden.add(bord3);
         beschikbareBorden.add(bord4);
+
+        System.out.println(dc.getSpelendeSpelers());
 
         int index = 0;
 
@@ -263,15 +266,7 @@ public class SpelController implements Initializable
 
     }
 
-    private void updateVBoxVisibility() {
-        if (rondeNummer == 1) {
-            beginKolomKeuze.setVisible(true);
-            eindKolomKeuze.setVisible(false);
-        } else {
-            beginKolomKeuze.setVisible(false);
-            eindKolomKeuze.setVisible(true);
-        }
-    }
+
     /*-------------------------------------------------Drag & Drop / Turning Tiles-------------------------------*/
 //    private boolean isDraggableImageView(ImageView imageView) {
 //        return imageView.getId().startsWith("beginKolom");
@@ -425,9 +420,12 @@ public class SpelController implements Initializable
         boolean verticaal = tegelRotated;
         DominoTegel tegel = dc.getGeclaimdeTegel(getKleurSpeler());
 
+
+        System.out.println("kolom" + kolom + "\n rij " + rij + "Tegel" + tegel);
+
         // Try-Catch om te checken of de tegel correct geplaatst kan worden in het tegelgebied.
         try {
-            dc.verplaatsDominotegel(kolom, rij, verticaal, tegel);
+            dc.verplaatsDominotegel(kolom, rij, verticaal, tegel, huidigeSpelerIndex);
             System.out.println("Tegel toegevoegd met kolom: " + kolom  +"\nrij: " + rij + "\nverticaal: " + tegelRotated + "\ntegel: " + tegel);
 
             draggedImageView.setOnMouseDragged(null);
@@ -480,7 +478,18 @@ public class SpelController implements Initializable
 
         if(rondeNummer == 1) {
             dc.voegKoningAanKaart(getKleurSpeler(), gekozenCirkel, 0);
-        } else dc.voegKoningAanKaart(getKleurSpeler(), gekozenCirkel, 1);
+            System.out.println(dc.getGeclaimdeTegel(getKleurSpeler()));
+            spelersMetTegels++;
+
+            if(spelersMetTegels == dc.getSpelendeSpelers().size())
+            {
+                rondeNummer++;
+            }
+            System.out.println(rondeNummer);
+        } else
+        {
+            dc.voegKoningAanKaart(getKleurSpeler(), gekozenCirkel, 1);
+        }
 
 
         System.out.println("speler toegevoegd!");
@@ -488,7 +497,7 @@ public class SpelController implements Initializable
         geselecteerdeCirkel = null;
         huidigeSpelerIndex = (huidigeSpelerIndex + 1) % 3;
 
-        updateVBoxVisibility();
+
         instructieTekst.setText("Speler met kleur " + getKleurSpeler() + ", kies een tegel voor je koninkrijk!");
 
     }
@@ -580,7 +589,7 @@ public class SpelController implements Initializable
     public void speelBeurtEersteRonde()
     {
         dc.koningRondeEenShuffle();
-        updateVBoxVisibility();
+
 
         instructieTekst.setText("Speler met kleur " + getKleurSpeler() + ", kies een tegel voor je koninkrijk!");
 

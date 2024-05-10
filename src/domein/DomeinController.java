@@ -134,9 +134,9 @@ public class DomeinController {
     public Kleur getKleurVanSpeler(String naam){return spelRepository.getKleurVanSpeler(naam);}
 
 
-    public void verplaatsDominotegel(int kolom, int rij, boolean verticaal, DominoTegel tegel)
+    public void verplaatsDominotegel(int kolom, int rij, boolean verticaal, DominoTegel tegel, int spelerIndex)
     {
-        spelRepository.verplaatsTegel(kolom, rij, verticaal, tegel);
+        spelRepository.verplaatsTegel(kolom, rij, verticaal, tegel, spelerIndex);
     }
 
     public String getFotoAchterkantVanTegel(int tegelNummer)
@@ -163,9 +163,6 @@ public class DomeinController {
         throw new IllegalArgumentException("Foto tegel voorkant niet gevonden");
     }
 
-    public void verplaatsKoning(Kleur kleur, DominoTegel dominoTegel){
-        spelRepository.verplaatsKoning(kleur, dominoTegel);
-    }
 
     public DominoTegel getGeclaimdeTegel(Kleur kleur){
         List<DominoTegel> beginKolom = getBeginKolom();

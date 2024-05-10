@@ -202,9 +202,9 @@ public class Spel
         return scores;
     }
 
-    public void verplaatsTegel(int kolom, int rij, boolean verticaal, DominoTegel tegel)
+    public void verplaatsTegel(int kolom, int rij, boolean verticaal, DominoTegel tegel, int spelerIndex)
     {
-        tegelGebieden.get(volgordeSpelers.get(0)).plaatsTegel(kolom, rij, verticaal, tegel);
+        tegelGebieden.get(volgordeSpelers.get(spelerIndex)).plaatsTegel(kolom, rij, verticaal, tegel);
         beginKolom.remove(tegel);
     }
 
