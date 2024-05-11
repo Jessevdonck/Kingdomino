@@ -282,9 +282,6 @@ public class SpelController implements Initializable
 
 
     /*-------------------------------------------------Drag & Drop / Turning Tiles-------------------------------*/
-//    private boolean isDraggableImageView(ImageView imageView) {
-//        return imageView.getId().startsWith("beginKolom");
-//    }
 
     private void imageViewMousePressed(MouseEvent event)
     {
