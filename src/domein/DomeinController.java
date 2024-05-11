@@ -111,6 +111,7 @@ public class DomeinController {
     public List<Kleur> getVolgordeKoning() {
         return spelRepository.getVolgordeKoning();
     }
+    public void setVolgordeKoning(List<Kleur> kleurList){spelRepository.setVolgordeKoning(kleurList);}
 
     /**
      * Methode om de begin speler te bepalen volgens koning

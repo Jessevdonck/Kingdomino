@@ -101,6 +101,7 @@ public class SpelController implements Initializable
 
     private boolean isEindeRonde;
     private boolean isBeginRonde;
+    private List<Kleur> gekozenVolgorde;
     private final String[] startTegelImagePath =
             {
                     "/img/KingDomino_Afbeeldingen1/starttegel/starttegel_blauw.png",
@@ -300,7 +301,6 @@ public class SpelController implements Initializable
         imageView.setFitWidth(156);
 
         kolom.getChildren().add(imageView);
-
     }
 
 
@@ -550,14 +550,17 @@ public class SpelController implements Initializable
     private void volgendeButtonHandler(ActionEvent event)
     {
         if(rondeNummer == 1) {
+            voegSpelerToeAanGekozenVolgorde(getKleurSpeler(), gekozenCirkel);
+            System.out.println("gekozen cirkel na toevoegen: " + gekozenCirkel);
             dc.voegKoningAanKaart(getKleurSpeler(), gekozenCirkel, 0);
 
+            System.out.println(gekozenVolgorde);
 
-            System.out.println(dc.getGeclaimdeTegel(getKleurSpeler()));
             spelersMetTegels++;
 
             if(spelersMetTegels == dc.getSpelendeSpelers().size())
             {
+                dc.setVolgordeKoning(gekozenVolgorde);
                 rondeNummer++;
             }
 
@@ -601,6 +604,7 @@ public class SpelController implements Initializable
         String circleId = ((Circle) event.getSource()).getId();
         gekozenCirkel = Integer.parseInt(circleId.substring(circleId.length() - 1));
 
+
         Kleur kleurHuidigeSpeler = getKleurSpeler();
         geselecteerdeKleurPaint = getKleurSpelerPaint(kleurHuidigeSpeler);
         geselecteerdeCirkel.setFill(geselecteerdeKleurPaint);
@@ -643,6 +647,16 @@ public class SpelController implements Initializable
     List<DominoTegel> getStapel()
     {
         return dc.getSpel().getTegelsDeck();
+    }
+
+    private void voegSpelerToeAanGekozenVolgorde(Kleur kleur, int index) {
+        // Controleer of de lijst al spelers bevat, zo niet, maak een nieuwe lijst aan
+        if (gekozenVolgorde == null) {
+            gekozenVolgorde = new ArrayList<>(Arrays.asList(new Kleur[dc.getSpelendeSpelers().size()]));
+
+        }
+
+        gekozenVolgorde.set(gekozenCirkel-1, kleur);
     }
 
 

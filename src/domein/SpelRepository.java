@@ -46,6 +46,10 @@ public class SpelRepository {
         return momenteelSpel.getVolgordeSpelers();
     }
 
+    public void setVolgordeKoning(List<Kleur> kleurList){
+        momenteelSpel.setVolgordeSpelers(kleurList);
+    }
+
     public void voegSpelerToeAanSpel(Speler speler, Kleur kleur) {
         System.out.println(gekozenSpelers);
         if (!isKleurGekozen(kleur))
