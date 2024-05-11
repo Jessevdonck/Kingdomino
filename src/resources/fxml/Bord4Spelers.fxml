@@ -51,11 +51,11 @@
                   <Font name="System Bold" size="12.0" />
                </font>
             </Label>
-            <ImageView fx:id="stapelImageView" fitHeight="78.0" fitWidth="156.0" layoutX="170.0" layoutY="49.0" onMouseClicked="#kaartenVanBeginNaarEindKolom" pickOnBounds="true" preserveRatio="true">
+            <Button fx:id="stapelImageView" prefHeight="78.0" prefWidth="156.0" layoutX="170.0" layoutY="49.0" onAction="#stapelButtonHandler" pickOnBounds="true">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
-            </ImageView>
+            </Button>
          </children>
       </AnchorPane>
       <AnchorPane fx:id="bord1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="390.0" prefWidth="390.0" />

@@ -23,11 +23,11 @@
       </Label>
       <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="289.0" prefWidth="372.0">
          <children>
-            <ImageView fx:id="stapelImageView" fitHeight="78.0" fitWidth="156.0" layoutX="97.0" layoutY="67.0" onMouseClicked="#kaartenVanBeginNaarEindKolom" pickOnBounds="true" preserveRatio="true">
+            <Button fx:id="stapelImageView" prefHeight="78.0" prefWidth="156.0" layoutX="97.0" layoutY="67.0" onAction="#stapelButtonHandler" pickOnBounds="true">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
-            </ImageView>
+            </Button>
             <HBox alignment="CENTER" layoutX="-5.0" layoutY="178.0" prefHeight="72.0" prefWidth="360.0" spacing="30.0">
                <children>
                   <Button fx:id="bevestigBtn" mnemonicParsing="false" onAction="#bevestigButtonHandler" prefHeight="42.0" prefWidth="87.0" text="Bevestig">

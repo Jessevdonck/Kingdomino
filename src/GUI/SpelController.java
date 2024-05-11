@@ -55,7 +55,7 @@ public class SpelController implements Initializable
     @FXML private Circle keuzeTegelEindKolom3;
     @FXML private Circle keuzeTegelEindKolom4;
     @FXML private Label instructieTekst;
-    @FXML private ImageView stapelImageView;
+    @FXML private Button stapelImageView;
     @FXML private Button verwijderBtn;
     @FXML private Button bevestignBtn;
     @FXML private Button volgendeBtn;
@@ -287,9 +287,9 @@ public class SpelController implements Initializable
         System.out.println(id);
     }
 
-    private void plaatsTegelInStapel(List<DominoTegel> tegels, ImageView stapelImageView)
+    private void plaatsTegelInStapel(List<DominoTegel> tegels, Button stapelImageView)
     {
-        stapelImageView.setImage(null);
+        stapelImageView.setGraphic(null);
 
         Random random = new Random();
         int randomIndex = random.nextInt(tegels.size());
@@ -303,7 +303,7 @@ public class SpelController implements Initializable
         imageView.setFitWidth(156);
 
         // Voeg de ImageView toe aan de stapelImageView
-        stapelImageView.setImage(imageView.getImage());
+        stapelImageView.setGraphic(imageView);
     }
 
 
@@ -418,12 +418,15 @@ public class SpelController implements Initializable
 
     /*-------------------------------------------------VOLGENDE RONDE--------------------------------------------*/
 
-    private void stapelButtonHandler(ActionEvent event){
+    public void stapelButtonHandler(ActionEvent event){
 
-        if(!beginKolom.getChildren().isEmpty() && 1 == 1){
+        System.out.println("Stapel button ingedrukt");
+        if(!beginKolom.getChildren().isEmpty()){
             instructieTekst.setText(bundle.getString("RondeNogNietGedaan"));
             instructieTekst.setStyle("-fx-text-fill: red;");
         }else{
+            instructieTekst.setText("Volgende ronde test");
+            instructieTekst.setStyle("-fx-text-fill: white;");
             // DOE ALLES OM RONDE TE UPDATEN
         }
 
@@ -499,6 +502,7 @@ public class SpelController implements Initializable
 
             instructieTekst.setText(bundle.getString("TegelSuccesVolToegevoegd"));
             instructieTekst.setStyle("-fx-text-fill: #00e000;");
+            System.out.println("Tegel is in het domein toegevoegd.");
         } catch (PlaatsenMiddenVanHetBordException | OverlappingHorizontaalException | OverlappingVerticaalException |
             TegelNietOvereenMetAanliggendeTegelException | IllegalArgumentException e) {
             instructieTekst.setText(e.getMessage());
@@ -592,7 +596,7 @@ public class SpelController implements Initializable
         huidigeSpelerIndex = (huidigeSpelerIndex + 1) % dc.getSpelendeSpelers().size();
 
 
-
+        instructieTekst.setStyle("-fx-text-fill: white;");
         instructieTekst.setText(bundle.getString("SpelerMetKleur") + getKleurSpeler() + bundle.getString("KiesEenTegel"));
         if(rondeNummer == 2){
             updateKaartenBeweegbaarHeid();
