@@ -1,5 +1,9 @@
 package domein;
 
+import exceptions.OverlappingHorizontaalException;
+import exceptions.OverlappingVerticaalException;
+import exceptions.PlaatsenMiddenVanHetBordException;
+import exceptions.TegelNietOvereenMetAanliggendeTegelException;
 import util.LandschapType;
 
 public class TegelGebied
@@ -29,78 +33,78 @@ public class TegelGebied
     public void plaatsTegel(int kolom, int rij, boolean verticaal,DominoTegel tegel) {
         if (verticaal) { // VERTICAAL
             if(rij == 1 && kolom == 2){
-                throw new IllegalArgumentException("kan niet plaatsen in het midden van het bord");
+                throw new PlaatsenMiddenVanHetBordException();
             }
             if(rij == 2 && kolom == 2){
-                throw new IllegalArgumentException("kan niet plaatsen in het midden van het bord");
+                throw new PlaatsenMiddenVanHetBordException();
             }
             if(gebied[kolom][rij+1] != null && rij <= 3 || gebied[kolom][rij] != null)
                 {
-                    throw new IllegalArgumentException("Overlapping met andere tegel verticaal.");
+                    throw new OverlappingVerticaalException();
                 }
 
             if (kolom-1 >0) {
                 // Tegel links komt niet overeen met landschap
                 if (gebied[kolom - 1][rij] != null && gebied[kolom - 1][rij].getType() != tegel.getLandschapType1().getType())
-                    throw new IllegalArgumentException("De tegel komt niet overeen met de aanliggende tegel");
+                    throw new TegelNietOvereenMetAanliggendeTegelException();
                 if (gebied[kolom - 1][rij + 1] != null && gebied[kolom - 1][rij + 1].getType() != tegel.getLandschapType2().getType())
-                    throw new IllegalArgumentException("De tegel komt niet overeen met de aanliggende tegel");
+                    throw new TegelNietOvereenMetAanliggendeTegelException();
             }
             // Tegel rechts komt niet overeen met landschap
             if(kolom+1 <= 4 ) {
                 if (gebied[kolom + 1][rij] != null && gebied[kolom + 1][rij].getType() != tegel.getLandschapType1().getType())
-                    throw new IllegalArgumentException("De tegel komt niet overeen met de aanliggende tegel");
+                    throw new TegelNietOvereenMetAanliggendeTegelException();
                 if (gebied[kolom + 1][rij + 1] != null && gebied[kolom + 1][rij + 1].getType() != tegel.getLandschapType2().getType())
-                    throw new IllegalArgumentException("De tegel komt niet overeen met de aanliggende tegel");
+                    throw new TegelNietOvereenMetAanliggendeTegelException();
             }
             // tegel onder komt niet overeen met landschap
             if(rij+2 <= 4) {
                 if (gebied[kolom][rij + 2] != null && gebied[kolom][rij + 2].getType() != tegel.getLandschapType2().getType())
-                    throw new IllegalArgumentException("De tegel komt niet overeen met de aanliggende tegel");
+                    throw new TegelNietOvereenMetAanliggendeTegelException();
             }
             // Tegel boven komt niet overeen met landschap
             if (rij -1 >= 0) {
                 if (gebied[kolom][rij - 1] != null && gebied[kolom][rij - 1].getType() != tegel.getLandschapType1().getType())
-                    throw new IllegalArgumentException("De tegel komt niet overeen met de aanliggende tegel");
+                    throw new TegelNietOvereenMetAanliggendeTegelException();
             }
             gebied[rij][kolom] = tegel.getLandschapType1();
             gebied[rij + 1][kolom] = tegel.getLandschapType2();
         } else { // HORIZONTAAL
             System.out.println("PLAATSTEGEL" + kolom +" rij :" + rij);
             if(rij == 2 && kolom == 2){
-                throw new IllegalArgumentException("kan niet plaatsen in het midden van het bord");
+                throw new PlaatsenMiddenVanHetBordException();
             }
             if(rij == 2 && kolom == 1){
-                throw new IllegalArgumentException("kan niet plaatsen in het midden van het bord");
+                throw new PlaatsenMiddenVanHetBordException();
             }
             if (kolom + 1 >= 5 || gebied[kolom][rij] != null || gebied[kolom+1][rij] != null) {
-                throw new IllegalArgumentException("Overlapping met andere tegel horizontaal.");
+                throw new OverlappingHorizontaalException();
             }
             // Tegel links komt niet overeen met landschap
             if (gebied[kolom+1][rij] != null && gebied[kolom][rij].getType() != tegel.getLandschapType1().getType() && kolom >= 1)
-                throw new IllegalArgumentException("De tegel komt niet overeen met de aanliggende tegel");
+                throw new TegelNietOvereenMetAanliggendeTegelException();
             // Tegel rechts komt niet overeen met landschap
             if (kolom <= 2) {
                 if (gebied[kolom + 2][rij] != null && gebied[kolom + 2][rij].getType() != tegel.getLandschapType2().getType()) {
-                    throw new IllegalArgumentException("De tegel komt niet overeen met de aanliggende tegel");
+                    throw new TegelNietOvereenMetAanliggendeTegelException();
                 }
             }
             if(rij <= 3)
             {
                 // Tegel onder komt niet overeen met landschap
                 if (rij + 1 < gebied[0].length && gebied[kolom][rij + 1] != null && gebied[kolom][rij + 1].getType() != tegel.getLandschapType1().getType())
-                    throw new IllegalArgumentException("De tegel komt niet overeen met de aanliggende tegel");
+                    throw new TegelNietOvereenMetAanliggendeTegelException();
                 if (gebied[kolom + 1][rij + 1] != null && gebied[kolom + 1][rij + 1].getType() != tegel.getLandschapType2().getType())
-                    throw new IllegalArgumentException("De tegel komt niet overeen met de aanliggende tegel");
+                    throw new TegelNietOvereenMetAanliggendeTegelException();
             }
 
             if(rij >= 1)
             {
                 // Tegel boven komt niet overeen met landschap
                 if (gebied[kolom][rij - 1] != null && gebied[kolom][rij - 1].getType() != tegel.getLandschapType1().getType())
-                    throw new IllegalArgumentException("De tegel komt niet overeen met de aanliggende tegel");
+                    throw new TegelNietOvereenMetAanliggendeTegelException();
                 if (gebied[kolom + 1][rij - 1] != null && gebied[kolom + 1][rij - 1].getType() != tegel.getLandschapType2().getType())
-                    throw new IllegalArgumentException("De tegel komt niet overeen met de aanliggende tegel");
+                    throw new TegelNietOvereenMetAanliggendeTegelException();
             }
 
 
