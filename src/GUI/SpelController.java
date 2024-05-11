@@ -100,6 +100,7 @@ public class SpelController implements Initializable
     private int spelersMetTegels = 0;
 
     private boolean isEindeRonde;
+    private boolean isBeginRonde;
     private final String[] startTegelImagePath =
             {
                     "/img/KingDomino_Afbeeldingen1/starttegel/starttegel_blauw.png",
@@ -125,7 +126,7 @@ public class SpelController implements Initializable
         plaatsTegelsInKolom(getEindKolomTegels(), eindKolom);
         plaatsTegelInStapel(getStapel(), stapel);
         plaatsTegelsInBeginKolom(getBeginKolomTegels(), beginKolom);
-
+        updateKaartenBeweegbaarHeid();
         speelBeurtEersteRonde();
         //startSpel();
 
@@ -527,13 +528,30 @@ public class SpelController implements Initializable
         }
 
     }
+    private void updateKaartenBeweegbaarHeid(){
+
+        int index = 0;
+
+        for (Node kaart:beginKolom.getChildren()) {
+
+
+            if (index != 0){
+                setDisable((ImageView) kaart);
+
+
+            }else {
+                kaart.setDisable(false);
+            }
+            index++;
+        }
+    }
 
     @FXML
     private void volgendeButtonHandler(ActionEvent event)
     {
-
         if(rondeNummer == 1) {
             dc.voegKoningAanKaart(getKleurSpeler(), gekozenCirkel, 0);
+
 
             System.out.println(dc.getGeclaimdeTegel(getKleurSpeler()));
             spelersMetTegels++;
@@ -542,21 +560,34 @@ public class SpelController implements Initializable
             {
                 rondeNummer++;
             }
+
             System.out.println(rondeNummer);
-        } else
+
+        } else // if(dc.getBeginKolom().get(gekozenCirkel - 1).getKoningVanSpeler() == null)
         {
             dc.voegKoningAanKaart(getKleurSpeler(), gekozenCirkel, 1);
         }
 
 
-        System.out.println("speler toegevoegd!");
-        geselecteerdeCirkel.setDisable(true);
+
+        System.out.println("speler toegevoegd aan kaart!");
+        try {
+            geselecteerdeCirkel.setDisable(true);
+        }
+        catch (NullPointerException e){
+            System.out.println(e.getMessage());
+        }
+
         geselecteerdeCirkel = null;
         huidigeSpelerIndex = (huidigeSpelerIndex + 1) % dc.getSpelendeSpelers().size();
 
 
-        instructieTekst.setText(bundle.getString("SpelerMetKleur") + getKleurSpeler() + bundle.getString("KiesEenTegel"));
 
+        instructieTekst.setText(bundle.getString("SpelerMetKleur") + getKleurSpeler() + bundle.getString("KiesEenTegel"));
+        if(rondeNummer == 2){
+            updateKaartenBeweegbaarHeid();
+            System.out.println("poop");
+        }
     }
     @FXML
     private void circleClickHandler(MouseEvent event)
@@ -594,25 +625,11 @@ public class SpelController implements Initializable
     }
 
 
-    private Kleur getKleurSpeler()
-    {
-        kleurenSpelers = dc.getVolgordeKoning();
-        return kleurenSpelers.get(huidigeSpelerIndex);
+    private Kleur getKleurSpeler() { return  dc.getVolgordeKoning().get(huidigeSpelerIndex);
     }
 
 
-    private void verschuifKolommen()
-    {
-        List<DominoTegel> eindKolomTegels = dc.getSpel().geefEindKolom();
-        List<DominoTegel> beginKolomTegels = dc.getSpel().geefBeginKolom();
-
-        beginKolomTegels.clear();
-        beginKolomTegels.addAll(eindKolomTegels);
-
-        List<DominoTegel> stapelTegels = dc.getBeschikbareTegels();
-        eindKolomTegels.clear();
-        eindKolomTegels.addAll(stapelTegels);
-    }
+    
     private List<DominoTegel> getBeginKolomTegels()
     {
         return dc.getSpel().geefBeginKolom();
