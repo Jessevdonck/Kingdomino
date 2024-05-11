@@ -553,7 +553,7 @@ public class SpelController implements Initializable
         huidigeSpelerIndex = (huidigeSpelerIndex + 1) % dc.getSpelendeSpelers().size();
 
 
-        instructieTekst.setText("Speler met kleur " + getKleurSpeler() + ", kies een tegel voor je koninkrijk!");
+        instructieTekst.setText(bundle.getString("SpelerMetKleur") + getKleurSpeler() + bundle.getString("KiesEenTegel"));
 
     }
     @FXML
@@ -646,7 +646,7 @@ public class SpelController implements Initializable
         dc.koningRondeEenShuffle();
 
 
-        instructieTekst.setText("Speler met kleur " + getKleurSpeler() + ", kies een tegel voor je koninkrijk!");
+        instructieTekst.setText(bundle.getString("SpelerMetKleur") + getKleurSpeler() + bundle.getString("KiesEenTegel"));
 
         int keuze = gekozenCirkel;
     }
