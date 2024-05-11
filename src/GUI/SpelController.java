@@ -518,7 +518,7 @@ public class SpelController implements Initializable
         System.out.println("speler toegevoegd!");
         geselecteerdeCirkel.setDisable(true);
         geselecteerdeCirkel = null;
-        huidigeSpelerIndex = (huidigeSpelerIndex + 1) % 3;
+        huidigeSpelerIndex = (huidigeSpelerIndex + 1) % dc.getSpelendeSpelers().size();
 
 
         instructieTekst.setText("Speler met kleur " + getKleurSpeler() + ", kies een tegel voor je koninkrijk!");
