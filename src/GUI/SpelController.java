@@ -390,6 +390,20 @@ public class SpelController implements Initializable
         System.out.println("R Pressed");
     }
 
+    /*-------------------------------------------------VOLGENDE RONDE--------------------------------------------*/
+
+    private void stapelButtonHandler(ActionEvent event){
+
+        if(!beginKolom.getChildren().isEmpty() && 1 == 1){
+            instructieTekst.setText(bundle.getString("RondeNogNietGedaan"));
+            instructieTekst.setStyle("-fx-text-fill: red;");
+        }else{
+            // DOE ALLES OM RONDE TE UPDATEN
+        }
+
+    }
+
+
     /*-------------------------------------------------LAAD LANGUAGE---------------------------------------------*/
     public void laadLanguage() //Wordt gebruikt wanneer er al taal gekozen is
     {
