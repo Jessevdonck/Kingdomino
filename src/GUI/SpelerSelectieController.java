@@ -251,6 +251,9 @@ public class SpelerSelectieController implements Initializable{
 
 public void switchToHomescreen(MouseEvent event) throws IOException
     {
+        for (String geselecteerdeSpeler : geselecteerdeSpelersList) {
+            dc.verwijderSpelerUitGekozenSpelers(geselecteerdeSpeler);
+        }
         ssc.switchToHomescreen(event, this.dc, tc);
     }
 
