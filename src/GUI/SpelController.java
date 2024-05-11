@@ -125,7 +125,7 @@ public class SpelController implements Initializable
         plaatsStartTegels();
 
         plaatsTegelsInKolom(getEindKolomTegels(), eindKolom);
-        plaatsTegelInStapel(getStapel(), stapel);
+        plaatsTegelInStapel(getStapel(), stapelImageView);
         plaatsTegelsInBeginKolom(getBeginKolomTegels(), beginKolom);
         updateKaartenBeweegbaarHeid();
         speelBeurtEersteRonde();
@@ -287,20 +287,23 @@ public class SpelController implements Initializable
         System.out.println(id);
     }
 
-    private void plaatsTegelInStapel(List<DominoTegel> tegels, HBox kolom)
+    private void plaatsTegelInStapel(List<DominoTegel> tegels, ImageView stapelImageView)
     {
-        kolom.getChildren().clear();
+        stapelImageView.setImage(null);
 
         Random random = new Random();
         int randomIndex = random.nextInt(tegels.size());
         DominoTegel willekeurigeTegel = tegels.get(randomIndex);
 
+        // Maak een nieuwe ImageView aan voor de willekeurige tegel
         ImageView imageView = new ImageView(new Image(willekeurigeTegel.getFotoAchterkant()));
 
+        // Stel de afmetingen van de ImageView in
         imageView.setFitHeight(78);
         imageView.setFitWidth(156);
 
-        kolom.getChildren().add(imageView);
+        // Voeg de ImageView toe aan de stapelImageView
+        stapelImageView.setImage(imageView.getImage());
     }
 
 

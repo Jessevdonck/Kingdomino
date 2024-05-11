@@ -16,13 +16,18 @@
 
 <AnchorPane fx:id="tafel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" stylesheets="@../css/bord.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <children>
+      <Label fx:id="instructieTekst" alignment="CENTER" contentDisplay="CENTER" layoutX="913.0" layoutY="30.0" prefHeight="258.0" prefWidth="326.0" textFill="WHITE" wrapText="true">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
       <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="289.0" prefWidth="372.0">
          <children>
-            <HBox fx:id="stapel" alignment="CENTER" layoutX="97.0" layoutY="86.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="78.0" prefWidth="156.0">
-               <children>
-                  <ImageView fx:id="stapelImageView" fitHeight="78.0" fitWidth="156.0" onMouseClicked="#kaartenVanBeginNaarEindKolom" pickOnBounds="true" preserveRatio="true" />
-               </children>
-            </HBox>
+            <ImageView fx:id="stapelImageView" fitHeight="78.0" fitWidth="156.0" layoutX="97.0" layoutY="67.0" onMouseClicked="#kaartenVanBeginNaarEindKolom" pickOnBounds="true" preserveRatio="true">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
             <HBox alignment="CENTER" layoutX="-5.0" layoutY="178.0" prefHeight="72.0" prefWidth="360.0" spacing="30.0">
                <children>
                   <Button fx:id="bevestigBtn" mnemonicParsing="false" onAction="#bevestigButtonHandler" prefHeight="42.0" prefWidth="87.0" text="Bevestig">
@@ -44,11 +49,6 @@
             </HBox>
          </children>
       </AnchorPane>
-      <Label fx:id="instructieTekst" alignment="CENTER" contentDisplay="CENTER" layoutX="913.0" layoutY="30.0" prefHeight="258.0" prefWidth="326.0" textFill="WHITE" wrapText="true">
-         <font>
-            <Font name="System Bold" size="16.0" />
-         </font>
-      </Label>
       <AnchorPane id="bord" fx:id="bord1" layoutX="32.0" layoutY="323.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="390.0" prefWidth="390.0" />
       <AnchorPane id="bord" fx:id="bord2" layoutX="445.0" layoutY="323.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="390.0" prefWidth="390.0" />
       <AnchorPane id="bord" fx:id="bord3" layoutX="857.0" layoutY="323.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="390.0" prefWidth="390.0" />
