@@ -160,6 +160,21 @@ public class DomeinController {
         return spelRepository.getEindKolom();
 
     }
+    public void updateKaarten() {
+        spelRepository.getMomenteelSpel().geefBeginKolom().clear();
+        List<DominoTegel> eindKolomSwitch = spelRepository.getMomenteelSpel().geefEindKolom();
+        spelRepository.getMomenteelSpel().geefBeginKolom().addAll(eindKolomSwitch);
+        spelRepository.getMomenteelSpel().geefEindKolom().clear();
+        spelRepository.
+                getMomenteelSpel().
+                geefEindKolom().
+                addAll(
+                        spelRepository.
+                                getMomenteelSpel().
+                                geefKaarten(getSpelendeSpelers().size())
+                );
+
+    }
 
     /**
      * @return De beschikbare tegels terug

@@ -5,6 +5,7 @@ import domein.DominoTegel;
 import domein.Speler;
 import dto.DominoTegelDTO;
 import dto.SpelerDTO;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -118,7 +119,7 @@ public class SpelController implements Initializable
 
         plaatsStartTegels();
 
-        plaatsTegelsInEindKolom(getEindKolomTegels(), eindKolom);
+        plaatsTegelsInKolom(getEindKolomTegels(), eindKolom);
         plaatsTegelInStapel(getStapel(), stapel);
         plaatsTegelsInBeginKolom(getBeginKolomTegels(), beginKolom);
 
@@ -233,7 +234,20 @@ public class SpelController implements Initializable
         }
     }
 
-    private void plaatsTegelsInEindKolom(List<DominoTegel> tegels, GridPane kolom)
+    private void setDisable(ImageView image){
+        image.setDisable(true);
+    }
+
+    @FXML
+    public void kaartenVanBeginNaarEindKolom(MouseEvent event){
+        dc.updateKaarten();
+        beginKolom.getChildren().clear();
+        eindKolom.getChildren().clear();
+        plaatsTegelsInKolom(dc.getBeginKolom(), beginKolom);
+        plaatsTegelsInKolom(dc.getEindKolom(), eindKolom);
+    }
+
+    private void plaatsTegelsInKolom(List<DominoTegel> tegels, GridPane kolom)
     {
         int index = dc.getSpelendeSpelers().size() + 1;
         int indexGridPane = 0;
@@ -244,7 +258,7 @@ public class SpelController implements Initializable
         for (DominoTegel tegel : tegels)
         {
             ImageView imageView = new ImageView(new Image(tegel.getFotoVoorkant()));
-            imageView.setId("imageView" + index);
+            imageView.setId(kolom.getId() + index);
 
             imageView.setFitHeight(78);
             imageView.setFitWidth(156);
@@ -252,6 +266,7 @@ public class SpelController implements Initializable
             kolom.add(imageView, 0, indexGridPane);
             index++;
             indexGridPane++;
+
         }
     }
 

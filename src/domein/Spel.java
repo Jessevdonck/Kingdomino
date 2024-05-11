@@ -55,10 +55,10 @@ public class Spel
     public HashMap<Kleur, TegelGebied> getTegelGebieden() {return this.tegelGebieden;}
     public List<Kleur> getVolgordeSpelers(){return volgordeSpelers;}
     public List<DominoTegel> geefBeginKolom(){
-        return beginKolom;
+        return this.beginKolom;
     }
     public List<DominoTegel> geefEindKolom(){
-        return eindkolom;
+        return this.eindkolom;
     }
     public List<DominoTegel> getTegelsDeck()
     {

@@ -20,7 +20,7 @@
          <children>
             <HBox fx:id="stapel" alignment="CENTER" layoutX="97.0" layoutY="86.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="78.0" prefWidth="156.0">
                <children>
-                  <ImageView fx:id="stapelImageView" fitHeight="78.0" fitWidth="156.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="stapelImageView" fitHeight="78.0" fitWidth="156.0" onMouseClicked="#kaartenVanBeginNaarEindKolom" pickOnBounds="true" preserveRatio="true" />
                </children>
             </HBox>
             <HBox alignment="CENTER" layoutX="-5.0" layoutY="178.0" prefHeight="72.0" prefWidth="360.0" spacing="30.0">
