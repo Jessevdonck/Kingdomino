@@ -97,6 +97,8 @@ public class SpelController implements Initializable
     private double mouseY;
     private double cellSize;
     private int spelersMetTegels = 0;
+
+    private boolean isEindeRonde;
     private final String[] startTegelImagePath =
             {
                     "/img/KingDomino_Afbeeldingen1/starttegel/starttegel_blauw.png",
@@ -240,6 +242,10 @@ public class SpelController implements Initializable
 
     @FXML
     public void kaartenVanBeginNaarEindKolom(MouseEvent event){
+        if(!isEindeRonde){
+
+            return;
+        }
         dc.updateKaarten();
         beginKolom.getChildren().clear();
         eindKolom.getChildren().clear();
