@@ -28,7 +28,7 @@ public class TegelGebied
 
     public void plaatsTegel(int kolom, int rij, boolean verticaal,DominoTegel tegel) {
         if (verticaal) { // VERTICAAL
-            if(rij == 3 && kolom == 2){
+            if(rij == 1 && kolom == 2){
                 throw new IllegalArgumentException("kan niet plaatsen in het midden van het bord");
             }
             if(rij == 2 && kolom == 2){
