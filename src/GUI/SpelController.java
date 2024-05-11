@@ -435,6 +435,10 @@ public class SpelController implements Initializable
         Locale locale = new Locale(gekozenTaal);
         bundle = ResourceBundle.getBundle("resourcebundles.lang", locale);
 
+        // Hier wordt de tekst van de buttons veranderd zodat er geen korte aparte methode voor moet zijn
+        bevestigBtn.setText(bundle.getString("Bevestig"));
+        verwijderBtn.setText(bundle.getString("Verwijder"));
+        volgendeBtn.setText(bundle.getString("VolgendeSpeler"));
     }
 
     /*-------------------------------------------------BACKEND---------------------------------------------------*/
