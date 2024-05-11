@@ -92,6 +92,9 @@ public class SpelController implements Initializable
     Pane[] borden;
     private double newX;
     private double newY;
+    private double mouseX;
+    private double mouseY;
+    private double cellSize;
     private int spelersMetTegels = 0;
     private final String[] startTegelImagePath =
             {
@@ -309,7 +312,7 @@ public class SpelController implements Initializable
 
     private void imageViewMouseReleased(MouseEvent event)
     {
-        double cellSize = customBorden[0].getSizeSquare();
+        cellSize = customBorden[0].getSizeSquare();
         Kleur kleurHuidigeSpeler = getKleurSpeler();
         int bordIndex = 0;
 
@@ -329,8 +332,8 @@ public class SpelController implements Initializable
         }
 
         // Haal de coördinaten op van de muispositie ten opzichte van het bord
-        double mouseX = event.getSceneX() - borden[bordIndex].getBoundsInParent().getMinX();
-        double mouseY = event.getSceneY() - borden[bordIndex].getBoundsInParent().getMinY();
+         mouseX = event.getSceneX() - borden[bordIndex].getBoundsInParent().getMinX();
+         mouseY = event.getSceneY() - borden[bordIndex].getBoundsInParent().getMinY();
 
         // Pas deze coördinaten aan om ervoor te zorgen dat ze binnen het bordgebied blijven
         mouseX = Math.max(0, Math.min(mouseX, borden[bordIndex].getWidth()) - 1);
@@ -338,7 +341,7 @@ public class SpelController implements Initializable
 
         // Bereken de gesnapte x- en y-coördinaten binnen het bord
          newX = !tegelRotated ? Math.floor(mouseX / cellSize) * cellSize : Math.floor(mouseX / cellSize) * cellSize - (cellSize / 2);
-         newY = !tegelRotated ? Math.floor(mouseY / cellSize) * cellSize : Math.floor(mouseY / cellSize) * cellSize - (cellSize / 2);
+         newY = !tegelRotated ? Math.floor(mouseY / cellSize) * cellSize : Math.floor(mouseY / cellSize) * cellSize + (cellSize / 2);
 
         if (!tegelRotated && newX >= borden[bordIndex].getWidth() - cellSize) {
             // Negeer de actie als de tegelRotated false is en de tegel in de laatste kolom wordt geplaatst
@@ -355,6 +358,8 @@ public class SpelController implements Initializable
         draggedImageView.setLayoutX(newX);
         draggedImageView.setLayoutY(newY);
 
+        System.out.println("newX " + newX + "\n newY" + newY);
+        System.out.println("\n kolom " + Math.floor(mouseX / cellSize) + "\n rij " + Math.floor(mouseY / cellSize));
 
         if (!borden[bordIndex].getChildren().contains(draggedImageView)) {
             borden[bordIndex].getChildren().add(draggedImageView);
@@ -433,13 +438,12 @@ public class SpelController implements Initializable
     @FXML
     private void bevestigButtonHandler(ActionEvent event)
     {
-        int kolom = (int) (newX / 78);
-        int rij = (int) (newY / 78);
+        int kolom = (int) (Math.floor(mouseX / cellSize));
+        int rij = (int) (Math.floor(mouseY / cellSize));
         boolean verticaal = tegelRotated;
         DominoTegel tegel = dc.getGeclaimdeTegel(getKleurSpeler());
 
 
-        System.out.println("kolom" + kolom + "\n rij " + rij + "Tegel" + tegel);
 
         // Try-Catch om te checken of de tegel correct geplaatst kan worden in het tegelgebied.
         try {
