@@ -101,14 +101,11 @@ public class SpelController implements Initializable
                     "/img/KingDomino_Afbeeldingen1/starttegel/starttegel_roos.png"
             };
 
-
     public SpelController(DomeinController dc, FXMLLoader loader)
     {
         this.loader = loader;
         this.dc = dc;
     }
-
-
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
@@ -225,8 +222,6 @@ public class SpelController implements Initializable
             imageView.setOnMouseDragged(this::imageViewMouseDragged);
             imageView.setOnMouseReleased(this::imageViewMouseReleased);
 
-
-
             kolom.add(imageView, 0, indexGridPane);
 
             index++;
@@ -264,8 +259,6 @@ public class SpelController implements Initializable
         String id = geklikteImage.getId();
         System.out.println(id);
     }
-
-
 
     private void plaatsTegelInStapel(List<DominoTegel> tegels, HBox kolom)
     {
@@ -316,8 +309,6 @@ public class SpelController implements Initializable
 
     private void imageViewMouseReleased(MouseEvent event)
     {
-
-
         double cellSize = customBorden[0].getSizeSquare();
         Kleur kleurHuidigeSpeler = getKleurSpeler();
         int bordIndex = 0;
@@ -373,11 +364,6 @@ public class SpelController implements Initializable
         draggedImageView.setTranslateX(0);
         draggedImageView.setTranslateY(0);
         draggedImageView.getParent().requestFocus();
-
-
-
-
-
     }
 
     /* Hier gaat er gekeken worden of onze tegel al gedraaid is geweest, dan zet hij hem terug op zijn
@@ -442,9 +428,6 @@ public class SpelController implements Initializable
             customBorden[3].maakBord(bord4);
             this.borden = new Pane[]{bord1, bord2, bord3,bord4};
         }
-
-
-
     }
 
     @FXML
@@ -513,6 +496,7 @@ public class SpelController implements Initializable
 
         if(rondeNummer == 1) {
             dc.voegKoningAanKaart(getKleurSpeler(), gekozenCirkel, 0);
+
             System.out.println(dc.getGeclaimdeTegel(getKleurSpeler()));
             spelersMetTegels++;
 
