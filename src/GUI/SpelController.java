@@ -5,6 +5,7 @@ import domein.DominoTegel;
 import domein.Speler;
 import dto.DominoTegelDTO;
 import dto.SpelerDTO;
+import exceptions.*;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -490,7 +491,8 @@ public class SpelController implements Initializable
 
             instructieTekst.setText(bundle.getString("TegelSuccesVolToegevoegd"));
             instructieTekst.setStyle("-fx-text-fill: #00e000;");
-        } catch(IllegalArgumentException e) {
+        } catch (PlaatsenMiddenVanHetBordException | OverlappingHorizontaalException | OverlappingVerticaalException |
+            TegelNietOvereenMetAanliggendeTegelException | IllegalArgumentException e) {
             instructieTekst.setText(e.getMessage());
             instructieTekst.setStyle("-fx-text-fill: red;");
         }
