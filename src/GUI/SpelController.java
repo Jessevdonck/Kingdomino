@@ -302,6 +302,13 @@ public class SpelController implements Initializable
             imageView.setFitHeight(78);
             imageView.setFitWidth(156);
 
+            imageView.setFocusTraversable(true);
+
+            imageView.setOnKeyPressed(this::imageViewKeyPressed);
+            imageView.setOnMousePressed(this::imageViewMousePressed);
+            imageView.setOnMouseDragged(this::imageViewMouseDragged);
+            imageView.setOnMouseReleased(this::imageViewMouseReleased);
+
             kolom.add(imageView, 0, indexGridPane);
             index++;
             indexGridPane++;
@@ -457,9 +464,7 @@ public class SpelController implements Initializable
     @FXML
     private void stapelButtonHandler(ActionEvent event)
     {
-
-
-        if (!beginKolom.getChildren().isEmpty()) {
+        if (!beginKolom.getChildren().isEmpty() && !kiesNieuweTegel) {
             String prevText = instructieTekst.getText();
             String prevStyle = instructieTekst.getStyle();
             PauseTransition pause = new PauseTransition(Duration.seconds(3));
@@ -482,9 +487,13 @@ public class SpelController implements Initializable
             instructieTekst.setStyle("-fx-text-fill: white;");
             pause.play();
             // DOE ALLES OM RONDE TE UPDATEN
+            dc.setVolgordeKoning(gekozenVolgordeNieuw);
             updateNaarVolgendeRonde();
             updateCirkels();
             updateKaartenBeweegbaarHeid();
+
+
+            beginKolom.getChildren().get(0).setDisable(false);
             plaatsTegel = true;
         }
 
@@ -626,6 +635,7 @@ public class SpelController implements Initializable
 
 
             kaart.setDisable(index != 0);
+
             index++;
         }
     }
@@ -657,8 +667,11 @@ public class SpelController implements Initializable
             if(cirkelRechts instanceof Circle){
                 Circle circle = (Circle) cirkelRechts;
                 circle.setFill(Color.GREY);
+                circle.setDisable(false);
             }
         }
+        gekozenVolgordeHuidig = gekozenVolgordeNieuw;
+        gekozenVolgordeNieuw  = new ArrayList<>(Arrays.asList(new Kleur[dc.getSpelendeSpelers().size()]));
 
     }
 
