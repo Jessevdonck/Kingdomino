@@ -124,6 +124,13 @@ public class SceneSwitchController
         Image cursorImage = new Image(getClass().getResourceAsStream("/img/middle-ages-cursor-32x32.png"));
         scene.setCursor(new ImageCursor(cursorImage));
         stage.setScene(scene);
+        Screen screen = Screen.getPrimary();
+        Rectangle2D bounds = screen.getVisualBounds();
+
+        double centerX = bounds.getMinX() + (bounds.getWidth() - scene.getWidth()) / 2;
+        stage.setX(centerX);
+        stage.setY(0);
+
         stage.show();
     }
 
