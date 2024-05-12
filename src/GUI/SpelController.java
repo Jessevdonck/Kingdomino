@@ -446,10 +446,10 @@ public class SpelController implements Initializable
             instructieTekst.setStyle("-fx-text-fill: red;");
             pause.play();
         }else{
-            updateNaarVolgendeRonde();
             instructieTekst.setText(bundle.getString("VolgendeRondeGestart"));
             instructieTekst.setStyle("-fx-text-fill: white;");
             // DOE ALLES OM RONDE TE UPDATEN
+            updateNaarVolgendeRonde();
         }
 
     }
