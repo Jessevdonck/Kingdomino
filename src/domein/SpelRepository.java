@@ -82,8 +82,8 @@ public class SpelRepository {
         return momenteelSpel.isEindeSpel();
     }
 
-    public List<Speler> geefWinnaars() {
-        // Convert to DTO misschien
+    public HashMap<Kleur, HashMap<LandschapType, Integer>> geefWinnaars() {
+
         return momenteelSpel.geefWinnaars();
     }
 
@@ -92,7 +92,7 @@ public class SpelRepository {
     // -Indien nog altijd gelijk dan wint de speler met de meeste kronen binnen zijn koninkrijk
     // -Indien dan nog altijd gelijk, wordt de overwinning gedeeld
 
-    public HashMap<Kleur, Integer> geefScores() {
+    public HashMap<Kleur,HashMap<LandschapType, Integer>> geefScores() {
         return momenteelSpel.geefScores();
     }
 

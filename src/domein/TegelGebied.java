@@ -6,6 +6,9 @@ import exceptions.PlaatsenMiddenVanHetBordException;
 import exceptions.TegelNietOvereenMetAanliggendeTegelException;
 import util.LandschapType;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class TegelGebied
 {
     private static int[][] richting = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
@@ -54,9 +57,9 @@ public class TegelGebied
         }
     }
 
-    public int berekenScore(int x, int y)
+    public int berekenScore(int x, int y, LandschapType type)
     {
-        if (x < 0 || y < 0 || x >= 5 || y >= 5 || bezocht[x][y] || gebied[x][y] == null) {
+        if (x < 0 || y < 0 || x >= 4 || y >= 4 || bezocht[x][y] || gebied[x][y] == null && gebied[x][y].getType() != type) {
             return 0;
         }
 
@@ -64,7 +67,7 @@ public class TegelGebied
         bezocht[x][y] = true;
 
 
-        int size = 1;
+        int size = 1 + gebied[x][y].getAantalKronen();
 
 
         for (int[] dir : richting) {
@@ -72,30 +75,32 @@ public class TegelGebied
             int ny = y + dir[1];
 
             if (nx >= 0 && ny >= 0 && nx < 5 && ny < 5) {
-                size += berekenScore(nx, ny);
+                size += berekenScore(nx, ny, type);
             }
         }
 
         return size;
     }
 
-    public int zoekDomein()
+    public HashMap<LandschapType, Integer> zoekDomein()
     {
 
-        int size = 0;
 
+        HashMap<LandschapType, Integer> puntenMap = new HashMap<>();
 
-        for (int i = 0; i < 5; i++) {
-            for (int j = 0; j < 5; j++) {
-
-                if (!bezocht[i][j]) {
-                    int grootte = berekenScore(i, j);
-                    size += grootte + 1;
+        for (LandschapType type : LandschapType.values()) {
+            int size = 0;
+            for (int i = 0; i < 5; i++) {
+                for (int j = 0; j < 5; j++) {
+                    if (!bezocht[i][j]) {
+                        int grootte = berekenScore(i, j, type);
+                        size += grootte + 1;
+                    }
                 }
             }
+            puntenMap.put(type, size);
         }
-
-        return size;
+        return puntenMap;
     }
 
     public int getAantalKronen()

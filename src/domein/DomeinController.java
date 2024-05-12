@@ -3,6 +3,7 @@ package domein;
 import dto.DominoTegelDTO;
 import dto.SpelerDTO;
 import util.Kleur;
+import util.LandschapType;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -78,7 +79,7 @@ public class DomeinController {
     /**
      * @return De scores van de spelers terug
      */
-    public HashMap<Kleur, Integer> geefScores(){
+    public HashMap<Kleur,HashMap<LandschapType, Integer>> geefScores(){
         return spelRepository.geefScores();
     }
     /**
@@ -87,12 +88,12 @@ public class DomeinController {
     public void verwerkEindeSpel() {
         if (isEindeSpel()) {
             List<Speler> spelers = spelRepository.getSpelers().keySet().stream().toList();
-            List<Speler> winnaars = spelRepository.geefWinnaars();
+            HashMap<Kleur, HashMap<LandschapType, Integer>> winnaars = spelRepository.geefWinnaars();
 
             for (Speler speler : spelers) {
                 speler.setAantalGespeeld(speler.getAantalGespeeld() + 1);
-                if(winnaars.contains(speler))
-                    speler.setAantalGewonnen(speler.getAantalGewonnen() + 1);
+//                if(winnaars.contains(speler))
+//                    speler.setAantalGewonnen(speler.getAantalGewonnen() + 1);
                 spelerRepository.updateSpeler(speler);
             }
         }
@@ -123,12 +124,12 @@ public class DomeinController {
     /**
      * @return de winnaars van het spel
      */
-    public List<SpelerDTO> getWinnaars() {
-        List<Speler> winnaars = spelRepository.geefWinnaars();
-        return Arrays.stream(winnaars.toArray(new Speler[0]))
-                .map(speler -> new SpelerDTO(speler.getGebruikersnaam(), speler.getGeboortejaar(), speler.getAantalGewonnen(), speler.getAantalGespeeld()))
-                .toList();
-    };
+//    public List<SpelerDTO> getWinnaars() {
+//        List<Speler> winnaars = spelRepository.geefWinnaars();
+//        return Arrays.stream(winnaars.toArray(new Speler[0]))
+//                .map(speler -> new SpelerDTO(speler.getGebruikersnaam(), speler.getGeboortejaar(), speler.getAantalGewonnen(), speler.getAantalGespeeld()))
+//                .toList();
+//    };
 
     /**
      * Methode om de koning op een kolom te zetten, 0 beginkolom, 1 eindkolom

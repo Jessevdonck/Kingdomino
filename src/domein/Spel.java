@@ -5,6 +5,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import javafx.css.PseudoClass;
 import persistentie.DominoTegelMapper;
 import util.Kleur;
 import util.LandschapType;
@@ -123,57 +124,10 @@ public class Spel
             return beschikbareTegels;
     }
 
-    public List<Speler> geefWinnaars()
+    public HashMap<Kleur, HashMap<LandschapType, Integer>> geefWinnaars()
     {
-        HashMap<Kleur, Integer> scores = geefScores();
-        int hoogsteScore = -1;
-        List<Kleur> winnaars = new ArrayList<>();
-
-        for (int score : scores.values()) {
-            if (score > hoogsteScore) {
-                hoogsteScore = score;
-            }
-        }
-
-        for (Map.Entry<Kleur, Integer> entry : scores.entrySet()) {
-            if (entry.getValue() == hoogsteScore) {
-                winnaars.add(entry.getKey());
-            }
-        }
-
-        if (winnaars.size() == 1) {
-            zetNaarSpelers(winnaars);
-        }
-
-        int grootsteGrondgebied = -1;
-
-        for (Kleur kleur : winnaars) {
-            int grootte = getGrondgebiedGrootte(kleur);
-            if ( grootte>= grootsteGrondgebied) {
-                grootsteGrondgebied = grootte;
-            }else
-            {
-                winnaars.remove(kleur);
-            }
-        }
-
-        if (winnaars.size() == 1) {
-            zetNaarSpelers(winnaars);
-        }
-
-        int meesteKronen = -1;
-
-        for (Kleur kleur : winnaars) {
-            int grootte = getAantalKronen(kleur);
-            if ( grootte>= meesteKronen) {
-                meesteKronen = grootte;
-            }else
-            {
-                winnaars.remove(kleur);
-            }
-        }
-
-        return zetNaarSpelers(winnaars);
+        HashMap<Kleur, HashMap<LandschapType, Integer>> scores = geefScores();
+        return null;
     }
 
     private int getGrondgebiedGrootte(Kleur kleur) {
@@ -193,9 +147,9 @@ public class Spel
         throw new IllegalArgumentException("Speler met kleur " + kleur + " niet gevonden");
     }
 
-    public HashMap<Kleur, Integer> geefScores()
+    public HashMap<Kleur, HashMap<LandschapType, Integer>> geefScores()
     {
-        HashMap<Kleur, Integer> scores = new HashMap<Kleur, Integer>();
+        HashMap<Kleur, HashMap<LandschapType, Integer>> scores = new HashMap<Kleur, HashMap<LandschapType, Integer>>();
         for (Kleur kleur : gekozenSpelers.values()) {
             scores.put(kleur, tegelGebieden.get(kleur).zoekDomein());
         }
