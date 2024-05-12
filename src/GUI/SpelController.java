@@ -683,7 +683,7 @@ public class SpelController implements Initializable
                 rondeEen = false;
                 plaatsTegel = true;
 
-                instructieTekst.setText("Speler met kleur " + getKleurSpeler() + ", plaats je tegel en klik op bevestig. Kies vervolgens een nieuwe tegel!");
+                instructieTekst.setText(bundle.getString("SpelerMetKleur") + getKleurSpeler() + bundle.getString("PlaatsTegelInstructie"));
                 System.out.println(huidigeSpelerIndex);
                 System.out.println(gekozenCirkel);
                 return;
@@ -697,7 +697,6 @@ public class SpelController implements Initializable
             int rij = (int) (Math.floor(mouseY / cellSize));
             boolean verticaal = tegelRotated;
             DominoTegel tegel = dc.getGeclaimdeTegel(getKleurSpeler());
-
 
             // Try-Catch om te checken of de tegel correct geplaatst kan worden in het tegelgebied.
             try {
@@ -743,12 +742,13 @@ public class SpelController implements Initializable
 
         if (kiesNieuweTegel) {
 
+            instructieTekst.setText(bundle.getString("SpelerMetKleur") + getKleurSpeler() + bundle.getString("PlaatsTegelInstructie"));
+
             if (dc.getGeclaimdeTegel(getKleurSpeler()) == null) {
                 voegSpelerToeAanGekozenVolgorde(getKleurSpeler(), gekozenCirkel);
                 dc.voegKoningAanKaart(getKleurSpeler(), gekozenCirkel, 1);
 
 
-                instructieTekst.setText(bundle.getString("SpelerMetKleur") + getKleurSpeler() + bundle.getString("KiesEenTegel"));
                 try {
                     geselecteerdeCirkel.setDisable(true);
                 } catch (NullPointerException e) {
@@ -764,15 +764,15 @@ public class SpelController implements Initializable
                     System.out.println(e.getMessage());
                 }
                 geselecteerdeCirkel = null;
-                instructieTekst.setText("Speler met kleur " + getKleurSpeler() + ", plaats je tegel en klik op bevestig. Kies vervolgens een nieuwe tegel!");
             }
             System.out.println(gekozenVolgordeNieuw.toString());
             kiesNieuweTegel = false;
             plaatsTegel = true;
             huidigeSpelerIndex = (huidigeSpelerIndex + 1) % dc.getSpelendeSpelers().size();
+            instructieTekst.setText(bundle.getString("SpelerMetKleur") + getKleurSpeler() + bundle.getString("PlaatsTegelInstructie"));
             updateKaartenBeweegbaarHeid();
             if(!gekozenVolgordeNieuw.contains(null)){
-                instructieTekst.setText("Klik op de stapel om de volgende ronde te starten.");
+                instructieTekst.setText(bundle.getString("KlikOpStapelInstructie"));
             }
             return;
         }
