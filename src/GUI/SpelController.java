@@ -509,9 +509,8 @@ public class SpelController implements Initializable
         bundle = ResourceBundle.getBundle("resourcebundles.lang", locale);
 
         // Hier wordt de tekst van de buttons veranderd zodat er geen korte aparte methode voor moet zijn
-        bevestigBtn.setText(bundle.getString("Bevestig"));
         verwijderBtn.setText(bundle.getString("Verwijder"));
-        volgendeBtn.setText(bundle.getString("VolgendeSpeler"));
+        volgendeBtn.setText(bundle.getString("Volgende"));
     }
 
     /*-------------------------------------------------BACKEND---------------------------------------------------*/
