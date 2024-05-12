@@ -617,56 +617,61 @@ public class SpelController implements Initializable
 //            instructieTekst.setStyle("-fx-text-fill: white;");
 //        }
 
-        if(rondeNummer == 1) {
+        if(rondeNummer == 1) //RONDE 1
+        {
+                voegSpelerToeAanGekozenVolgorde(getKleurSpeler(), gekozenCirkel);
+                dc.voegKoningAanKaart(getKleurSpeler(), gekozenCirkel, 0);
+                try {
+                    geselecteerdeCirkel.setDisable(true);
+                }
+                catch (NullPointerException e){
+                    System.out.println(e.getMessage());
+                }
 
-            voegSpelerToeAanGekozenVolgorde(getKleurSpeler(), gekozenCirkel);
-            dc.voegKoningAanKaart(getKleurSpeler(), gekozenCirkel, 0);
-
-            System.out.println(gekozenVolgorde);
-
-            spelersMetTegels++;
+                System.out.println(gekozenVolgorde);
+                spelersMetTegels++;
+                geselecteerdeCirkel = null;
+                huidigeSpelerIndex = (huidigeSpelerIndex + 1) % dc.getSpelendeSpelers().size();
+                instructieTekst.setText(bundle.getString("SpelerMetKleur") + getKleurSpeler() + bundle.getString("KiesEenTegel"));
 
             if(spelersMetTegels == dc.getSpelendeSpelers().size())
             {
                 dc.setVolgordeKoning(gekozenVolgorde);
                 rondeNummer++;
+                instructieTekst.setText("Speler met kleur " + getKleurSpeler() + ", plaats je tegel en klik op bevestig. Kies vervolgens een nieuwe tegel!");
             }
 
             System.out.println(rondeNummer);
 
-        } else // if(dc.getBeginKolom().get(gekozenCirkel - 1).getKoningVanSpeler() == null)
+        } else // ALLES NA RONDE 1
         {
-            dc.voegKoningAanKaart(getKleurSpeler(), gekozenCirkel, 1);
+            huidigeSpelerIndex = (huidigeSpelerIndex + 1) % dc.getSpelendeSpelers().size();
+            updateKaartenBeweegbaarHeid();
+
+            if (dc.getGeclaimdeTegel(getKleurSpeler()) == null)
+            {
+                dc.voegKoningAanKaart(getKleurSpeler(), gekozenCirkel, 1);
+                
+                System.out.println(gekozenVolgorde);
+                instructieTekst.setText(bundle.getString("SpelerMetKleur") + getKleurSpeler() + bundle.getString("KiesEenTegel"));
+
+            } else
+                {
+                    try {
+                        geselecteerdeCirkel.setDisable(true);
+                    }
+                    catch (NullPointerException e){
+                        System.out.println(e.getMessage());
+                    }
+                    geselecteerdeCirkel = null;
+                    instructieTekst.setText("Speler met kleur " + getKleurSpeler() + ", plaats je tegel en klik op bevestig. Kies vervolgens een nieuwe tegel!");
+                }
         }
 
-
-
-        System.out.println("speler toegevoegd aan kaart!");
-        try {
-            geselecteerdeCirkel.setDisable(true);
-        }
-        catch (NullPointerException e){
-            System.out.println(e.getMessage());
-        }
-
-        geselecteerdeCirkel = null;
-        huidigeSpelerIndex = (huidigeSpelerIndex + 1) % dc.getSpelendeSpelers().size();
-
-
-        if (spelersMetTegels != dc.getSpelendeSpelers().size())
-        {
-            instructieTekst.setText(bundle.getString("SpelerMetKleur") + getKleurSpeler() + bundle.getString("KiesEenTegel"));
-        } else {
-            instructieTekst.setText("Speler met kleur " + getKleurSpeler() + ", plaats je tegel en klik op bevestig. Kies vervolgens een nieuwe tegel!");
-        }
-
-
-        instructieTekst.setStyle("-fx-text-fill: white;");
-
-        if(rondeNummer > 1){
+        /*if(rondeNummer > 1){
             updateKaartenBeweegbaarHeid();
             System.out.println("poop");
-        }
+        }*/
     }
     @FXML
     private void circleClickHandler(MouseEvent event)
@@ -756,8 +761,6 @@ public class SpelController implements Initializable
 
 
         instructieTekst.setText(bundle.getString("SpelerMetKleur") + getKleurSpeler() + bundle.getString("KiesEenTegel"));
-
-        int keuze = gekozenCirkel;
     }
     public void speelBeurt()
     {

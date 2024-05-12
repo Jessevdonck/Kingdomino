@@ -279,7 +279,8 @@ public class DomeinController {
                 return tegel;
             }
         }
-        throw new IllegalArgumentException("geen geclaimde tegel gevonden");
+        return null;
+        //throw new IllegalArgumentException("geen geclaimde tegel gevonden");
     }
 
     public boolean kanTegelPlaatsen(int spelerIndex, DominoTegel tegel) {
