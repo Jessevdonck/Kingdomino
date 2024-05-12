@@ -31,7 +31,7 @@ public class SceneSwitchController
     public void switchToRegisterScene(ActionEvent event, DomeinController dc, TaalController tc) throws IOException
     {
         MediaPlayerSingleton.getInstanceSoundFX().play();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Login.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ScoreScherm.fxml"));
         loader.setController(new RegistreerSpelerController(dc, tc));
         Parent root = loader.load();
 
@@ -111,6 +111,19 @@ public class SceneSwitchController
         stage.setX(centerX);
         stage.setY(0);
 
+        stage.show();
+    }
+
+    public void switchToScoreScene(ActionEvent event, DomeinController dc, TaalController tc) throws IOException {
+        MediaPlayerSingleton.getInstanceSoundFX().play();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ScoreScherm.fxml"));
+        loader.setController(new ScoreController(dc, tc));
+        Parent root = loader.load();
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        Image cursorImage = new Image(getClass().getResourceAsStream("/img/middle-ages-cursor-32x32.png"));
+        scene.setCursor(new ImageCursor(cursorImage));
+        stage.setScene(scene);
         stage.show();
     }
 
