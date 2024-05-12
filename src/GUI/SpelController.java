@@ -245,10 +245,10 @@ public class SpelController implements Initializable
 
     @FXML
     public void kaartenVanBeginNaarEindKolom(){
-        if(!isEindeRonde){
-
-            return;
-        }
+//        if(!isEindeRonde){
+//
+//            return;
+//        }
         dc.updateKaarten();
         beginKolom.getChildren().clear();
         eindKolom.getChildren().clear();
@@ -372,12 +372,14 @@ public class SpelController implements Initializable
 
         if (!tegelRotated && newX >= borden[bordIndex].getWidth() - cellSize) {
             // Negeer de actie als de tegelRotated false is en de tegel in de laatste kolom wordt geplaatst
-            return;
+            newX = Math.floor((borden[bordIndex].getWidth() - cellSize * 2) / cellSize) * cellSize;
+            mouseX = borden[bordIndex].getWidth() - cellSize - 1;
         }
 
-        if (tegelRotated && newY < cellSize / 2) {
+        if (tegelRotated && tegelRotated && newY >= borden[bordIndex].getHeight() - cellSize) {
             // Negeer de actie als de tegel geroteerd is en wordt geplaatst in de bovenste rij
-            return;
+            newY = Math.floor((borden[bordIndex].getHeight() - cellSize * 2) / cellSize) * cellSize + (cellSize / 2);
+            mouseY = newY - cellSize / 2;
         }
 
 
