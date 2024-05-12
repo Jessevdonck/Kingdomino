@@ -151,4 +151,8 @@ public class SpelRepository {
     public void verplaatsKoning(Kleur kleur, DominoTegel dominoTegel) {
         momenteelSpel.verplaatskoning(kleur, dominoTegel);
     }
+
+    public boolean kanTegelPlaatsen(int spelerindex) {
+        return momenteelSpel.kanTegelPlaatsen(spelerindex);
+    }
 }

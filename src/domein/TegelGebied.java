@@ -9,7 +9,7 @@ import util.LandschapType;
 public class TegelGebied
 {
     private static int[][] richting = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
-    private final Landschap[][] gebied;
+    private Landschap[][] gebied;
     private boolean[][] bezocht = new boolean[5][5];
 
     public TegelGebied() {
@@ -179,6 +179,26 @@ public class TegelGebied
             }
         }
         return count;
+    }
+
+    public boolean kanTegelPlaatsen( ) {
+        // Horizontaal
+        for (int rij = 0; rij < gebied.length; rij++) {
+            for (int kolom = 0; kolom < gebied[rij].length - 1; kolom++) {
+                if (gebied[rij][kolom] == null && gebied[rij][kolom + 1] == null) {
+                    return true;
+                }
+            }
+        }
+        // Verticaal
+        for (int kolom = 0; kolom < gebied[0].length; kolom++) {
+            for (int rij = 0; rij < gebied.length - 1; rij++) {
+                if (gebied[rij][kolom] == null && gebied[rij + 1][kolom] == null) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     @Override

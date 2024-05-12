@@ -280,6 +280,9 @@ public class DomeinController {
             }
         }
         throw new IllegalArgumentException("geen geclaimde tegel gevonden");
+    }
 
+    public boolean kanTegelPlaatsen(int spelerIndex) {
+        return spelRepository.kanTegelPlaatsen(spelerIndex);
     }
 }
