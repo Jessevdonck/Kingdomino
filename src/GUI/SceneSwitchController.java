@@ -31,7 +31,7 @@ public class SceneSwitchController
     public void switchToRegisterScene(ActionEvent event, DomeinController dc, TaalController tc) throws IOException
     {
         MediaPlayerSingleton.getInstanceSoundFX().play();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ScoreScherm.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Login.fxml.fxml"));
         loader.setController(new RegistreerSpelerController(dc, tc));
         Parent root = loader.load();
 
@@ -108,8 +108,9 @@ public class SceneSwitchController
         Rectangle2D bounds = screen.getVisualBounds();
 
         double centerX = bounds.getMinX() + (bounds.getWidth() - scene.getWidth()) / 2;
+        double centerY = bounds.getMinX() + (bounds.getHeight() - scene.getHeight()) / 2;
         stage.setX(centerX);
-        stage.setY(0);
+        stage.setY(centerY);
 
         stage.show();
     }
@@ -128,8 +129,9 @@ public class SceneSwitchController
         Rectangle2D bounds = screen.getVisualBounds();
 
         double centerX = bounds.getMinX() + (bounds.getWidth() - scene.getWidth()) / 2;
+        double centerY = bounds.getMinX() + (bounds.getHeight() - scene.getHeight()) / 2;
         stage.setX(centerX);
-        stage.setY(0);
+        stage.setY(centerY);
 
         stage.show();
     }
