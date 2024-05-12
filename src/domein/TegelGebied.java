@@ -190,28 +190,28 @@ public class TegelGebied
             for (int kolom = 0; kolom < gebied[rij].length - 1; kolom++) {
                 if (gebied[rij][kolom] == null && gebied[rij][kolom + 1] == null) {
                     // type 1 boven
-                    if((rij <= 4) && gebied[rij + 1][kolom].getType() == type1){
+                    if((rij <= 3) && (gebied[rij + 1][kolom] != null) &&  gebied[rij + 1][kolom].getType() == type1){
                         return true;
                     }
                     // type 1 onder
-                    if((rij >= 1) && gebied[rij - 1][kolom].getType() == type1){
+                    if((rij >= 1) && (gebied[rij - 1][kolom] != null) && gebied[rij - 1][kolom].getType() == type1){
                         return true;
                     }
                     // type 1 links
-                    if((kolom >= 1) && gebied[rij][kolom - 1].getType() == type1){
+                    if((kolom >= 1) && (gebied[rij][kolom - 1] != null) &&  gebied[rij][kolom - 1].getType() == type1){
                         return true;
                     }
 
                     // type 2 boven
-                    if( (rij <= 3) && (kolom <= 3) && gebied[rij + 1][kolom + 1].getType() == type1 ){
+                    if( (rij <= 3) && (kolom <= 3) &&(gebied[rij + 1][kolom + 1] != null) &&  gebied[rij + 1][kolom + 1].getType() == type1 ){
                         return true;
                     }
                     // type 2 onder
-                    if((rij >= 1) && (kolom <= 3) && gebied[rij - 1][kolom + 1].getType() == type1){
+                    if((rij >= 1) && (kolom <= 3) && (gebied[rij - 1][kolom + 1] != null) && gebied[rij - 1][kolom + 1].getType() == type1){
                         return true;
                     }
                     // type 2 rechts
-                    if((kolom <= 2 ) && gebied[rij][kolom + 2].getType() == type1 ){
+                    if((kolom <= 2 ) && (gebied[rij][kolom + 2] != null) && gebied[rij][kolom + 2].getType() == type1 ){
                         return true;
                     }
 
@@ -223,27 +223,27 @@ public class TegelGebied
             for (int rij = 0; rij < gebied.length - 1; rij++) {
                 if (gebied[rij][kolom] == null && gebied[rij + 1][kolom] == null) {
                     //type 1 links
-                    if((kolom >= 1) && gebied[rij][kolom - 1].getType() == type1){
+                    if((kolom >= 1) && (gebied[rij][kolom - 1] != null) && gebied[rij][kolom - 1].getType() == type1){
                         return true;
                     }
                     //type 1 rechts
-                    if((kolom <= 3) && gebied[rij][kolom + 1].getType() == type1){
+                    if((kolom <= 3) && (gebied[rij][kolom + 1] != null) && gebied[rij][kolom + 1].getType() == type1){
                         return true;
                     }
                     //type 1 boven
-                    if((rij >= 1) && gebied[rij - 1][kolom].getType() == type1){
+                    if((rij >= 1) && (gebied[rij - 1][kolom] != null) && gebied[rij - 1][kolom].getType() == type1){
                         return true;
                     }
                     //type 2 links
-                    if((kolom >= 1) && (rij >= 1) && gebied[rij + 1][kolom - 1].getType() == type2){
+                    if((kolom >= 1) && (rij >= 1) && (gebied[rij + 1][kolom - 1] != null) && gebied[rij + 1][kolom - 1].getType() == type2){
                         return true;
                     }
                     //type 2 rechts
-                    if((kolom <= 3) && (rij >= 1) && gebied[rij + 1][kolom + 1].getType() == type2){
+                    if((kolom <= 3) && (rij >= 1) && (gebied[rij + 1][kolom + 1] != null) && gebied[rij + 1][kolom + 1].getType() == type2){
                         return true;
                     }
                     // type 2 onder
-                    if((rij <= 2) && gebied[rij + 2][kolom].getType() == type1){
+                    if((rij <= 2) && (gebied[rij + 2][kolom] != null) && gebied[rij + 2][kolom].getType() == type1){
                         return true;
                     }
 
