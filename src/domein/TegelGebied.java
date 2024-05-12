@@ -190,7 +190,7 @@ public class TegelGebied
             for (int kolom = 0; kolom < gebied[rij].length - 1; kolom++) {
                 if (gebied[rij][kolom] == null && gebied[rij][kolom + 1] == null) {
                     // type 1 boven
-                    if((rij <= 4) && (gebied[rij + 1][kolom] != null) &&  gebied[rij + 1][kolom].getType() == type1){
+                    if((rij <= 3) && (gebied[rij + 1][kolom] != null) &&  gebied[rij + 1][kolom].getType() == type1){
                         return true;
                     }
                     // type 1 onder
