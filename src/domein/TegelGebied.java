@@ -156,14 +156,14 @@ public class TegelGebied
 
                 // type 2 boven
                 if ((rij <= 3) && (kolom <= 3) && (gebied[rij + 1][kolom + 1] != null)
-                        && ((gebied[rij + 1][kolom + 1].getType() == type1)
-                        || (gebied[rij + 1][kolom + 1].getType() == LandschapType.KONING))) {
+                        && ((gebied[rij - 1][kolom + 1].getType() == type1)
+                        || (gebied[rij - 1][kolom + 1].getType() == LandschapType.KONING))) {
                     return true;
                 }
                 // type 2 onder
                 if ((rij >= 1) && (kolom <= 3) && (gebied[rij - 1][kolom + 1] != null)
-                        && ((gebied[rij - 1][kolom + 1].getType() == type1)
-                        || (gebied[rij - 1][kolom + 1].getType() == LandschapType.KONING))) {
+                        && ((gebied[rij + 1][kolom + 1].getType() == type1)
+                        || (gebied[rij + 1][kolom + 1].getType() == LandschapType.KONING))) {
                     return true;
                 }
                 // type 2 rechts
