@@ -244,7 +244,7 @@ public class SpelController implements Initializable
     }
 
     @FXML
-    public void kaartenVanBeginNaarEindKolom(MouseEvent event){
+    public void kaartenVanBeginNaarEindKolom(){
         if(!isEindeRonde){
 
             return;
@@ -254,6 +254,10 @@ public class SpelController implements Initializable
         eindKolom.getChildren().clear();
         plaatsTegelsInKolom(dc.getBeginKolom(), beginKolom);
         plaatsTegelsInKolom(dc.getEindKolom(), eindKolom);
+    }
+
+    public void updateFotoStapelButton(){
+        // VOORLOPIG EMPTY MORGEN EVEN VRAGEN AAN DE GROEP HOE HET IN HET DOMEIN WERKT
     }
 
     private void plaatsTegelsInKolom(List<DominoTegel> tegels, GridPane kolom)
@@ -425,9 +429,10 @@ public class SpelController implements Initializable
             instructieTekst.setText(bundle.getString("RondeNogNietGedaan"));
             instructieTekst.setStyle("-fx-text-fill: red;");
         }else{
-            instructieTekst.setText("Volgende ronde test");
+            instructieTekst.setText(bundle.getString("VolgendeRondeGestart"));
             instructieTekst.setStyle("-fx-text-fill: white;");
             // DOE ALLES OM RONDE TE UPDATEN
+            kaartenVanBeginNaarEindKolom();
         }
 
     }
