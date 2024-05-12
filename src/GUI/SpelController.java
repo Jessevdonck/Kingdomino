@@ -563,12 +563,28 @@ public class SpelController implements Initializable
 
         DominoTegel tegel = dc.getGeclaimdeTegel(getKleurSpeler());
         if(!dc.kanTegelPlaatsen(huidigeSpelerIndex, tegel)){
+            String prevText = instructieTekst.getText();
+            String prevStyle = instructieTekst.getStyle();
+            PauseTransition pause = new PauseTransition(Duration.seconds(3));
+            pause.setOnFinished(pauseEvent -> {
+                instructieTekst.setText(prevText);
+                instructieTekst.setStyle(prevStyle);
+            });
             instructieTekst.setText(bundle.getString("TegelVerwijderdUitSpel"));
             instructieTekst.setStyle("-fx-text-fill: green;");
+            pause.play();
             // Delete imageview
         }else{
+            String prevText = instructieTekst.getText();
+            String prevStyle = instructieTekst.getStyle();
+            PauseTransition pause = new PauseTransition(Duration.seconds(3));
+            pause.setOnFinished(pauseEvent -> {
+                instructieTekst.setText(prevText);
+                instructieTekst.setStyle(prevStyle);
+            });
             instructieTekst.setText(bundle.getString("TegelKanGeplaatstWorden"));
             instructieTekst.setStyle("-fx-text-fill: white;");
+            pause.play();
         }
 
 
