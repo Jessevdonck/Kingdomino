@@ -480,7 +480,7 @@ public class SpelController implements Initializable
             String prevStyle = instructieTekst.getStyle();
             PauseTransition pause = new PauseTransition(Duration.seconds(1.5));
             pause.setOnFinished(pauseEvent -> {
-                instructieTekst.setText("Speler met kleur " + getKleurSpeler() + ", plaats je tegel en klik op bevestig. Kies vervolgens een nieuwe tegel!");
+                instructieTekst.setText(bundle.getString("SpelerMetKleur") + getKleurSpeler() + bundle.getString("PlaatsTegelInstructie"));
                 instructieTekst.setStyle(prevStyle);
             });
             instructieTekst.setText(bundle.getString("VolgendeRondeGestart"));
