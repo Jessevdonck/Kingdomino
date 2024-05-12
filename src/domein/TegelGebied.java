@@ -181,12 +181,40 @@ public class TegelGebied
         return count;
     }
 
-    public boolean kanTegelPlaatsen( ) {
+    public boolean kanTegelPlaatsen(DominoTegel tegel) {
         // Horizontaal
+        LandschapType type1 = tegel.getLandschapType1().getType();
+        LandschapType type2 = tegel.getLandschapType2().getType();
+
         for (int rij = 0; rij < gebied.length; rij++) {
             for (int kolom = 0; kolom < gebied[rij].length - 1; kolom++) {
                 if (gebied[rij][kolom] == null && gebied[rij][kolom + 1] == null) {
-                    return true;
+                    // type 1 boven
+                    if((rij <= 4) && gebied[rij + 1][kolom].getType() == type1){
+                        return true;
+                    }
+                    // type 1 onder
+                    if((rij >= 1) && gebied[rij - 1][kolom].getType() == type1){
+                        return true;
+                    }
+                    // type 1 links
+                    if((kolom >= 1) && gebied[rij][kolom - 1].getType() == type1){
+                        return true;
+                    }
+
+                    // type 2 boven
+                    if( (rij <= 3) && (kolom <= 3) && gebied[rij + 1][kolom + 1].getType() == type1 ){
+                        return true;
+                    }
+                    // type 2 onder
+                    if((rij >= 1) && (kolom <= 3) && gebied[rij - 1][kolom + 1].getType() == type1){
+                        return true;
+                    }
+                    // type 2 rechts
+                    if((kolom <= 2 ) && gebied[rij][kolom + 2].getType() == type1 ){
+                        return true;
+                    }
+
                 }
             }
         }
@@ -194,7 +222,31 @@ public class TegelGebied
         for (int kolom = 0; kolom < gebied[0].length; kolom++) {
             for (int rij = 0; rij < gebied.length - 1; rij++) {
                 if (gebied[rij][kolom] == null && gebied[rij + 1][kolom] == null) {
-                    return true;
+                    //type 1 links
+                    if((kolom >= 1) && gebied[rij][kolom - 1].getType() == type1){
+                        return true;
+                    }
+                    //type 1 rechts
+                    if((kolom <= 3) && gebied[rij][kolom + 1].getType() == type1){
+                        return true;
+                    }
+                    //type 1 boven
+                    if((rij >= 1) && gebied[rij - 1][kolom].getType() == type1){
+                        return true;
+                    }
+                    //type 2 links
+                    if((kolom >= 1) && (rij >= 1) && gebied[rij + 1][kolom - 1].getType() == type2){
+                        return true;
+                    }
+                    //type 2 rechts
+                    if((kolom <= 3) && (rij >= 1) && gebied[rij + 1][kolom + 1].getType() == type2){
+                        return true;
+                    }
+                    // type 2 onder
+                    if((rij <= 2) && gebied[rij + 2][kolom].getType() == type1){
+                        return true;
+                    }
+
                 }
             }
         }
