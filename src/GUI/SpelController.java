@@ -468,6 +468,7 @@ public class SpelController implements Initializable
         if(dc.getBeschikbareTegels().isEmpty()){
             //HIER MOETEN WE SWITCHEN NAAR HET SCORESCHERM AANGEZIEN DAN HET EINDE VAN HET SPEL BEREIKT IS
             //OOK ALLE NODIGE FUNCTIES VAN VERWERKEINDESPEL IN DC OF DOEN WE DAT IN SCORESCHERM IDK
+            return;
         }
 
         if (!beginKolom.getChildren().isEmpty() || gekozenVolgordeNieuw.contains(null)) {
