@@ -51,7 +51,7 @@
                   <Font name="System Bold" size="12.0" />
                </font>
             </Label>
-            <Button fx:id="stapelImageView" prefHeight="78.0" prefWidth="156.0" layoutX="170.0" layoutY="49.0" onAction="#stapelButtonHandler" pickOnBounds="true">
+            <Button fx:id="stapelButton" prefHeight="78.0" prefWidth="156.0" layoutX="170.0" layoutY="49.0" onAction="#stapelButtonHandler" pickOnBounds="true">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>

@@ -55,7 +55,7 @@ public class SpelController implements Initializable
     @FXML private Circle keuzeTegelEindKolom3;
     @FXML private Circle keuzeTegelEindKolom4;
     @FXML private Label instructieTekst;
-    @FXML private Button stapelImageView;
+    @FXML private Button stapelButton;
     @FXML private Button verwijderBtn;
     @FXML private Button bevestignBtn;
     @FXML private Button volgendeBtn;
@@ -125,7 +125,7 @@ public class SpelController implements Initializable
         plaatsStartTegels();
 
         plaatsTegelsInKolom(getEindKolomTegels(), eindKolom);
-        plaatsTegelInStapel(getStapel(), stapelImageView);
+        plaatsTegelInStapel(getStapel(), stapelButton);
         plaatsTegelsInBeginKolom(getBeginKolomTegels(), beginKolom);
         updateKaartenBeweegbaarHeid();
         speelBeurtEersteRonde();
@@ -244,7 +244,7 @@ public class SpelController implements Initializable
     }
 
     @FXML
-    public void kaartenVanBeginNaarEindKolom(){
+    public void updateNaarVolgendeRonde(){
 //        if(!isEindeRonde){
 //
 //            return;
@@ -254,10 +254,7 @@ public class SpelController implements Initializable
         eindKolom.getChildren().clear();
         plaatsTegelsInKolom(dc.getBeginKolom(), beginKolom);
         plaatsTegelsInKolom(dc.getEindKolom(), eindKolom);
-    }
-
-    public void updateFotoStapelButton(){
-        // VOORLOPIG EMPTY MORGEN EVEN VRAGEN AAN DE GROEP HOE HET IN HET DOMEIN WERKT
+        plaatsTegelInStapel(dc.getBeschikbareTegels(), stapelButton);
     }
 
     private void plaatsTegelsInKolom(List<DominoTegel> tegels, GridPane kolom)
@@ -291,9 +288,9 @@ public class SpelController implements Initializable
         System.out.println(id);
     }
 
-    private void plaatsTegelInStapel(List<DominoTegel> tegels, Button stapelImageView)
+    private void plaatsTegelInStapel(List<DominoTegel> tegels, Button stapelButton)
     {
-        stapelImageView.setGraphic(null);
+        stapelButton.setGraphic(null);
 
         Random random = new Random();
         int randomIndex = random.nextInt(tegels.size());
@@ -306,8 +303,8 @@ public class SpelController implements Initializable
         imageView.setFitHeight(78);
         imageView.setFitWidth(156);
 
-        // Voeg de ImageView toe aan de stapelImageView
-        stapelImageView.setGraphic(imageView);
+        // Voeg de ImageView toe aan de stapelButton
+        stapelButton.setGraphic(imageView);
     }
 
 
@@ -434,11 +431,10 @@ public class SpelController implements Initializable
             instructieTekst.setText(bundle.getString("RondeNogNietGedaan"));
             instructieTekst.setStyle("-fx-text-fill: red;");
         }else{
-            kaartenVanBeginNaarEindKolom();
+            updateNaarVolgendeRonde();
             instructieTekst.setText(bundle.getString("VolgendeRondeGestart"));
             instructieTekst.setStyle("-fx-text-fill: white;");
             // DOE ALLES OM RONDE TE UPDATEN
-            kaartenVanBeginNaarEindKolom();
         }
 
     }
