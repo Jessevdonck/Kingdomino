@@ -373,10 +373,15 @@ public class SpelController implements Initializable
             mouseX = borden[bordIndex].getWidth() - cellSize - 1;
         }
 
-        if (tegelRotated && tegelRotated && newY >= borden[bordIndex].getHeight() - cellSize) {
+        if (tegelRotated && newY >= borden[bordIndex].getHeight() - cellSize) {
             // Negeer de actie als de tegel geroteerd is en wordt geplaatst in de bovenste rij
             newY = Math.floor((borden[bordIndex].getHeight() - cellSize * 2) / cellSize) * cellSize + (cellSize / 2);
             mouseY = newY - cellSize / 2;
+        }
+
+        if (newX == 156 && newY == 156)
+        {
+            return;
         }
 
 
