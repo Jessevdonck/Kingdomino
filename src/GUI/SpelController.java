@@ -446,8 +446,16 @@ public class SpelController implements Initializable
             instructieTekst.setStyle("-fx-text-fill: red;");
             pause.play();
         }else{
+            String prevText = instructieTekst.getText();
+            String prevStyle = instructieTekst.getStyle();
+            PauseTransition pause = new PauseTransition(Duration.seconds(3));
+            pause.setOnFinished(pauseEvent -> {
+                instructieTekst.setText(prevText);
+                instructieTekst.setStyle(prevStyle);
+            });
             instructieTekst.setText(bundle.getString("VolgendeRondeGestart"));
             instructieTekst.setStyle("-fx-text-fill: white;");
+            pause.play();
             // DOE ALLES OM RONDE TE UPDATEN
             updateNaarVolgendeRonde();
         }
@@ -522,13 +530,30 @@ public class SpelController implements Initializable
             draggedImageView.setOnKeyPressed(null);
             tegelRotated = false;
 
+            String prevText = instructieTekst.getText();
+            String prevStyle = instructieTekst.getStyle();
+            PauseTransition pause = new PauseTransition(Duration.seconds(3));
+            pause.setOnFinished(pauseEvent -> {
+                instructieTekst.setText(prevText);
+                instructieTekst.setStyle(prevStyle);
+            });
             instructieTekst.setText(bundle.getString("TegelSuccesVolToegevoegd"));
             instructieTekst.setStyle("-fx-text-fill: #00e000;");
+            pause.play();
+
             System.out.println("Tegel is in het domein toegevoegd.");
         } catch (PlaatsenMiddenVanHetBordException | OverlappingHorizontaalException | OverlappingVerticaalException |
             TegelNietOvereenMetAanliggendeTegelException | IllegalArgumentException e) {
+            String prevText = instructieTekst.getText();
+            String prevStyle = instructieTekst.getStyle();
+            PauseTransition pause = new PauseTransition(Duration.seconds(3));
+            pause.setOnFinished(pauseEvent -> {
+                instructieTekst.setText(prevText);
+                instructieTekst.setStyle(prevStyle);
+            });
             instructieTekst.setText(e.getMessage());
             instructieTekst.setStyle("-fx-text-fill: red;");
+            pause.play();
         }
 
     }
