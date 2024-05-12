@@ -526,29 +526,17 @@ public class SpelController implements Initializable
     @FXML
     private void verwijderButtonHandler(ActionEvent event){
 
-        int kolom = (int) (newX / 78);
-        int rij = (int) (newY / 78);
-        boolean verticaal = tegelRotated;
         DominoTegel tegel = dc.getGeclaimdeTegel(getKleurSpeler());
-
-        // Try-Catch om te checken of de tegel weldegelijk geplaatst kan worden, of toch niet.
-        try {
-
-            //methodeDieChecktOfTegelWelOfNietGeplaatstKanWorden()
-            System.out.println("Tegel verwijderd uit spel: " + tegel);
-
-            draggedImageView.setOnMouseDragged(null);
-            draggedImageView.setOnMousePressed(null);
-            draggedImageView.setOnMouseReleased(null);
-            draggedImageView.setOnKeyPressed(null);
-            tegelRotated = false;
-
+        if(!dc.kanTegelPlaatsen(huidigeSpelerIndex, tegel)){
             instructieTekst.setText(bundle.getString("TegelVerwijderdUitSpel"));
-            instructieTekst.setStyle("-fx-text-fill: #00e000;");
-        } catch(IllegalArgumentException e) {
-            instructieTekst.setText(e.getMessage());
-            instructieTekst.setStyle("-fx-text-fill: red;");
+            instructieTekst.setStyle("-fx-text-fill: green;");
+            // Delete imageview
+        }else{
+            instructieTekst.setText(bundle.getString("TegelKanGeplaatstWorden"));
+            instructieTekst.setStyle("-fx-text-fill: white;");
         }
+
+
 
     }
     private void updateKaartenBeweegbaarHeid(){

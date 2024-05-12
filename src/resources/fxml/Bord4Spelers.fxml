@@ -34,7 +34,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Button fx:id="verwijderBtn" mnemonicParsing="false" prefHeight="42.0" prefWidth="87.0" text="Verwijder">
+                  <Button fx:id="verwijderBtn" mnemonicParsing="false" onAction="#verwijderButtonHandler" prefHeight="42.0" prefWidth="87.0" text="Verwijder">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
