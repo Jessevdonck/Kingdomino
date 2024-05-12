@@ -424,7 +424,8 @@ public class SpelController implements Initializable
 
     /*-------------------------------------------------VOLGENDE RONDE--------------------------------------------*/
 
-    public void stapelButtonHandler(ActionEvent event){
+    @FXML
+    private void stapelButtonHandler(ActionEvent event){
 
         System.out.println("Stapel button ingedrukt");
         if(!beginKolom.getChildren().isEmpty()){
@@ -569,6 +570,10 @@ public class SpelController implements Initializable
     private void volgendeButtonHandler(ActionEvent event)
     {
 
+//        if((gekozenVolgorde != null) && !(gekozenVolgorde.contains(null))){
+//            instructieTekst.setText("Klik op de stapel om naar de volgende ronde te gaan.");
+//            instructieTekst.setStyle("-fx-text-fill: white;");
+//        }
 
         if(rondeNummer == 1) {
 
@@ -581,8 +586,8 @@ public class SpelController implements Initializable
 
             if(spelersMetTegels == dc.getSpelendeSpelers().size())
             {
-
                 dc.setVolgordeKoning(gekozenVolgorde);
+                rondeNummer++;
             }
 
             System.out.println(rondeNummer);
