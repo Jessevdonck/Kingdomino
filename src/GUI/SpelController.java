@@ -467,7 +467,7 @@ public class SpelController implements Initializable
         if (!beginKolom.getChildren().isEmpty() && !kiesNieuweTegel) {
             String prevText = instructieTekst.getText();
             String prevStyle = instructieTekst.getStyle();
-            PauseTransition pause = new PauseTransition(Duration.seconds(3));
+            PauseTransition pause = new PauseTransition(Duration.seconds(1.5));
             pause.setOnFinished(pauseEvent -> {
                 instructieTekst.setText(prevText);
                 instructieTekst.setStyle(prevStyle);
@@ -478,7 +478,7 @@ public class SpelController implements Initializable
         } else {
             String prevText = instructieTekst.getText();
             String prevStyle = instructieTekst.getStyle();
-            PauseTransition pause = new PauseTransition(Duration.seconds(3));
+            PauseTransition pause = new PauseTransition(Duration.seconds(1.5));
             pause.setOnFinished(pauseEvent -> {
                 instructieTekst.setText(prevText);
                 instructieTekst.setStyle(prevStyle);
@@ -545,54 +545,6 @@ public class SpelController implements Initializable
     }
 
     @FXML
-    private void bevestigButtonHandler(ActionEvent event)
-    {
-        int kolom = (int) (Math.floor(mouseX / cellSize));
-        int rij = (int) (Math.floor(mouseY / cellSize));
-        boolean verticaal = tegelRotated;
-        DominoTegel tegel = dc.getGeclaimdeTegel(getKleurSpeler());
-
-
-        // Try-Catch om te checken of de tegel correct geplaatst kan worden in het tegelgebied.
-        try {
-            dc.verplaatsDominotegel(kolom, rij, verticaal, tegel, huidigeSpelerIndex);
-
-
-            draggedImageView.setOnMouseDragged(null);
-            draggedImageView.setOnMousePressed(null);
-            draggedImageView.setOnMouseReleased(null);
-            draggedImageView.setOnKeyPressed(null);
-            tegelRotated = false;
-
-            String prevText = instructieTekst.getText();
-            String prevStyle = instructieTekst.getStyle();
-            PauseTransition pause = new PauseTransition(Duration.seconds(3));
-            pause.setOnFinished(pauseEvent -> {
-                instructieTekst.setText(prevText);
-                instructieTekst.setStyle(prevStyle);
-            });
-            instructieTekst.setText(bundle.getString("TegelSuccesVolToegevoegd"));
-            instructieTekst.setStyle("-fx-text-fill: #00e000;");
-            pause.play();
-
-            System.out.println("Tegel is in het domein toegevoegd.");
-        } catch (PlaatsenMiddenVanHetBordException | OverlappingHorizontaalException | OverlappingVerticaalException |
-                 TegelNietOvereenMetAanliggendeTegelException | IllegalArgumentException e) {
-            String prevText = instructieTekst.getText();
-            String prevStyle = instructieTekst.getStyle();
-            PauseTransition pause = new PauseTransition(Duration.seconds(3));
-            pause.setOnFinished(pauseEvent -> {
-                instructieTekst.setText(prevText);
-                instructieTekst.setStyle(prevStyle);
-            });
-            instructieTekst.setText(e.getMessage());
-            instructieTekst.setStyle("-fx-text-fill: red;");
-            pause.play();
-        }
-
-    }
-
-    @FXML
     private void verwijderButtonHandler(ActionEvent event)
     {
 
@@ -600,7 +552,7 @@ public class SpelController implements Initializable
         if (!dc.kanTegelPlaatsen(huidigeSpelerIndex, tegel)) {
             String prevText = instructieTekst.getText();
             String prevStyle = instructieTekst.getStyle();
-            PauseTransition pause = new PauseTransition(Duration.seconds(3));
+            PauseTransition pause = new PauseTransition(Duration.seconds(1.5));
             pause.setOnFinished(pauseEvent -> {
                 instructieTekst.setText(prevText);
                 instructieTekst.setStyle(prevStyle);
@@ -608,11 +560,43 @@ public class SpelController implements Initializable
             instructieTekst.setText(bundle.getString("TegelVerwijderdUitSpel"));
             instructieTekst.setStyle("-fx-text-fill: green;");
             pause.play();
+
             // Delete imageview
+
+            Kleur kleurHuidigeSpeler = getKleurSpeler();
+            int bordIndex = 0;
+
+            switch (kleurHuidigeSpeler) {
+                case GROEN:
+                    bordIndex = bordIndexGroen;
+                    break;
+                case BLAUW:
+                    bordIndex = bordIndexBlauw;
+                    break;
+                case ROOS:
+                    bordIndex = bordIndexRoos;
+                    break;
+                case GEEL:
+                    bordIndex = bordIndexGeel;
+                    break;
+            }
+
+            System.out.println(borden[bordIndex].getChildren().get(0).toString());
+            if(borden[bordIndex].getChildren().contains(draggedImageView)){
+                borden[bordIndex].getChildren().remove(draggedImageView);
+            }else{
+                beginKolom.getChildren().remove(0);
+            }
+
+            dc.getBeginKolom().remove(tegel);
+            plaatsTegel = false;
+            kiesNieuweTegel = true;
+
+
         } else {
             String prevText = instructieTekst.getText();
             String prevStyle = instructieTekst.getStyle();
-            PauseTransition pause = new PauseTransition(Duration.seconds(3));
+            PauseTransition pause = new PauseTransition(Duration.seconds(1.5));
             pause.setOnFinished(pauseEvent -> {
                 instructieTekst.setText(prevText);
                 instructieTekst.setStyle(prevStyle);
@@ -730,7 +714,7 @@ public class SpelController implements Initializable
 
                String prevText = instructieTekst.getText();
                String prevStyle = instructieTekst.getStyle();
-               PauseTransition pause = new PauseTransition(Duration.seconds(3));
+               PauseTransition pause = new PauseTransition(Duration.seconds(1.5));
                pause.setOnFinished(pauseEvent -> {
                    instructieTekst.setText(prevText);
                    instructieTekst.setStyle(prevStyle);
@@ -746,7 +730,7 @@ public class SpelController implements Initializable
                      TegelNietOvereenMetAanliggendeTegelException | IllegalArgumentException e) {
                 String prevText = instructieTekst.getText();
                 String prevStyle = instructieTekst.getStyle();
-                PauseTransition pause = new PauseTransition(Duration.seconds(3));
+                PauseTransition pause = new PauseTransition(Duration.seconds(1.5));
                 pause.setOnFinished(pauseEvent -> {
                     instructieTekst.setText(prevText);
                     instructieTekst.setStyle(prevStyle);
