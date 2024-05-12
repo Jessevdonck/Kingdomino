@@ -175,6 +175,7 @@ public class DomeinController {
                                 geefKaarten(getSpelendeSpelers().size())
                 );
 
+
     }
 
     /**

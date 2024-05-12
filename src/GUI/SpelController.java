@@ -40,34 +40,58 @@ public class SpelController implements Initializable
 
     private boolean tegelRotated = false;
 
-    @FXML private GridPane gridPane1;
-    @FXML private GridPane gridPane2;
-    @FXML private GridPane gridPane3;
-    @FXML private GridPane gridPane4;
-    @FXML private GridPane beginKolom;
-    @FXML private GridPane eindKolom;
-    @FXML private Label instructieMelding;
-    @FXML private Button bevestigBtn;
-    @FXML private Circle keuzeTegelBeginKolom1;
-    @FXML private Circle keuzeTegelBeginKolom2;
-    @FXML private Circle keuzeTegelBeginKolom3;
-    @FXML private Circle keuzeTegelBeginKolom4;
-    @FXML private Circle keuzeTegelEindKolom1;
-    @FXML private Circle keuzeTegelEindKolom2;
-    @FXML private Circle keuzeTegelEindKolom3;
-    @FXML private Circle keuzeTegelEindKolom4;
-    @FXML private Label instructieTekst;
-    @FXML private Button stapelButton;
-    @FXML private Button verwijderBtn;
-    @FXML private Button bevestignBtn;
-    @FXML private Button volgendeBtn;
-    @FXML private VBox eindKolomKeuze;
-    @FXML private VBox beginKolomKeuze;
-    @FXML private Pane bord1, bord2, bord3, bord4;
+    @FXML
+    private GridPane gridPane1;
+    @FXML
+    private GridPane gridPane2;
+    @FXML
+    private GridPane gridPane3;
+    @FXML
+    private GridPane gridPane4;
+    @FXML
+    private GridPane beginKolom;
+    @FXML
+    private GridPane eindKolom;
+    @FXML
+    private Label instructieMelding;
+    @FXML
+    private Button bevestigBtn;
+    @FXML
+    private Circle keuzeTegelBeginKolom1;
+    @FXML
+    private Circle keuzeTegelBeginKolom2;
+    @FXML
+    private Circle keuzeTegelBeginKolom3;
+    @FXML
+    private Circle keuzeTegelBeginKolom4;
+    @FXML
+    private Circle keuzeTegelEindKolom1;
+    @FXML
+    private Circle keuzeTegelEindKolom2;
+    @FXML
+    private Circle keuzeTegelEindKolom3;
+    @FXML
+    private Circle keuzeTegelEindKolom4;
+    @FXML
+    private Label instructieTekst;
+    @FXML
+    private Button stapelButton;
+    @FXML
+    private Button verwijderBtn;
+    @FXML
+    private Button bevestignBtn;
+    @FXML
+    private Button volgendeBtn;
+    @FXML
+    private VBox eindKolomKeuze;
+    @FXML
+    private VBox beginKolomKeuze;
+    @FXML
+    private Pane bord1, bord2, bord3, bord4;
 
 
-
-    @FXML private AnchorPane tafel;
+    @FXML
+    private AnchorPane tafel;
 
     @FXML
     private ImageView draggedImageView;
@@ -91,7 +115,7 @@ public class SpelController implements Initializable
 
     private List<Kleur> kleurenSpelers;
     private int huidigeSpelerIndex = 0;
-    private int rondeNummer = 1;
+
     Paint geselecteerdeKleurPaint;
     Pane[] borden;
     private double newX;
@@ -101,9 +125,17 @@ public class SpelController implements Initializable
     private double cellSize;
     private int spelersMetTegels = 0;
 
+
+    // ------ Game State Booleans --------
+    private boolean rondeEen = true;
+    private boolean plaatsTegel = false;
+    private boolean kiesNieuweTegel = false;
+
+
     private boolean isEindeRonde;
     private boolean isBeginRonde;
-    private List<Kleur> gekozenVolgorde;
+    private List<Kleur> gekozenVolgordeHuidig;
+    private List<Kleur> gekozenVolgordeNieuw;
     private final String[] startTegelImagePath =
             {
                     "/img/KingDomino_Afbeeldingen1/starttegel/starttegel_blauw.png",
@@ -134,6 +166,7 @@ public class SpelController implements Initializable
         //startSpel();
 
     }
+
     /*-------------------------------------------------FRONTEND---------------------------------------------------*/
     public void laadStarttegels(Pane pane, String startTegelImagePath)
     {
@@ -163,16 +196,14 @@ public class SpelController implements Initializable
 
         int index = 0;
 
-        for(Map.Entry<Speler, Kleur> entry : spelersMetKleuren.entrySet())
-        {
+        for (Map.Entry<Speler, Kleur> entry : spelersMetKleuren.entrySet()) {
             Speler speler = entry.getKey();
             Kleur kleur = entry.getValue();
 
-            if(index < beschikbareBorden.size())
-            {
+            if (index < beschikbareBorden.size()) {
                 Pane pane = beschikbareBorden.get(index);
                 String startTegelImagePath = getStartTegelImagePath(kleur);
-                switch (kleur){
+                switch (kleur) {
                     case GROEN:
                         bordIndexGroen = index;
                         break;
@@ -196,8 +227,7 @@ public class SpelController implements Initializable
 
     private String getStartTegelImagePath(Kleur kleur)
     {
-        switch (kleur)
-        {
+        switch (kleur) {
             case BLAUW:
                 return "/img/KingDomino_Afbeeldingen1/starttegel/starttegel_blauw.png";
             case GEEL:
@@ -211,13 +241,13 @@ public class SpelController implements Initializable
         }
     }
 
-    private void plaatsTegelsInBeginKolom(List<DominoTegel> tegels, GridPane kolom) {
+    private void plaatsTegelsInBeginKolom(List<DominoTegel> tegels, GridPane kolom)
+    {
         int index = 1;
         int indexGridPane = 0;
         kolom.getChildren().clear();
 
-        for (DominoTegel tegel : tegels)
-        {
+        for (DominoTegel tegel : tegels) {
             ImageView imageView = new ImageView(new Image(tegel.getFotoVoorkant()));
             imageView.setId("imageView" + index);
 
@@ -241,12 +271,10 @@ public class SpelController implements Initializable
         }
     }
 
-    private void setDisable(ImageView image){
-        image.setDisable(true);
-    }
 
     @FXML
-    public void updateNaarVolgendeRonde(){
+    public void updateNaarVolgendeRonde()
+    {
 //        if(!isEindeRonde){
 //
 //            return;
@@ -267,8 +295,7 @@ public class SpelController implements Initializable
         kolom.getChildren().clear();
 
 
-        for (DominoTegel tegel : tegels)
-        {
+        for (DominoTegel tegel : tegels) {
             ImageView imageView = new ImageView(new Image(tegel.getFotoVoorkant()));
             imageView.setId(kolom.getId() + index);
 
@@ -317,8 +344,8 @@ public class SpelController implements Initializable
 
         orgSceneX = event.getSceneX();
         orgSceneY = event.getSceneY();
-        orgTranslateX = ((ImageView)(event.getSource())).getTranslateX();
-        orgTranslateY = ((ImageView)(event.getSource())).getTranslateY();
+        orgTranslateX = ((ImageView) (event.getSource())).getTranslateX();
+        orgTranslateY = ((ImageView) (event.getSource())).getTranslateY();
     }
 
     private void imageViewMouseDragged(MouseEvent event)
@@ -342,7 +369,7 @@ public class SpelController implements Initializable
         Kleur kleurHuidigeSpeler = getKleurSpeler();
         int bordIndex = 0;
 
-        switch(kleurHuidigeSpeler) {
+        switch (kleurHuidigeSpeler) {
             case GROEN:
                 bordIndex = bordIndexGroen;
                 break;
@@ -358,16 +385,16 @@ public class SpelController implements Initializable
         }
 
         // Haal de coördinaten op van de muispositie ten opzichte van het bord
-         mouseX = event.getSceneX() - borden[bordIndex].getBoundsInParent().getMinX();
-         mouseY = event.getSceneY() - borden[bordIndex].getBoundsInParent().getMinY();
+        mouseX = event.getSceneX() - borden[bordIndex].getBoundsInParent().getMinX();
+        mouseY = event.getSceneY() - borden[bordIndex].getBoundsInParent().getMinY();
 
         // Pas deze coördinaten aan om ervoor te zorgen dat ze binnen het bordgebied blijven
         mouseX = Math.max(0, Math.min(mouseX, borden[bordIndex].getWidth()) - 1);
         mouseY = Math.max(0, Math.min(mouseY, borden[bordIndex].getHeight()) - 1);
 
         // Bereken de gesnapte x- en y-coördinaten binnen het bord
-         newX = !tegelRotated ? Math.floor(mouseX / cellSize) * cellSize : Math.floor(mouseX / cellSize) * cellSize - (cellSize / 2);
-         newY = !tegelRotated ? Math.floor(mouseY / cellSize) * cellSize : Math.floor(mouseY / cellSize) * cellSize + (cellSize / 2);
+        newX = !tegelRotated ? Math.floor(mouseX / cellSize) * cellSize : Math.floor(mouseX / cellSize) * cellSize - (cellSize / 2);
+        newY = !tegelRotated ? Math.floor(mouseY / cellSize) * cellSize : Math.floor(mouseY / cellSize) * cellSize + (cellSize / 2);
 
         if (!tegelRotated && newX >= borden[bordIndex].getWidth() - cellSize) {
             // Negeer de actie als de tegelRotated false is en de tegel in de laatste kolom wordt geplaatst
@@ -381,8 +408,7 @@ public class SpelController implements Initializable
             mouseY = newY - cellSize / 2;
         }
 
-        if (newX == 156 && newY == 156)
-        {
+        if (newX == 156 && newY == 156) {
             return;
         }
 
@@ -391,8 +417,6 @@ public class SpelController implements Initializable
         draggedImageView.setLayoutX(newX);
         draggedImageView.setLayoutY(newY);
 
-        System.out.println("newX " + newX + "\n newY" + newY);
-        System.out.println("\n kolom " + Math.floor(mouseX / cellSize) + "\n rij " + Math.floor(mouseY / cellSize));
 
         if (!borden[bordIndex].getChildren().contains(draggedImageView)) {
             borden[bordIndex].getChildren().add(draggedImageView);
@@ -410,20 +434,20 @@ public class SpelController implements Initializable
     private void imageViewKeyPressed(KeyEvent event)
     {
 
-        System.out.println("Key pressed: " + event.getCode());
+
         keyTypedImageView = (ImageView) event.getSource();
-        if(event.getCode() == KeyCode.R){
+        if (event.getCode() == KeyCode.R) {
             double rotation = keyTypedImageView.getRotate();
-            if(rotation == 0.0) {
+            if (rotation == 0.0) {
                 keyTypedImageView.setRotate(90);
                 tegelRotated = true;
-            }else{
+            } else {
                 keyTypedImageView.setRotate(0);
                 tegelRotated = false;
             }
         }
 
-        System.out.println("R Pressed");
+
     }
 
 
@@ -431,10 +455,11 @@ public class SpelController implements Initializable
     /*-------------------------------------------------VOLGENDE RONDE--------------------------------------------*/
 
     @FXML
-    private void stapelButtonHandler(ActionEvent event){
+    private void stapelButtonHandler(ActionEvent event)
+    {
 
-        System.out.println("Stapel button ingedrukt");
-        if(!beginKolom.getChildren().isEmpty()){
+
+        if (!beginKolom.getChildren().isEmpty()) {
             String prevText = instructieTekst.getText();
             String prevStyle = instructieTekst.getStyle();
             PauseTransition pause = new PauseTransition(Duration.seconds(3));
@@ -445,7 +470,7 @@ public class SpelController implements Initializable
             instructieTekst.setText(bundle.getString("RondeNogNietGedaan"));
             instructieTekst.setStyle("-fx-text-fill: red;");
             pause.play();
-        }else{
+        } else {
             String prevText = instructieTekst.getText();
             String prevStyle = instructieTekst.getStyle();
             PauseTransition pause = new PauseTransition(Duration.seconds(3));
@@ -458,6 +483,9 @@ public class SpelController implements Initializable
             pause.play();
             // DOE ALLES OM RONDE TE UPDATEN
             updateNaarVolgendeRonde();
+            updateCirkels();
+            updateKaartenBeweegbaarHeid();
+            plaatsTegel = true;
         }
 
     }
@@ -484,8 +512,7 @@ public class SpelController implements Initializable
     {
         customBorden = new CustomBord[4];
 
-        if(dc.getSpelendeSpelers().size() == 3)
-        {
+        if (dc.getSpelendeSpelers().size() == 3) {
             customBorden[0] = new CustomBord();
             customBorden[1] = new CustomBord();
             customBorden[2] = new CustomBord();
@@ -505,7 +532,7 @@ public class SpelController implements Initializable
             customBorden[1].maakBord(bord2);
             customBorden[2].maakBord(bord3);
             customBorden[3].maakBord(bord4);
-            this.borden = new Pane[]{bord1, bord2, bord3,bord4};
+            this.borden = new Pane[]{bord1, bord2, bord3, bord4};
         }
     }
 
@@ -518,11 +545,10 @@ public class SpelController implements Initializable
         DominoTegel tegel = dc.getGeclaimdeTegel(getKleurSpeler());
 
 
-
         // Try-Catch om te checken of de tegel correct geplaatst kan worden in het tegelgebied.
         try {
             dc.verplaatsDominotegel(kolom, rij, verticaal, tegel, huidigeSpelerIndex);
-            System.out.println("Tegel toegevoegd met kolom: " + kolom  +"\nrij: " + rij + "\nverticaal: " + tegelRotated + "\ntegel: " + tegel);
+
 
             draggedImageView.setOnMouseDragged(null);
             draggedImageView.setOnMousePressed(null);
@@ -543,7 +569,7 @@ public class SpelController implements Initializable
 
             System.out.println("Tegel is in het domein toegevoegd.");
         } catch (PlaatsenMiddenVanHetBordException | OverlappingHorizontaalException | OverlappingVerticaalException |
-            TegelNietOvereenMetAanliggendeTegelException | IllegalArgumentException e) {
+                 TegelNietOvereenMetAanliggendeTegelException | IllegalArgumentException e) {
             String prevText = instructieTekst.getText();
             String prevStyle = instructieTekst.getStyle();
             PauseTransition pause = new PauseTransition(Duration.seconds(3));
@@ -559,10 +585,11 @@ public class SpelController implements Initializable
     }
 
     @FXML
-    private void verwijderButtonHandler(ActionEvent event){
+    private void verwijderButtonHandler(ActionEvent event)
+    {
 
         DominoTegel tegel = dc.getGeclaimdeTegel(getKleurSpeler());
-        if(!dc.kanTegelPlaatsen(huidigeSpelerIndex, tegel)){
+        if (!dc.kanTegelPlaatsen(huidigeSpelerIndex, tegel)) {
             String prevText = instructieTekst.getText();
             String prevStyle = instructieTekst.getStyle();
             PauseTransition pause = new PauseTransition(Duration.seconds(3));
@@ -574,7 +601,7 @@ public class SpelController implements Initializable
             instructieTekst.setStyle("-fx-text-fill: green;");
             pause.play();
             // Delete imageview
-        }else{
+        } else {
             String prevText = instructieTekst.getText();
             String prevStyle = instructieTekst.getStyle();
             PauseTransition pause = new PauseTransition(Duration.seconds(3));
@@ -588,96 +615,193 @@ public class SpelController implements Initializable
         }
 
 
-
     }
-    private void updateKaartenBeweegbaarHeid(){
+
+    private void updateKaartenBeweegbaarHeid()
+    {
 
         int index = 0;
 
-        for (Node kaart:beginKolom.getChildren()) {
+        for (Node kaart : beginKolom.getChildren()) {
 
 
-            if (index != 0){
-                setDisable((ImageView) kaart);
+            kaart.setDisable(index != 0);
+            index++;
+        }
+    }
 
+    private void updateCirkels()
+    {
 
-            }else {
-                kaart.setDisable(false);
+        int index = 0;
+        for (Node cirkel : beginKolomKeuze.getChildren()) {
+
+            if(cirkel instanceof Circle){
+                Kleur kleur = gekozenVolgordeNieuw.get(index);
+                Circle circle = (Circle) cirkel;
+                switch(kleur){
+                    case GEEL -> circle.setFill(Color.web("#f2ff3d"));
+                    case ROOS -> circle.setFill(Color.web("#ff63ea"));
+                    case BLAUW -> circle.setFill(Color.web("#51aeff"));
+                    case GROEN -> circle.setFill(Color.web("#66ff61"));
+                    default -> circle.setFill(Color.GREY);
+                }
+
+                circle.setDisable(true);
+
             }
             index++;
         }
+
+        for(Node cirkelRechts : eindKolomKeuze.getChildren()) {
+            if(cirkelRechts instanceof Circle){
+                Circle circle = (Circle) cirkelRechts;
+                circle.setFill(Color.GREY);
+            }
+        }
+
     }
 
     @FXML
     private void volgendeButtonHandler(ActionEvent event)
     {
 
-//        if((gekozenVolgorde != null) && !(gekozenVolgorde.contains(null))){
-//            instructieTekst.setText("Klik op de stapel om naar de volgende ronde te gaan.");
-//            instructieTekst.setStyle("-fx-text-fill: white;");
-//        }
 
-        if(rondeNummer == 1) //RONDE 1
-        {
-                voegSpelerToeAanGekozenVolgorde(getKleurSpeler(), gekozenCirkel);
-                dc.voegKoningAanKaart(getKleurSpeler(), gekozenCirkel, 0);
-                try {
-                    geselecteerdeCirkel.setDisable(true);
-                }
-                catch (NullPointerException e){
-                    System.out.println(e.getMessage());
-                }
-
-                System.out.println(gekozenVolgorde);
-                spelersMetTegels++;
-                geselecteerdeCirkel = null;
-                huidigeSpelerIndex = (huidigeSpelerIndex + 1) % dc.getSpelendeSpelers().size();
-                instructieTekst.setText(bundle.getString("SpelerMetKleur") + getKleurSpeler() + bundle.getString("KiesEenTegel"));
-
-            if(spelersMetTegels == dc.getSpelendeSpelers().size())
-            {
-                dc.setVolgordeKoning(gekozenVolgorde);
-                rondeNummer++;
-                instructieTekst.setText("Speler met kleur " + getKleurSpeler() + ", plaats je tegel en klik op bevestig. Kies vervolgens een nieuwe tegel!");
+        if (rondeEen) {
+            voegSpelerToeAanGekozenVolgorde(getKleurSpeler(), gekozenCirkel);
+            dc.voegKoningAanKaart(getKleurSpeler(), gekozenCirkel, 0);
+            try {
+                geselecteerdeCirkel.setDisable(true);
+            } catch (NullPointerException e) {
+                System.out.println(e.getMessage());
             }
 
-            System.out.println(rondeNummer);
 
-        } else // ALLES NA RONDE 1
-        {
+            spelersMetTegels++;
+            geselecteerdeCirkel = null;
             huidigeSpelerIndex = (huidigeSpelerIndex + 1) % dc.getSpelendeSpelers().size();
-            updateKaartenBeweegbaarHeid();
+            instructieTekst.setText(bundle.getString("SpelerMetKleur") + getKleurSpeler() + bundle.getString("KiesEenTegel"));
 
-            if (dc.getGeclaimdeTegel(getKleurSpeler()) == null)
-            {
-                dc.voegKoningAanKaart(getKleurSpeler(), gekozenCirkel, 1);
-                
-                System.out.println(gekozenVolgorde);
-                instructieTekst.setText(bundle.getString("SpelerMetKleur") + getKleurSpeler() + bundle.getString("KiesEenTegel"));
+            if (spelersMetTegels == dc.getSpelendeSpelers().size()) {
+                dc.setVolgordeKoning(gekozenVolgordeHuidig);
+                rondeEen = false;
+                plaatsTegel = true;
 
-            } else
-                {
-                    try {
-                        geselecteerdeCirkel.setDisable(true);
-                    }
-                    catch (NullPointerException e){
-                        System.out.println(e.getMessage());
-                    }
-                    geselecteerdeCirkel = null;
-                    instructieTekst.setText("Speler met kleur " + getKleurSpeler() + ", plaats je tegel en klik op bevestig. Kies vervolgens een nieuwe tegel!");
-                }
+                instructieTekst.setText("Speler met kleur " + getKleurSpeler() + ", plaats je tegel en klik op bevestig. Kies vervolgens een nieuwe tegel!");
+                System.out.println(huidigeSpelerIndex);
+                System.out.println(gekozenCirkel);
+                return;
+            }
+
         }
 
-        /*if(rondeNummer > 1){
+
+        if (plaatsTegel) {
+            int kolom = (int) (Math.floor(mouseX / cellSize));
+            int rij = (int) (Math.floor(mouseY / cellSize));
+            boolean verticaal = tegelRotated;
+            DominoTegel tegel = dc.getGeclaimdeTegel(getKleurSpeler());
+
+
+            // Try-Catch om te checken of de tegel correct geplaatst kan worden in het tegelgebied.
+            try {
+                dc.verplaatsDominotegel(kolom, rij, verticaal, tegel, huidigeSpelerIndex);
+
+
+                draggedImageView.setOnMouseDragged(null);
+                draggedImageView.setOnMousePressed(null);
+                draggedImageView.setOnMouseReleased(null);
+                draggedImageView.setOnKeyPressed(null);
+                tegelRotated = false;
+                plaatsTegel = false;
+                kiesNieuweTegel = true;
+
+//                String prevText = instructieTekst.getText();
+//                String prevStyle = instructieTekst.getStyle();
+//                PauseTransition pause = new PauseTransition(Duration.seconds(3));
+//                pause.setOnFinished(pauseEvent -> {
+//                    instructieTekst.setText(prevText);
+//                    instructieTekst.setStyle(prevStyle);
+//                });
+//                instructieTekst.setText(bundle.getString("TegelSuccesVolToegevoegd"));
+//                instructieTekst.setStyle("-fx-text-fill: #00e000;");
+//                pause.play();
+
+
+                return;
+            } catch (PlaatsenMiddenVanHetBordException | OverlappingHorizontaalException |
+                     OverlappingVerticaalException |
+                     TegelNietOvereenMetAanliggendeTegelException | IllegalArgumentException e) {
+//                String prevText = instructieTekst.getText();
+//                String prevStyle = instructieTekst.getStyle();
+//                PauseTransition pause = new PauseTransition(Duration.seconds(3));
+//                pause.setOnFinished(pauseEvent -> {
+//                    instructieTekst.setText(prevText);
+//                    instructieTekst.setStyle(prevStyle);
+//                });
+//                instructieTekst.setText(e.getMessage());
+//                instructieTekst.setStyle("-fx-text-fill: red;");
+//                pause.play();
+            }
+        }
+
+        if (kiesNieuweTegel) {
+
+            if (dc.getGeclaimdeTegel(getKleurSpeler()) == null) {
+                voegSpelerToeAanGekozenVolgorde(getKleurSpeler(), gekozenCirkel);
+                dc.voegKoningAanKaart(getKleurSpeler(), gekozenCirkel, 1);
+
+
+//                instructieTekst.setText(bundle.getString("SpelerMetKleur") + getKleurSpeler() + bundle.getString("KiesEenTegel"));
+                try {
+                    geselecteerdeCirkel.setDisable(true);
+                } catch (NullPointerException e) {
+                    System.out.println(e.getMessage());
+                }
+                geselecteerdeCirkel = null;
+
+
+            } else {
+                try {
+                    geselecteerdeCirkel.setDisable(true);
+                } catch (NullPointerException e) {
+                    System.out.println(e.getMessage());
+                }
+                geselecteerdeCirkel = null;
+//                instructieTekst.setText("Speler met kleur " + getKleurSpeler() + ", plaats je tegel en klik op bevestig. Kies vervolgens een nieuwe tegel!");
+            }
+            kiesNieuweTegel = false;
+            plaatsTegel = true;
+            huidigeSpelerIndex = (huidigeSpelerIndex + 1) % dc.getSpelendeSpelers().size();
             updateKaartenBeweegbaarHeid();
-            System.out.println("poop");
-        }*/
+            return;
+        }
+
+
+//        if (dc.getGeclaimdeTegel(getKleurSpeler()) == null) {
+//            dc.voegKoningAanKaart(getKleurSpeler(), gekozenCirkel, 1);
+//
+//            System.out.println(gekozenVolgorde);
+//            instructieTekst.setText(bundle.getString("SpelerMetKleur") + getKleurSpeler() + bundle.getString("KiesEenTegel"));
+//
+//        } else {
+//            try {
+//                geselecteerdeCirkel.setDisable(true);
+//            } catch (NullPointerException e) {
+//                System.out.println(e.getMessage());
+//            }
+//            geselecteerdeCirkel = null;
+//            instructieTekst.setText("Speler met kleur " + getKleurSpeler() + ", plaats je tegel en klik op bevestig. Kies vervolgens een nieuwe tegel!");
+//        }
+
+
     }
+
+
     @FXML
     private void circleClickHandler(MouseEvent event)
     {
-        if (geselecteerdeCirkel != null)
-        {
+        if (geselecteerdeCirkel != null) {
             geselecteerdeCirkel.setFill(Color.GREY);
         }
 
@@ -694,8 +818,7 @@ public class SpelController implements Initializable
 
     private Paint getKleurSpelerPaint(Kleur kleur)
     {
-        switch(kleur)
-        {
+        switch (kleur) {
             case BLAUW:
                 return Color.web("#51aeff");
             case GEEL:
@@ -710,11 +833,12 @@ public class SpelController implements Initializable
     }
 
 
-    private Kleur getKleurSpeler() { return  dc.getVolgordeKoning().get(huidigeSpelerIndex);
+    private Kleur getKleurSpeler()
+    {
+        return dc.getVolgordeKoning().get(huidigeSpelerIndex);
     }
 
 
-    
     private List<DominoTegel> getBeginKolomTegels()
     {
         return dc.getSpel().geefBeginKolom();
@@ -730,30 +854,28 @@ public class SpelController implements Initializable
         return dc.getSpel().getTegelsDeck();
     }
 
-    private void voegSpelerToeAanGekozenVolgorde(Kleur kleur, int index) {
-        // Controleer of de lijst al spelers bevat, zo niet, maak een nieuwe lijst aan
-        if (gekozenVolgorde == null) {
-            gekozenVolgorde = new ArrayList<>(Arrays.asList(new Kleur[dc.getSpelendeSpelers().size()]));
-
-        }
-
-        gekozenVolgorde.set(gekozenCirkel-1, kleur);
-    }
-
-
-    public void startSpel()
+    private void voegSpelerToeAanGekozenVolgorde(Kleur kleur, int index)
     {
-        dc.koningRondeEenShuffle();
-        speelBeurtEersteRonde();
-
-        while (!dc.isEindeSpel())
-        {
-            speelRonde();
+        // Controleer of de lijst al spelers bevat, zo niet, maak een nieuwe lijst aan
+        if (gekozenVolgordeHuidig == null) {
+            gekozenVolgordeHuidig = new ArrayList<>(Arrays.asList(new Kleur[dc.getSpelendeSpelers().size()]));
+        }
+        if(gekozenVolgordeNieuw == null){
+            gekozenVolgordeNieuw = new ArrayList<>(Arrays.asList(new Kleur[dc.getSpelendeSpelers().size()]));
+        }
+        if(rondeEen){
+            gekozenVolgordeHuidig.set(gekozenCirkel - 1, kleur);
+            return;
+        }
+        if(!rondeEen){
+            gekozenVolgordeNieuw.set(gekozenCirkel - 1, kleur);
         }
 
-        instructieTekst.setText("Het spel is afgelopen!");
-        System.out.println("Het spel is afgelopen!");
+
+
     }
+
+
 
     public void speelBeurtEersteRonde()
     {
@@ -762,15 +884,6 @@ public class SpelController implements Initializable
 
         instructieTekst.setText(bundle.getString("SpelerMetKleur") + getKleurSpeler() + bundle.getString("KiesEenTegel"));
     }
-    public void speelBeurt()
-    {
 
-    }
-
-    public void speelRonde()
-    {
-
-        rondeNummer++;
-    }
 
 }
