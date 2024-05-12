@@ -464,7 +464,7 @@ public class SpelController implements Initializable
     @FXML
     private void stapelButtonHandler(ActionEvent event)
     {
-        if (!beginKolom.getChildren().isEmpty() && !kiesNieuweTegel) {
+        if (!beginKolom.getChildren().isEmpty() || gekozenVolgordeNieuw.contains(null)) {
             String prevText = instructieTekst.getText();
             String prevStyle = instructieTekst.getStyle();
             PauseTransition pause = new PauseTransition(Duration.seconds(1.5));
@@ -480,7 +480,7 @@ public class SpelController implements Initializable
             String prevStyle = instructieTekst.getStyle();
             PauseTransition pause = new PauseTransition(Duration.seconds(1.5));
             pause.setOnFinished(pauseEvent -> {
-                instructieTekst.setText(prevText);
+                instructieTekst.setText("Speler met kleur " + getKleurSpeler() + ", plaats je tegel en klik op bevestig. Kies vervolgens een nieuwe tegel!");
                 instructieTekst.setStyle(prevStyle);
             });
             instructieTekst.setText(bundle.getString("VolgendeRondeGestart"));
@@ -766,10 +766,14 @@ public class SpelController implements Initializable
                 geselecteerdeCirkel = null;
                 instructieTekst.setText("Speler met kleur " + getKleurSpeler() + ", plaats je tegel en klik op bevestig. Kies vervolgens een nieuwe tegel!");
             }
+            System.out.println(gekozenVolgordeNieuw.toString());
             kiesNieuweTegel = false;
             plaatsTegel = true;
             huidigeSpelerIndex = (huidigeSpelerIndex + 1) % dc.getSpelendeSpelers().size();
             updateKaartenBeweegbaarHeid();
+            if(!gekozenVolgordeNieuw.contains(null)){
+                instructieTekst.setText("Klik op de stapel om de volgende ronde te starten.");
+            }
             return;
         }
 
