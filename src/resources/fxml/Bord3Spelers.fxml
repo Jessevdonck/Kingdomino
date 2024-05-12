@@ -4,7 +4,6 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -23,27 +22,25 @@
       </Label>
       <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="289.0" prefWidth="372.0">
          <children>
-            <Button fx:id="stapelButton" prefHeight="78.0" prefWidth="156.0" layoutX="97.0" layoutY="67.0" onAction="#stapelButtonHandler" pickOnBounds="true">
+            <Button fx:id="stapelButton" layoutX="97.0" layoutY="67.0" onAction="#stapelButtonHandler" pickOnBounds="true" prefHeight="78.0" prefWidth="156.0">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
             <HBox alignment="CENTER" layoutX="-5.0" layoutY="178.0" prefHeight="72.0" prefWidth="360.0" spacing="30.0">
                <children>
-                  <Button fx:id="bevestigBtn" mnemonicParsing="false" onAction="#bevestigButtonHandler" prefHeight="42.0" prefWidth="87.0" text="Bevestig">
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </Button>
                   <Button fx:id="verwijderBtn" mnemonicParsing="false" onAction="#verwijderButtonHandler" prefHeight="42.0" prefWidth="87.0" text="Verwijder">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Button fx:id="volgendeBtn" mnemonicParsing="false" onAction="#volgendeButtonHandler" prefHeight="42.0" prefWidth="87.0" text="Volgende Speler" textAlignment="CENTER" wrapText="true">
+                  <Button fx:id="volgendeBtn" mnemonicParsing="false" onAction="#volgendeButtonHandler" prefHeight="42.0" prefWidth="87.0" text="Volgende" textAlignment="CENTER" wrapText="true">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
                   </Button>
                </children>
             </HBox>

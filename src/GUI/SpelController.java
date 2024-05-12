@@ -729,32 +729,32 @@ public class SpelController implements Initializable
                 plaatsTegel = false;
                 kiesNieuweTegel = true;
 
-//                String prevText = instructieTekst.getText();
-//                String prevStyle = instructieTekst.getStyle();
-//                PauseTransition pause = new PauseTransition(Duration.seconds(3));
-//                pause.setOnFinished(pauseEvent -> {
-//                    instructieTekst.setText(prevText);
-//                    instructieTekst.setStyle(prevStyle);
-//                });
-//                instructieTekst.setText(bundle.getString("TegelSuccesVolToegevoegd"));
-//                instructieTekst.setStyle("-fx-text-fill: #00e000;");
-//                pause.play();
+               String prevText = instructieTekst.getText();
+               String prevStyle = instructieTekst.getStyle();
+               PauseTransition pause = new PauseTransition(Duration.seconds(3));
+               pause.setOnFinished(pauseEvent -> {
+                   instructieTekst.setText(prevText);
+                   instructieTekst.setStyle(prevStyle);
+               });
+                instructieTekst.setText(bundle.getString("TegelSuccesVolToegevoegd"));
+                instructieTekst.setStyle("-fx-text-fill: #00e000;");
+               pause.play();
 
 
                 return;
             } catch (PlaatsenMiddenVanHetBordException | OverlappingHorizontaalException |
                      OverlappingVerticaalException |
                      TegelNietOvereenMetAanliggendeTegelException | IllegalArgumentException e) {
-//                String prevText = instructieTekst.getText();
-//                String prevStyle = instructieTekst.getStyle();
-//                PauseTransition pause = new PauseTransition(Duration.seconds(3));
-//                pause.setOnFinished(pauseEvent -> {
-//                    instructieTekst.setText(prevText);
-//                    instructieTekst.setStyle(prevStyle);
-//                });
-//                instructieTekst.setText(e.getMessage());
-//                instructieTekst.setStyle("-fx-text-fill: red;");
-//                pause.play();
+                String prevText = instructieTekst.getText();
+                String prevStyle = instructieTekst.getStyle();
+                PauseTransition pause = new PauseTransition(Duration.seconds(3));
+                pause.setOnFinished(pauseEvent -> {
+                    instructieTekst.setText(prevText);
+                    instructieTekst.setStyle(prevStyle);
+                });
+                instructieTekst.setText(e.getMessage());
+                instructieTekst.setStyle("-fx-text-fill: red;");
+                pause.play();
             }
         }
 
@@ -765,7 +765,7 @@ public class SpelController implements Initializable
                 dc.voegKoningAanKaart(getKleurSpeler(), gekozenCirkel, 1);
 
 
-//                instructieTekst.setText(bundle.getString("SpelerMetKleur") + getKleurSpeler() + bundle.getString("KiesEenTegel"));
+                instructieTekst.setText(bundle.getString("SpelerMetKleur") + getKleurSpeler() + bundle.getString("KiesEenTegel"));
                 try {
                     geselecteerdeCirkel.setDisable(true);
                 } catch (NullPointerException e) {
@@ -781,7 +781,7 @@ public class SpelController implements Initializable
                     System.out.println(e.getMessage());
                 }
                 geselecteerdeCirkel = null;
-//                instructieTekst.setText("Speler met kleur " + getKleurSpeler() + ", plaats je tegel en klik op bevestig. Kies vervolgens een nieuwe tegel!");
+                instructieTekst.setText("Speler met kleur " + getKleurSpeler() + ", plaats je tegel en klik op bevestig. Kies vervolgens een nieuwe tegel!");
             }
             kiesNieuweTegel = false;
             plaatsTegel = true;
