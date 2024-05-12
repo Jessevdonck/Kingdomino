@@ -464,6 +464,12 @@ public class SpelController implements Initializable
     @FXML
     private void stapelButtonHandler(ActionEvent event)
     {
+        // DEZE CHECK IS VOOR HET EINDE VAN HET SPEL
+        if(dc.getBeschikbareTegels().isEmpty()){
+            //HIER MOETEN WE SWITCHEN NAAR HET SCORESCHERM AANGEZIEN DAN HET EINDE VAN HET SPEL BEREIKT IS
+            //OOK ALLE NODIGE FUNCTIES VAN VERWERKEINDESPEL IN DC OF DOEN WE DAT IN SCORESCHERM IDK
+        }
+
         if (!beginKolom.getChildren().isEmpty() || gekozenVolgordeNieuw.contains(null)) {
             String prevText = instructieTekst.getText();
             String prevStyle = instructieTekst.getStyle();
