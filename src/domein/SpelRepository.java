@@ -152,7 +152,7 @@ public class SpelRepository {
         momenteelSpel.verplaatskoning(kleur, dominoTegel);
     }
 
-    public boolean kanTegelPlaatsen(int spelerindex) {
-        return momenteelSpel.kanTegelPlaatsen(spelerindex);
+    public boolean kanTegelPlaatsen(int spelerindex, DominoTegel tegel) {
+        return momenteelSpel.kanTegelPlaatsen(spelerindex, tegel);
     }
 }

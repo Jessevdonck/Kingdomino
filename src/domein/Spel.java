@@ -216,7 +216,8 @@ public class Spel
         return claimdeTegel.get(kleur);
     }
 
-    public boolean kanTegelPlaatsen(int spelerIndex) {
-        return tegelGebieden.get(volgordeSpelers.get(spelerIndex)).kanTegelPlaatsen();
+    public boolean kanTegelPlaatsen(int spelerIndex,DominoTegel tegel ) {
+        return tegelGebieden.get(volgordeSpelers.get(spelerIndex))
+                .kanTegelPlaatsen(tegel);
     }
 }
