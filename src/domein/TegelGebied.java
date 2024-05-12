@@ -12,11 +12,13 @@ public class TegelGebied
     private Landschap[][] gebied;
     private boolean[][] bezocht = new boolean[5][5];
 
-    public TegelGebied() {
+    public TegelGebied()
+    {
         this.gebied = maakGebied();
     }
 
-    private Landschap[][] maakGebied() {
+    private Landschap[][] maakGebied()
+    {
         Landschap[][] grid = new Landschap[5][5];
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 5; j++) {
@@ -27,97 +29,34 @@ public class TegelGebied
         return grid;
     }
 
-    public Landschap[][] getGebied() {
+    public Landschap[][] getGebied()
+    {
         return gebied;
     }
 
-    public void plaatsTegel(int kolom, int rij, boolean verticaal,DominoTegel tegel) {
-        if (verticaal) { // VERTICAAL
-            if(rij == 1 && kolom == 2){
-                throw new PlaatsenMiddenVanHetBordException();
-            }
-            if(rij == 2 && kolom == 2){
-                throw new PlaatsenMiddenVanHetBordException();
-            }
-            if(gebied[kolom][rij+1] != null && rij <= 3 || gebied[kolom][rij] != null)
-                {
-                    throw new OverlappingVerticaalException();
-                }
-
-            if (kolom-1 >0) {
-                // Tegel links komt niet overeen met landschap
-                if (gebied[kolom - 1][rij] != null && gebied[kolom - 1][rij].getType() != tegel.getLandschapType1().getType())
-                    throw new TegelNietOvereenMetAanliggendeTegelException();
-                if (gebied[kolom - 1][rij + 1] != null && gebied[kolom - 1][rij + 1].getType() != tegel.getLandschapType2().getType())
-                    throw new TegelNietOvereenMetAanliggendeTegelException();
-            }
-            // Tegel rechts komt niet overeen met landschap
-            if(kolom+1 <= 4 ) {
-                if (gebied[kolom + 1][rij] != null && gebied[kolom + 1][rij].getType() != tegel.getLandschapType1().getType())
-                    throw new TegelNietOvereenMetAanliggendeTegelException();
-                if (gebied[kolom + 1][rij + 1] != null && gebied[kolom + 1][rij + 1].getType() != tegel.getLandschapType2().getType())
-                    throw new TegelNietOvereenMetAanliggendeTegelException();
-            }
-            // tegel onder komt niet overeen met landschap
-            if(rij+2 <= 4) {
-                if (gebied[kolom][rij + 2] != null && gebied[kolom][rij + 2].getType() != tegel.getLandschapType2().getType())
-                    throw new TegelNietOvereenMetAanliggendeTegelException();
-            }
-            // Tegel boven komt niet overeen met landschap
-            if (rij -1 >= 0) {
-                if (gebied[kolom][rij - 1] != null && gebied[kolom][rij - 1].getType() != tegel.getLandschapType1().getType())
-                    throw new TegelNietOvereenMetAanliggendeTegelException();
-            }
-            gebied[rij][kolom] = tegel.getLandschapType1();
-            gebied[rij + 1][kolom] = tegel.getLandschapType2();
-        } else { // HORIZONTAAL
-            System.out.println("PLAATSTEGEL" + kolom +" rij :" + rij);
-            if(rij == 2 && kolom == 2){
-                throw new PlaatsenMiddenVanHetBordException();
-            }
-            if(rij == 2 && kolom == 1){
-                throw new PlaatsenMiddenVanHetBordException();
-            }
-            if (kolom + 1 >= 5 || gebied[kolom][rij] != null || gebied[kolom+1][rij] != null) {
-                throw new OverlappingHorizontaalException();
-            }
-            // Tegel links komt niet overeen met landschap
-            if (gebied[kolom+1][rij] != null && gebied[kolom][rij].getType() != tegel.getLandschapType1().getType() && kolom >= 1)
+    public void plaatsTegel(int kolom, int rij, boolean verticaal, DominoTegel tegel)
+    {
+        if (verticaal) {
+            if (kanTegelPlaatsenOpSpecifiekePlek(tegel, rij, kolom, verticaal)) {
+                gebied[rij][kolom] = tegel.getLandschapType1();
+                gebied[rij + 1][kolom] = tegel.getLandschapType2();
+            } else {
                 throw new TegelNietOvereenMetAanliggendeTegelException();
-            // Tegel rechts komt niet overeen met landschap
-            if (kolom <= 2) {
-                if (gebied[kolom + 2][rij] != null && gebied[kolom + 2][rij].getType() != tegel.getLandschapType2().getType()) {
-                    throw new TegelNietOvereenMetAanliggendeTegelException();
-                }
-            }
-            if(rij <= 3)
-            {
-                // Tegel onder komt niet overeen met landschap
-                if (rij + 1 < gebied[0].length && gebied[kolom][rij + 1] != null && gebied[kolom][rij + 1].getType() != tegel.getLandschapType1().getType())
-                    throw new TegelNietOvereenMetAanliggendeTegelException();
-                if (gebied[kolom + 1][rij + 1] != null && gebied[kolom + 1][rij + 1].getType() != tegel.getLandschapType2().getType())
-                    throw new TegelNietOvereenMetAanliggendeTegelException();
             }
 
-            if(rij >= 1)
-            {
-                // Tegel boven komt niet overeen met landschap
-                if (gebied[kolom][rij - 1] != null && gebied[kolom][rij - 1].getType() != tegel.getLandschapType1().getType())
-                    throw new TegelNietOvereenMetAanliggendeTegelException();
-                if (gebied[kolom + 1][rij - 1] != null && gebied[kolom + 1][rij - 1].getType() != tegel.getLandschapType2().getType())
-                    throw new TegelNietOvereenMetAanliggendeTegelException();
+        } else {
+            if (kanTegelPlaatsenOpSpecifiekePlek(tegel, rij, kolom, verticaal)) {
+                gebied[rij][kolom] = tegel.getLandschapType1();
+                gebied[rij][kolom + 1] = tegel.getLandschapType2();
+            } else {
+                throw new TegelNietOvereenMetAanliggendeTegelException();
             }
-
-
-
-            gebied[rij][kolom] = tegel.getLandschapType1();
-            gebied[rij][kolom + 1] = tegel.getLandschapType2();
         }
-
     }
 
-    public int berekenScore(int x, int y) {
-        if (x < 0 || y < 0 || x >= 5 || y >= 5 || bezocht[x][y] || gebied[x][y] == null ) {
+    public int berekenScore(int x, int y)
+    {
+        if (x < 0 || y < 0 || x >= 5 || y >= 5 || bezocht[x][y] || gebied[x][y] == null) {
             return 0;
         }
 
@@ -140,7 +79,8 @@ public class TegelGebied
         return size;
     }
 
-    public int zoekDomein() {
+    public int zoekDomein()
+    {
 
         int size = 0;
 
@@ -158,7 +98,8 @@ public class TegelGebied
         return size;
     }
 
-    public int getAantalKronen() {
+    public int getAantalKronen()
+    {
         int aantalKronen = 0;
         for (Landschap[] rij : gebied) {
             for (Landschap landschap : rij) {
@@ -170,7 +111,8 @@ public class TegelGebied
         return aantalKronen;
     }
 
-    public int getGrootteGebied() {
+    public int getGrootteGebied()
+    {
         int count = 0;
         for (Landschap[] rij : gebied) {
             for (Landschap landschap : rij) {
@@ -182,106 +124,128 @@ public class TegelGebied
         return count;
     }
 
-    public boolean kanTegelPlaatsen(DominoTegel tegel) {
+    private boolean kanTegelPlaatsenOpSpecifiekePlek(DominoTegel tegel, int rij, int kolom, boolean verticaal)
+    {
+        LandschapType type1 = tegel.getLandschapType1().getType();
+        LandschapType type2 = tegel.getLandschapType2().getType();
+        if (!verticaal) {
+            if (gebied[rij][kolom] == null && gebied[rij][kolom + 1] == null) {
+                // type 1 boven
+                if ((rij <= 3) && (gebied[rij + 1][kolom] != null)
+                        && ((gebied[rij + 1][kolom].getType() == type1)
+                        || (gebied[rij + 1][kolom].getType() == LandschapType.KONING))) {
+                    return true;
+                }
+                // type 1 onder
+                if ((rij >= 1) && (gebied[rij - 1][kolom] != null)
+                        && ((gebied[rij - 1][kolom].getType() == type1)
+                        || (gebied[rij - 1][kolom].getType() == LandschapType.KONING))) {
+                    return true;
+                }
+                // type 1 links
+                if ((kolom >= 1) && (gebied[rij][kolom - 1] != null)
+                        && ((gebied[rij][kolom - 1].getType() == type1)
+                        || (gebied[rij][kolom - 1].getType() == LandschapType.KONING))) {
+                    return true;
+                }
+
+                // type 2 boven
+                if ((rij <= 3) && (kolom <= 3) && (gebied[rij + 1][kolom + 1] != null)
+                        && ((gebied[rij + 1][kolom + 1].getType() == type1)
+                        || (gebied[rij + 1][kolom + 1].getType() == LandschapType.KONING))) {
+                    return true;
+                }
+                // type 2 onder
+                if ((rij >= 1) && (kolom <= 3) && (gebied[rij - 1][kolom + 1] != null)
+                        && ((gebied[rij - 1][kolom + 1].getType() == type1)
+                        || (gebied[rij - 1][kolom + 1].getType() == LandschapType.KONING))) {
+                    return true;
+                }
+                // type 2 rechts
+                if ((kolom <= 2) && (gebied[rij][kolom + 2] != null)
+                        && ((gebied[rij][kolom + 2].getType() == type1)
+                        || (gebied[rij][kolom + 2].getType() == LandschapType.KONING))) {
+                    return true;
+                }
+
+            }
+        } else {
+            if (gebied[rij][kolom] == null && gebied[rij + 1][kolom] == null) {
+                //type 1 links
+                if ((kolom >= 1) && (gebied[rij][kolom - 1] != null) &&
+                        ((gebied[rij][kolom - 1].getType() == type1)
+                                || (gebied[rij][kolom - 1].getType() == LandschapType.KONING))) {
+                    return true;
+                }
+                //type 1 rechts
+                if ((kolom <= 3) && (gebied[rij][kolom + 1] != null) &&
+                        ((gebied[rij][kolom + 1].getType() == type1)
+                                || (gebied[rij][kolom + 1].getType() == LandschapType.KONING))) {
+                    return true;
+                }
+                //type 1 boven
+                if ((rij >= 1) && (gebied[rij - 1][kolom] != null) &&
+                        ((gebied[rij - 1][kolom].getType() == type1)
+                                || (gebied[rij - 1][kolom].getType() == LandschapType.KONING))) {
+                    return true;
+                }
+                //type 2 links
+                if ((kolom >= 1) && (rij >= 1) && (gebied[rij + 1][kolom - 1] != null) &&
+                        ((gebied[rij + 1][kolom - 1].getType() == type2)
+                                || (gebied[rij + 1][kolom - 1].getType() == LandschapType.KONING))) {
+                    return true;
+                }
+                //type 2 rechts
+                if ((kolom <= 3) && (rij >= 1) && (gebied[rij + 1][kolom + 1] != null) &&
+                        ((gebied[rij + 1][kolom + 1].getType() == type2)
+                                || (gebied[rij + 1][kolom + 1].getType() == LandschapType.KONING))) {
+                    return true;
+                }
+                // type 2 onder
+                if ((rij <= 2) && (gebied[rij + 2][kolom] != null) &&
+                        ((gebied[rij + 2][kolom].getType() == type2)
+                                || (gebied[rij + 2][kolom].getType() == LandschapType.KONING))) {
+                    return true;
+                }
+                // boven midden
+
+
+            }
+        }
+        return false;
+    }
+
+    public boolean kanTegelPlaatsen(DominoTegel tegel)
+    {
         // Horizontaal
         LandschapType type1 = tegel.getLandschapType1().getType();
         LandschapType type2 = tegel.getLandschapType2().getType();
 
         for (int rij = 0; rij < gebied.length; rij++) {
             for (int kolom = 0; kolom < gebied[rij].length - 1; kolom++) {
-                if (gebied[rij][kolom] == null && gebied[rij][kolom + 1] == null) {
-                    // type 1 boven
-                    if((rij <= 3) && (gebied[rij + 1][kolom] != null)
-                            &&  ((gebied[rij + 1][kolom].getType() == type1)
-                            || (gebied[rij + 1][kolom].getType() == LandschapType.KONING))){
-                        return true;
-                    }
-                    // type 1 onder
-                    if((rij >= 1) && (gebied[rij - 1][kolom] != null)
-                            && ((gebied[rij - 1][kolom].getType() == type1)
-                            || (gebied[rij - 1][kolom].getType() == LandschapType.KONING))){
-                        return true;
-                    }
-                    // type 1 links
-                    if((kolom >= 1) && (gebied[rij][kolom - 1] != null)
-                            &&  ((gebied[rij][kolom - 1].getType() == type1)
-                            || (gebied[rij][kolom - 1].getType() == LandschapType.KONING))){
-                        return true;
-                    }
-
-                    // type 2 boven
-                    if( (rij <= 3) && (kolom <= 3) &&(gebied[rij + 1][kolom + 1] != null)
-                            &&  ((gebied[rij + 1][kolom + 1].getType() == type1 )
-                            || (gebied[rij + 1][kolom + 1].getType() == LandschapType.KONING ))){
-                        return true;
-                    }
-                    // type 2 onder
-                    if((rij >= 1) && (kolom <= 3) && (gebied[rij - 1][kolom + 1] != null)
-                            && ((gebied[rij - 1][kolom + 1].getType() == type1)
-                            || (gebied[rij - 1][kolom + 1].getType() == LandschapType.KONING))){
-                        return true;
-                    }
-                    // type 2 rechts
-                    if((kolom <= 2 ) && (gebied[rij][kolom + 2] != null)
-                            && ((gebied[rij][kolom + 2].getType() == type1 )
-                            || (gebied[rij][kolom + 2].getType() == LandschapType.KONING))){
-                        return true;
-                    }
-
+                if (kanTegelPlaatsenOpSpecifiekePlek(tegel, rij, kolom, false)) {
+                    return true;
                 }
+
             }
         }
-        // Verticaal
+
+
         for (int kolom = 0; kolom < gebied[0].length; kolom++) {
             for (int rij = 0; rij < gebied.length - 1; rij++) {
-                if (gebied[rij][kolom] == null && gebied[rij + 1][kolom] == null) {
-                    //type 1 links
-                    if((kolom >= 1) && (gebied[rij][kolom - 1] != null) &&
-                            ((gebied[rij][kolom - 1].getType() == type1)
-                            || (gebied[rij][kolom - 1].getType() == LandschapType.KONING))){
-                        return true;
-                    }
-                    //type 1 rechts
-                    if((kolom <= 3) && (gebied[rij][kolom + 1] != null) &&
-                            ((gebied[rij][kolom + 1].getType() == type1)
-                            || (gebied[rij][kolom + 1].getType() == LandschapType.KONING))){
-                        return true;
-                    }
-                    //type 1 boven
-                    if((rij >= 1) && (gebied[rij - 1][kolom] != null) &&
-                            ((gebied[rij - 1][kolom].getType() == type1)
-                            || (gebied[rij - 1][kolom].getType() == LandschapType.KONING))){
-                        return true;
-                    }
-                    //type 2 links
-                    if((kolom >= 1) && (rij >= 1) && (gebied[rij + 1][kolom - 1] != null) &&
-                            ((gebied[rij + 1][kolom - 1].getType() == type2)
-                            || (gebied[rij + 1][kolom - 1].getType() == LandschapType.KONING))){
-                        return true;
-                    }
-                    //type 2 rechts
-                    if((kolom <= 3) && (rij >= 1) && (gebied[rij + 1][kolom + 1] != null) &&
-                            ((gebied[rij + 1][kolom + 1].getType() == type2)
-                            || (gebied[rij + 1][kolom + 1].getType() == LandschapType.KONING))){
-                        return true;
-                    }
-                    // type 2 onder
-                    if((rij <= 2) && (gebied[rij + 2][kolom] != null) &&
-                            ((gebied[rij + 2][kolom].getType() == type2)
-                            || (gebied[rij + 2][kolom].getType() == LandschapType.KONING))){
-                        return true;
-                    }
-                    // boven midden
-
-
+                if (kanTegelPlaatsenOpSpecifiekePlek(tegel, rij, kolom, true)) {
+                    return true;
                 }
+
             }
         }
+
         return false;
     }
 
     @Override
-    public String toString() {
+    public String toString()
+    {
         StringBuilder string = new StringBuilder();
         for (int kolom = 0; kolom < gebied.length; kolom++) {
             for (int rij = 0; rij < gebied[kolom].length; rij++) {
