@@ -23,6 +23,7 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
+import javafx.scene.text.Text;
 import util.Kleur;
 
 import javax.swing.*;
@@ -43,7 +44,6 @@ public class SpelController implements Initializable
     @FXML private GridPane gridPane4;
     @FXML private GridPane beginKolom;
     @FXML private GridPane eindKolom;
-    @FXML private HBox stapel;
     @FXML private Label instructieMelding;
     @FXML private Button bevestigBtn;
     @FXML private Circle keuzeTegelBeginKolom1;
@@ -420,6 +420,8 @@ public class SpelController implements Initializable
         System.out.println("R Pressed");
     }
 
+
+
     /*-------------------------------------------------VOLGENDE RONDE--------------------------------------------*/
 
     public void stapelButtonHandler(ActionEvent event){
@@ -429,6 +431,7 @@ public class SpelController implements Initializable
             instructieTekst.setText(bundle.getString("RondeNogNietGedaan"));
             instructieTekst.setStyle("-fx-text-fill: red;");
         }else{
+            kaartenVanBeginNaarEindKolom();
             instructieTekst.setText(bundle.getString("VolgendeRondeGestart"));
             instructieTekst.setStyle("-fx-text-fill: white;");
             // DOE ALLES OM RONDE TE UPDATEN
@@ -565,9 +568,11 @@ public class SpelController implements Initializable
     @FXML
     private void volgendeButtonHandler(ActionEvent event)
     {
+
+
         if(rondeNummer == 1) {
+
             voegSpelerToeAanGekozenVolgorde(getKleurSpeler(), gekozenCirkel);
-            System.out.println("gekozen cirkel na toevoegen: " + gekozenCirkel);
             dc.voegKoningAanKaart(getKleurSpeler(), gekozenCirkel, 0);
 
             System.out.println(gekozenVolgorde);
@@ -576,8 +581,8 @@ public class SpelController implements Initializable
 
             if(spelersMetTegels == dc.getSpelendeSpelers().size())
             {
+
                 dc.setVolgordeKoning(gekozenVolgorde);
-                rondeNummer++;
             }
 
             System.out.println(rondeNummer);
@@ -601,9 +606,17 @@ public class SpelController implements Initializable
         huidigeSpelerIndex = (huidigeSpelerIndex + 1) % dc.getSpelendeSpelers().size();
 
 
+        if (spelersMetTegels != dc.getSpelendeSpelers().size())
+        {
+            instructieTekst.setText(bundle.getString("SpelerMetKleur") + getKleurSpeler() + bundle.getString("KiesEenTegel"));
+        } else {
+            instructieTekst.setText("Speler met kleur " + getKleurSpeler() + ", plaats je tegel en klik op bevestig. Kies vervolgens een nieuwe tegel!");
+        }
+
+
         instructieTekst.setStyle("-fx-text-fill: white;");
-        instructieTekst.setText(bundle.getString("SpelerMetKleur") + getKleurSpeler() + bundle.getString("KiesEenTegel"));
-        if(rondeNummer == 2){
+
+        if(rondeNummer > 1){
             updateKaartenBeweegbaarHeid();
             System.out.println("poop");
         }
