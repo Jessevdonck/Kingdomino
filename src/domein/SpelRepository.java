@@ -82,7 +82,7 @@ public class SpelRepository {
         return momenteelSpel.isEindeSpel();
     }
 
-    public HashMap<Kleur, HashMap<LandschapType, Integer>> geefWinnaars() {
+    public List<Speler> geefWinnaars() {
 
         return momenteelSpel.geefWinnaars();
     }

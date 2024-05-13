@@ -167,9 +167,17 @@ public class Spel
     /**
      * @return HashMap van de winnaars
      */
-    public HashMap<Kleur, HashMap<LandschapType, Integer>> geefWinnaars()
+    public List<Speler> geefWinnaars()
     {
-        HashMap<Kleur, HashMap<LandschapType, Integer>> scores = geefScores();
+        List<Speler> winnaars = new ArrayList<>();
+        HashMap<Kleur, Integer> kleurEnScore = new HashMap<>();
+        HashMap<Kleur, HashMap<LandschapType, Integer>> scoresPerSpeler = geefScores();
+        for(Kleur kleur : scoresPerSpeler.keySet()){
+            int score = 0;
+            for(LandschapType type : scoresPerSpeler.get(kleur).keySet()){
+                score += scoresPerSpeler.get(kleur).get(type);
+            }
+        }
         return null;
     }
 
