@@ -556,7 +556,7 @@ public class SpelController implements Initializable {
     @FXML
     private void verwijderButtonHandler(ActionEvent event) {
 
-        DominoTegel tegel = dc.getGeclaimdeTegel(getKleurSpeler(), rondeEen);
+        DominoTegel tegel = dc.getGeclaimdeTegel(getKleurSpeler(), true);
         if (!dc.kanTegelPlaatsen(huidigeSpelerIndex, tegel)) {
             String prevText = instructieTekst.getText();
             String prevStyle = instructieTekst.getStyle();
