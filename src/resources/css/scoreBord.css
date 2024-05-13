@@ -1,12 +1,16 @@
 GridPane Line {
     -fx-stroke: white;
-    -fx-stroke-width: 2px;
+    -fx-stroke-width: 3px;
 }
 
 #tafel {
+
     -fx-background-image: url(../img/woodBackground.jpg);
-    -fx-background-color: #fcba03;
+    -fx-background-opacity: 0.7;
     -fx-background-repeat: no-repeat;
     -fx-background-size: cover;
     -fx-background-position: center;
 }
+
+#AchtergrondKleur {
+    -fx-background-color: rgba(0,0,0,0.5);}

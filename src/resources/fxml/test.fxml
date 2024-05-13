@@ -1,17 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
 
-<AnchorPane id="tafel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" stylesheets="@../css/scoreBord.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.Test">
+<AnchorPane id="tafel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" stylesheets="@../css/scoreBord.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <children>
+      <Pane id="AchtergrondKleur" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" />
       <GridPane gridLinesVisible="true" prefHeight="720.0" prefWidth="1280.0">
         <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -56,9 +59,9 @@
                   <Image url="@../img/KingDomino_Afbeeldingen1/dominotegel/tegel_12_voorkant.png" />
                </image>
             </ImageView>
-            <Label id="SpelerEen" fx:id="SpelerEen" contentDisplay="CENTER" text="Label" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+            <Label id="SpelerEen" fx:id="SpelerEen" contentDisplay="CENTER" text="Label" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="1">
                <font>
-                  <Font size="22.0" />
+                  <Font name="System Bold" size="25.0" />
                </font>
             </Label>
             <ImageView fitHeight="270.0" fitWidth="163.0" pickOnBounds="true" preserveRatio="true" rotate="90.0" scaleX="1.65" scaleY="2.039" GridPane.columnIndex="6">
@@ -66,106 +69,174 @@
                   <Image url="@../img/GoudmijnScorebord.png" />
                </image>
             </ImageView>
-            <Label id="SpelerEen" fx:id="SpelerTwee" contentDisplay="CENTER" text="Label" GridPane.rowIndex="2">
+            <Label id="SpelerEen" fx:id="SpelerTwee" alignment="CENTER" contentDisplay="CENTER" text="Label" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                <font>
-                  <Font size="22.0" />
+                  <Font name="System Bold" size="25.0" />
                </font>
             </Label>
-            <Label id="SpelerEen" fx:id="SpelerDrie" contentDisplay="CENTER" text="Label" GridPane.rowIndex="3">
+            <Label id="SpelerEen" fx:id="SpelerDrie" alignment="CENTER" contentDisplay="CENTER" text="Label" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
                <font>
-                  <Font size="22.0" />
+                  <Font name="System Bold" size="25.0" />
                </font>
             </Label>
-            <Label id="ScoreGraanSpelerEen" fx:id="ScoreGraanSpelerEen" contentDisplay="CENTER" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <Label id="ScoreGraanSpelerEen" fx:id="ScoreGraanSpelerEen" alignment="CENTER" contentDisplay="CENTER" text="Label" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                <font>
-                  <Font size="22.0" />
+                  <Font size="25.0" />
                </font>
             </Label>
-            <Label id="ScoreGraanSpelerEen" fx:id="ScoreGraanSpelerTwee" contentDisplay="CENTER" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <Label id="ScoreGraanSpelerEen" fx:id="ScoreGraanSpelerTwee" alignment="CENTER" contentDisplay="CENTER" text="Label" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                <font>
-                  <Font size="22.0" />
+                  <Font size="25.0" />
                </font>
             </Label>
-            <Label id="ScoreGraanSpelerEen" fx:id="ScoreGraanSpelerDrie" contentDisplay="CENTER" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3">
+            <Label id="ScoreGraanSpelerEen" fx:id="ScoreGraanSpelerDrie" alignment="CENTER" contentDisplay="CENTER" text="Label" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
                <font>
-                  <Font size="22.0" />
+                  <Font size="25.0" />
                </font>
             </Label>
-            <Label id="ScoreBosSpelerEen" fx:id="ScoreBosSpelerEen" contentDisplay="CENTER" text="Label" GridPane.columnIndex="2" GridPane.rowIndex="1">
+            <Label id="ScoreBosSpelerEen" fx:id="ScoreBosSpelerEen" alignment="CENTER" contentDisplay="CENTER" text="Label" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                <font>
-                  <Font size="22.0" />
+                  <Font size="25.0" />
                </font>
             </Label>
-            <Label id="ScoreBosSpelerEen" fx:id="ScoreBosSpelerTwee" contentDisplay="CENTER" text="Label" GridPane.columnIndex="2" GridPane.rowIndex="2">
+            <Label id="ScoreBosSpelerEen" fx:id="ScoreBosSpelerTwee" alignment="CENTER" contentDisplay="CENTER" text="Label" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                <font>
-                  <Font size="22.0" />
+                  <Font size="25.0" />
                </font>
             </Label>
-            <Label id="ScoreBosSpelerEen" fx:id="ScoreBosSpelerDrie" contentDisplay="CENTER" text="Label" GridPane.columnIndex="2" GridPane.rowIndex="3">
+            <Label id="ScoreBosSpelerEen" fx:id="ScoreBosSpelerDrie" alignment="CENTER" contentDisplay="CENTER" text="Label" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
                <font>
-                  <Font size="22.0" />
+                  <Font size="25.0" />
                </font>
             </Label>
-            <Label id="ScoreWaterSpelerEen" fx:id="ScoreWaterSpelerEen" contentDisplay="CENTER" text="Label" GridPane.columnIndex="3" GridPane.rowIndex="1">
+            <Label id="ScoreWaterSpelerEen" fx:id="ScoreWaterSpelerEen" alignment="CENTER" contentDisplay="CENTER" text="Label" textFill="WHITE" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                <font>
-                  <Font size="22.0" />
+                  <Font size="25.0" />
                </font>
             </Label>
-            <Label id="ScoreWaterSpelerEen" fx:id="ScoreWaterSpelerTwee" contentDisplay="CENTER" text="Label" GridPane.columnIndex="3" GridPane.rowIndex="2">
+            <Label id="ScoreWaterSpelerEen" fx:id="ScoreWaterSpelerTwee" alignment="CENTER" contentDisplay="CENTER" text="Label" textFill="WHITE" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                <font>
-                  <Font size="22.0" />
+                  <Font size="25.0" />
                </font>
             </Label>
-            <Label id="ScoreWaterSpelerEen" fx:id="ScoreWaterSpelerDrie" contentDisplay="CENTER" text="Label" GridPane.columnIndex="3" GridPane.rowIndex="3">
+            <Label id="ScoreWaterSpelerEen" fx:id="ScoreWaterSpelerDrie" alignment="CENTER" contentDisplay="CENTER" text="Label" textFill="WHITE" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
                <font>
-                  <Font size="22.0" />
+                  <Font size="25.0" />
                </font>
             </Label>
-            <Label id="ScoreGrasSpelerEen" fx:id="ScoreGrasSpelerEen" contentDisplay="CENTER" text="Label" GridPane.columnIndex="4" GridPane.rowIndex="1">
+            <Label id="ScoreGrasSpelerEen" fx:id="ScoreGrasSpelerEen" alignment="CENTER" contentDisplay="CENTER" text="Label" textFill="WHITE" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                <font>
-                  <Font size="22.0" />
+                  <Font size="25.0" />
                </font>
             </Label>
-            <Label id="ScoreGrasSpelerEen" fx:id="ScoreGrasSpelerTwee" contentDisplay="CENTER" text="Label" GridPane.columnIndex="4" GridPane.rowIndex="2">
+            <Label id="ScoreGrasSpelerEen" fx:id="ScoreGrasSpelerTwee" alignment="CENTER" contentDisplay="CENTER" text="Label" textFill="WHITE" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                <font>
-                  <Font size="22.0" />
+                  <Font size="25.0" />
                </font>
             </Label>
-            <Label id="ScoreGrasSpelerEen" fx:id="ScoreGrasSpelerDrie" contentDisplay="CENTER" text="Label" GridPane.columnIndex="4" GridPane.rowIndex="3">
+            <Label id="ScoreGrasSpelerEen" fx:id="ScoreGrasSpelerDrie" alignment="CENTER" contentDisplay="CENTER" text="Label" textFill="WHITE" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
                <font>
-                  <Font size="22.0" />
+                  <Font size="25.0" />
                </font>
             </Label>
-            <Label id="ScoreModderSpelerEen" fx:id="ScoreModderSpelerEen" contentDisplay="CENTER" text="Label" GridPane.columnIndex="5" GridPane.rowIndex="1">
+            <Label id="ScoreModderSpelerEen" fx:id="ScoreModderSpelerEen" alignment="CENTER" contentDisplay="CENTER" text="Label" textFill="WHITE" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                <font>
-                  <Font size="22.0" />
+                  <Font size="25.0" />
                </font>
             </Label>
-            <Label id="ScoreModderSpelerEen" fx:id="ScoreModderSpelerTwee" contentDisplay="CENTER" text="Label" GridPane.columnIndex="5" GridPane.rowIndex="2">
+            <Label id="ScoreModderSpelerEen" fx:id="ScoreModderSpelerTwee" alignment="CENTER" contentDisplay="CENTER" text="Label" textFill="WHITE" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                <font>
-                  <Font size="22.0" />
+                  <Font size="25.0" />
                </font>
             </Label>
-            <Label id="ScoreModderSpelerEen" fx:id="ScoreModderSpelerDrie" contentDisplay="CENTER" text="Label" GridPane.columnIndex="5" GridPane.rowIndex="3">
+            <Label id="ScoreModderSpelerEen" fx:id="ScoreModderSpelerDrie" alignment="CENTER" contentDisplay="CENTER" text="Label" textFill="WHITE" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
                <font>
-                  <Font size="22.0" />
+                  <Font size="25.0" />
                </font>
             </Label>
-            <Label id="ScoreKoolmijnSpelerEen" fx:id="ScoreKoolmijnSpelerEen" contentDisplay="CENTER" text="Label" GridPane.columnIndex="6" GridPane.rowIndex="1">
+            <Label id="ScoreKoolmijnSpelerEen" fx:id="ScoreKoolmijnSpelerEen" alignment="CENTER" contentDisplay="CENTER" text="Label" textFill="WHITE" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                <font>
-                  <Font size="22.0" />
+                  <Font size="25.0" />
                </font>
             </Label>
-            <Label id="ScoreKoolmijnSpelerEen" fx:id="ScoreKoolmijnSpelerTwee" contentDisplay="CENTER" text="Label" GridPane.columnIndex="6" GridPane.rowIndex="2">
+            <Label id="ScoreKoolmijnSpelerEen" fx:id="ScoreKoolmijnSpelerTwee" alignment="CENTER" contentDisplay="CENTER" text="Label" textFill="WHITE" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                <font>
-                  <Font size="22.0" />
+                  <Font size="25.0" />
                </font>
             </Label>
-            <Label id="ScoreKoolmijnSpelerEen" fx:id="ScoreKoolmijnSpelerDrie" contentDisplay="CENTER" text="Label" GridPane.columnIndex="6" GridPane.rowIndex="3">
+            <Label id="ScoreKoolmijnSpelerEen" fx:id="ScoreKoolmijnSpelerDrie" alignment="CENTER" contentDisplay="CENTER" text="Label" textFill="WHITE" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
                <font>
-                  <Font size="22.0" />
+                  <Font size="25.0" />
                </font>
             </Label>
+            <Label id="SpelerEen" fx:id="SpelerVier" alignment="CENTER" contentDisplay="CENTER" text="Label" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="25.0" />
+               </font>
+            </Label>
+            <Label id="ScoreGraanSpelerEen" fx:id="ScoreGraanSpelerVier" alignment="CENTER" contentDisplay="CENTER" text="Label" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Label>
+            <Label id="ScoreBosSpelerEen" fx:id="ScoreBosSpelerVier" alignment="CENTER" contentDisplay="CENTER" text="Label" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Label>
+            <Label id="ScoreWaterSpelerEen" fx:id="ScoreWaterSpelerVier" alignment="CENTER" contentDisplay="CENTER" text="Label" textFill="WHITE" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Label>
+            <Label id="ScoreGrasSpelerEen" fx:id="ScoreGrasSpelerVier" alignment="CENTER" contentDisplay="CENTER" text="Label" textFill="WHITE" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Label>
+            <Label id="ScoreModderSpelerEen" fx:id="ScoreModderSpelerVier" alignment="CENTER" contentDisplay="CENTER" text="Label" textFill="WHITE" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Label>
+            <Label id="ScoreKoolmijnSpelerEen" fx:id="ScoreKoolmijnSpelerVier" alignment="CENTER" contentDisplay="CENTER" text="Label" textFill="WHITE" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="250.0" rotate="90.0" text="Totaal" textFill="WHITE" GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="64.0" />
+               </font>
+            </Label>
+            <Label id="TotaalScoreSpelerEen" fx:id="TotaalScoreSpelerEen" alignment="CENTER" contentDisplay="CENTER" text="Label" textFill="WHITE" GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="25.0" />
+               </font>
+            </Label>
+            <Label id="TotaalScoreSpelerEen" fx:id="TotaalScoreSpelerTwee" alignment="CENTER" contentDisplay="CENTER" text="Label" textFill="WHITE" GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="25.0" />
+               </font>
+            </Label>
+            <Label id="TotaalScoreSpelerEen" fx:id="TotaalScoreSpelerDrie" alignment="CENTER" contentDisplay="CENTER" text="Label" textFill="WHITE" GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="25.0" />
+               </font>
+            </Label>
+            <Label id="TotaalScoreSpelerEen" fx:id="TotaalScoreSpelerVier" alignment="CENTER" contentDisplay="CENTER" text="Label" textFill="WHITE" GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="25.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="75.0" fitWidth="102.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+               <image>
+                  <Image url="@../img/crown.png" />
+               </image>
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+            </ImageView>
          </children>
       </GridPane>
    </children>
