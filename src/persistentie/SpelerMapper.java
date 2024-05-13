@@ -91,12 +91,16 @@ public class SpelerMapper {
         return playersArray;
     }
 
-    public  void updateSpeler(Speler speler) {
+    public  void updateSpeler(Speler speler, Boolean isGewonnen) {
+        Speler speler1 = geefSpeler(speler.getGebruikersnaam());
+
     	Connectie ssh = new Connectie();
     	try (Connection conn = DriverManager.getConnection(Connectie.MYSQL_JDBC);
                 PreparedStatement query = conn.prepareStatement("UPDATE ID430262_kingdominoDB.Speler SET aantalGewonnen = ?, aantalGespeeld = ? WHERE gebruikersnaam = ?")) {
-            query.setInt(1, speler.getAantalGewonnen());
-            query.setInt(2, speler.getAantalGespeeld());
+            if(isGewonnen) {
+                query.setInt(1, speler1.getAantalGewonnen() + 1);
+            }
+            query.setInt(2, speler1.getAantalGespeeld() + 1);
             query.setString(3, speler.getGebruikersnaam());
             query.executeUpdate();
         } catch (SQLException ex) {

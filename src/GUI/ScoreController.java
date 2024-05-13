@@ -1,13 +1,17 @@
 package GUI;
 
 import domein.DomeinController;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import util.Kleur;
 import util.LandschapType;
 
+import javax.swing.*;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -54,11 +58,12 @@ public class ScoreController implements Initializable
     private DomeinController dc;
     private TaalController tc;
     private HashMap<Kleur, HashMap<LandschapType, Integer>> scoreMap;
+    private SceneSwitchController ssc;
 
 
     public ScoreController(DomeinController dc, TaalController tc)
     {
-
+        this.ssc = new SceneSwitchController(dc);
         this.tc = tc;
         this.dc = dc;
         this.scoreMap = new HashMap<Kleur, HashMap<LandschapType, Integer>>();
@@ -229,6 +234,34 @@ public class ScoreController implements Initializable
             }
             index++;
         }
+    }
+
+    /*---------------------------------------------------------------------SCENE SWITCH----------------------------------------------------------------*/
+    public void switchToSpeelScene(ActionEvent event) throws IOException
+    {
+        for (int i = 1 ; i <= dc.getSpelendeSpelers().size() - 1 ; i++)
+        {
+            dc.updateSpeler(dc.vanKleurNaarSpeler(dc.geefWinnaars().get(i)), false);
+        }
+        dc.updateSpeler(dc.vanKleurNaarSpeler(dc.geefWinnaars().get(0)), true);
+        ssc.switchToSpeelScene(event, dc, tc);
+    }
+    public void switchToHomescreen(MouseEvent event) throws IOException
+    {
+        for (int i = 1 ; i <= dc.getSpelendeSpelers().size() - 1 ; i++)
+        {
+            dc.updateSpeler(dc.vanKleurNaarSpeler(dc.geefWinnaars().get(i)), false);
+        }
+        dc.updateSpeler(dc.vanKleurNaarSpeler(dc.geefWinnaars().get(0)), true);
+        ssc.switchToHomescreen(event, dc, tc);
+    }
+    public void afsluiten(ActionEvent event){
+        for (int i = 1 ; i <= dc.getSpelendeSpelers().size() - 1 ; i++)
+        {
+            dc.updateSpeler(dc.vanKleurNaarSpeler(dc.geefWinnaars().get(i)), false);
+        }
+        dc.updateSpeler(dc.vanKleurNaarSpeler(dc.geefWinnaars().get(0)), true);
+        ssc.afsluiten(event);
     }
 }
 

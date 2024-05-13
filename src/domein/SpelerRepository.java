@@ -27,8 +27,8 @@ public class SpelerRepository {
         return mapper.geefSpeler(gebruikersnaam)!=null;
     }
 
-    public void updateSpeler(Speler speler) {
-        mapper.updateSpeler(speler);
+    public void updateSpeler(Speler speler, Boolean isGewonnen) {
+        mapper.updateSpeler(speler, isGewonnen);
     }
 
 }

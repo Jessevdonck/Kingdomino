@@ -109,6 +109,7 @@ public class Spel
     }
 
 
+
     /**
      * @return een boolean of het het einde van het spel is, true als het einde van het spel is
      */
@@ -196,7 +197,7 @@ public class Spel
      * @param kleur kleur van de speler
      * @return de speler
      */
-    private Speler getSpeler(Kleur kleur) {
+    public Speler getSpeler(Kleur kleur) {
         for (Map.Entry<Speler, Kleur> entry : gekozenSpelers.entrySet()) {
             if (entry.getValue() == kleur) {
                 return entry.getKey();

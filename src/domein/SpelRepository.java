@@ -78,6 +78,11 @@ public class SpelRepository {
         }
     }
 
+    public Speler vanKleurNaarSpeler(Kleur kleur)
+    {
+        return momenteelSpel.getSpeler(kleur);
+    }
+
     public boolean isEindeSpel() {
         return momenteelSpel.isEindeSpel();
     }

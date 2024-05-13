@@ -16,7 +16,7 @@ private MediaPlayerSingleton() {}
         Media bgMusic = new Media(MediaPlayerSingleton.class.getResource(muziekPath).toString());
         mediaPlayerBgMusic = new MediaPlayer(bgMusic);
 
-        mediaPlayerBgMusic.setVolume(0.00); // normaal 0.03
+        mediaPlayerBgMusic.setVolume(0.03); // normaal 0.03
 
         mediaPlayerBgMusic.setOnEndOfMedia(() -> mediaPlayerBgMusic.seek(Duration.ZERO));
     }
