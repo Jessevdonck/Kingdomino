@@ -90,6 +90,15 @@ public class SpelController implements Initializable {
 
 
     @FXML
+    private void switchToScoreScene(ActionEvent event) throws IOException{
+        SceneSwitchController sc = new SceneSwitchController(dc);
+
+        sc.switchToScoreScene(event, dc, TaalController.getInstance());
+
+
+    }
+
+    @FXML
     private AnchorPane tafel;
 
     @FXML
