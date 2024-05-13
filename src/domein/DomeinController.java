@@ -25,65 +25,67 @@ public class DomeinController {
 
     /**
      * Methode om een speler te registreren
+     *
      * @param gebruikersnaam gebruikersnaam van de speler
-     * @param geboortejaar geboortejaar van de speler
+     * @param geboortejaar   geboortejaar van de speler
      */
-    public void registreerSpeler(String gebruikersnaam, int geboortejaar)
-    {
+    public void registreerSpeler(String gebruikersnaam, int geboortejaar) {
         Speler nieuweSpeler = new Speler(gebruikersnaam, geboortejaar);
         spelerRepository.voegToe(nieuweSpeler);
     }
 
     /**
      * Methode om speler toe te voegen aan de gekozen spelers
-     * @param naam naam van de speler
-     * @param geboortejaar geboortejaar van de speler
+     *
+     * @param naam           naam van de speler
+     * @param geboortejaar   geboortejaar van de speler
      * @param aantalgewonnen aantal gewonnen spellen
      * @param aantalgespeeld aantal gespeelde spellen
-     * @param kleur kleur van de speler
+     * @param kleur          kleur van de speler
      */
-    public void voegSpelerToeAanGekozenSpelers(String naam, int geboortejaar, int aantalgewonnen, int aantalgespeeld, Kleur kleur){
-        spelRepository.voegSpelerToeAanSpel(new Speler(naam, geboortejaar, aantalgewonnen, aantalgespeeld),kleur);
+    public void voegSpelerToeAanGekozenSpelers(String naam, int geboortejaar, int aantalgewonnen, int aantalgespeeld, Kleur kleur) {
+        spelRepository.voegSpelerToeAanSpel(new Speler(naam, geboortejaar, aantalgewonnen, aantalgespeeld), kleur);
     }
 
     /**
      * Methode om een speler te verwijderen uit de gekozen spelers
+     *
      * @param naam naam van de speler
      */
-    public void verwijderSpelerUitGekozenSpelers(String naam)
-        {
-            spelRepository.verwijderSpelerUitSpel(naam);
-        }
+    public void verwijderSpelerUitGekozenSpelers(String naam) {
+        spelRepository.verwijderSpelerUitSpel(naam);
+    }
 
     /**
      * @return De gekozen spelers terug
      */
-    public HashMap<Speler, Kleur> getSpelendeSpelers(){
+    public HashMap<Speler, Kleur> getSpelendeSpelers() {
         return spelRepository.getSpelers();
     }
 
     /**
      * Methode om het spel te starten, initialisatie van het spel
      */
-    public void startSpel(){
+    public void startSpel() {
         spelRepository.startSpel();
     }
 
     /**
      * @return boolean of het spel is gedaan, true = spel gedaan, false = spel nog bezig
      */
-    public boolean isEindeSpel(){
+    public boolean isEindeSpel() {
         return spelRepository.isEindeSpel();
     }
 
     /**
      * @return De scores van de spelers terug
      */
-    public HashMap<Kleur,HashMap<LandschapType, Integer>> geefScores(){
+    public HashMap<Kleur, HashMap<LandschapType, Integer>> geefScores() {
         return spelRepository.geefScores();
     }
+
     /**
-     *  Methode die het einde van het spel verwerkt
+     * Methode die het einde van het spel verwerkt
      */
     public void verwerkEindeSpel() {
         if (isEindeSpel()) {
@@ -102,7 +104,7 @@ public class DomeinController {
     /**
      * @return het huidige spel terug
      */
-    public Spel getSpel(){
+    public Spel getSpel() {
         return spelRepository.getMomenteelSpel();
     }
 
@@ -112,12 +114,15 @@ public class DomeinController {
     public List<Kleur> getVolgordeKoning() {
         return spelRepository.getVolgordeKoning();
     }
-    public void setVolgordeKoning(List<Kleur> kleurList){spelRepository.setVolgordeKoning(kleurList);}
+
+    public void setVolgordeKoning(List<Kleur> kleurList) {
+        spelRepository.setVolgordeKoning(kleurList);
+    }
 
     /**
      * Methode om de begin speler te bepalen volgens koning
      */
-    public void koningRondeEenShuffle(){
+    public void koningRondeEenShuffle() {
         spelRepository.koningRondeEen();
     }
 
@@ -133,16 +138,15 @@ public class DomeinController {
 
     /**
      * Methode om de koning op een kolom te zetten, 0 beginkolom, 1 eindkolom
+     *
      * @param kleur kleur van de speler
      * @param index positie van de tegel
      * @param kolom kolom bepaling
      */
-    public void voegKoningAanKaart(Kleur kleur, int index, int kolom)
-    {
-        if(kolom == 0) {
+    public void voegKoningAanKaart(Kleur kleur, int index, int kolom) {
+        if (kolom == 0) {
             spelRepository.getBeginKolom().get(index - 1).claimTegel(kleur);
-        }
-        else {
+        } else {
             spelRepository.getEindKolom().get(index - 1).claimTegel(kleur);
         }
     }
@@ -150,7 +154,7 @@ public class DomeinController {
     /**
      * @return De begin kolom terug
      */
-    public List<DominoTegel> getBeginKolom(){
+    public List<DominoTegel> getBeginKolom() {
 
         return spelRepository.getBeginKolom();
     }
@@ -162,21 +166,21 @@ public class DomeinController {
         return spelRepository.getEindKolom();
 
     }
+
     public void updateKaarten() {
         spelRepository.getMomenteelSpel().geefBeginKolom().clear();
         List<DominoTegel> eindKolomSwitch = spelRepository.getMomenteelSpel().geefEindKolom();
         spelRepository.getMomenteelSpel().geefBeginKolom().addAll(eindKolomSwitch);
         spelRepository.getMomenteelSpel().geefEindKolom().clear();
-        spelRepository.
-                getMomenteelSpel().
-                geefEindKolom().
-                addAll(
-                        spelRepository.
-                                getMomenteelSpel().
-                                geefKaarten(getSpelendeSpelers().size())
-                );
-
-
+        if(!spelRepository.getMomenteelSpel().getTegelsDeck().isEmpty()) {
+            spelRepository.
+                    getMomenteelSpel().
+                    geefEindKolom().
+                    addAll(
+                            spelRepository.
+                                    getMomenteelSpel().
+                                    geefKaarten(getSpelendeSpelers().size()));
+        }
     }
 
     /**
@@ -190,7 +194,7 @@ public class DomeinController {
     /**
      * @return De spelers terug in een DTO
      */
-    public SpelerDTO[] geefAlleSpelers(){
+    public SpelerDTO[] geefAlleSpelers() {
         Speler[] spelers = spelerRepository.geefSpelers();
         return Arrays.stream(spelers)
                 .map(speler -> new SpelerDTO(
@@ -204,15 +208,16 @@ public class DomeinController {
 
     /**
      * Methode om een tegel te kiezen
+     *
      * @param tegelNummer nummer van de tegel
      */
-    public void kiesTegel(int tegelNummer){
+    public void kiesTegel(int tegelNummer) {
         spelRepository.kiesTegel(tegelNummer);
     }
 
     /**
      * @param kleur geselcteerde kleur van de speler
-     * @return  boolean of de kleur al gekozen is, true = kleur gekozen, false = kleur nog niet gekozen
+     * @return boolean of de kleur al gekozen is, true = kleur gekozen, false = kleur nog niet gekozen
      */
     public boolean isKleurGekozen(Kleur kleur) {
         return spelRepository.isKleurGekozen(kleur);
@@ -222,18 +227,19 @@ public class DomeinController {
      * @param naam naam van de speler
      * @return De kleur van de speler terug
      */
-    public Kleur getKleurVanSpeler(String naam){return spelRepository.getKleurVanSpeler(naam);}
+    public Kleur getKleurVanSpeler(String naam) {
+        return spelRepository.getKleurVanSpeler(naam);
+    }
 
 
     /**
-     * @param kolom kolom van de tegel
-     * @param rij rij van de tegel
-     * @param verticaal boolean verticaal of niet
-     * @param tegel tegel die verplaatst wordt
+     * @param kolom       kolom van de tegel
+     * @param rij         rij van de tegel
+     * @param verticaal   boolean verticaal of niet
+     * @param tegel       tegel die verplaatst wordt
      * @param spelerIndex index van de speler
      */
-    public void verplaatsDominotegel(int kolom, int rij, boolean verticaal, DominoTegel tegel, int spelerIndex)
-    {
+    public void verplaatsDominotegel(int kolom, int rij, boolean verticaal, DominoTegel tegel, int spelerIndex) {
         spelRepository.verplaatsTegel(kolom, rij, verticaal, tegel, spelerIndex);
     }
 
@@ -241,12 +247,9 @@ public class DomeinController {
      * @param tegelNummer nummer van de tegel
      * @return De foto van de achterkant van de tegel terug
      */
-    public String getFotoAchterkantVanTegel(int tegelNummer)
-    {
-        for(DominoTegel tegel : dominoTegels)
-        {
-            if(tegel.getTegelNummer() == tegelNummer)
-            {
+    public String getFotoAchterkantVanTegel(int tegelNummer) {
+        for (DominoTegel tegel : dominoTegels) {
+            if (tegel.getTegelNummer() == tegelNummer) {
                 return tegel.getFotoAchterkant();
             }
         }
@@ -257,12 +260,9 @@ public class DomeinController {
      * @param tegelNummer nummer van de tegel
      * @return De foto van de voorkant van de tegel terug
      */
-    public String getFotoVoorkantVanTegel(int tegelNummer)
-    {
-        for(DominoTegel tegel : dominoTegels)
-        {
-            if(tegel.getTegelNummer() == tegelNummer)
-            {
+    public String getFotoVoorkantVanTegel(int tegelNummer) {
+        for (DominoTegel tegel : dominoTegels) {
+            if (tegel.getTegelNummer() == tegelNummer) {
                 return tegel.getFotoVoorkant();
             }
         }
@@ -274,10 +274,10 @@ public class DomeinController {
      * @param kleur kleur van de speler
      * @return De geclaimde tegel van de speler terug in de beginkolom
      */
-    public DominoTegel getGeclaimdeTegel(Kleur kleur){
+    public DominoTegel getGeclaimdeTegel(Kleur kleur) {
         List<DominoTegel> beginKolom = getBeginKolom();
-        for(DominoTegel tegel : beginKolom){
-            if(tegel.getKoningVanSpeler() == kleur){
+        for (DominoTegel tegel : beginKolom) {
+            if (tegel.getKoningVanSpeler() == kleur) {
                 return tegel;
             }
         }
