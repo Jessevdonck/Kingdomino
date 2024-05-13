@@ -85,12 +85,15 @@ public class DomeinController {
     }
 
 
-
     /**
      * @return het huidige spel terug
      */
     public Spel getSpel() {
         return spelRepository.getMomenteelSpel();
+    }
+    public void updateSpeler(Speler speler, Boolean isGewonnen)
+    {
+        spelerRepository.updateSpeler(speler, isGewonnen);
     }
 
     /**
@@ -144,6 +147,11 @@ public class DomeinController {
     public List<DominoTegel> getEindKolom() {
         return spelRepository.getEindKolom();
 
+    }
+
+    public Speler vanKleurNaarSpeler(Kleur kleur)
+    {
+        return spelRepository.vanKleurNaarSpeler(kleur);
     }
 
     public void updateKaarten() {
