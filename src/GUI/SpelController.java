@@ -87,6 +87,7 @@ public class SpelController implements Initializable {
     private VBox beginKolomKeuze;
     @FXML
     private Pane bord1, bord2, bord3, bord4;
+    @FXML AnchorPane scorePopUp;
 
 
     @FXML
@@ -713,10 +714,16 @@ public class SpelController implements Initializable {
                 kiesNieuweTegel = true;
                 if(laatsteRonde) {
                     kiesNieuweTegel = false;
-                    huidigeSpelerIndex = (huidigeSpelerIndex + 1) % dc.getSpelendeSpelers().size();
-                    instructieTekst.setText(bundle.getString("SpelerMetKleur") + getKleurSpeler() + bundle.getString("PlaatsTegelInstructie"));
-                    updateKaartenBeweegbaarHeid();
-                    plaatsTegel = true;
+                    huidigeSpelerIndex++;
+                    if (huidigeSpelerIndex >= dc.getSpelendeSpelers().size()) {
+                        // Als de huidige spelerindex de maximale index overschrijdt, toon de scorePopUp
+                        scorePopUp.setVisible(true);
+                    } else {
+                        // Anders, update de instructietekst en andere logica voor de volgende speler
+                        instructieTekst.setText(bundle.getString("SpelerMetKleur") + getKleurSpeler() + bundle.getString("PlaatsTegelInstructie"));
+                        updateKaartenBeweegbaarHeid();
+                        plaatsTegel = true;
+                    }
                 }
                 String prevText = instructieTekst.getText();
                 String prevStyle = instructieTekst.getStyle();

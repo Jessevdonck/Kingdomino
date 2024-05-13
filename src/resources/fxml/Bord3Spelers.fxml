@@ -4,21 +4,32 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.ColorAdjust?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
 <?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="tafel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" stylesheets="@../css/bord.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label fx:id="instructieTekst" alignment="CENTER" contentDisplay="CENTER" layoutX="913.0" layoutY="30.0" prefHeight="258.0" prefWidth="326.0" textFill="WHITE" wrapText="true">
+      <Label fx:id="instructieTekst" alignment="CENTER" contentDisplay="CENTER" layoutX="915.0" layoutY="35.0" prefHeight="265.0" prefWidth="332.0" textFill="WHITE" wrapText="true">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
+         <effect>
+            <ColorAdjust hue="-0.68" />
+         </effect>
       </Label>
       <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="289.0" prefWidth="372.0">
          <children>
@@ -120,5 +131,135 @@
             </VBox>
          </children>
       </HBox>
+      <AnchorPane id="scorePopUp" fx:id="scorePopUp" layoutX="212.5" layoutY="75.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="850.0" visible="false">
+         <children>
+            <HBox alignment="BOTTOM_CENTER" layoutX="125.0" layoutY="300.0">
+               <children>
+                  <Pane>
+                     <children>
+                        <Rectangle id="Podium2" arcHeight="5.0" arcWidth="5.0" fill="#797979" height="119.0" layoutY="51.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="200.0" />
+                        <Label id="PodiumNummer" alignment="CENTER" contentDisplay="CENTER" layoutX="82.0" layoutY="66.0" text="2">
+                           <font>
+                              <Font name="System Bold" size="62.0" />
+                           </font>
+                           <textFill>
+                              <LinearGradient endX="1.0" endY="1.0">
+                                 <stops>
+                                    <Stop>
+                                       <color>
+                                          <Color red="1.0" green="1.0" blue="1.0" />
+                                       </color>
+                                    </Stop>
+                                    <Stop offset="1.0">
+                                       <color>
+                                          <Color red="0.7254902124404907" green="0.7254902124404907" blue="0.7254902124404907" />
+                                       </color>
+                                    </Stop>
+                                 </stops>
+                              </LinearGradient>
+                           </textFill>
+                        </Label>
+                     </children>
+                  </Pane>
+                  <Pane>
+                     <children>
+                        <Rectangle id="Podium" arcHeight="5.0" arcWidth="5.0" fill="#797979" height="164.0" layoutY="6.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="200.0" />
+                        <Label id="PodiumNummer" contentDisplay="CENTER" layoutX="82.0" layoutY="43.0" text="1">
+                           <font>
+                              <Font name="System Bold" size="62.0" />
+                           </font>
+                           <textFill>
+                              <LinearGradient endX="1.0" endY="1.0">
+                                 <stops>
+                                    <Stop>
+                                       <color>
+                                          <Color red="0.9607843160629272" green="0.8117647171020508" blue="0.364705890417099" />
+                                       </color>
+                                    </Stop>
+                                    <Stop offset="1.0">
+                                       <color>
+                                          <Color red="0.7490196228027344" green="0.5843137502670288" blue="0.24705882370471954" />
+                                       </color>
+                                    </Stop>
+                                 </stops>
+                              </LinearGradient>
+                           </textFill>
+                        </Label>
+                     </children>
+                  </Pane>
+                  <Pane prefHeight="85.0" prefWidth="200.0">
+                     <children>
+                        <Rectangle id="Podium" arcHeight="5.0" arcWidth="5.0" fill="#797979" height="85.0" layoutY="85.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="200.0" />
+                        <Label id="PodiumNummer" contentDisplay="CENTER" layoutX="82.0" layoutY="85.0" text="3">
+                           <font>
+                              <Font name="System Bold" size="62.0" />
+                           </font>
+                           <textFill>
+                              <LinearGradient endX="1.0" endY="1.0">
+                                 <stops>
+                                    <Stop>
+                                       <color>
+                                          <Color red="0.9078947305679321" green="0.7111842036247253" blue="0.41611841320991516" />
+                                       </color>
+                                    </Stop>
+                                    <Stop offset="1.0">
+                                       <color>
+                                          <Color red="0.8289473652839661" green="0.502997100353241" blue="0.13048245012760162" />
+                                       </color>
+                                    </Stop>
+                                 </stops>
+                              </LinearGradient>
+                           </textFill>
+                        </Label>
+                     </children>
+                  </Pane>
+               </children>
+            </HBox>
+            <Label fx:id="spelerEen" alignment="CENTER" contentDisplay="CENTER" layoutX="325.0" layoutY="246.0" prefHeight="60.0" prefWidth="200.0" text="test" textFill="WHITE" wrapText="true">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label fx:id="spelerTwee" alignment="CENTER" contentDisplay="CENTER" layoutX="125.0" layoutY="279.0" prefHeight="72.0" prefWidth="200.0" text="test" textFill="WHITE" wrapText="true">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label fx:id="spelerDrie" alignment="CENTER" contentDisplay="CENTER" layoutX="525.0" layoutY="325.0" prefHeight="60.0" prefWidth="200.0" text="test" textFill="WHITE" wrapText="true">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+            <Button fx:id="naarScoreSheetBtn" layoutX="715.0" layoutY="546.0" mnemonicParsing="false" onAction="#switchToScoreScene" prefHeight="40.0" prefWidth="121.0" text="Volgende">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <ImageView fitHeight="228.0" fitWidth="228.0" layoutX="134.0" layoutY="-15.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/Fireworks1.gif" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="60.0" fitWidth="65.0" layoutX="415.0" layoutY="118.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/Fireworks1.gif" />
+               </image>
+               <effect>
+                  <ColorAdjust />
+               </effect>
+            </ImageView>
+            <ImageView fitHeight="208.0" fitWidth="208.0" layoutX="453.0" layoutY="74.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/Fireworks1.gif" />
+               </image>
+               <effect>
+                  <ColorAdjust />
+               </effect>
+            </ImageView>
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>

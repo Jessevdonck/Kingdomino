@@ -32,7 +32,7 @@ public class Spel
         this.tegels = dominoTegelMapper.geefAlleDominoTegels();
         Collections.shuffle(tegels);
 
-        int aantalTegelsPerSpeler = spelers.size() == 3 ? 6 : 48;
+        int aantalTegelsPerSpeler = spelers.size() == 3 ? 6 : 8;
         if (tegels.size() < aantalTegelsPerSpeler) {
             throw new IllegalArgumentException("Er zijn niet genoeg tegels voor het opgegeven aantal spelers.");
         }
