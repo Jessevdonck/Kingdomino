@@ -770,9 +770,9 @@ public class SpelController implements Initializable {
                         huidigeSpelerIndex++;
                         if (huidigeSpelerIndex >= dc.getSpelendeSpelers().size()) {
                             // Als de huidige spelerindex de maximale index overschrijdt, toon de scorePopUp
-                            spelerEen.setText(dc.geefWinnaars().get(0).toString());
-                            spelerTwee.setText(dc.geefWinnaars().get(1).toString());
-                            spelerDrie.setText(dc.geefWinnaars().get(2).toString());
+                            //spelerEen.setText(dc.geefWinnaars().get(0).toString());
+                            //spelerTwee.setText(dc.geefWinnaars().get(1).toString());
+                            //spelerDrie.setText(dc.geefWinnaars().get(2).toString());
                             scorePopUp.setVisible(true);
 
                         } else {

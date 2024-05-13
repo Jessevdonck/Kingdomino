@@ -239,28 +239,28 @@ public class ScoreController implements Initializable
     /*---------------------------------------------------------------------SCENE SWITCH----------------------------------------------------------------*/
     public void switchToSpeelScene(ActionEvent event) throws IOException
     {
-        for (int i = 1 ; i <= dc.getSpelendeSpelers().size() - 1 ; i++)
+        /*for (int i = 1 ; i <= dc.getSpelendeSpelers().size() - 1 ; i++)
         {
             dc.updateSpeler(dc.vanKleurNaarSpeler(dc.geefWinnaars().get(i)), false);
         }
-        dc.updateSpeler(dc.vanKleurNaarSpeler(dc.geefWinnaars().get(0)), true);
+        dc.updateSpeler(dc.vanKleurNaarSpeler(dc.geefWinnaars().get(0)), true);*/
         ssc.switchToSpeelScene(event, dc, tc);
     }
     public void switchToHomescreen(MouseEvent event) throws IOException
     {
-        for (int i = 1 ; i <= dc.getSpelendeSpelers().size() - 1 ; i++)
+        /*for (int i = 1 ; i <= dc.getSpelendeSpelers().size() - 1 ; i++)
         {
             dc.updateSpeler(dc.vanKleurNaarSpeler(dc.geefWinnaars().get(i)), false);
         }
-        dc.updateSpeler(dc.vanKleurNaarSpeler(dc.geefWinnaars().get(0)), true);
+        dc.updateSpeler(dc.vanKleurNaarSpeler(dc.geefWinnaars().get(0)), true);*/
         ssc.switchToHomescreen(event, dc, tc);
     }
     public void afsluiten(ActionEvent event){
-        for (int i = 1 ; i <= dc.getSpelendeSpelers().size() - 1 ; i++)
+        /*for (int i = 1 ; i <= dc.getSpelendeSpelers().size() - 1 ; i++)
         {
             dc.updateSpeler(dc.vanKleurNaarSpeler(dc.geefWinnaars().get(i)), false);
         }
-        dc.updateSpeler(dc.vanKleurNaarSpeler(dc.geefWinnaars().get(0)), true);
+        dc.updateSpeler(dc.vanKleurNaarSpeler(dc.geefWinnaars().get(0)), true);*/
         ssc.afsluiten(event);
     }
 }
