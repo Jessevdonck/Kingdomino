@@ -15,11 +15,18 @@ public class TegelGebied
     private Landschap[][] gebied;
     private boolean[][] bezocht = new boolean[5][5];
 
+    /**
+     * Constructor voor TegelGebied
+     */
     public TegelGebied()
     {
         this.gebied = maakGebied();
     }
 
+    /**
+     * Methode om een gebied te maken
+     * @return een 5x5 grid met landschappen
+     */
     private Landschap[][] maakGebied()
     {
         Landschap[][] grid = new Landschap[5][5];
@@ -32,11 +39,21 @@ public class TegelGebied
         return grid;
     }
 
+    /**
+     * @return het gebied 5x5 grid met landschappen
+     */
     public Landschap[][] getGebied()
     {
         return gebied;
     }
 
+    /**
+     * Methode om een tegel te plaatsen in het gebied
+     * @param kolom de kolom waar de tegel geplaatst moet worden
+     * @param rij de rij waar de tegel geplaatst moet worden
+     * @param verticaal of de tegel verticaal geplaatst moet worden
+     * @param tegel de tegel die geplaatst moet worden
+     */
     public void plaatsTegel(int kolom, int rij, boolean verticaal, DominoTegel tegel)
     {
         if (verticaal) {
@@ -57,6 +74,12 @@ public class TegelGebied
         }
     }
 
+    /**
+     * @param x de x coordinaat
+     * @param y de y coordinaat
+     * @param type het landschapstype
+     * @return de score van het gebied
+     */
     public int berekenScore(int x, int y, LandschapType type)
     {
         if (x < 0 || y < 0 || x >= 4 || y >= 4 || bezocht[x][y] || gebied[x][y] == null && gebied[x][y].getType() != type) {
@@ -82,6 +105,9 @@ public class TegelGebied
         return size;
     }
 
+    /**
+     * @return een hashmap met de scores van elk landschapstype
+     */
     public HashMap<LandschapType, Integer> zoekDomein()
     {
 
@@ -103,6 +129,9 @@ public class TegelGebied
         return puntenMap;
     }
 
+    /**
+     * @return het aantal kronen in het gebied
+     */
     public int getAantalKronen()
     {
         int aantalKronen = 0;
@@ -116,6 +145,9 @@ public class TegelGebied
         return aantalKronen;
     }
 
+    /**
+     * @return de grootte van het gebied
+     */
     public int getGrootteGebied()
     {
         int count = 0;
@@ -129,6 +161,13 @@ public class TegelGebied
         return count;
     }
 
+    /**
+     * @param tegel de tegel die geplaatst moet worden
+     * @param rij de rij waar de tegel geplaatst moet worden
+     * @param kolom de kolom waar de tegel geplaatst moet worden
+     * @param verticaal of de tegel verticaal geplaatst moet worden
+     * @return of de tegel geplaats kan worden op een specifieke plek, true als het kan, false als het niet kan
+     */
     private boolean kanTegelPlaatsenOpSpecifiekePlek(DominoTegel tegel, int rij, int kolom, boolean verticaal)
     {
         LandschapType type1 = tegel.getLandschapType1().getType();
@@ -221,6 +260,10 @@ public class TegelGebied
         return false;
     }
 
+    /**
+     * @param tegel een tegel
+     * @return of de tegel nog geplaats kan worden
+     */
     public boolean kanTegelPlaatsen(DominoTegel tegel)
     {
         // Horizontaal

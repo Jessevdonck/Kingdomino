@@ -20,6 +20,13 @@ public class DominoTegel {
     private String fotoVoorkant;
 
 
+    /**
+     * @param l1 Landschap van de linker zijde
+     * @param l2 Landschap van de rechterzijde
+     * @param nummer Nummer van de tegel
+     * @param fotoAchterkant Foto van de achterkant van de tegel
+     * @param fotoVoorkant Foto van de voorkant van de tegel
+     */
     public DominoTegel(Landschap l1, Landschap l2, int nummer, String fotoAchterkant, String fotoVoorkant) {
 
         this.landschapType1 = l1;
@@ -30,36 +37,70 @@ public class DominoTegel {
         this.fotoVoorkant = fotoVoorkant;
     }
 
+    /**
+     * @return Landschap van linkerzijde
+     */
     public Landschap getLandschapType1() {
         return landschapType1;
     }
+
+    /**
+     * @return Kleur van de speler die de tegel heeft geclaimed
+     */
     public Kleur getKoningVanSpeler(){return kleurVanKoning;}
+
+    /**
+     * @return Nummer van de tegel
+     */
     public int getTegelNummer(){
         return tegelNummer;
     }
+
+    /**
+     * @return Kronen van de linkerzijde
+     */
     public int getKronen1() {
         return landschapType1.getAantalKronen();
     }
 
+    /**
+     * @return Landschap van de rechterzijde
+     */
     public Landschap getLandschapType2() {
         return landschapType2;
     }
 
+    /**
+     * @return Kronen van de rechterzijde
+     */
     public int getKronen2() {
         return landschapType2.getAantalKronen();
     }
+
+    /**
+     * @param kleur Kleur van de speler die de tegel heeft geclaimed
+     */
     private void setKleurVanKoning(Kleur kleur){
         this.kleurVanKoning = kleur;
     }
 
+    /**
+     * @return Foto van de achterkant van de tegel
+     */
     public String getFotoAchterkant(){
         return fotoAchterkant;
     }
 
+    /**
+     * @return Foto van de voorkant van de tegel
+     */
     public String getFotoVoorkant(){
         return fotoVoorkant;
     }
 
+    /**
+     * @param kleur Kleur van de speler die de tegel claimt
+     */
     public void claimTegel(Kleur kleur){
         if (kleurVanKoning == null){
             setKleurVanKoning(kleur);
