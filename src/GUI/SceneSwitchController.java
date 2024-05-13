@@ -31,7 +31,7 @@ public class SceneSwitchController
     public void switchToRegisterScene(ActionEvent event, DomeinController dc, TaalController tc) throws IOException
     {
         MediaPlayerSingleton.getInstanceSoundFX().play();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Login.fxml.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Login.fxml"));
         loader.setController(new RegistreerSpelerController(dc, tc));
         Parent root = loader.load();
 
