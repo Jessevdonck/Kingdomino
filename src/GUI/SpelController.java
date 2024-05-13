@@ -161,6 +161,10 @@ public class SpelController implements Initializable
         plaatsTegelsInKolom(getEindKolomTegels(), eindKolom);
         plaatsTegelInStapel(getStapel(), stapelButton);
         plaatsTegelsInBeginKolom(getBeginKolomTegels(), beginKolom);
+        for (Node node : eindKolom.getChildren()) {
+            // Disable eindkolom
+            node.setDisable(true);
+        }
         updateKaartenBeweegbaarHeid();
         speelBeurtEersteRonde();
         //startSpel();
@@ -301,6 +305,8 @@ public class SpelController implements Initializable
 
             imageView.setFitHeight(78);
             imageView.setFitWidth(156);
+
+            imageView.setCursor(Cursor.HAND);
 
             imageView.setFocusTraversable(true);
 
@@ -501,6 +507,10 @@ public class SpelController implements Initializable
 
 
             beginKolom.getChildren().get(0).setDisable(false);
+            for (Node node : eindKolom.getChildren()) {
+                // Disable eindkolom
+                node.setDisable(true);
+            }
             plaatsTegel = true;
         }
 
@@ -668,7 +678,6 @@ public class SpelController implements Initializable
     @FXML
     private void volgendeButtonHandler(ActionEvent event)
     {
-
 
         if (rondeEen) {
             voegSpelerToeAanGekozenVolgorde(getKleurSpeler(), gekozenCirkel);

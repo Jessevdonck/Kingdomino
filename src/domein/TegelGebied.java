@@ -140,39 +140,38 @@ public class TegelGebied
                         && ((gebied[rij + 1][kolom].getType() == type1)
                         || (gebied[rij + 1][kolom].getType() == LandschapType.KONING))) {
                     return true;
-                }
+                } else System.out.println("type 1 boven is niet hetzelfde.");
                 // type 1 onder
                 if ((rij >= 1) && (gebied[rij - 1][kolom] != null)
                         && ((gebied[rij - 1][kolom].getType() == type1)
                         || (gebied[rij - 1][kolom].getType() == LandschapType.KONING))) {
                     return true;
-                }
+                } else System.out.println("type 1 onder is niet hetzelfde");
                 // type 1 links
                 if ((kolom >= 1) && (gebied[rij][kolom - 1] != null)
                         && ((gebied[rij][kolom - 1].getType() == type1)
                         || (gebied[rij][kolom - 1].getType() == LandschapType.KONING))) {
                     return true;
-                }
+                }else System.out.println("type 1 links is niet hetzelfde");
 
                 // type 2 boven
                 if ((rij <= 3) && (kolom <= 3) && (gebied[rij + 1][kolom + 1] != null)
                         && ((gebied[rij + 1][kolom + 1].getType() == type1)
                         || (gebied[rij + 1][kolom + 1].getType() == LandschapType.KONING))) {
                     return true;
-                }
+                } else System.out.println("type 2 boven is niet hetzelfde");
                 // type 2 onder
                 if ((rij >= 1) && (kolom <= 3) && (gebied[rij - 1][kolom + 1] != null)
                         && ((gebied[rij - 1][kolom + 1].getType() == type1)
                         || (gebied[rij - 1][kolom + 1].getType() == LandschapType.KONING))) {
                     return true;
-                }
+                }else System.out.println("type 2 onder is niet hetzelfde");
                 // type 2 rechts
                 if ((kolom <= 2) && (gebied[rij][kolom + 2] != null)
                         && ((gebied[rij][kolom + 2].getType() == type1)
                         || (gebied[rij][kolom + 2].getType() == LandschapType.KONING))) {
                     return true;
-                }
-
+                } else System.out.println("type 2 rechts is niet hetzelfde");
             }
         } else {
             if (gebied[rij][kolom] == null && gebied[rij + 1][kolom] == null) {
