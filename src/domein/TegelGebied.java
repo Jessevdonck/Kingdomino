@@ -126,13 +126,16 @@ public class TegelGebied
 
 
         for (LandschapType type : LandschapType.values()) {
+            if(type == LandschapType.KONING){
+                continue;
+            }
             int size = 0;
             for (int i = 0; i < 5; i++) {
                 for (int j = 0; j < 5; j++) {
                     if (!bezocht[i][j]) {
                         List<Integer> data = berekenScore(i, j, type);
                         size += data.get(0) * data.get(1);
-
+                        System.out.println(data.get(1));
                     }
                 }
             }
