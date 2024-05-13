@@ -163,18 +163,27 @@ public class Spel
 
 
 
-    public HashMap<Kleur,Integer> geefWinnaars()
+    public List<Kleur> geefWinnaars()
     {
-        List<Speler> winnaars = new ArrayList<>();
-        HashMap<Kleur, Integer> kleurEnScore = new HashMap<>();
+
+        HashMap<Integer, Kleur> kleurEnScore = new HashMap<>();
+        List<Integer> sorted;
         HashMap<Kleur, HashMap<LandschapType, Integer>> scoresPerSpeler = geefScores();
         for(Kleur kleur : scoresPerSpeler.keySet()){
             int score = 0;
             for(LandschapType type : scoresPerSpeler.get(kleur).keySet()){
                 score += scoresPerSpeler.get(kleur).get(type);
             }
+            kleurEnScore.put(score, kleur);
+
         }
-        return kleurEnScore;
+        sorted = new ArrayList<>(kleurEnScore.keySet());
+        Collections.sort(sorted, (a, b) -> b.compareTo(a));
+        List<Kleur> kleurenOpVolgorde = new ArrayList<>();
+        for (Integer ints : sorted){
+            kleurenOpVolgorde.add(kleurEnScore.get(ints));
+        }
+        return kleurenOpVolgorde;
     }
 
     /**
