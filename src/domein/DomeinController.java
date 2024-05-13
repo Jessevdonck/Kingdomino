@@ -84,22 +84,7 @@ public class DomeinController {
         return spelRepository.geefScores();
     }
 
-    /**
-     * Methode die het einde van het spel verwerkt
-     */
-    public void verwerkEindeSpel() {
-        if (isEindeSpel()) {
-            List<Speler> spelers = spelRepository.getSpelers().keySet().stream().toList();
-            HashMap<Kleur, HashMap<LandschapType, Integer>> winnaars = spelRepository.geefWinnaars();
 
-            for (Speler speler : spelers) {
-                speler.setAantalGespeeld(speler.getAantalGespeeld() + 1);
-//                if(winnaars.contains(speler))
-//                    speler.setAantalGewonnen(speler.getAantalGewonnen() + 1);
-                spelerRepository.updateSpeler(speler);
-            }
-        }
-    }
 
     /**
      * @return het huidige spel terug
@@ -126,15 +111,9 @@ public class DomeinController {
         spelRepository.koningRondeEen();
     }
 
-    /**
-     * @return de winnaars van het spel
-     */
-//    public List<SpelerDTO> getWinnaars() {
-//        List<Speler> winnaars = spelRepository.geefWinnaars();
-//        return Arrays.stream(winnaars.toArray(new Speler[0]))
-//                .map(speler -> new SpelerDTO(speler.getGebruikersnaam(), speler.getGeboortejaar(), speler.getAantalGewonnen(), speler.getAantalGespeeld()))
-//                .toList();
-//    };
+    public List<Kleur> geefWinnaars(){
+        return spelRepository.geefWinnaars();
+    }
 
     /**
      * Methode om de koning op een kolom te zetten, 0 beginkolom, 1 eindkolom

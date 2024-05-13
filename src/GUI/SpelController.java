@@ -40,6 +40,8 @@ public class SpelController implements Initializable {
     private boolean tegelRotated = false;
 
     @FXML
+    private Label spelerEen, spelerTwee, spelerDrie;
+    @FXML
     private GridPane gridPane1;
     @FXML
     private GridPane gridPane2;
@@ -768,7 +770,11 @@ public class SpelController implements Initializable {
                         huidigeSpelerIndex++;
                         if (huidigeSpelerIndex >= dc.getSpelendeSpelers().size()) {
                             // Als de huidige spelerindex de maximale index overschrijdt, toon de scorePopUp
+
+
+
                             scorePopUp.setVisible(true);
+
                         } else {
                             // Anders, update de instructietekst en andere logica voor de volgende speler
                             instructieTekst.setText(bundle.getString("SpelerMetKleur") + getKleurSpeler() + bundle.getString("PlaatsTegelInstructie"));
