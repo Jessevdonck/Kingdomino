@@ -27,9 +27,6 @@
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
-         <effect>
-            <ColorAdjust hue="-0.68" />
-         </effect>
       </Label>
       <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="289.0" prefWidth="372.0">
          <children>
