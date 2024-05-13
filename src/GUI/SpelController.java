@@ -742,6 +742,9 @@ public class SpelController implements Initializable {
                     plaatsTegel = false;
                     kiesNieuweTegel = true;
                     if(laatsteRonde) {
+                        for(Node node: eindKolomKeuze.getChildren()){
+                            node.setDisable(true);
+                        }
                         kiesNieuweTegel = false;
                         huidigeSpelerIndex++;
                         if (huidigeSpelerIndex >= dc.getSpelendeSpelers().size()) {
