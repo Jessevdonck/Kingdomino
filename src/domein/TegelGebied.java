@@ -6,7 +6,9 @@ import exceptions.PlaatsenMiddenVanHetBordException;
 import exceptions.TegelNietOvereenMetAanliggendeTegelException;
 import util.LandschapType;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class TegelGebied
@@ -80,17 +82,21 @@ public class TegelGebied
      * @param type het landschapstype
      * @return de score van het gebied
      */
-    public int berekenScore(int x, int y, LandschapType type)
+    public List<Integer> berekenScore(int x, int y, LandschapType type)
     {
-        if (x < 0 || y < 0 || x >= 4 || y >= 4 || bezocht[x][y] || gebied[x][y] == null && gebied[x][y].getType() != type) {
-            return 0;
+        List<Integer> punten = new ArrayList<>();
+        punten.add(0);
+        punten.add(0);
+        if (x < 0 || y < 0 || x >= 4 || y >= 4 || bezocht[x][y] || gebied[x][y] == null) {
+            return punten;
+        }
+        if(gebied[x][y].getType() != type){
+            return punten;
         }
 
-
         bezocht[x][y] = true;
-
-
-        int size = 1 + gebied[x][y].getAantalKronen();
+        int aantalKronen = gebied[x][y].getAantalKronen();
+        int size = 1;
 
 
         for (int[] dir : richting) {
@@ -98,11 +104,14 @@ public class TegelGebied
             int ny = y + dir[1];
 
             if (nx >= 0 && ny >= 0 && nx < 5 && ny < 5) {
-                size += berekenScore(nx, ny, type);
+                punten = berekenScore(nx, ny, type);
+                aantalKronen += punten.get(1);
+                size += punten.get(0);
+
             }
         }
 
-        return size;
+        return punten;
     }
 
     /**
@@ -114,13 +123,16 @@ public class TegelGebied
 
         HashMap<LandschapType, Integer> puntenMap = new HashMap<>();
 
+
+
         for (LandschapType type : LandschapType.values()) {
             int size = 0;
             for (int i = 0; i < 5; i++) {
                 for (int j = 0; j < 5; j++) {
                     if (!bezocht[i][j]) {
-                        int grootte = berekenScore(i, j, type);
-                        size += grootte + 1;
+                        List<Integer> data = berekenScore(i, j, type);
+                        size += data.get(0) * data.get(1);
+
                     }
                 }
             }

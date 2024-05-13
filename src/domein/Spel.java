@@ -162,20 +162,7 @@ public class Spel
      * @param tegelGebied
      * @return een 2D array van de beschikbare tegels
      */
-    public Integer[][] geefBeschikbareTegels(TegelGebied tegelGebied){
-        Landschap[][] grid = tegelGebied.getGebied();
-        Integer[][] beschikbareTegels = new Integer[grid.length][grid[0].length];
-        for (int i = 0; i < 5;i++ ){
-            for(int j = 0; j < 5; j++) {
-                if (grid[i][j] == null) {
-                    beschikbareTegels[i][j] = 1; // Set the status of the tile to "Beschikbaar"
-                }else {
-                    beschikbareTegels[i][j] = 0;
-                }
-            }
-        }
-            return beschikbareTegels;
-    }
+
 
     /**
      * @return HashMap van de winnaars
@@ -222,7 +209,10 @@ public class Spel
     {
         HashMap<Kleur, HashMap<LandschapType, Integer>> scores = new HashMap<Kleur, HashMap<LandschapType, Integer>>();
         for (Kleur kleur : gekozenSpelers.values()) {
+            System.out.println(kleur.toString());
+
             scores.put(kleur, tegelGebieden.get(kleur).zoekDomein());
+            System.out.println(scores.get(kleur));
         }
         return scores;
     }
