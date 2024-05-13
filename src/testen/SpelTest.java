@@ -40,4 +40,12 @@ public class SpelTest {
         assertNotNull(tegelGebieden.get(Kleur.GEEL));
     }
 
+    @Test
+    public void test_spel_setVolgordeSpelers() {
+        Spel spel = new Spel(spelers);
+        List<Kleur> kleurList = List.of(Kleur.ROOS, Kleur.BLAUW, Kleur.GEEL);
+        spel.setVolgordeSpelers(kleurList);
+        assertEquals(kleurList, spel.getVolgordeSpelers());
+    }
+
 }
