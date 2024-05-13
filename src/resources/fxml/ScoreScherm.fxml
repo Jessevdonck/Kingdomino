@@ -20,7 +20,7 @@
          <children>
             <HBox alignment="CENTER" layoutX="333.0" layoutY="640.0" prefHeight="66.0" prefWidth="614.0" spacing="50.0">
                <children>
-                  <Button mnemonicParsing="false" onAction="#afsluiten" prefHeight="46.0" prefWidth="117.0" text="QUIT">
+                  <Button fx:id="quitBtn" mnemonicParsing="false" onAction="#afsluiten" prefHeight="46.0" prefWidth="130.0" text="QUIT" wrapText="true">
                      <font>
                         <Font name="System Bold" size="13.0" />
                      </font>
@@ -28,7 +28,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Button mnemonicParsing="false" onMouseClicked="#switchToHomescreen" prefHeight="46.0" prefWidth="117.0" text="MAIN MENU">
+                  <Button fx:id="menuBtn" mnemonicParsing="false" onMouseClicked="#switchToHomescreen" prefHeight="46.0" prefWidth="130.0" text="MAIN MENU" wrapText="true">
                      <font>
                         <Font name="System Bold" size="13.0" />
                      </font>
@@ -36,7 +36,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Button mnemonicParsing="false" onAction="#switchToSpeelScene" prefHeight="46.0" prefWidth="117.0" text="PLAY AGAIN">
+                  <Button fx:id="playAgainBtn" mnemonicParsing="false" onAction="#switchToSpeelScene" prefHeight="46.0" prefWidth="130.0" text="PLAY AGAIN" wrapText="true">
                      <font>
                         <Font name="System Bold" size="13.0" />
                      </font>

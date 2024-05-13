@@ -13,15 +13,12 @@ import util.LandschapType;
 import javax.swing.*;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class ScoreController implements Initializable
 {
 
-
+    @FXML private Button quitBtn, menuBtn, playAgainBtn;
     @FXML
     private Label SpelerEen, SpelerTwee, SpelerDrie, SpelerVier;
     private Label[] spelerNaamLabels;
@@ -73,7 +70,7 @@ public class ScoreController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
-
+        laadLanguage();
         spelerNaamLabels = new Label[]{SpelerEen, SpelerTwee, SpelerDrie, SpelerVier};
         scoreGraanLabels = new Label[]{ScoreGraanSpelerEen, ScoreGraanSpelerTwee, ScoreGraanSpelerDrie, ScoreGraanSpelerVier};
         scoreBosLabels = new Label[]{ScoreBosSpelerEen, ScoreBosSpelerTwee, ScoreBosSpelerDrie, ScoreBosSpelerVier};
@@ -265,6 +262,16 @@ public class ScoreController implements Initializable
         dc.updateSpeler(dc.vanKleurNaarSpeler(dc.geefWinnaars().get(0)), true);*/
         dc.getSpelendeSpelers().clear();
         ssc.afsluiten(event);
+    }
+
+    private void laadLanguage() //Wordt gebruikt wanneer taal nog niet gekozen is
+    {
+        Locale locale = new Locale(tc.getLanguage());
+        ResourceBundle bundle = ResourceBundle.getBundle("resourcebundles.lang", locale);
+        quitBtn.setText(bundle.getString("afsluiten"));
+        menuBtn.setText(bundle.getString("HoofdMenu"));
+        playAgainBtn.setText(bundle.getString("SpeelNogEens"));
+
     }
 }
 
