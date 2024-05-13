@@ -244,6 +244,7 @@ public class ScoreController implements Initializable
             dc.updateSpeler(dc.vanKleurNaarSpeler(dc.geefWinnaars().get(i)), false);
         }
         dc.updateSpeler(dc.vanKleurNaarSpeler(dc.geefWinnaars().get(0)), true);*/
+        dc.getSpelendeSpelers().clear();
         ssc.switchToSpeelScene(event, dc, tc);
     }
     public void switchToHomescreen(MouseEvent event) throws IOException
@@ -253,6 +254,7 @@ public class ScoreController implements Initializable
             dc.updateSpeler(dc.vanKleurNaarSpeler(dc.geefWinnaars().get(i)), false);
         }
         dc.updateSpeler(dc.vanKleurNaarSpeler(dc.geefWinnaars().get(0)), true);*/
+        dc.getSpelendeSpelers().clear();
         ssc.switchToHomescreen(event, dc, tc);
     }
     public void afsluiten(ActionEvent event){
@@ -261,6 +263,7 @@ public class ScoreController implements Initializable
             dc.updateSpeler(dc.vanKleurNaarSpeler(dc.geefWinnaars().get(i)), false);
         }
         dc.updateSpeler(dc.vanKleurNaarSpeler(dc.geefWinnaars().get(0)), true);*/
+        dc.getSpelendeSpelers().clear();
         ssc.afsluiten(event);
     }
 }
