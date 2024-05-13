@@ -111,7 +111,7 @@ public class DomeinController {
         spelRepository.koningRondeEen();
     }
 
-    public List<Kleur> geefWinnaars(){
+    public HashMap<Kleur, Integer> geefWinnaars(){
         return spelRepository.geefWinnaars();
     }
 

@@ -158,16 +158,11 @@ public class Spel
         return spelers;
     }
 
-    /**
-     * @param tegelGebied
-     * @return een 2D array van de beschikbare tegels
-     */
 
 
-    /**
-     * @return HashMap van de winnaars
-     */
-    public List<Speler> geefWinnaars()
+
+
+    public HashMap<Kleur,Integer> geefWinnaars()
     {
         List<Speler> winnaars = new ArrayList<>();
         HashMap<Kleur, Integer> kleurEnScore = new HashMap<>();
@@ -178,7 +173,7 @@ public class Spel
                 score += scoresPerSpeler.get(kleur).get(type);
             }
         }
-        return null;
+        return kleurEnScore;
     }
 
     /**
