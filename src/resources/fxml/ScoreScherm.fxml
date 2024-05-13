@@ -11,7 +11,6 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane id="tafel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" stylesheets="@../css/scoreBord.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Pane id="AchtergrondKleur" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" />
@@ -169,37 +168,37 @@
                   <Font size="25.0" />
                </font>
             </Label>
-            <Label id="SpelerEen" fx:id="SpelerVier" alignment="CENTER" contentDisplay="CENTER" text="Label" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
+            <Label id="SpelerEen" fx:id="SpelerVier" alignment="CENTER" contentDisplay="CENTER" prefWidth="150.0" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
                <font>
                   <Font name="System Bold" size="25.0" />
                </font>
             </Label>
-            <Label id="ScoreGraanSpelerEen" fx:id="ScoreGraanSpelerVier" alignment="CENTER" contentDisplay="CENTER" text="Label" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
+            <Label id="ScoreGraanSpelerEen" fx:id="ScoreGraanSpelerVier" alignment="CENTER" contentDisplay="CENTER" prefWidth="150.0" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
                <font>
                   <Font size="25.0" />
                </font>
             </Label>
-            <Label id="ScoreBosSpelerEen" fx:id="ScoreBosSpelerVier" alignment="CENTER" contentDisplay="CENTER" text="Label" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
+            <Label id="ScoreBosSpelerEen" fx:id="ScoreBosSpelerVier" alignment="CENTER" contentDisplay="CENTER" prefWidth="150.0" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
                <font>
                   <Font size="25.0" />
                </font>
             </Label>
-            <Label id="ScoreWaterSpelerEen" fx:id="ScoreWaterSpelerVier" alignment="CENTER" contentDisplay="CENTER" text="Label" textFill="WHITE" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
+            <Label id="ScoreWaterSpelerEen" fx:id="ScoreWaterSpelerVier" alignment="CENTER" contentDisplay="CENTER" prefWidth="150.0" textFill="WHITE" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
                <font>
                   <Font size="25.0" />
                </font>
             </Label>
-            <Label id="ScoreGrasSpelerEen" fx:id="ScoreGrasSpelerVier" alignment="CENTER" contentDisplay="CENTER" text="Label" textFill="WHITE" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
+            <Label id="ScoreGrasSpelerEen" fx:id="ScoreGrasSpelerVier" alignment="CENTER" contentDisplay="CENTER" prefWidth="150.0" textFill="WHITE" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
                <font>
                   <Font size="25.0" />
                </font>
             </Label>
-            <Label id="ScoreModderSpelerEen" fx:id="ScoreModderSpelerVier" alignment="CENTER" contentDisplay="CENTER" text="Label" textFill="WHITE" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
+            <Label id="ScoreModderSpelerEen" fx:id="ScoreModderSpelerVier" alignment="CENTER" contentDisplay="CENTER" prefWidth="150.0" textFill="WHITE" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
                <font>
                   <Font size="25.0" />
                </font>
             </Label>
-            <Label id="ScoreKoolmijnSpelerEen" fx:id="ScoreKoolmijnSpelerVier" alignment="CENTER" contentDisplay="CENTER" text="Label" textFill="WHITE" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
+            <Label id="ScoreKoolmijnSpelerEen" fx:id="ScoreKoolmijnSpelerVier" alignment="CENTER" contentDisplay="CENTER" prefWidth="150.0" textFill="WHITE" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
                <font>
                   <Font size="25.0" />
                </font>
@@ -224,7 +223,7 @@
                   <Font name="System Bold" size="25.0" />
                </font>
             </Label>
-            <Label id="TotaalScoreSpelerEen" fx:id="TotaalScoreSpelerVier" alignment="CENTER" contentDisplay="CENTER" text="Label" textFill="WHITE" GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
+            <Label id="TotaalScoreSpelerEen" fx:id="TotaalScoreSpelerVier" alignment="CENTER" contentDisplay="CENTER" prefWidth="100.0" textFill="WHITE" GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
                <font>
                   <Font name="System Bold" size="25.0" />
                </font>
