@@ -45,15 +45,3 @@ GridPane Line {
     -fx-background-insets: 1px;
 }
 
-
-#PodiumNummer
-{
-    -fx-stroke: white;
-    -fx-stroke-width: 2px;
-}
-
-.outline .label .text {
-    -fx-fill: lightseagreen;
-    -fx-stroke: firebrick;
-    -fx-stroke-width: 2px;
-}
