@@ -700,31 +700,25 @@ public class SpelController implements Initializable {
             boolean verticaal = tegelRotated;
             DominoTegel tegel = dc.getGeclaimdeTegel(getKleurSpeler());
 
-            // Try-Catch om te checken of de tegel correct geplaatst kan worden in het tegelgebied.
-            try {
-                dc.verplaatsDominotegel(kolom, rij, verticaal, tegel, huidigeSpelerIndex);
+            Kleur kleurHuidigeSpeler = getKleurSpeler();
+            int bordIndex = 0;
 
+            switch (kleurHuidigeSpeler) {
+                case GROEN:
+                    bordIndex = bordIndexGroen;
+                    break;
+                case BLAUW:
+                    bordIndex = bordIndexBlauw;
+                    break;
+                case ROOS:
+                    bordIndex = bordIndexRoos;
+                    break;
+                case GEEL:
+                    bordIndex = bordIndexGeel;
+                    break;
+            }
 
-                draggedImageView.setOnMouseDragged(null);
-                draggedImageView.setOnMousePressed(null);
-                draggedImageView.setOnMouseReleased(null);
-                draggedImageView.setOnKeyPressed(null);
-                tegelRotated = false;
-                plaatsTegel = false;
-                kiesNieuweTegel = true;
-                if(laatsteRonde) {
-                    kiesNieuweTegel = false;
-                    huidigeSpelerIndex++;
-                    if (huidigeSpelerIndex >= dc.getSpelendeSpelers().size()) {
-                        // Als de huidige spelerindex de maximale index overschrijdt, toon de scorePopUp
-                        scorePopUp.setVisible(true);
-                    } else {
-                        // Anders, update de instructietekst en andere logica voor de volgende speler
-                        instructieTekst.setText(bundle.getString("SpelerMetKleur") + getKleurSpeler() + bundle.getString("PlaatsTegelInstructie"));
-                        updateKaartenBeweegbaarHeid();
-                        plaatsTegel = true;
-                    }
-                }
+            if(!borden[bordIndex].getChildren().contains(draggedImageView)){
                 String prevText = instructieTekst.getText();
                 String prevStyle = instructieTekst.getStyle();
                 PauseTransition pause = new PauseTransition(Duration.seconds(1.5));
@@ -732,26 +726,63 @@ public class SpelController implements Initializable {
                     instructieTekst.setText(prevText);
                     instructieTekst.setStyle(prevStyle);
                 });
-                instructieTekst.setText(bundle.getString("TegelSuccesVolToegevoegd"));
-                instructieTekst.setStyle("-fx-text-fill: #00e000;");
-                pause.play();
-
-
-                return;
-            } catch (PlaatsenMiddenVanHetBordException | OverlappingHorizontaalException |
-                     OverlappingVerticaalException |
-                     TegelNietOvereenMetAanliggendeTegelException | IllegalArgumentException e) {
-                String prevText = instructieTekst.getText();
-                String prevStyle = instructieTekst.getStyle();
-                PauseTransition pause = new PauseTransition(Duration.seconds(1.5));
-                pause.setOnFinished(pauseEvent -> {
-                    instructieTekst.setText(prevText);
-                    instructieTekst.setStyle(prevStyle);
-                });
-                instructieTekst.setText(e.getMessage());
+                instructieTekst.setText(bundle.getString("PlaatsEerstJeTegelInJeDomein"));
                 instructieTekst.setStyle("-fx-text-fill: red;");
                 pause.play();
+            }else{
+                try {
+                    dc.verplaatsDominotegel(kolom, rij, verticaal, tegel, huidigeSpelerIndex);
+
+
+                    draggedImageView.setOnMouseDragged(null);
+                    draggedImageView.setOnMousePressed(null);
+                    draggedImageView.setOnMouseReleased(null);
+                    draggedImageView.setOnKeyPressed(null);
+                    tegelRotated = false;
+                    plaatsTegel = false;
+                    kiesNieuweTegel = true;
+                    if(laatsteRonde) {
+                        kiesNieuweTegel = false;
+                        huidigeSpelerIndex++;
+                        if (huidigeSpelerIndex >= dc.getSpelendeSpelers().size()) {
+                            // Als de huidige spelerindex de maximale index overschrijdt, toon de scorePopUp
+                            scorePopUp.setVisible(true);
+                        } else {
+                            // Anders, update de instructietekst en andere logica voor de volgende speler
+                            instructieTekst.setText(bundle.getString("SpelerMetKleur") + getKleurSpeler() + bundle.getString("PlaatsTegelInstructie"));
+                            updateKaartenBeweegbaarHeid();
+                            plaatsTegel = true;
+                        }
+                    }
+                    String prevText = instructieTekst.getText();
+                    String prevStyle = instructieTekst.getStyle();
+                    PauseTransition pause = new PauseTransition(Duration.seconds(1.5));
+                    pause.setOnFinished(pauseEvent -> {
+                        instructieTekst.setText(prevText);
+                        instructieTekst.setStyle(prevStyle);
+                    });
+                    instructieTekst.setText(bundle.getString("TegelSuccesVolToegevoegd"));
+                    instructieTekst.setStyle("-fx-text-fill: #00e000;");
+                    pause.play();
+
+                    return;
+                } catch (PlaatsenMiddenVanHetBordException | OverlappingHorizontaalException |
+                         OverlappingVerticaalException |
+                         TegelNietOvereenMetAanliggendeTegelException | IllegalArgumentException e) {
+                    String prevText = instructieTekst.getText();
+                    String prevStyle = instructieTekst.getStyle();
+                    PauseTransition pause = new PauseTransition(Duration.seconds(1.5));
+                    pause.setOnFinished(pauseEvent -> {
+                        instructieTekst.setText(prevText);
+                        instructieTekst.setStyle(prevStyle);
+                    });
+                    instructieTekst.setText(e.getMessage());
+                    instructieTekst.setStyle("-fx-text-fill: red;");
+                    pause.play();
+                }
             }
+            // Try-Catch om te checken of de tegel correct geplaatst kan worden in het tegelgebied.
+
         }
 
         if (kiesNieuweTegel) {
