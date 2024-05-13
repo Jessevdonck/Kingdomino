@@ -274,9 +274,9 @@ public class DomeinController {
      * @param kleur kleur van de speler
      * @return De geclaimde tegel van de speler terug in de beginkolom
      */
-    public DominoTegel getGeclaimdeTegel(Kleur kleur) {
-        List<DominoTegel> beginKolom = getBeginKolom();
-        for (DominoTegel tegel : beginKolom) {
+    public DominoTegel getGeclaimdeTegel(Kleur kleur, boolean isRondeEen) {
+        List<DominoTegel> kolom = isRondeEen? getBeginKolom():getEindKolom();
+        for (DominoTegel tegel : kolom) {
             if (tegel.getKoningVanSpeler() == kleur) {
                 return tegel;
             }

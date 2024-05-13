@@ -119,7 +119,7 @@ public class SpelController implements Initializable {
     private FXMLLoader loader;
 
 
-    private int gekozenCirkel = 0;
+    private int gekozenCirkel = -1;
     Circle geselecteerdeCirkel;
 
     private List<Kleur> kleurenSpelers;
@@ -554,7 +554,7 @@ public class SpelController implements Initializable {
     @FXML
     private void verwijderButtonHandler(ActionEvent event) {
 
-        DominoTegel tegel = dc.getGeclaimdeTegel(getKleurSpeler());
+        DominoTegel tegel = dc.getGeclaimdeTegel(getKleurSpeler(), rondeEen);
         if (!dc.kanTegelPlaatsen(huidigeSpelerIndex, tegel)) {
             String prevText = instructieTekst.getText();
             String prevStyle = instructieTekst.getStyle();
@@ -666,6 +666,24 @@ public class SpelController implements Initializable {
     private void volgendeButtonHandler(ActionEvent event) {
 
         if (rondeEen) {
+            try{
+                if(gekozenCirkel == -1){
+                    throw new IllegalArgumentException("Mag niet");
+                }
+            }catch(IllegalArgumentException e){
+                System.out.println(e.getMessage());
+                String prevText = instructieTekst.getText();
+                String prevStyle = instructieTekst.getStyle();
+                PauseTransition pause = new PauseTransition(Duration.seconds(1.5));
+                pause.setOnFinished(pauseEvent -> {
+                    instructieTekst.setText(prevText);
+                    instructieTekst.setStyle(prevStyle);
+                });
+                instructieTekst.setText(bundle.getString("KiesEerstEenTegel"));
+                instructieTekst.setStyle("-fx-text-fill: red;");
+                pause.play();
+            }
+            System.out.println("peop");
             voegSpelerToeAanGekozenVolgorde(getKleurSpeler(), gekozenCirkel);
             dc.voegKoningAanKaart(getKleurSpeler(), gekozenCirkel, 0);
             try {
@@ -688,6 +706,7 @@ public class SpelController implements Initializable {
                 instructieTekst.setText(bundle.getString("SpelerMetKleur") + getKleurSpeler() + bundle.getString("PlaatsTegelInstructie"));
                 System.out.println(huidigeSpelerIndex);
                 System.out.println(gekozenCirkel);
+                gekozenCirkel = -1;
                 return;
             }
 
@@ -698,7 +717,7 @@ public class SpelController implements Initializable {
             int kolom = (int) (Math.floor(mouseX / cellSize));
             int rij = (int) (Math.floor(mouseY / cellSize));
             boolean verticaal = tegelRotated;
-            DominoTegel tegel = dc.getGeclaimdeTegel(getKleurSpeler());
+            DominoTegel tegel = dc.getGeclaimdeTegel(getKleurSpeler(), true);
 
             Kleur kleurHuidigeSpeler = getKleurSpeler();
             int bordIndex = 0;
@@ -792,7 +811,24 @@ public class SpelController implements Initializable {
 
             instructieTekst.setText(bundle.getString("SpelerMetKleur") + getKleurSpeler() + bundle.getString("PlaatsTegelInstructie"));
 
-            if (dc.getGeclaimdeTegel(getKleurSpeler()) == null) {
+            if (dc.getGeclaimdeTegel(getKleurSpeler(), rondeEen) == null) {
+                try{
+                    if(gekozenCirkel == -1){
+                        throw new IllegalArgumentException("Mag niet");
+                    }
+                }catch(IllegalArgumentException e){
+                    System.out.println(e.getMessage());
+                    String prevText = instructieTekst.getText();
+                    String prevStyle = instructieTekst.getStyle();
+                    PauseTransition pause = new PauseTransition(Duration.seconds(1.5));
+                    pause.setOnFinished(pauseEvent -> {
+                        instructieTekst.setText(prevText);
+                        instructieTekst.setStyle(prevStyle);
+                    });
+                    instructieTekst.setText(bundle.getString("KiesEerstEenTegel"));
+                    instructieTekst.setStyle("-fx-text-fill: red;");
+                    pause.play();
+                }
                 voegSpelerToeAanGekozenVolgorde(getKleurSpeler(), gekozenCirkel);
                 dc.voegKoningAanKaart(getKleurSpeler(), gekozenCirkel, 1);
 
@@ -822,6 +858,7 @@ public class SpelController implements Initializable {
             if (!gekozenVolgordeNieuw.contains(null)) {
                 instructieTekst.setText(bundle.getString("KlikOpStapelInstructie"));
             }
+            gekozenCirkel = -1;
             return;
         }
 
