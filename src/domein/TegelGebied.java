@@ -27,6 +27,7 @@ public class TegelGebied
 
     /**
      * Methode om een gebied te maken
+     *
      * @return een 5x5 grid met landschappen
      */
     private Landschap[][] maakGebied()
@@ -51,10 +52,11 @@ public class TegelGebied
 
     /**
      * Methode om een tegel te plaatsen in het gebied
-     * @param kolom de kolom waar de tegel geplaatst moet worden
-     * @param rij de rij waar de tegel geplaatst moet worden
+     *
+     * @param kolom     de kolom waar de tegel geplaatst moet worden
+     * @param rij       de rij waar de tegel geplaatst moet worden
      * @param verticaal of de tegel verticaal geplaatst moet worden
-     * @param tegel de tegel die geplaatst moet worden
+     * @param tegel     de tegel die geplaatst moet worden
      */
     public void plaatsTegel(int kolom, int rij, boolean verticaal, DominoTegel tegel)
     {
@@ -77,8 +79,8 @@ public class TegelGebied
     }
 
     /**
-     * @param x de x coordinaat
-     * @param y de y coordinaat
+     * @param x    de x coordinaat
+     * @param y    de y coordinaat
      * @param type het landschapstype
      * @return de score van het gebied
      */
@@ -87,10 +89,10 @@ public class TegelGebied
         List<Integer> punten = new ArrayList<>();
         punten.add(0);
         punten.add(0);
-        if (x < 0 || y < 0 || x >= 4 || y >= 4 || bezocht[x][y] || gebied[x][y] == null) {
+        if (x < 0 || y < 0 || x >= 5 || y >= 5 || bezocht[x][y] || gebied[x][y] == null) {
             return punten;
         }
-        if(gebied[x][y].getType() != type){
+        if (gebied[x][y].getType() != type) {
             return punten;
         }
 
@@ -98,19 +100,19 @@ public class TegelGebied
         int aantalKronen = gebied[x][y].getAantalKronen();
         int size = 1;
 
-
         for (int[] dir : richting) {
             int nx = x + dir[0];
             int ny = y + dir[1];
 
             if (nx >= 0 && ny >= 0 && nx < 5 && ny < 5) {
-                punten = berekenScore(nx, ny, type);
-                aantalKronen += punten.get(1);
-                size += punten.get(0);
-
+                List<Integer> nextPunten = berekenScore(nx, ny, type);
+                aantalKronen += nextPunten.get(1);
+                size += nextPunten.get(0);
             }
         }
 
+        punten.set(0, size);
+        punten.set(1, aantalKronen);
         return punten;
     }
 
@@ -119,23 +121,20 @@ public class TegelGebied
      */
     public HashMap<LandschapType, Integer> zoekDomein()
     {
-
-
         HashMap<LandschapType, Integer> puntenMap = new HashMap<>();
 
-
-
         for (LandschapType type : LandschapType.values()) {
-            if(type == LandschapType.KONING){
+            if (type == LandschapType.KONING) {
                 continue;
             }
             int size = 0;
             for (int i = 0; i < 5; i++) {
                 for (int j = 0; j < 5; j++) {
                     if (!bezocht[i][j]) {
+
+                        
                         List<Integer> data = berekenScore(i, j, type);
                         size += data.get(0) * data.get(1);
-                        System.out.println(data.get(1));
                     }
                 }
             }
@@ -177,9 +176,9 @@ public class TegelGebied
     }
 
     /**
-     * @param tegel de tegel die geplaatst moet worden
-     * @param rij de rij waar de tegel geplaatst moet worden
-     * @param kolom de kolom waar de tegel geplaatst moet worden
+     * @param tegel     de tegel die geplaatst moet worden
+     * @param rij       de rij waar de tegel geplaatst moet worden
+     * @param kolom     de kolom waar de tegel geplaatst moet worden
      * @param verticaal of de tegel verticaal geplaatst moet worden
      * @return of de tegel geplaats kan worden op een specifieke plek, true als het kan, false als het niet kan
      */
@@ -206,7 +205,7 @@ public class TegelGebied
                         && ((gebied[rij][kolom - 1].getType() == type1)
                         || (gebied[rij][kolom - 1].getType() == LandschapType.KONING))) {
                     return true;
-                }else System.out.println("type 1 links is niet hetzelfde");
+                } else System.out.println("type 1 links is niet hetzelfde");
 
                 // type 2 onder
                 if ((rij <= 3) && (kolom <= 3) && (gebied[rij + 1][kolom + 1] != null)
@@ -219,7 +218,7 @@ public class TegelGebied
                         && ((gebied[rij - 1][kolom + 1].getType() == type2)
                         || (gebied[rij - 1][kolom + 1].getType() == LandschapType.KONING))) {
                     return true;
-                }else System.out.println("type 2 onder is niet hetzelfde");
+                } else System.out.println("type 2 onder is niet hetzelfde");
                 // type 2 rechts
                 if ((kolom <= 2) && (gebied[rij][kolom + 2] != null)
                         && ((gebied[rij][kolom + 2].getType() == type2)
@@ -252,7 +251,7 @@ public class TegelGebied
                         ((gebied[rij + 1][kolom - 1].getType() == type2)
                                 || (gebied[rij + 1][kolom - 1].getType() == LandschapType.KONING))) {
                     return true;
-                }else System.out.println("type 2 links is niet hetzelfde");
+                } else System.out.println("type 2 links is niet hetzelfde");
                 //type 2 rechts
                 if ((kolom <= 3) && (rij <= 3) && (gebied[rij + 1][kolom + 1] != null) &&
                         ((gebied[rij + 1][kolom + 1].getType() == type2)

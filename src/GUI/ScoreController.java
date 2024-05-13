@@ -77,6 +77,7 @@ public class ScoreController implements Initializable
         scoreModderLabels = new Label[]{ScoreModderSpelerEen, ScoreModderSpelerTwee, ScoreModderSpelerDrie, ScoreModderSpelerVier};
         scoreWaterLabels = new Label[]{ScoreWaterSpelerEen, ScoreWaterSpelerTwee, ScoreWaterSpelerDrie, ScoreWaterSpelerVier};
         totaalScoreLabels = new Label[]{TotaalScoreSpelerEen, TotaalScoreSpelerTwee, TotaalScoreSpelerDrie, TotaalScoreSpelerVier};
+        setEindScores();
         setScorePlayerNames();
         setScoresGraan();
         setScoresBos();
@@ -84,50 +85,35 @@ public class ScoreController implements Initializable
         setScoresKoolmijn();
         setScoresModder();
         setScoresWater();
-        setEindScores();
 
-        scoreMap = dc.geefScores();
+
+
 
     }
 
 
     private void setEindScores()
     {
-        System.out.println(dc.geefScores().toString());
+        scoreMap = dc.geefScores();
+        System.out.println(scoreMap);
         int index = 0;
-        for (Kleur kleur : dc.getSpelendeSpelers().values()) {
+        for (Kleur kleur : scoreMap.keySet()) {
             int scoreTotaal = 0;
             for (LandschapType type : LandschapType.values()) {
                 if (type != LandschapType.KONING) {
                     System.out.println(scoreMap.get(kleur).toString());
                     scoreTotaal += scoreMap.get(kleur).get(type);
                 }
-
             }
             totaalScoreLabels[index].setText(String.format("%d", scoreTotaal));
             index++;
         }
-
-
-//        for (Label label : totaalScoreLabels) {
-//            int scoreTotaal = 0;
-//
-//            List<Kleur> kleur = new ArrayList<>(dc.getSpelendeSpelers().values());
-//
-//            for (LandschapType type : LandschapType.values()) {
-//                if (type != LandschapType.KONING) {
-//                    scoreTotaal += scoreMap.get(kleur.get(index)).get(type);
-//                }
-//
-//            }
-//            label.setText(String.format("%d", scoreTotaal));
-//            index++;
     }
 
 
     private void setScorePlayerNames()
     {
-        List<Kleur> kleurenLijst = dc.getSpelendeSpelers().values().stream().toList();
+        List<Kleur> kleurenLijst = scoreMap.keySet().stream().toList();
         int index = 0;
         for (Label speler : spelerNaamLabels) {
             System.out.println(index);
@@ -147,6 +133,7 @@ public class ScoreController implements Initializable
         int index = 0;
         Label[] label = scoreGraanLabels;
         for (Kleur kleur : scoreMap.keySet()) {
+            System.out.println(index);
             if (index >= dc.getSpelendeSpelers().size()) {
                 label[index].setText("N/A");
             } else {
